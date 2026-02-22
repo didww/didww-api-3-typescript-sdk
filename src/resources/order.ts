@@ -1,18 +1,19 @@
 import type { ResourceMeta } from './base.js';
 import type { OrderItem } from '../nested/order-item.js';
+import type { OrderStatus, CallbackMethod } from '../enums.js';
 import { serializeOrderItems, deserializeOrderItems } from '../nested/order-item.js';
 
 export interface Order {
   id: string;
   type: 'orders';
   amount: string;
-  status: string;
+  status: OrderStatus;
   description: string;
   reference: string;
   created_at: string;
   allow_back_ordering: boolean;
   callback_url: string | null;
-  callback_method: string | null;
+  callback_method: CallbackMethod | null;
   items: OrderItem[];
 }
 
@@ -20,7 +21,7 @@ export interface OrderWrite {
   allow_back_ordering?: boolean;
   items?: OrderItem[];
   callback_url?: string | null;
-  callback_method?: string | null;
+  callback_method?: CallbackMethod | null;
 }
 
 export const ORDER_META: ResourceMeta<Order, OrderWrite> = {

@@ -1,24 +1,34 @@
+import type {
+  Codec,
+  TransportProtocol,
+  RxDtmfFormat,
+  TxDtmfFormat,
+  SstRefreshMethod,
+  MediaEncryptionMode,
+  StirShakenMode,
+} from '../enums.js';
+
 export interface SipConfiguration {
   type: 'sip_configurations';
   username?: string;
   host: string;
   port: number;
-  codec_ids: number[];
-  transport_protocol_id?: number;
+  codec_ids: Codec[];
+  transport_protocol_id?: TransportProtocol;
   auth_enabled?: boolean;
   auth_user?: string;
   auth_password?: string;
   auth_from_user?: string;
   auth_from_domain?: string;
   resolve_ruri?: boolean;
-  rx_dtmf_format_id?: number;
-  tx_dtmf_format_id?: number;
+  rx_dtmf_format_id?: RxDtmfFormat;
+  tx_dtmf_format_id?: TxDtmfFormat;
   sst_enabled?: boolean;
   sst_min_timer?: number;
   sst_max_timer?: number;
   sst_accept_501?: boolean;
   sst_session_expires?: number;
-  sst_refresh_method_id?: number;
+  sst_refresh_method_id?: SstRefreshMethod;
   sip_timer_b?: number;
   dns_srv_failover_timer?: number;
   rtp_ping?: boolean;
@@ -26,8 +36,8 @@ export interface SipConfiguration {
   rerouting_disconnect_code_ids?: number[];
   max_transfers?: number;
   max_30x_redirects?: number;
-  media_encryption_mode?: string;
-  stir_shaken_mode?: string;
+  media_encryption_mode?: MediaEncryptionMode;
+  stir_shaken_mode?: StirShakenMode;
   allowed_rtp_ips?: string[];
 }
 
@@ -36,7 +46,7 @@ export interface H323Configuration {
   dst: string;
   host: string;
   port: number;
-  codec_ids: number[];
+  codec_ids: Codec[];
 }
 
 export interface Iax2Configuration {
@@ -44,7 +54,7 @@ export interface Iax2Configuration {
   dst: string;
   host: string;
   port: number;
-  codec_ids: number[];
+  codec_ids: Codec[];
   auth_enabled?: boolean;
   auth_user?: string;
   auth_password?: string;

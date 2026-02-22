@@ -1,15 +1,11 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
-
-export interface DidGroupFeature {
-  name: string;
-  value: boolean;
-}
+import type { Feature } from '../enums.js';
 
 export interface DidGroup {
   id: string;
   type: 'did_groups';
   prefix: string;
-  features: DidGroupFeature[];
+  features: Feature[];
   is_metered: boolean;
   area_name: string;
   allow_additional_channels: boolean;

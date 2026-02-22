@@ -1,4 +1,5 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { IdentityType } from '../enums.js';
 
 export interface Identity {
   id: string;
@@ -13,7 +14,7 @@ export interface Identity {
   vat_id: string;
   description: string;
   personal_tax_id: string;
-  identity_type: string;
+  identity_type: IdentityType;
   external_reference_id: string;
   contact_email: string;
   created_at: string;
@@ -35,7 +36,7 @@ export interface IdentityWrite {
   vat_id?: string;
   description?: string;
   personal_tax_id?: string;
-  identity_type?: string;
+  identity_type?: IdentityType;
   external_reference_id?: string;
   contact_email?: string;
   country?: ResourceRef;

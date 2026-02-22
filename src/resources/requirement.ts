@@ -1,12 +1,13 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { IdentityType, AreaLevel } from '../enums.js';
 
 export interface Requirement {
   id: string;
   type: 'requirements';
-  identity_type: string;
-  personal_area_level: string;
-  business_area_level: string;
-  address_area_level: string;
+  identity_type: IdentityType;
+  personal_area_level: AreaLevel;
+  business_area_level: AreaLevel;
+  address_area_level: AreaLevel;
   personal_proof_qty: number;
   business_proof_qty: number;
   address_proof_qty: number;

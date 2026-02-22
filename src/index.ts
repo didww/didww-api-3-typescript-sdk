@@ -18,7 +18,7 @@ export type { Area } from './resources/area.js';
 export type { Pop } from './resources/pop.js';
 export type { Balance } from './resources/balance.js';
 export type { DidGroupType } from './resources/did-group-type.js';
-export type { DidGroup, DidGroupFeature } from './resources/did-group.js';
+export type { DidGroup } from './resources/did-group.js';
 export type { AvailableDid } from './resources/available-did.js';
 export type { NanpaPrefix } from './resources/nanpa-prefix.js';
 export type { ProofType } from './resources/proof-type.js';
