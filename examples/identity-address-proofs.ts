@@ -1,4 +1,4 @@
-import { DidwwClient, Environment, ref } from '../src/index.js';
+import { DidwwClient, Environment, IdentityType, ref } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -17,7 +17,7 @@ async function main() {
 
   // Create an identity
   const identity = await client.identities().create({
-    identity_type: 'Personal',
+    identity_type: IdentityType.PERSONAL,
     first_name: 'John',
     last_name: 'Doe',
     phone_number: '1234567890',
