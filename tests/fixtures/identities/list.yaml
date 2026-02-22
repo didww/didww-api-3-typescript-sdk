@@ -1,0 +1,95 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/identities
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"5e9df058-50d2-4e34-b0d4-d1746b86f41a\"\
+        ,\n      \"type\": \"identities\",\n      \"attributes\": {\n        \"first_name\"\
+        : \"John\",\n        \"last_name\": \"Doe\",\n        \"phone_number\": \"\
+        123456789\",\n        \"id_number\": \"ABC1234\",\n        \"birth_date\"\
+        : \"1970-01-01\",\n        \"company_name\": null,\n        \"company_reg_number\"\
+        : null,\n        \"vat_id\": null,\n        \"description\": \"test identity\"\
+        ,\n        \"personal_tax_id\": \"987654321\",\n        \"identity_type\"\
+        : \"Personal\",\n        \"created_at\": \"2021-04-01T12:57:24.025Z\",\n \
+        \       \"external_reference_id\": \"111\",\n        \"verified\": false\n\
+        \      },\n      \"relationships\": {\n        \"country\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/country\"\
+        \n          },\n          \"data\": {\n            \"type\": \"countries\"\
+        ,\n            \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\n        \
+        \  }\n        },\n        \"proofs\": {\n          \"links\": {\n        \
+        \    \"self\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/relationships/proofs\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/proofs\"\
+        \n          },\n          \"data\": []\n        },\n        \"addresses\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/relationships/addresses\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/addresses\"\
+        \n          },\n          \"data\": [\n            {\n              \"type\"\
+        : \"addresses\",\n              \"id\": \"d3414687-40f4-4346-a267-c2c65117d28c\"\
+        \n            }\n          ]\n        },\n        \"permanent_documents\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/relationships/permanent_documents\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/5e9df058-50d2-4e34-b0d4-d1746b86f41a/permanent_documents\"\
+        \n          },\n          \"data\": []\n        }\n      }\n    },\n    {\n\
+        \      \"id\": \"9728ea13-cb5d-41fb-8a7f-796a005b0a13\",\n      \"type\":\
+        \ \"identities\",\n      \"attributes\": {\n        \"first_name\": \"John\"\
+        ,\n        \"last_name\": \"Doe\",\n        \"phone_number\": \"123456789\"\
+        ,\n        \"id_number\": \"ABC1234\",\n        \"birth_date\": \"1970-01-01\"\
+        ,\n        \"company_name\": null,\n        \"company_reg_number\": null,\n\
+        \        \"vat_id\": null,\n        \"description\": \"test identity\",\n\
+        \        \"personal_tax_id\": \"987654321\",\n        \"identity_type\": \"\
+        Personal\",\n        \"created_at\": \"2021-04-01T14:56:38.664Z\",\n     \
+        \   \"external_reference_id\": \"111\",\n        \"verified\": false\n   \
+        \   },\n      \"relationships\": {\n        \"country\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/country\"\
+        \n          },\n          \"data\": {\n            \"type\": \"countries\"\
+        ,\n            \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\n        \
+        \  }\n        },\n        \"proofs\": {\n          \"links\": {\n        \
+        \    \"self\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/relationships/proofs\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/proofs\"\
+        \n          },\n          \"data\": []\n        },\n        \"addresses\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/relationships/addresses\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/addresses\"\
+        \n          },\n          \"data\": []\n        },\n        \"permanent_documents\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/relationships/permanent_documents\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/9728ea13-cb5d-41fb-8a7f-796a005b0a13/permanent_documents\"\
+        \n          },\n          \"data\": []\n        }\n      }\n    }\n  ],\n\
+        \  \"included\": [\n    {\n      \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United States\",\n        \"prefix\": \"1\",\n        \"iso\": \"US\"\n\
+        \      },\n      \"relationships\": {\n        \"regions\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/countries/1f6fc2bd-f081-4202-9b1a-d9cb88d942b9/relationships/regions\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/1f6fc2bd-f081-4202-9b1a-d9cb88d942b9/regions\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d3414687-40f4-4346-a267-c2c65117d28c\"\
+        ,\n      \"type\": \"addresses\",\n      \"attributes\": {\n        \"city_name\"\
+        : \"Chicago\",\n        \"postal_code\": \"1234\",\n        \"address\": \"\
+        Main street\",\n        \"description\": \"some address\",\n        \"created_at\"\
+        : \"2021-04-01T13:12:56.632Z\"\n      },\n      \"relationships\": {\n   \
+        \     \"identity\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/relationships/identity\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/identity\"\
+        \n          }\n        },\n        \"country\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/country\"\
+        \n          }\n        },\n        \"proofs\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/relationships/proofs\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/proofs\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 2,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\"\
+        : \"https://sandbox-api.didww.com/v3/identities?include=country%2Caddresses%2Cproofs%2Cpermanent_documents&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/identities?include=country%2Caddresses%2Cproofs%2Cpermanent_documents&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

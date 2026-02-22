@@ -1,0 +1,126 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/voice_in_trunks
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"9cbadd6f-0665-46bc-b3aa-687d22157808\"\
+        ,\n      \"type\": \"voice_in_trunks\",\n      \"attributes\": {\n       \
+        \ \"priority\": 1,\n        \"capacity_limit\": null,\n        \"weight\"\
+        : 65535,\n        \"name\": \"iax2 trunk sample\",\n        \"cli_format\"\
+        : \"e164\",\n        \"cli_prefix\": \"\",\n        \"description\": \"\"\
+        ,\n        \"ringing_timeout\": null,\n        \"configuration\": {\n    \
+        \      \"type\": \"iax2_configurations\",\n          \"attributes\": {\n \
+        \           \"dst\": \"{DID}\",\n            \"host\": \"216.58.215.78\",\n\
+        \            \"port\": 4569,\n            \"auth_user\": \"auth_user\",\n\
+        \            \"auth_password\": \"auth_password\",\n            \"codec_ids\"\
+        : [\n              9,\n              6,\n              10,\n             \
+        \ 8\n            ]\n          }\n        },\n        \"created_at\": \"2018-12-28T15:11:49.330Z\"\
+        \n      },\n      \"relationships\": {\n        \"voice_in_trunk_group\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/9cbadd6f-0665-46bc-b3aa-687d22157808/relationships/voice_in_trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/9cbadd6f-0665-46bc-b3aa-687d22157808/voice_in_trunk_group\"\
+        \n          },\n          \"data\": {\n            \"type\": \"voice_in_trunk_groups\"\
+        ,\n            \"id\": \"837c5764-a6c3-456f-aa37-71fc8f8ca07b\"\n        \
+        \  }\n        },\n        \"pop\": {\n          \"links\": {\n           \
+        \ \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/9cbadd6f-0665-46bc-b3aa-687d22157808/relationships/pop\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/9cbadd6f-0665-46bc-b3aa-687d22157808/pop\"\
+        \n          },\n          \"data\": null\n        }\n      }\n    },\n   \
+        \ {\n      \"id\": \"2b4b1fcf-fe6a-4de9-8a58-7df46820ba13\",\n      \"type\"\
+        : \"voice_in_trunks\",\n      \"attributes\": {\n        \"priority\": 1,\n\
+        \        \"capacity_limit\": null,\n        \"weight\": 65535,\n        \"\
+        name\": \"sample trunk pstn\",\n        \"cli_format\": \"e164\",\n      \
+        \  \"cli_prefix\": \"\",\n        \"description\": \"\",\n        \"ringing_timeout\"\
+        : null,\n        \"configuration\": {\n          \"type\": \"pstn_configurations\"\
+        ,\n          \"attributes\": {\n            \"dst\": \"442080995011\"\n  \
+        \        }\n        },\n        \"created_at\": \"2018-12-28T15:03:48.751Z\"\
+        \n      },\n      \"relationships\": {\n        \"voice_in_trunk_group\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/voice_in_trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/voice_in_trunk_group\"\
+        \n          },\n          \"data\": null\n        },\n        \"pop\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/pop\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/pop\"\
+        \n          },\n          \"data\": null\n        }\n      }\n    },\n   \
+        \ {\n      \"id\": \"cae43c7c-3c62-429a-b4ff-210e511cafab\",\n      \"type\"\
+        : \"voice_in_trunks\",\n      \"attributes\": {\n        \"priority\": 1,\n\
+        \        \"capacity_limit\": null,\n        \"weight\": 65535,\n        \"\
+        name\": \"h323 trunk sample\",\n        \"cli_format\": \"raw\",\n       \
+        \ \"cli_prefix\": \"\",\n        \"description\": \"\",\n        \"ringing_timeout\"\
+        : null,\n        \"configuration\": {\n          \"type\": \"h323_configurations\"\
+        ,\n          \"attributes\": {\n            \"dst\": \"{DID}\",\n        \
+        \    \"host\": \"216.58.215.78\",\n            \"port\": 5060,\n         \
+        \   \"codec_ids\": [\n              9,\n              8,\n              6\n\
+        \            ]\n          }\n        },\n        \"created_at\": \"2018-12-28T15:02:27.821Z\"\
+        \n      },\n      \"relationships\": {\n        \"voice_in_trunk_group\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/cae43c7c-3c62-429a-b4ff-210e511cafab/relationships/voice_in_trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/cae43c7c-3c62-429a-b4ff-210e511cafab/voice_in_trunk_group\"\
+        \n          },\n          \"data\": null\n        },\n        \"pop\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/cae43c7c-3c62-429a-b4ff-210e511cafab/relationships/pop\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/cae43c7c-3c62-429a-b4ff-210e511cafab/pop\"\
+        \n          },\n          \"data\": {\n            \"type\": \"pops\",\n \
+        \           \"id\": \"f402ddc7-0ef9-486d-85f3-6278f1417dd0\"\n          }\n\
+        \        }\n      }\n    },\n    {\n      \"id\": \"24cec518-da51-4274-9a4b-1aad910b996f\"\
+        ,\n      \"type\": \"voice_in_trunks\",\n      \"attributes\": {\n       \
+        \ \"priority\": 1,\n        \"capacity_limit\": null,\n        \"weight\"\
+        : 65535,\n        \"name\": \"Sip trunk sample\",\n        \"cli_format\"\
+        : \"local\",\n        \"cli_prefix\": \"\",\n        \"description\": \"\"\
+        ,\n        \"ringing_timeout\": null,\n        \"configuration\": {\n    \
+        \      \"type\": \"sip_configurations\",\n          \"attributes\": {\n  \
+        \          \"username\": \"username\",\n            \"host\": \"216.58.215.78\"\
+        ,\n            \"port\": 8060,\n            \"codec_ids\": [\n           \
+        \   9,\n              10,\n              8\n            ],\n            \"\
+        rx_dtmf_format_id\": 1,\n            \"tx_dtmf_format_id\": 1,\n         \
+        \   \"resolve_ruri\": true,\n            \"auth_enabled\": true,\n       \
+        \     \"auth_user\": \"auth_user\",\n            \"auth_password\": \"auth_password\"\
+        ,\n            \"auth_from_user\": \"\",\n            \"auth_from_domain\"\
+        : \"\",\n            \"sst_enabled\": false,\n            \"sst_min_timer\"\
+        : 600,\n            \"sst_max_timer\": 900,\n            \"sst_accept_501\"\
+        : true,\n            \"sip_timer_b\": 8000,\n            \"dns_srv_failover_timer\"\
+        : 2000,\n            \"rtp_ping\": false,\n            \"rtp_timeout\": 30,\n\
+        \            \"force_symmetric_rtp\": false,\n            \"symmetric_rtp_ignore_rtcp\"\
+        : false,\n            \"rerouting_disconnect_code_ids\": null,\n         \
+        \   \"sst_session_expires\": null,\n            \"sst_refresh_method_id\"\
+        : 1,\n            \"transport_protocol_id\": 1,\n            \"max_transfers\"\
+        : 2,\n            \"max_30x_redirects\": 5,\n            \"media_encryption_mode\"\
+        : \"disabled\",\n            \"stir_shaken_mode\": \"disabled\",\n       \
+        \     \"allowed_rtp_ips\": null\n          }\n        },\n        \"created_at\"\
+        : \"2018-12-28T15:00:43.522Z\"\n      },\n      \"relationships\": {\n   \
+        \     \"voice_in_trunk_group\": {\n          \"links\": {\n            \"\
+        self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/voice_in_trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/voice_in_trunk_group\"\
+        \n          },\n          \"data\": null\n        },\n        \"pop\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/pop\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/pop\"\
+        \n          },\n          \"data\": {\n            \"type\": \"pops\",\n \
+        \           \"id\": \"ba7ccbef-82ac-4372-9391-eac90d5c9479\"\n          }\n\
+        \        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\":\
+        \ \"837c5764-a6c3-456f-aa37-71fc8f8ca07b\",\n      \"type\": \"voice_in_trunk_groups\"\
+        ,\n      \"attributes\": {\n        \"created_at\": \"2017-11-14T15:07:25.571Z\"\
+        ,\n        \"name\": \"sample trunk group\",\n        \"capacity_limit\":\
+        \ null\n      },\n      \"relationships\": {\n        \"voice_in_trunks\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/relationships/voice_in_trunks\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/voice_in_trunks\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"trunks_count\"\
+        : 3\n      }\n    },\n    {\n      \"id\": \"f402ddc7-0ef9-486d-85f3-6278f1417dd0\"\
+        ,\n      \"type\": \"pops\",\n      \"attributes\": {\n        \"name\": \"\
+        US, LA\"\n      }\n    },\n    {\n      \"id\": \"ba7ccbef-82ac-4372-9391-eac90d5c9479\"\
+        ,\n      \"type\": \"pops\",\n      \"attributes\": {\n        \"name\": \"\
+        DE, FRA\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 70\n\
+        \  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=1&page%5Bsize%5D=4&sort=-created_at\"\
+        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=2&page%5Bsize%5D=4&sort=-created_at\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=18&page%5Bsize%5D=4&sort=-created_at\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

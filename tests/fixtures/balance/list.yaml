@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/balance
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"4c39e0bf-683b-4697-9322-5abaf4011883\"\
+        ,\n    \"type\": \"balances\",\n    \"attributes\": {\n      \"total_balance\"\
+        : \"60.00\",\n      \"credit\": \"10.00\",\n      \"balance\": \"50.00\"\n\
+        \    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

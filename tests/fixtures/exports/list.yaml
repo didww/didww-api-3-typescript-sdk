@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/exports
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"da15f006-5da4-45ca-b0df-735baeadf423\"\
+        ,\n      \"type\": \"exports\",\n      \"attributes\": {\n        \"status\"\
+        : \"Completed\",\n        \"created_at\": \"2019-01-02T10:23:00.897Z\",\n\
+        \        \"url\": \"https://sandbox-api.didww.com/v3/exports/e5352384-6f64-4132-bba1-cda18fbc5896.csv\"\
+        ,\n        \"callback_url\": null,\n        \"callback_method\": null,\n \
+        \       \"export_type\": \"cdr_in\"\n      }\n    }\n  ],\n  \"meta\": {\n\
+        \    \"total_records\": 1\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/exports?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/exports?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

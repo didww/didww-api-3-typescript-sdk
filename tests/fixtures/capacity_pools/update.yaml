@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: '{"data": {"type": "capacity_pools", "id": "f288d07c-e2fc-4ae6-9837-b18fb469c324",
+      "attributes": {"total_channels_count": 25}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"f288d07c-e2fc-4ae6-9837-b18fb469c324\"\
+        ,\n    \"type\": \"capacity_pools\",\n    \"attributes\": {\n      \"name\"\
+        : \"Standard\",\n      \"renew_date\": \"2019-01-21\",\n      \"total_channels_count\"\
+        : 25,\n      \"assigned_channels_count\": 24,\n      \"minimum_limit\": 0,\n\
+        \      \"minimum_qty_per_order\": 1,\n      \"setup_price\": \"0.0\",\n  \
+        \    \"monthly_price\": \"15.0\",\n      \"metered_rate\": \"1.0\"\n    },\n\
+        \    \"relationships\": {\n      \"countries\": {\n        \"links\": {\n\
+        \          \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/countries\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/countries\"\
+        \n        }\n      },\n      \"shared_capacity_groups\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/shared_capacity_groups\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/shared_capacity_groups\"\
+        \n        }\n      },\n      \"qty_based_pricings\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/qty_based_pricings\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/qty_based_pricings\"\
+        \n        }\n      }\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

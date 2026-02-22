@@ -1,0 +1,73 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/available_dids
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"0b76223b-9625-412f-b0f3-330551473e7e\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"16169886810\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/0b76223b-9625-412f-b0f3-330551473e7e/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/0b76223b-9625-412f-b0f3-330551473e7e/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b6db898e-5c40-40b2-9ee8-3847d5345435\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"61872285223\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/b6db898e-5c40-40b2-9ee8-3847d5345435/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/b6db898e-5c40-40b2-9ee8-3847d5345435/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"89ca2b0e-38eb-430b-a5b8-843e47e0239a\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"19733247924\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/89ca2b0e-38eb-430b-a5b8-843e47e0239a/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/89ca2b0e-38eb-430b-a5b8-843e47e0239a/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"859db73a-d2ca-4834-b975-9b7b831ea252\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"19736095078\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/859db73a-d2ca-4834-b975-9b7b831ea252/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/859db73a-d2ca-4834-b975-9b7b831ea252/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1f3c4f6b-15f6-4992-877e-33cb62f3bb10\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"19492034504\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/1f3c4f6b-15f6-4992-877e-33cb62f3bb10/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/1f3c4f6b-15f6-4992-877e-33cb62f3bb10/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"857d1462-5f43-4238-b007-ff05f282e41b\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"19492033398\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"35666e83-2385-438a-bb6f-9477c88d99eb\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"19492034515\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/35666e83-2385-438a-bb6f-9477c88d99eb/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/35666e83-2385-438a-bb6f-9477c88d99eb/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"46198397-0fbd-43bd-8a39-31e8a40c09cc\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"17024795477\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/46198397-0fbd-43bd-8a39-31e8a40c09cc/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/46198397-0fbd-43bd-8a39-31e8a40c09cc/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b156ef32-f578-462c-b842-9b84b087521b\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"17024795341\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/b156ef32-f578-462c-b842-9b84b087521b/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/b156ef32-f578-462c-b842-9b84b087521b/did_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e61b3863-86e9-4126-80c9-32fa10acd832\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"441322659027\"\n      },\n      \"relationships\": {\n       \
+        \ \"did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/e61b3863-86e9-4126-80c9-32fa10acd832/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/e61b3863-86e9-4126-80c9-32fa10acd832/did_group\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_count\"\
+        : 260747\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,745 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/countries
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"6c7727b3-6e17-4b8b-a4b3-4c5142e31a63\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Afghanistan\",\n        \"prefix\": \"93\",\n        \"iso\": \"AF\"\n\
+        \      }\n    },\n    {\n      \"id\": \"86c5647c-67a2-4856-8271-3c78c90bb47b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Albania\",\n        \"prefix\": \"355\",\n        \"iso\": \"AL\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"e36a345a-0186-4eb4-85e6-840fed74f49f\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Algeria\",\n        \"prefix\": \"213\",\n        \"iso\": \"DZ\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"71efd050-248f-4255-9558-226dff4a62fc\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"American Samoa\",\n        \"prefix\": \"1684\",\n        \"iso\": \"\
+        AS\"\n      }\n    },\n    {\n      \"id\": \"b9dce495-1085-4452-8224-6761dd3cc15a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Andorra\",\n        \"prefix\": \"376\",\n        \"iso\": \"AD\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"3d34b655-df3c-4aa0-bde6-e7787756b4d8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Angola\",\n        \"prefix\": \"244\",\n        \"iso\": \"AO\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"9a8ba950-ead9-4ede-bd5f-0220bfc3212d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Anguilla\",\n        \"prefix\": \"1264\",\n        \"iso\": \"AI\"\n\
+        \      }\n    },\n    {\n      \"id\": \"c6174e54-d240-4cef-94ae-c21853b2747e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Antarctica\",\n        \"prefix\": null,\n        \"iso\": \"AQ\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"7b693d72-b569-4853-b491-916e43d29970\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Antigua And Barbuda\",\n        \"prefix\": \"1268\",\n        \"iso\"\
+        : \"AG\"\n      }\n    },\n    {\n      \"id\": \"3d1c2c4e-4b06-4c94-8f0b-43eea90929a0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Argentina\",\n        \"prefix\": \"54\",\n        \"iso\": \"AR\"\n \
+        \     }\n    },\n    {\n      \"id\": \"873673a3-4338-4f99-89b3-a73968f1fcd5\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Armenia\",\n        \"prefix\": \"374\",\n        \"iso\": \"AM\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"ddebc1ae-a89a-4d1c-b95a-eda3b0849a25\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aruba\",\n        \"prefix\": \"297\",\n        \"iso\": \"AW\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"9a4c9414-5353-4fb3-81ee-f8e3e3587034\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Australia\",\n        \"prefix\": \"61\",\n        \"iso\": \"AU\"\n \
+        \     }\n    },\n    {\n      \"id\": \"60657766-0c13-4ad9-beb2-300ad1c66511\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Austria\",\n        \"prefix\": \"43\",\n        \"iso\": \"AT\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"a415006e-072d-4f87-b540-0f90c637c6d1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Azerbaijan\",\n        \"prefix\": \"994\",\n        \"iso\": \"AZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"419915bd-6368-485b-8db9-99f5b7b52d46\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bahamas\",\n        \"prefix\": \"1242\",\n        \"iso\": \"BS\"\n \
+        \     }\n    },\n    {\n      \"id\": \"dc9c1de5-6043-4726-bab2-63e915b7eae4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bahrain\",\n        \"prefix\": \"973\",\n        \"iso\": \"BH\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"f6e6f6bd-a76b-4ea3-8f02-6906b0945b99\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bangladesh\",\n        \"prefix\": \"880\",\n        \"iso\": \"BD\"\n\
+        \      }\n    },\n    {\n      \"id\": \"15b9bdee-85aa-4f6c-890b-19b5f8ec50dd\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Barbados\",\n        \"prefix\": \"1246\",\n        \"iso\": \"BB\"\n\
+        \      }\n    },\n    {\n      \"id\": \"9a0e5b4b-cbff-40f5-89ac-07c205a0ddd2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Belarus\",\n        \"prefix\": \"375\",\n        \"iso\": \"BY\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"f711b8ee-7576-4d40-9dd4-f51a69cee8a7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Belgium\",\n        \"prefix\": \"32\",\n        \"iso\": \"BE\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"b1dc322f-f07f-4e8b-9e4b-3d9679eaef60\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Belize\",\n        \"prefix\": \"501\",\n        \"iso\": \"BZ\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"a9a39ddf-eb23-41e7-8394-86ea07bfb105\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Benin\",\n        \"prefix\": \"229\",\n        \"iso\": \"BJ\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"5d358525-1725-49a9-89a4-f36aaf7ac469\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bermuda\",\n        \"prefix\": \"1441\",\n        \"iso\": \"BM\"\n \
+        \     }\n    },\n    {\n      \"id\": \"4348edc9-9ae6-484a-95f2-242a2679ee85\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bhutan\",\n        \"prefix\": \"975\",\n        \"iso\": \"BT\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"4915018a-3537-4aa0-926e-d3f1a3498f1d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bolivia\",\n        \"prefix\": \"591\",\n        \"iso\": \"BO\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"a5971c7d-c8b3-4f32-a3d0-c92067b012cb\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bosnia And Herzegovina\",\n        \"prefix\": \"387\",\n        \"iso\"\
+        : \"BA\"\n      }\n    },\n    {\n      \"id\": \"fbf7a14c-0a6b-424a-9a21-55ab6e0fbe4d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Botswana\",\n        \"prefix\": \"267\",\n        \"iso\": \"BW\"\n \
+        \     }\n    },\n    {\n      \"id\": \"ac92b635-f8b9-42a2-a8d4-c7cfff8481c8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bouvet Island\",\n        \"prefix\": null,\n        \"iso\": \"BV\"\n\
+        \      }\n    },\n    {\n      \"id\": \"fd56bea6-8cbf-4846-9c2f-bd2742015529\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Brazil\",\n        \"prefix\": \"55\",\n        \"iso\": \"BR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"e6deeab8-8f1c-4685-a0c2-9ac562ca1d24\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"British Virgin Islands\",\n        \"prefix\": \"1284\",\n        \"iso\"\
+        : \"VG\"\n      }\n    },\n    {\n      \"id\": \"6518c891-6809-4b37-80b7-bfc5c5bae720\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Brunei Darussalam\",\n        \"prefix\": \"673\",\n        \"iso\": \"\
+        BN\"\n      }\n    },\n    {\n      \"id\": \"f25136bb-a336-43fa-b05f-34e52d75adaa\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bulgaria\",\n        \"prefix\": \"359\",\n        \"iso\": \"BG\"\n \
+        \     }\n    },\n    {\n      \"id\": \"586a8e38-753d-4e30-bce6-8a071a8c77b4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Burkina Faso\",\n        \"prefix\": \"226\",\n        \"iso\": \"BF\"\
+        \n      }\n    },\n    {\n      \"id\": \"df7872d4-8d7b-461f-86fa-31c533fb297d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Burundi\",\n        \"prefix\": \"257\",\n        \"iso\": \"BI\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"97746b92-4a17-4216-acd4-e51aaec247b1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cambodia\",\n        \"prefix\": \"855\",\n        \"iso\": \"KH\"\n \
+        \     }\n    },\n    {\n      \"id\": \"10c6aa33-d06a-4ca7-8c48-803690a05827\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cameroon\",\n        \"prefix\": \"237\",\n        \"iso\": \"CM\"\n \
+        \     }\n    },\n    {\n      \"id\": \"24eb6e85-f628-4765-bbb2-420e48de76f2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Canada\",\n        \"prefix\": \"1\",\n        \"iso\": \"CA\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"245a11a6-0e73-419f-b9c4-05b27f4436cb\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cape Verde\",\n        \"prefix\": \"238\",\n        \"iso\": \"CV\"\n\
+        \      }\n    },\n    {\n      \"id\": \"3dd07989-af62-4906-897b-47219f546ada\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cayman Islands\",\n        \"prefix\": \"1345\",\n        \"iso\": \"\
+        KY\"\n      }\n    },\n    {\n      \"id\": \"2bd78923-28f2-457e-a395-1b4f240a7962\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Central African Republic\",\n        \"prefix\": \"236\",\n        \"\
+        iso\": \"CF\"\n      }\n    },\n    {\n      \"id\": \"54b54fb7-1938-4bbd-88ad-eb97fc4a34fb\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Chad\",\n        \"prefix\": \"235\",\n        \"iso\": \"TD\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"eb06b185-ff83-445f-96f7-16bfc98bc23e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Chile\",\n        \"prefix\": \"56\",\n        \"iso\": \"CL\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"fccd5be9-41dc-4daf-8894-234ecc916731\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"China\",\n        \"prefix\": \"86\",\n        \"iso\": \"CN\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"1c114629-69ea-4d8b-9305-4904926149fe\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Christmas Island\",\n        \"prefix\": \"61\",\n        \"iso\": \"\
+        CX\"\n      }\n    },\n    {\n      \"id\": \"fd1b12b0-1107-471a-9422-d3f35114d3dc\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Colombia\",\n        \"prefix\": \"57\",\n        \"iso\": \"CO\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"9de720fe-fa19-444f-9a9e-87e012184aa2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Comoros\",\n        \"prefix\": \"269\",\n        \"iso\": \"KM\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"47484867-c2d8-41c0-b9a8-bc4e42a9f1e9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Congo\",\n        \"prefix\": \"242\",\n        \"iso\": \"CG\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"a1b67b93-11f4-42da-a308-4d72ad295625\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cook Islands\",\n        \"prefix\": \"682\",\n        \"iso\": \"CK\"\
+        \n      }\n    },\n    {\n      \"id\": \"76bfece7-78d7-471e-baab-edd0325714c4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Costa Rica\",\n        \"prefix\": \"506\",\n        \"iso\": \"CR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"9793bbee-2c5e-40bf-aadb-5fa38bf40c5b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cote DIvoire\",\n        \"prefix\": \"225\",\n        \"iso\": \"CI\"\
+        \n      }\n    },\n    {\n      \"id\": \"78347fe1-6f98-47ea-999f-2b93b6aceb58\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Croatia\",\n        \"prefix\": \"385\",\n        \"iso\": \"HR\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"6c225277-7be6-48c8-b757-39981d972585\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cuba\",\n        \"prefix\": \"53\",\n        \"iso\": \"CU\"\n      }\n\
+        \    },\n    {\n      \"id\": \"64c9bbb0-964c-4ac6-a336-a27053f88b24\",\n\
+        \      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cura\\u00e7ao\",\n        \"prefix\": \"599\",\n        \"iso\": \"CW\"\
+        \n      }\n    },\n    {\n      \"id\": \"6061dbd6-e5ff-45ed-8c98-489c397fc807\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cyprus\",\n        \"prefix\": \"357\",\n        \"iso\": \"CY\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"1d2c0df1-1b51-40f7-bb76-5397a3f25934\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Czech Republic\",\n        \"prefix\": \"420\",\n        \"iso\": \"CZ\"\
+        \n      }\n    },\n    {\n      \"id\": \"36f2bcfa-79a7-4bbf-894d-d66f53344220\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Democratic Republic Of Congo\",\n        \"prefix\": \"243\",\n      \
+        \  \"iso\": \"CD\"\n      }\n    },\n    {\n      \"id\": \"f782047c-09ae-4424-8de3-762408dc7ba9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Denmark\",\n        \"prefix\": \"45\",\n        \"iso\": \"DK\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"8fb2f5ff-62fc-45ad-8e8a-7f7bbb893de9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Djibouti\",\n        \"prefix\": \"253\",\n        \"iso\": \"DJ\"\n \
+        \     }\n    },\n    {\n      \"id\": \"48f7aa4d-a1b6-4247-85c6-1d9bd91c3865\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Dominica\",\n        \"prefix\": \"1767\",\n        \"iso\": \"DM\"\n\
+        \      }\n    },\n    {\n      \"id\": \"a2618969-ac27-41e4-af10-cec2dee7ca92\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Dominican Republic\",\n        \"prefix\": \"1\",\n        \"iso\": \"\
+        DO\"\n      }\n    },\n    {\n      \"id\": \"ad363233-3f37-4f68-b1bd-2ac4bed69ecd\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"East Timor\",\n        \"prefix\": \"670\",\n        \"iso\": \"TP\"\n\
+        \      }\n    },\n    {\n      \"id\": \"58876d89-4e8d-4738-9a5c-8b382432bee7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ecuador\",\n        \"prefix\": \"593\",\n        \"iso\": \"EC\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"f10b73b7-fad8-439f-acdc-f88ee5c2671d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Egypt\",\n        \"prefix\": \"20\",\n        \"iso\": \"EG\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"d053392c-c5dd-4b40-9984-bd9ed6756c72\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"El Salvador\",\n        \"prefix\": \"503\",\n        \"iso\": \"SV\"\n\
+        \      }\n    },\n    {\n      \"id\": \"4fe5175b-34a9-4533-abcd-f4e66bd400b3\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Equatorial Guinea\",\n        \"prefix\": \"240\",\n        \"iso\": \"\
+        GQ\"\n      }\n    },\n    {\n      \"id\": \"e6d05058-48f2-4dda-92d2-b677b0ed3e7d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Eritrea\",\n        \"prefix\": \"291\",\n        \"iso\": \"ER\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"e369a791-dad8-4a48-a512-0fab3b54d4c2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Estonia\",\n        \"prefix\": \"372\",\n        \"iso\": \"EE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"aa315104-6ec7-4c26-bfd0-dc953e64f72c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ethiopia\",\n        \"prefix\": \"251\",\n        \"iso\": \"ET\"\n \
+        \     }\n    },\n    {\n      \"id\": \"0abcab32-d99f-470e-8c7c-0556215174b7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Falkland Islands\",\n        \"prefix\": \"500\",\n        \"iso\": \"\
+        FK\"\n      }\n    },\n    {\n      \"id\": \"4c82cacb-c6dc-45fb-8a71-92dbafb0b6b1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Faroe Islands\",\n        \"prefix\": \"298\",\n        \"iso\": \"FO\"\
+        \n      }\n    },\n    {\n      \"id\": \"37b40372-eb9d-4ef3-9f78-fa071fdcea49\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Fiji\",\n        \"prefix\": \"679\",\n        \"iso\": \"FJ\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"5883ec41-eafe-46e9-99e8-5b3b386fea3a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Finland\",\n        \"prefix\": \"358\",\n        \"iso\": \"FI\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"7d9f8011-40a4-4fd7-a970-c3b679a75daf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"France\",\n        \"prefix\": \"33\",\n        \"iso\": \"FR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"e4be405d-55f5-440a-b263-8f8f5daa4cb6\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"French Guiana\",\n        \"prefix\": \"594\",\n        \"iso\": \"GF\"\
+        \n      }\n    },\n    {\n      \"id\": \"535c35e4-e0a6-4798-a46c-6517ef0b1095\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"French Polynesia\",\n        \"prefix\": \"689\",\n        \"iso\": \"\
+        PF\"\n      }\n    },\n    {\n      \"id\": \"bd6afdb8-d852-4214-ba80-e16a73bc6761\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"French Southern\",\n        \"prefix\": \"262\",\n        \"iso\": \"\
+        TF\"\n      }\n    },\n    {\n      \"id\": \"a78ba1eb-d4f4-4273-81f5-fc6649f19918\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Gabon\",\n        \"prefix\": \"241\",\n        \"iso\": \"GA\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"bb71bf73-b07f-4cef-b8d6-d46daadab3b2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Gambia\",\n        \"prefix\": \"220\",\n        \"iso\": \"GM\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"b6f04bf7-f31a-44cb-a062-a36b3699429b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Georgia\",\n        \"prefix\": \"995\",\n        \"iso\": \"GE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"dfd1a0a0-bd53-4f7a-9c8e-d2fc5dd1bf7e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Germany\",\n        \"prefix\": \"49\",\n        \"iso\": \"DE\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"7cbc534b-cf16-4ccf-b436-8ad0f06f03ba\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ghana\",\n        \"prefix\": \"233\",\n        \"iso\": \"GH\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"08b1e1f4-e697-4607-8275-e8e2e6a66eab\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Gibraltar\",\n        \"prefix\": \"350\",\n        \"iso\": \"GI\"\n\
+        \      }\n    },\n    {\n      \"id\": \"86b9ccac-1cad-4e02-8cef-bb6cb7cb9c6a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Global\",\n        \"prefix\": \"89\",\n        \"iso\": \"WX\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"93444592-cbb1-42c5-99e9-5ffeb150b7ec\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Greece\",\n        \"prefix\": \"30\",\n        \"iso\": \"GR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"43500361-f536-4e2f-9e69-5a7f6028f9cc\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Greenland\",\n        \"prefix\": \"299\",\n        \"iso\": \"GL\"\n\
+        \      }\n    },\n    {\n      \"id\": \"9a65c679-4b0c-4ca5-895d-d7c76d6ce8e2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Grenada\",\n        \"prefix\": \"1473\",\n        \"iso\": \"GD\"\n \
+        \     }\n    },\n    {\n      \"id\": \"a0b6f939-a10f-4584-a1b2-a8f3d3140d86\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guadeloupe\",\n        \"prefix\": \"590\",\n        \"iso\": \"GP\"\n\
+        \      }\n    },\n    {\n      \"id\": \"d2e55a1c-e33c-49a2-8d74-9594470d5dca\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guam\",\n        \"prefix\": \"1671\",\n        \"iso\": \"GU\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"1c413f83-1522-4dc8-841c-d1b4e4ed8ab2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guatemala\",\n        \"prefix\": \"502\",\n        \"iso\": \"GT\"\n\
+        \      }\n    },\n    {\n      \"id\": \"3b05bbf7-2210-4983-95e8-9b72c9f15a77\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guinea\",\n        \"prefix\": \"224\",\n        \"iso\": \"GN\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"f36ec7f2-2131-44b4-bc4e-a5c50f180549\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guinea Bissau\",\n        \"prefix\": \"245\",\n        \"iso\": \"GW\"\
+        \n      }\n    },\n    {\n      \"id\": \"f249f50c-1e89-499c-8c71-9caa6ceb0770\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Guyana\",\n        \"prefix\": \"592\",\n        \"iso\": \"GY\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"e06c6d09-485d-4e00-8658-0f8cf2dfff15\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Haiti\",\n        \"prefix\": \"509\",\n        \"iso\": \"HT\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"67edb8f8-f125-41b2-9cba-05d6f4e38029\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Honduras\",\n        \"prefix\": \"504\",\n        \"iso\": \"HN\"\n \
+        \     }\n    },\n    {\n      \"id\": \"e413c0ce-8eee-42c2-9f4c-2e4c6c9fd5c3\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Hong Kong\",\n        \"prefix\": \"852\",\n        \"iso\": \"HK\"\n\
+        \      }\n    },\n    {\n      \"id\": \"093df79a-c4d5-4ebd-8716-5a8523db2854\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Hungary\",\n        \"prefix\": \"36\",\n        \"iso\": \"HU\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"8526a723-49dc-461b-b9fd-ee7c0742935c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Iceland\",\n        \"prefix\": \"354\",\n        \"iso\": \"IS\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"a07a1118-7d6c-487a-8f26-698e4f19fa32\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"India\",\n        \"prefix\": \"91\",\n        \"iso\": \"IN\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"4d41a42f-1dc6-44d1-8b63-7e9224133e48\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Indonesia\",\n        \"prefix\": \"62\",\n        \"iso\": \"ID\"\n \
+        \     }\n    },\n    {\n      \"id\": \"db52bed6-09e3-41a9-af9b-98e814798a44\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"International Network\",\n        \"prefix\": \"882\",\n        \"iso\"\
+        : \"WZ\"\n      }\n    },\n    {\n      \"id\": \"914d97dd-a84b-4407-9574-c67bec6c1fee\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"International Networks\",\n        \"prefix\": \"883\",\n        \"iso\"\
+        : \"WY\"\n      }\n    },\n    {\n      \"id\": \"aaba2d62-64c5-4d2c-8074-9920a014c278\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Iran\",\n        \"prefix\": \"98\",\n        \"iso\": \"IR\"\n      }\n\
+        \    },\n    {\n      \"id\": \"7518fc6b-3cc4-4a18-b27c-82dc53d302ef\",\n\
+        \      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Iraq\",\n        \"prefix\": \"964\",\n        \"iso\": \"IQ\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"5ff63a6f-075f-4d12-ba3a-d4a1e617eaeb\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ireland\",\n        \"prefix\": \"353\",\n        \"iso\": \"IE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"514e77da-5c87-4b86-9b5f-8c48b12a4d48\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Israel\",\n        \"prefix\": \"972\",\n        \"iso\": \"IL\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Italy\",\n        \"prefix\": \"39\",\n        \"iso\": \"IT\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"ad1ee8ae-11b5-45df-a175-63b4a661bd31\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Jamaica\",\n        \"prefix\": \"1\",\n        \"iso\": \"JM\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"eb89ebf7-2c8c-4e7d-9aea-89cddeced3c8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Japan\",\n        \"prefix\": \"81\",\n        \"iso\": \"JP\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"4566e1df-9a28-49f8-939b-6828babee410\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Jordan\",\n        \"prefix\": \"962\",\n        \"iso\": \"JO\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"f7e78968-b6e4-463f-b213-8681ab3760f8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kazakhstan\",\n        \"prefix\": \"7\",\n        \"iso\": \"KZ\"\n \
+        \     }\n    },\n    {\n      \"id\": \"2c3e0d50-e28a-4c1c-bfca-c77db719d469\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kenya\",\n        \"prefix\": \"254\",\n        \"iso\": \"KE\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"ecc68601-c0d6-41ad-8167-1eb48cc30bde\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kiribati\",\n        \"prefix\": \"686\",\n        \"iso\": \"KI\"\n \
+        \     }\n    },\n    {\n      \"id\": \"fb6eaa36-5b05-4925-9bdd-53665f8c90f9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kuwait\",\n        \"prefix\": \"965\",\n        \"iso\": \"KW\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"e0e75649-58e6-4e53-b4cd-7728dcb7641c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kyrgyzstan\",\n        \"prefix\": \"996\",\n        \"iso\": \"KG\"\n\
+        \      }\n    },\n    {\n      \"id\": \"12dc3bd7-d4ed-4ae5-93a9-d6f22b2b896c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Lao Peoples Democratic Republic\",\n        \"prefix\": \"856\",\n   \
+        \     \"iso\": \"LA\"\n      }\n    },\n    {\n      \"id\": \"3786d53f-2a7b-450f-ac57-c38850d1a0d9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Latvia\",\n        \"prefix\": \"371\",\n        \"iso\": \"LV\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"a03ffb28-8e23-476c-8b57-529c0a225bbd\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Lebanon\",\n        \"prefix\": \"961\",\n        \"iso\": \"LB\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"59eea630-9cf9-4be1-adbd-cd7255c59485\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Lesotho\",\n        \"prefix\": \"266\",\n        \"iso\": \"LS\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"806ee1f1-f813-4dd4-b5c5-188933ed6d96\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Liberia\",\n        \"prefix\": \"231\",\n        \"iso\": \"LR\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"08e2a395-9837-4bbf-acb7-f44f5c3e4c31\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Libyan Arab Jamahiriya\",\n        \"prefix\": \"218\",\n        \"iso\"\
+        : \"LY\"\n      }\n    },\n    {\n      \"id\": \"7e1df075-3ea0-4491-b8fa-57f1b07af625\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Liechtenstein\",\n        \"prefix\": \"423\",\n        \"iso\": \"LI\"\
+        \n      }\n    },\n    {\n      \"id\": \"661d8448-8897-4765-acda-00cc1740148d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Lithuania\",\n        \"prefix\": \"370\",\n        \"iso\": \"LT\"\n\
+        \      }\n    },\n    {\n      \"id\": \"3ba49d6a-5f02-4dbe-bb7f-b3509fec2b2a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Luxembourg\",\n        \"prefix\": \"352\",\n        \"iso\": \"LU\"\n\
+        \      }\n    },\n    {\n      \"id\": \"bc449e92-6480-4c53-8d9c-f574a9b0b2bf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Macao\",\n        \"prefix\": \"853\",\n        \"iso\": \"MO\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"c06a0a65-607a-4c75-a33e-0d65222a6da8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Macedonia\",\n        \"prefix\": \"389\",\n        \"iso\": \"MK\"\n\
+        \      }\n    },\n    {\n      \"id\": \"3408943f-950d-49f7-9a5b-2226bd9e2f51\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Madagascar\",\n        \"prefix\": \"261\",\n        \"iso\": \"MG\"\n\
+        \      }\n    },\n    {\n      \"id\": \"31be3528-bc84-4bda-8914-bb346ec26b68\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Malawi\",\n        \"prefix\": \"265\",\n        \"iso\": \"MW\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"cd24ef5b-a3a6-4dd5-bbd0-ca01882ccc65\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Malaysia\",\n        \"prefix\": \"60\",\n        \"iso\": \"MY\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"53d83e80-ceb0-4a65-9140-64a15d6fb712\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Maldives\",\n        \"prefix\": \"960\",\n        \"iso\": \"MV\"\n \
+        \     }\n    },\n    {\n      \"id\": \"d2cf1fd0-fa4d-4f4a-8ba1-eb9bef8195c1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mali\",\n        \"prefix\": \"223\",\n        \"iso\": \"ML\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"7c0f34bc-2c6f-4a0a-a4ce-3690cd3be29c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Malta\",\n        \"prefix\": \"356\",\n        \"iso\": \"MT\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"3f42902c-fe3e-4da4-b656-64530897cc38\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Marshall Islands\",\n        \"prefix\": \"692\",\n        \"iso\": \"\
+        MH\"\n      }\n    },\n    {\n      \"id\": \"53a95f9a-6e8d-4c75-9ebf-60aea8bb7cfe\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Martinique\",\n        \"prefix\": \"596\",\n        \"iso\": \"MQ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"bb059d92-bf97-4397-b3f7-a4f9a274360e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mauritania\",\n        \"prefix\": \"222\",\n        \"iso\": \"MR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"032569b8-2407-40cc-8143-f7a5389b4810\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mauritius\",\n        \"prefix\": \"230\",\n        \"iso\": \"MU\"\n\
+        \      }\n    },\n    {\n      \"id\": \"89bda52f-4f07-4d0a-b730-c4da69d38da2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mayotte\",\n        \"prefix\": \"262\",\n        \"iso\": \"YT\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"410c07fc-4fa6-4693-b217-90838c1750a8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mexico\",\n        \"prefix\": \"52\",\n        \"iso\": \"MX\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"9c33ec3d-a75a-4704-9c66-db7861fd4582\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Micronesia Federated States Of\",\n        \"prefix\": \"691\",\n    \
+        \    \"iso\": \"FM\"\n      }\n    },\n    {\n      \"id\": \"45929f06-d181-4ae4-982d-7b56a5f092d6\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Moldova\",\n        \"prefix\": \"373\",\n        \"iso\": \"MD\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"ede31af6-92a7-4b64-b485-d0e307898de8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Monaco\",\n        \"prefix\": \"377\",\n        \"iso\": \"MC\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"ffac3fdb-40ea-463c-8891-362728d8144b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mongolia\",\n        \"prefix\": \"976\",\n        \"iso\": \"MN\"\n \
+        \     }\n    },\n    {\n      \"id\": \"a2ef73b7-8aec-49da-b3e0-7a1a07260b77\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Montenegro\",\n        \"prefix\": \"382\",\n        \"iso\": \"ME\"\n\
+        \      }\n    },\n    {\n      \"id\": \"10a17c42-7bf4-43f7-827c-5a48122ca3d0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Montserrat\",\n        \"prefix\": \"1664\",\n        \"iso\": \"MS\"\n\
+        \      }\n    },\n    {\n      \"id\": \"796a4db7-6d84-4d0e-8e2a-24dcfa85dbab\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Morocco\",\n        \"prefix\": \"212\",\n        \"iso\": \"MA\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"fd492947-207e-4c35-9f4c-b1c804dc0bbe\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mozambique\",\n        \"prefix\": \"258\",\n        \"iso\": \"MZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"c829e7c4-cdec-47c9-a481-3e401afe5452\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Myanmar\",\n        \"prefix\": \"95\",\n        \"iso\": \"MM\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"561e740a-6f5f-4484-b6a5-e7922e7e6a28\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Namibia\",\n        \"prefix\": \"264\",\n        \"iso\": \"NA\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"6f2514b0-4a63-4325-ba89-63f4eb13b420\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nauru\",\n        \"prefix\": \"674\",\n        \"iso\": \"NR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"31c152f7-41fb-4be9-94e1-53d62057a1a2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nepal\",\n        \"prefix\": \"977\",\n        \"iso\": \"NP\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"6f8a6d1d-9341-4a64-a5d0-986639e24124\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Netherlands\",\n        \"prefix\": \"31\",\n        \"iso\": \"NL\"\n\
+        \      }\n    },\n    {\n      \"id\": \"7dbcb688-a7e7-452a-9735-7f4bd750ad89\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Caledonia\",\n        \"prefix\": \"687\",\n        \"iso\": \"NC\"\
+        \n      }\n    },\n    {\n      \"id\": \"98513846-dd8f-487b-9828-e5f689bee3c6\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Zealand\",\n        \"prefix\": \"64\",\n        \"iso\": \"NZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"85bc2686-1b18-4ca0-a2f3-a8b2297770fe\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nicaragua\",\n        \"prefix\": \"505\",\n        \"iso\": \"NI\"\n\
+        \      }\n    },\n    {\n      \"id\": \"1d220a15-712d-460c-8773-a08e9730cce6\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Niger\",\n        \"prefix\": \"227\",\n        \"iso\": \"NE\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"bb24495a-3bf8-4b0d-bdc7-763c3c23027b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nigeria\",\n        \"prefix\": \"234\",\n        \"iso\": \"NG\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"5e589230-ff7e-4293-a8e4-9fe992d318b7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Niue\",\n        \"prefix\": \"683\",\n        \"iso\": \"NU\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"dde9f20a-9b47-4f93-bf03-e87f5c24ac2c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Norfolk Island\",\n        \"prefix\": \"672\",\n        \"iso\": \"NF\"\
+        \n      }\n    },\n    {\n      \"id\": \"cee1612b-b645-408e-b563-ab3c550f6cd9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Northern Mariana Islands\",\n        \"prefix\": \"1670\",\n        \"\
+        iso\": \"MP\"\n      }\n    },\n    {\n      \"id\": \"0df8e504-d581-4279-8a01-3e28cf6515b1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"North Korea\",\n        \"prefix\": \"850\",\n        \"iso\": \"KP\"\n\
+        \      }\n    },\n    {\n      \"id\": \"d17c184d-6f7d-4848-a87d-c5ed88020015\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Norway\",\n        \"prefix\": \"47\",\n        \"iso\": \"NO\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"ee84bcbf-e7fd-4e64-923d-54bcdba6e8c2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Oman\",\n        \"prefix\": \"968\",\n        \"iso\": \"OM\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"ffd90060-53f0-4a3a-961a-48b237d1cb94\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Pakistan\",\n        \"prefix\": \"92\",\n        \"iso\": \"PK\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"f40d44f0-6a05-4538-b9e5-25a3d518c85f\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Palau\",\n        \"prefix\": \"680\",\n        \"iso\": \"PW\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"187ffe47-fe34-4588-a031-6092e1f37321\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Palestine\",\n        \"prefix\": \"970\",\n        \"iso\": \"PS\"\n\
+        \      }\n    },\n    {\n      \"id\": \"d5ca867b-9a2f-49bf-bd50-1d37349e665e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Panama\",\n        \"prefix\": \"507\",\n        \"iso\": \"PA\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"88eb64ea-ffcb-484b-8733-73864d5fc0f5\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Papua New Guinea\",\n        \"prefix\": \"675\",\n        \"iso\": \"\
+        PG\"\n      }\n    },\n    {\n      \"id\": \"c5d0effd-75c4-41cc-b419-a93eb343e474\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Paraguay\",\n        \"prefix\": \"595\",\n        \"iso\": \"PY\"\n \
+        \     }\n    },\n    {\n      \"id\": \"dac76647-14d5-438f-9de7-598c8d3d3149\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Peru\",\n        \"prefix\": \"51\",\n        \"iso\": \"PE\"\n      }\n\
+        \    },\n    {\n      \"id\": \"49938ee6-c1db-4fbb-b7d0-01e1123b87d9\",\n\
+        \      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Philippines\",\n        \"prefix\": \"63\",\n        \"iso\": \"PH\"\n\
+        \      }\n    },\n    {\n      \"id\": \"5b1a298e-d45d-48e8-8b4d-de3c5981a82a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Pitcairn\",\n        \"prefix\": null,\n        \"iso\": \"PN\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"37a97e75-f2ac-4485-82d3-d5a49bd4e4a9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Poland\",\n        \"prefix\": \"48\",\n        \"iso\": \"PL\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"b84bc6d4-fb8d-46bb-9b95-a94c78cb82a0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Portugal\",\n        \"prefix\": \"351\",\n        \"iso\": \"PT\"\n \
+        \     }\n    },\n    {\n      \"id\": \"a84bb196-c3dd-40a2-af7d-baeee3660061\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Puerto Rico\",\n        \"prefix\": \"1\",\n        \"iso\": \"PR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"28e4ff4a-653a-4873-80b9-a65905547ea8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Qatar\",\n        \"prefix\": \"974\",\n        \"iso\": \"QA\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"2ec1dac8-13d0-40a4-be52-b9285ce786a1\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Reunion\",\n        \"prefix\": null,\n        \"iso\": \"RE\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"93d5c5d4-e420-440b-9887-9693edd006ca\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Romania\",\n        \"prefix\": \"40\",\n        \"iso\": \"RO\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"134d9428-0cf1-469b-9657-bb65d1d9fcac\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Russian Federation\",\n        \"prefix\": \"7\",\n        \"iso\": \"\
+        RU\"\n      }\n    },\n    {\n      \"id\": \"70c0146a-5ad6-426e-a8ba-56150359d151\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Rwanda\",\n        \"prefix\": \"250\",\n        \"iso\": \"RW\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"a6699092-a9f6-4691-b574-c31b104b7ffa\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saint Helena\",\n        \"prefix\": \"290\",\n        \"iso\": \"SH\"\
+        \n      }\n    },\n    {\n      \"id\": \"13f0613b-5549-4985-a0d8-06691b3db597\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saint Kitts And Nevis\",\n        \"prefix\": \"1869\",\n        \"iso\"\
+        : \"KN\"\n      }\n    },\n    {\n      \"id\": \"d386d82e-6525-4ce5-8584-2d1f9cae6b8a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saint Lucia\",\n        \"prefix\": \"1758\",\n        \"iso\": \"LC\"\
+        \n      }\n    },\n    {\n      \"id\": \"3fe60b6d-45da-44c8-80b3-1e2adda68d1c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saint Pierre And Miquelon\",\n        \"prefix\": \"508\",\n        \"\
+        iso\": \"PM\"\n      }\n    },\n    {\n      \"id\": \"24b30641-d46a-44a5-af26-5485d295be3a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saint Vincent\",\n        \"prefix\": \"1\",\n        \"iso\": \"VC\"\n\
+        \      }\n    },\n    {\n      \"id\": \"51a18593-cc94-4a4a-8e63-ca26b3429eee\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Samoa\",\n        \"prefix\": \"685\",\n        \"iso\": \"WS\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"37101c39-32f9-4241-83a7-938f75bcdf4a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"San Marino\",\n        \"prefix\": \"378\",\n        \"iso\": \"SM\"\n\
+        \      }\n    },\n    {\n      \"id\": \"bbed06f0-d30b-4d8d-80d3-6eb8f75725e4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sao Tome And Principe\",\n        \"prefix\": null,\n        \"iso\":\
+        \ \"ST\"\n      }\n    },\n    {\n      \"id\": \"4e0b2ad5-912b-4b43-a670-03635a4cbe8c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saudi Arabia\",\n        \"prefix\": \"966\",\n        \"iso\": \"SA\"\
+        \n      }\n    },\n    {\n      \"id\": \"e87ea495-59d3-4b0d-9be0-d3a1d8fad354\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Senegal\",\n        \"prefix\": \"221\",\n        \"iso\": \"SN\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"8498a2dc-3c92-421c-b917-873a661e6e2a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Serbia\",\n        \"prefix\": \"381\",\n        \"iso\": \"RS\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"f833c0b0-1484-407c-a758-fedffef9b044\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Seychelles\",\n        \"prefix\": \"248\",\n        \"iso\": \"SC\"\n\
+        \      }\n    },\n    {\n      \"id\": \"51143fb7-e8f9-489c-bac1-b3bca45ecd2d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sierra Leone\",\n        \"prefix\": \"232\",\n        \"iso\": \"SL\"\
+        \n      }\n    },\n    {\n      \"id\": \"c7ff81e1-da30-4d87-8110-88c5aed0b619\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Singapore\",\n        \"prefix\": \"65\",\n        \"iso\": \"SG\"\n \
+        \     }\n    },\n    {\n      \"id\": \"be646dc6-dd7e-4947-a11b-79fe5871d3dd\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Slovakia\",\n        \"prefix\": \"421\",\n        \"iso\": \"SK\"\n \
+        \     }\n    },\n    {\n      \"id\": \"de9ad7fd-115d-4f95-9a59-d357a9999e38\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Slovenia\",\n        \"prefix\": \"386\",\n        \"iso\": \"SI\"\n \
+        \     }\n    },\n    {\n      \"id\": \"ca73a70a-1176-499a-9b23-87f0e6f500a0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Solomon Islands\",\n        \"prefix\": \"677\",\n        \"iso\": \"\
+        SB\"\n      }\n    },\n    {\n      \"id\": \"69a3aa14-54e8-4149-85ed-44ccecec8fa3\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Somalia\",\n        \"prefix\": \"252\",\n        \"iso\": \"SO\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"9b0329f8-8295-45a7-8f2a-64129b87cdaa\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Africa\",\n        \"prefix\": \"27\",\n        \"iso\": \"ZA\"\n\
+        \      }\n    },\n    {\n      \"id\": \"5eced6a9-45f1-488d-9558-d77548a64faf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Korea\",\n        \"prefix\": \"82\",\n        \"iso\": \"KR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"4b8b8c78-8b64-4f70-85e5-05d0e4889e6d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Sudan\",\n        \"prefix\": \"211\",\n        \"iso\": \"SS\"\n\
+        \      }\n    },\n    {\n      \"id\": \"5b156dc2-327e-4665-bdc5-35cd8729b885\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Spain\",\n        \"prefix\": \"34\",\n        \"iso\": \"ES\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"00d4c5f2-3e82-4c63-9b6e-6c6abea8188b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sri Lanka\",\n        \"prefix\": \"94\",\n        \"iso\": \"LK\"\n \
+        \     }\n    },\n    {\n      \"id\": \"543494cb-35ae-43b0-8ec3-ce9b390d5c7e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sudan\",\n        \"prefix\": \"249\",\n        \"iso\": \"SD\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"dae68fdf-a894-4991-83a6-d5efebca6c31\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Suriname\",\n        \"prefix\": \"597\",\n        \"iso\": \"SR\"\n \
+        \     }\n    },\n    {\n      \"id\": \"f38aea4b-de76-422e-b9be-fd494ade87c9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Svalbard And Jan Mayen\",\n        \"prefix\": \"47\",\n        \"iso\"\
+        : \"SJ\"\n      }\n    },\n    {\n      \"id\": \"9108e29b-1189-45ce-84ff-2f2bda6998f7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Swaziland\",\n        \"prefix\": \"268\",\n        \"iso\": \"SZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"7549be3c-1077-433d-9a77-25416373660d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sweden\",\n        \"prefix\": \"46\",\n        \"iso\": \"SE\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"c03605c9-b40d-4b13-9e83-c8e5bf41d9f4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Switzerland\",\n        \"prefix\": \"41\",\n        \"iso\": \"CH\"\n\
+        \      }\n    },\n    {\n      \"id\": \"129fdc4f-668b-4ea2-b56a-eafc344e1e66\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Syrian Arab Republic\",\n        \"prefix\": \"963\",\n        \"iso\"\
+        : \"SY\"\n      }\n    },\n    {\n      \"id\": \"fd63fa76-bc65-446d-8be4-2d84731ab470\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Taiwan\",\n        \"prefix\": \"886\",\n        \"iso\": \"TW\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"c4cc14e3-7190-494b-9e84-2a063ecb615a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tajikistan\",\n        \"prefix\": \"992\",\n        \"iso\": \"TJ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"51320dd1-6cd6-4484-b8db-072a4d34db1e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Taka-tuka\",\n        \"prefix\": \"112\",\n        \"iso\": \"00\"\n\
+        \      }\n    },\n    {\n      \"id\": \"fb69e8ce-4195-44f3-808c-ed2702a3a7b8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tanzania\",\n        \"prefix\": \"255\",\n        \"iso\": \"TZ\"\n \
+        \     }\n    },\n    {\n      \"id\": \"e8a1a559-d5bf-4831-a0c3-1886f59967fc\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Thailand\",\n        \"prefix\": \"66\",\n        \"iso\": \"TH\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"2a50ff9b-2564-4252-bacc-515443438f79\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Timor Leste\",\n        \"prefix\": \"670\",\n        \"iso\": \"TL\"\n\
+        \      }\n    },\n    {\n      \"id\": \"14a8b771-6075-4d02-8b77-5c31bcacd279\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Togo\",\n        \"prefix\": \"228\",\n        \"iso\": \"TG\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"b4cf777e-c6d5-4e1c-89ba-ebbee5a884c4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tokelau\",\n        \"prefix\": \"690\",\n        \"iso\": \"TK\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"2e1cf224-9fff-42f4-9523-ba78a6fa9ce7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tonga\",\n        \"prefix\": \"676\",\n        \"iso\": \"TO\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"a4414ee0-34c0-49d2-886d-14fcaa46044d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Trinidad And Tobago\",\n        \"prefix\": \"1868\",\n        \"iso\"\
+        : \"TT\"\n      }\n    },\n    {\n      \"id\": \"65868a1f-7d1c-412e-a41c-d68210d7026d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tunisia\",\n        \"prefix\": \"216\",\n        \"iso\": \"TN\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"39dc851f-2fcb-4870-bbb4-e65e371c3333\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Turkey\",\n        \"prefix\": \"90\",\n        \"iso\": \"TR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"61cc37e0-de11-4f63-bfcd-b21dcd81454f\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Turkmenistan\",\n        \"prefix\": \"993\",\n        \"iso\": \"TM\"\
+        \n      }\n    },\n    {\n      \"id\": \"e4afbb77-e87c-4cb5-8b8c-846ec2a56841\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Turks And Caicos Islands\",\n        \"prefix\": \"1649\",\n        \"\
+        iso\": \"TC\"\n      }\n    },\n    {\n      \"id\": \"abd5c2bb-69ea-4016-91c9-a01b0691832f\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tuvalu\",\n        \"prefix\": \"688\",\n        \"iso\": \"TV\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"96dab4f1-da30-49a9-83f4-e92b7ccdd4a8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Uganda\",\n        \"prefix\": \"256\",\n        \"iso\": \"UG\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"f0ce4464-dfeb-412f-8ad1-ee27a858d0c2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ukraine\",\n        \"prefix\": \"380\",\n        \"iso\": \"UA\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"9b2be02d-03a0-49a7-bb0c-9ee13fe88daf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United Arab Emirates\",\n        \"prefix\": \"971\",\n        \"iso\"\
+        : \"AE\"\n      }\n    },\n    {\n      \"id\": \"7eda11bb-0e66-4146-98e7-57a5281f56c8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United Kingdom\",\n        \"prefix\": \"44\",\n        \"iso\": \"GB\"\
+        \n      }\n    },\n    {\n      \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United States\",\n        \"prefix\": \"1\",\n        \"iso\": \"US\"\n\
+        \      }\n    },\n    {\n      \"id\": \"f0a748e3-b307-4591-8418-7c03bcdd5ecf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Uruguay\",\n        \"prefix\": \"598\",\n        \"iso\": \"UY\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"55bf95e5-31a2-4159-a9dd-a3756bb52f1c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"US Minor Outlying Islands\",\n        \"prefix\": \"699\",\n        \"\
+        iso\": \"UM\"\n      }\n    },\n    {\n      \"id\": \"70ba2ffa-0c74-4dd5-93ca-3ad48cd12872\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"US Virgin Islands\",\n        \"prefix\": \"1340\",\n        \"iso\":\
+        \ \"VI\"\n      }\n    },\n    {\n      \"id\": \"57d2c50c-9858-4d57-884b-d51005c80992\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Uzbekistan\",\n        \"prefix\": \"998\",\n        \"iso\": \"UZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"ad701d8b-f148-4691-8455-ac7ea53fef31\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Vanuatu\",\n        \"prefix\": \"678\",\n        \"iso\": \"VU\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"6fe29757-8cd8-44d0-82b5-6f7b02d8e420\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Venezuela\",\n        \"prefix\": \"58\",\n        \"iso\": \"VE\"\n \
+        \     }\n    },\n    {\n      \"id\": \"6aa332f9-e63a-44c5-a2cd-272e1274be47\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Vietnam\",\n        \"prefix\": \"84\",\n        \"iso\": \"VN\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"904ca216-dc7a-48f6-8f40-c96e33cbd788\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Wallis And Futuna\",\n        \"prefix\": \"681\",\n        \"iso\": \"\
+        WF\"\n      }\n    },\n    {\n      \"id\": \"9cec29f5-daf8-49a8-a24d-934d96e16024\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Western Sahara\",\n        \"prefix\": null,\n        \"iso\": \"EH\"\n\
+        \      }\n    },\n    {\n      \"id\": \"d4389869-6074-408c-ab5e-34eb35a65508\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Yemen\",\n        \"prefix\": \"967\",\n        \"iso\": \"YE\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"8ed8ce8d-ea6f-44af-abe1-628c493a0b73\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Zambia\",\n        \"prefix\": \"260\",\n        \"iso\": \"ZM\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"0ef3ab8c-caee-4430-9cce-d9976ce7d693\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Zimbabwe\",\n        \"prefix\": \"263\",\n        \"iso\": \"ZW\"\n \
+        \     }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

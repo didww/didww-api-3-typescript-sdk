@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/pops
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"29dbdddf-3026-4e82-a2d6-5d8b3b2e0ad9\"\
+        ,\n      \"type\": \"pops\",\n      \"attributes\": {\n        \"name\": \"\
+        New York, NY, USA\"\n      }\n    },\n    {\n      \"id\": \"5fbb9593-de83-441f-8144-4b7b88547e22\"\
+        ,\n      \"type\": \"pops\",\n      \"attributes\": {\n        \"name\": \"\
+        Los Angeles, CA, USA\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 2\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

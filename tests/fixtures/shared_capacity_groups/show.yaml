@@ -1,0 +1,546 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"89f987e2-0862-4bf4-a3f4-cdc89af0d875\"\
+        ,\n    \"type\": \"shared_capacity_groups\",\n    \"attributes\": {\n    \
+        \  \"name\": \"didww\",\n      \"shared_channels_count\": 19,\n      \"created_at\"\
+        : \"2018-06-19T11:41:21.644Z\",\n      \"metered_channels_count\": 0\n   \
+        \ },\n    \"relationships\": {\n      \"capacity_pool\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/capacity_pool\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/capacity_pool\"\
+        \n        },\n        \"data\": {\n          \"type\": \"capacity_pools\"\
+        ,\n          \"id\": \"f288d07c-e2fc-4ae6-9837-b18fb469c324\"\n        }\n\
+        \      },\n      \"dids\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/dids\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/dids\"\
+        \n        },\n        \"data\": [\n          {\n            \"type\": \"dids\"\
+        ,\n            \"id\": \"0e63926a-a9cc-4597-b58b-620c3b05cd7f\"\n        \
+        \  },\n          {\n            \"type\": \"dids\",\n            \"id\": \"\
+        ac6b3d66-3b45-423b-b378-52e236f18399\"\n          },\n          {\n      \
+        \      \"type\": \"dids\",\n            \"id\": \"619a9f6a-78f8-4f87-9d18-ecbff657f014\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"78771845-2f29-46bc-8151-53732926d3ed\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"98798cf5-80ee-4736-aff9-4d3ce60ae29a\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"7a8a797d-b0e8-4e90-ac32-0a251ca3d612\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"a79c8633-60d6-4640-9a72-680d59cb44ee\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"9467643f-8fbc-4e25-9818-59f8ccfb915a\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"06e783b2-860c-4c6d-911d-989c081e1f46\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"a0366c97-a34f-4b09-a615-4e41bdec9abd\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"d526e2d6-9015-49f8-b474-74ab2aad33ab\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"5e78f52d-2328-4ecd-9f85-bcb28737e47f\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"683a7cbb-0859-438e-9540-105f3411c98f\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"db9de004-95e2-4f14-8867-bd43183d9c2c\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"d962f2b1-a34d-45dc-9964-2a0ad83ffbd2\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"be060f8b-00f3-4ee3-983a-abefaba7c6fa\"\n          },\n       \
+        \   {\n            \"type\": \"dids\",\n            \"id\": \"1f07c315-8921-4c74-ab80-1a23fea87623\"\
+        \n          },\n          {\n            \"type\": \"dids\",\n           \
+        \ \"id\": \"d6235d1e-092b-48a1-a295-e1b13dafcda2\"\n          }\n        ]\n\
+        \      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"f288d07c-e2fc-4ae6-9837-b18fb469c324\"\
+        ,\n      \"type\": \"capacity_pools\",\n      \"attributes\": {\n        \"\
+        name\": \"Standard\",\n        \"renew_date\": \"2019-01-21\",\n        \"\
+        total_channels_count\": 25,\n        \"assigned_channels_count\": 24,\n  \
+        \      \"minimum_limit\": 0,\n        \"minimum_qty_per_order\": 1,\n    \
+        \    \"setup_price\": \"0.0\",\n        \"monthly_price\": \"15.0\",\n   \
+        \     \"metered_rate\": \"1.0\"\n      },\n      \"relationships\": {\n  \
+        \      \"countries\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/countries\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/countries\"\
+        \n          }\n        },\n        \"shared_capacity_groups\": {\n       \
+        \   \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/shared_capacity_groups\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/shared_capacity_groups\"\
+        \n          }\n        },\n        \"qty_based_pricings\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/qty_based_pricings\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/qty_based_pricings\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"0e63926a-a9cc-4597-b58b-620c3b05cd7f\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T16:44:05.634Z\",\n        \"number\"\
+        : \"18082068798\",\n        \"expires_at\": \"2019-01-27T16:44:06.207Z\",\n\
+        \        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/0e63926a-a9cc-4597-b58b-620c3b05cd7f/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ac6b3d66-3b45-423b-b378-52e236f18399\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : true,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T16:45:15.997Z\",\n        \"number\"\
+        : \"18082068794\",\n        \"expires_at\": \"2019-01-27T16:45:15.957Z\",\n\
+        \        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/ac6b3d66-3b45-423b-b378-52e236f18399/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"619a9f6a-78f8-4f87-9d18-ecbff657f014\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T16:42:07.700Z\",\n        \"number\"\
+        : \"542323629641\",\n        \"expires_at\": \"2019-01-27T16:43:05.192Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/619a9f6a-78f8-4f87-9d18-ecbff657f014/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"78771845-2f29-46bc-8151-53732926d3ed\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T16:42:07.725Z\",\n        \"number\"\
+        : \"542323629643\",\n        \"expires_at\": \"2019-01-27T16:43:05.159Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/78771845-2f29-46bc-8151-53732926d3ed/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"98798cf5-80ee-4736-aff9-4d3ce60ae29a\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : true,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T16:45:16.033Z\",\n        \"number\"\
+        : \"18082068799\",\n        \"expires_at\": \"2019-01-27T16:45:15.958Z\",\n\
+        \        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/98798cf5-80ee-4736-aff9-4d3ce60ae29a/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7a8a797d-b0e8-4e90-ac32-0a251ca3d612\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-28T10:40:48.488Z\",\n        \"number\"\
+        : \"14057782140\",\n        \"expires_at\": \"2019-01-28T10:41:04.529Z\",\n\
+        \        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/7a8a797d-b0e8-4e90-ac32-0a251ca3d612/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a79c8633-60d6-4640-9a72-680d59cb44ee\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:59:55.175Z\",\n        \"number\"\
+        : \"16091609123456799\",\n        \"expires_at\": \"2019-01-27T10:00:04.659Z\"\
+        ,\n        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9467643f-8fbc-4e25-9818-59f8ccfb915a\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:59:55.053Z\",\n        \"number\"\
+        : \"16091609123456798\",\n        \"expires_at\": \"2019-01-27T10:00:04.715Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/9467643f-8fbc-4e25-9818-59f8ccfb915a/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"06e783b2-860c-4c6d-911d-989c081e1f46\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:40.275Z\",\n        \"number\"\
+        : \"16091609123456795\",\n        \"expires_at\": \"2019-01-27T09:57:02.119Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/06e783b2-860c-4c6d-911d-989c081e1f46/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a0366c97-a34f-4b09-a615-4e41bdec9abd\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:40.237Z\",\n        \"number\"\
+        : \"16091609123456794\",\n        \"expires_at\": \"2019-01-27T09:57:02.150Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/a0366c97-a34f-4b09-a615-4e41bdec9abd/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d526e2d6-9015-49f8-b474-74ab2aad33ab\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:55:12.536Z\",\n        \"number\"\
+        : \"16091234567\",\n        \"expires_at\": \"2019-01-27T09:56:02.662Z\",\n\
+        \        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d526e2d6-9015-49f8-b474-74ab2aad33ab/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5e78f52d-2328-4ecd-9f85-bcb28737e47f\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:55:12.575Z\",\n        \"number\"\
+        : \"16091609123456789\",\n        \"expires_at\": \"2019-01-27T09:56:02.627Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/5e78f52d-2328-4ecd-9f85-bcb28737e47f/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"683a7cbb-0859-438e-9540-105f3411c98f\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:55:12.699Z\",\n        \"number\"\
+        : \"16091609123456790\",\n        \"expires_at\": \"2019-01-27T09:56:02.559Z\"\
+        ,\n        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/683a7cbb-0859-438e-9540-105f3411c98f/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"db9de004-95e2-4f14-8867-bd43183d9c2c\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:01.638Z\",\n        \"number\"\
+        : \"16091609123456791\",\n        \"expires_at\": \"2019-01-27T09:56:02.821Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/db9de004-95e2-4f14-8867-bd43183d9c2c/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d962f2b1-a34d-45dc-9964-2a0ad83ffbd2\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:01.679Z\",\n        \"number\"\
+        : \"16091609123456792\",\n        \"expires_at\": \"2019-01-27T09:56:02.792Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d962f2b1-a34d-45dc-9964-2a0ad83ffbd2/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"be060f8b-00f3-4ee3-983a-abefaba7c6fa\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:01.799Z\",\n        \"number\"\
+        : \"16091609123456793\",\n        \"expires_at\": \"2019-01-27T09:56:02.759Z\"\
+        ,\n        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/be060f8b-00f3-4ee3-983a-abefaba7c6fa/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1f07c315-8921-4c74-ab80-1a23fea87623\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : false,\n        \"capacity_limit\": 2,\n        \"description\": \"something\"\
+        ,\n        \"terminated\": false,\n        \"awaiting_registration\": false,\n\
+        \        \"created_at\": \"2018-12-27T09:56:40.396Z\",\n        \"number\"\
+        : \"16091609123456796\",\n        \"expires_at\": \"2019-01-27T09:57:02.026Z\"\
+        ,\n        \"channels_included_count\": 2,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/1f07c315-8921-4c74-ab80-1a23fea87623/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d6235d1e-092b-48a1-a295-e1b13dafcda2\"\
+        ,\n      \"type\": \"dids\",\n      \"attributes\": {\n        \"blocked\"\
+        : true,\n        \"capacity_limit\": 8,\n        \"description\": null,\n\
+        \        \"terminated\": false,\n        \"awaiting_registration\": true,\n\
+        \        \"created_at\": \"2017-05-24T08:04:41.572Z\",\n        \"number\"\
+        : \"380442213578\",\n        \"expires_at\": \"2017-06-24T08:04:41.603Z\"\
+        ,\n        \"channels_included_count\": 0,\n        \"billing_cycles_count\": null,\n\
+        \        \"dedicated_channels_count\": 0\n      },\n      \"relationships\"\
+        : {\n        \"did_group\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/did_group\"\
+        \n          }\n        },\n        \"order\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/order\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/order\"\
+        \n          }\n        },\n        \"trunk\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/trunk\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/trunk\"\
+        \n          }\n        },\n        \"trunk_group\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/trunk_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/trunk_group\"\
+        \n          }\n        },\n        \"capacity_pool\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/capacity_pool\"\
+        \n          }\n        },\n        \"shared_capacity_group\": {\n        \
+        \  \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/relationships/shared_capacity_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/dids/d6235d1e-092b-48a1-a295-e1b13dafcda2/shared_capacity_group\"\
+        \n          }\n        }\n      }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

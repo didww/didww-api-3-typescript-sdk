@@ -1,0 +1,664 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/areas
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"5df464d5-fcc4-4a82-817a-00111c990020\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Aalst\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5df464d5-fcc4-4a82-817a-00111c990020/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5df464d5-fcc4-4a82-817a-00111c990020/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b218046e-fb17-47f9-9d50-593b03456996\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Abruzzo\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b218046e-fb17-47f9-9d50-593b03456996/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b218046e-fb17-47f9-9d50-593b03456996/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"66e27cde-4f2d-4ca2-aacf-bbcebb47f99e\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Aosta Valley\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/66e27cde-4f2d-4ca2-aacf-bbcebb47f99e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/66e27cde-4f2d-4ca2-aacf-bbcebb47f99e/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5b72a800-fd62-4765-a118-101051920dcb\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Apulia\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5b72a800-fd62-4765-a118-101051920dcb/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5b72a800-fd62-4765-a118-101051920dcb/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a0edfb2e-3e34-4c08-86a3-6a456f50fe1e\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 1\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a0edfb2e-3e34-4c08-86a3-6a456f50fe1e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a0edfb2e-3e34-4c08-86a3-6a456f50fe1e/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"31bbda1a-3acb-4e33-b520-33063c03fab3\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 21\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/31bbda1a-3acb-4e33-b520-33063c03fab3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/31bbda1a-3acb-4e33-b520-33063c03fab3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7c993328-a982-4f93-87b5-8eb0ad580889\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 22\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/7c993328-a982-4f93-87b5-8eb0ad580889/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/7c993328-a982-4f93-87b5-8eb0ad580889/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e82ad303-45b0-43ac-a81c-b7c1a5544582\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 23\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e82ad303-45b0-43ac-a81c-b7c1a5544582/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e82ad303-45b0-43ac-a81c-b7c1a5544582/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9b45e6a4-0d1e-425d-84f4-a0cd0047dc75\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 24\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9b45e6a4-0d1e-425d-84f4-a0cd0047dc75/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9b45e6a4-0d1e-425d-84f4-a0cd0047dc75/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fb10cd78-f890-425f-9a70-0fdc6cb99b88\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 25\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/fb10cd78-f890-425f-9a70-0fdc6cb99b88/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/fb10cd78-f890-425f-9a70-0fdc6cb99b88/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b2fbf0bb-33dd-483e-857c-19a79de9c1d3\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 26\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b2fbf0bb-33dd-483e-857c-19a79de9c1d3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b2fbf0bb-33dd-483e-857c-19a79de9c1d3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ff5afa64-2231-45e6-95a0-5b3b7d5a0dd2\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 27\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/ff5afa64-2231-45e6-95a0-5b3b7d5a0dd2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/ff5afa64-2231-45e6-95a0-5b3b7d5a0dd2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9e52b6ee-e627-4d4e-bc68-790c5fb456c8\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 28\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9e52b6ee-e627-4d4e-bc68-790c5fb456c8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9e52b6ee-e627-4d4e-bc68-790c5fb456c8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"64696564-ee11-42fd-8462-915bfaf13f68\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 29\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/64696564-ee11-42fd-8462-915bfaf13f68/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/64696564-ee11-42fd-8462-915bfaf13f68/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5ce7d1ba-2461-49ff-804d-d7f616511634\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 402\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5ce7d1ba-2461-49ff-804d-d7f616511634/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5ce7d1ba-2461-49ff-804d-d7f616511634/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"3fcac095-104d-4de3-9733-6e027e5c81f2\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 404\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/3fcac095-104d-4de3-9733-6e027e5c81f2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/3fcac095-104d-4de3-9733-6e027e5c81f2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"453bf8be-9de6-490d-bf2a-7c9988d73385\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 41\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/453bf8be-9de6-490d-bf2a-7c9988d73385/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/453bf8be-9de6-490d-bf2a-7c9988d73385/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"16123617-9372-4f3f-ae9a-bbcabf73f522\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 42\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/16123617-9372-4f3f-ae9a-bbcabf73f522/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/16123617-9372-4f3f-ae9a-bbcabf73f522/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"297ab459-af72-48ef-8724-9d5dc8e95681\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 43\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/297ab459-af72-48ef-8724-9d5dc8e95681/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/297ab459-af72-48ef-8724-9d5dc8e95681/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"33fe4a78-f8eb-4dac-bc21-2b4d96e78bd8\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 44\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/33fe4a78-f8eb-4dac-bc21-2b4d96e78bd8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/33fe4a78-f8eb-4dac-bc21-2b4d96e78bd8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"cebda46e-cb14-4a5c-82f4-c64339f76523\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 45\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/cebda46e-cb14-4a5c-82f4-c64339f76523/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/cebda46e-cb14-4a5c-82f4-c64339f76523/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4e3468b8-c422-4bfe-83d0-15dc6d66997a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 46\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4e3468b8-c422-4bfe-83d0-15dc6d66997a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4e3468b8-c422-4bfe-83d0-15dc6d66997a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"acaf294a-4459-4c0e-b9dc-b69f89d87325\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 47\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/acaf294a-4459-4c0e-b9dc-b69f89d87325/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/acaf294a-4459-4c0e-b9dc-b69f89d87325/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e11dfb74-1786-41a3-8247-b97911e3eb03\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 49\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e11dfb74-1786-41a3-8247-b97911e3eb03/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e11dfb74-1786-41a3-8247-b97911e3eb03/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7bb1d6c6-1f7b-476f-8f4b-afbd4f6c948c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 504\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/7bb1d6c6-1f7b-476f-8f4b-afbd4f6c948c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/7bb1d6c6-1f7b-476f-8f4b-afbd4f6c948c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7f65a0ed-4bed-4cb0-addd-1d9ae40392d8\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 505\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/7f65a0ed-4bed-4cb0-addd-1d9ae40392d8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/7f65a0ed-4bed-4cb0-addd-1d9ae40392d8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fbe2fd57-9881-46e8-9e01-079268d7fdb0\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 51\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/fbe2fd57-9881-46e8-9e01-079268d7fdb0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/fbe2fd57-9881-46e8-9e01-079268d7fdb0/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a1f8412f-50b1-4f72-b69a-e5e725bb6659\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 52\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a1f8412f-50b1-4f72-b69a-e5e725bb6659/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a1f8412f-50b1-4f72-b69a-e5e725bb6659/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f936111e-f5f1-45de-b967-f7ca60d64ae1\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 53\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f936111e-f5f1-45de-b967-f7ca60d64ae1/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f936111e-f5f1-45de-b967-f7ca60d64ae1/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"20a23c1f-a739-4731-8bc8-096fe1ae4501\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 56\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/20a23c1f-a739-4731-8bc8-096fe1ae4501/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/20a23c1f-a739-4731-8bc8-096fe1ae4501/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fa417b29-d776-486f-bf4f-6daf62e4c2c9\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 57\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/fa417b29-d776-486f-bf4f-6daf62e4c2c9/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/fa417b29-d776-486f-bf4f-6daf62e4c2c9/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4c5d448e-1e93-4cc2-a579-d8b61fb70a19\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 58\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4c5d448e-1e93-4cc2-a579-d8b61fb70a19/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4c5d448e-1e93-4cc2-a579-d8b61fb70a19/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"85b99f74-a7eb-4c51-a551-b25a84774f6f\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 59\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/85b99f74-a7eb-4c51-a551-b25a84774f6f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/85b99f74-a7eb-4c51-a551-b25a84774f6f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4d74e586-4e15-4e44-a6ee-2c7ead26a39b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 61\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4d74e586-4e15-4e44-a6ee-2c7ead26a39b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4d74e586-4e15-4e44-a6ee-2c7ead26a39b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"14c53a9d-7a99-472e-8982-2baa166ece4a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 62\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/14c53a9d-7a99-472e-8982-2baa166ece4a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/14c53a9d-7a99-472e-8982-2baa166ece4a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a33429dc-e7a6-461b-86f1-c5ca5f5adbc6\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 63\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a33429dc-e7a6-461b-86f1-c5ca5f5adbc6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a33429dc-e7a6-461b-86f1-c5ca5f5adbc6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"8325eeeb-c74e-4c71-b262-919253d8d67f\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 64\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/8325eeeb-c74e-4c71-b262-919253d8d67f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/8325eeeb-c74e-4c71-b262-919253d8d67f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9fab1c16-3555-4c78-a27f-5b16197d2b5c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 65\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9fab1c16-3555-4c78-a27f-5b16197d2b5c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9fab1c16-3555-4c78-a27f-5b16197d2b5c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f5e349a8-4108-4f15-b549-3d3a49f6fd38\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 66\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f5e349a8-4108-4f15-b549-3d3a49f6fd38/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f5e349a8-4108-4f15-b549-3d3a49f6fd38/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fa15fd99-4fca-49bf-ae41-d63112031e6a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 67\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/fa15fd99-4fca-49bf-ae41-d63112031e6a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/fa15fd99-4fca-49bf-ae41-d63112031e6a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d2d6bc4f-1444-48cc-922e-2cd31eeba653\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 68\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/d2d6bc4f-1444-48cc-922e-2cd31eeba653/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/d2d6bc4f-1444-48cc-922e-2cd31eeba653/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a91b1571-0f55-43be-aef0-5b30855aa980\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 69\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a91b1571-0f55-43be-aef0-5b30855aa980/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a91b1571-0f55-43be-aef0-5b30855aa980/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1e950978-6ad7-4b95-afc0-5be519ab0838\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 71\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/1e950978-6ad7-4b95-afc0-5be519ab0838/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/1e950978-6ad7-4b95-afc0-5be519ab0838/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"991f0177-babe-4b1d-8416-69866e053a97\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 74\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/991f0177-babe-4b1d-8416-69866e053a97/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/991f0177-babe-4b1d-8416-69866e053a97/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"de8d71f7-2a56-4f90-9a93-773a25238804\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 90\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/de8d71f7-2a56-4f90-9a93-773a25238804/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/de8d71f7-2a56-4f90-9a93-773a25238804/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"6e2a4432-b4eb-42ae-8fdd-086885172295\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 91\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/6e2a4432-b4eb-42ae-8fdd-086885172295/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/6e2a4432-b4eb-42ae-8fdd-086885172295/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"da9a4e43-571d-4ef8-8411-b2b4b07dbd3c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 93\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/da9a4e43-571d-4ef8-8411-b2b4b07dbd3c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/da9a4e43-571d-4ef8-8411-b2b4b07dbd3c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"bad69827-ca85-4ad1-acd2-37f06d1c97d5\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 94\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/bad69827-ca85-4ad1-acd2-37f06d1c97d5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/bad69827-ca85-4ad1-acd2-37f06d1c97d5/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"670e5a0f-4f57-4ce1-acde-0cb268e9a9d0\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 95\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/670e5a0f-4f57-4ce1-acde-0cb268e9a9d0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/670e5a0f-4f57-4ce1-acde-0cb268e9a9d0/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"dfc2c4d0-6b33-46ae-a55c-08186d692557\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 96\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/dfc2c4d0-6b33-46ae-a55c-08186d692557/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/dfc2c4d0-6b33-46ae-a55c-08186d692557/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5c212467-18ce-4fa3-9ad4-27e459cb49ad\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 97\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5c212467-18ce-4fa3-9ad4-27e459cb49ad/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5c212467-18ce-4fa3-9ad4-27e459cb49ad/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b867825a-73d0-46dd-8f6e-37d3a2b0e33b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 98\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b867825a-73d0-46dd-8f6e-37d3a2b0e33b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b867825a-73d0-46dd-8f6e-37d3a2b0e33b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4bbc04d0-48bd-4fee-8a4f-597ff9da62c8\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Area code 99\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4bbc04d0-48bd-4fee-8a4f-597ff9da62c8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4bbc04d0-48bd-4fee-8a4f-597ff9da62c8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9c956393-9d21-4d90-9108-3d6fff71bce7\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Banja Luka\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9c956393-9d21-4d90-9108-3d6fff71bce7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9c956393-9d21-4d90-9108-3d6fff71bce7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"efcc0a76-dd77-4256-b0ad-b24fd55a71df\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Basilicata\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/efcc0a76-dd77-4256-b0ad-b24fd55a71df/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/efcc0a76-dd77-4256-b0ad-b24fd55a71df/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d964fb43-5e2e-4dad-acd6-496f57be7a87\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Belgrade\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/d964fb43-5e2e-4dad-acd6-496f57be7a87/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/d964fb43-5e2e-4dad-acd6-496f57be7a87/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f1f01e58-c664-412c-9c57-ebdc7872ab37\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Brugge\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f1f01e58-c664-412c-9c57-ebdc7872ab37/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f1f01e58-c664-412c-9c57-ebdc7872ab37/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c15ff02e-4a98-4f17-bb3c-f8e685a10687\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Brussels-Capital Region\"\n      },\n      \"relationships\": {\n    \
+        \    \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/c15ff02e-4a98-4f17-bb3c-f8e685a10687/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/c15ff02e-4a98-4f17-bb3c-f8e685a10687/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9a5ca4f5-9161-4c8d-bd89-fa56bf1bcd3b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Calabria\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9a5ca4f5-9161-4c8d-bd89-fa56bf1bcd3b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9a5ca4f5-9161-4c8d-bd89-fa56bf1bcd3b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9eb7cf03-9bf3-4e37-b7c1-7c2a9e465b9b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Campania\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9eb7cf03-9bf3-4e37-b7c1-7c2a9e465b9b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9eb7cf03-9bf3-4e37-b7c1-7c2a9e465b9b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"191d2d7e-ec0c-4581-885a-5bbfb58484ec\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Celje, Trbovlje\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/191d2d7e-ec0c-4581-885a-5bbfb58484ec/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/191d2d7e-ec0c-4581-885a-5bbfb58484ec/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b59902c1-dda0-4c0a-9528-7e3760d68076\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Dendermonde\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b59902c1-dda0-4c0a-9528-7e3760d68076/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b59902c1-dda0-4c0a-9528-7e3760d68076/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1d01ead0-18eb-44c1-9247-c3ac8c7153c1\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Drenthe\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/1d01ead0-18eb-44c1-9247-c3ac8c7153c1/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/1d01ead0-18eb-44c1-9247-c3ac8c7153c1/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90d9cc5b-1de1-4c2f-8e0c-d9b0055e18d0\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Dubrovnik-Neretva\"\n      },\n      \"relationships\": {\n        \"\
+        country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/90d9cc5b-1de1-4c2f-8e0c-d9b0055e18d0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/90d9cc5b-1de1-4c2f-8e0c-d9b0055e18d0/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9ab24f05-6bb4-457f-8abb-059d7c6e151a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Eastern Cape\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9ab24f05-6bb4-457f-8abb-059d7c6e151a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9ab24f05-6bb4-457f-8abb-059d7c6e151a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"41feeeec-fd8e-444d-8601-5ddb2b0522f9\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Emilia-Romagna\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/41feeeec-fd8e-444d-8601-5ddb2b0522f9/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/41feeeec-fd8e-444d-8601-5ddb2b0522f9/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a782da4a-c99e-49a5-a98a-8de055fede8c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Flemish Region\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a782da4a-c99e-49a5-a98a-8de055fede8c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a782da4a-c99e-49a5-a98a-8de055fede8c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90a7c8d3-b084-480d-a3f7-3b2932facb6d\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Flevoland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/90a7c8d3-b084-480d-a3f7-3b2932facb6d/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/90a7c8d3-b084-480d-a3f7-3b2932facb6d/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4544817f-7edd-4093-845f-25bccbe4eb9a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Free State\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4544817f-7edd-4093-845f-25bccbe4eb9a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4544817f-7edd-4093-845f-25bccbe4eb9a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5849b239-7fe4-4a07-90bb-4660a2cdb6cf\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Friesland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5849b239-7fe4-4a07-90bb-4660a2cdb6cf/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5849b239-7fe4-4a07-90bb-4660a2cdb6cf/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"df8542d4-9c93-4b30-8c33-70f8b09c322a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Friuli-Venezia Giulia\"\n      },\n      \"relationships\": {\n      \
+        \  \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/df8542d4-9c93-4b30-8c33-70f8b09c322a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/df8542d4-9c93-4b30-8c33-70f8b09c322a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5113bc38-fdfe-4b3c-b58e-a61280175118\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Gauteng\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5113bc38-fdfe-4b3c-b58e-a61280175118/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5113bc38-fdfe-4b3c-b58e-a61280175118/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"223a83f4-735e-4779-af1e-1d2f596f5fa2\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Gelderland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/223a83f4-735e-4779-af1e-1d2f596f5fa2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/223a83f4-735e-4779-af1e-1d2f596f5fa2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"58cce57f-f4d3-4cd7-8468-80b205af0e19\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Gent\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/58cce57f-f4d3-4cd7-8468-80b205af0e19/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/58cce57f-f4d3-4cd7-8468-80b205af0e19/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ddce30cc-0d6b-4930-a2fa-9944b847b135\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Groningen\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/ddce30cc-0d6b-4930-a2fa-9944b847b135/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/ddce30cc-0d6b-4930-a2fa-9944b847b135/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1a418307-490f-4b03-b841-02336082c0d4\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Herzegovina-Neretva Canton\"\n      },\n      \"relationships\": {\n \
+        \       \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/1a418307-490f-4b03-b841-02336082c0d4/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/1a418307-490f-4b03-b841-02336082c0d4/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e7a8629f-b5bf-45f3-8bfb-80351fd5ca49\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Ieper\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e7a8629f-b5bf-45f3-8bfb-80351fd5ca49/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e7a8629f-b5bf-45f3-8bfb-80351fd5ca49/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"118d2314-a173-4bf6-a935-cc13defb6ed6\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"\\u00cele-de-France\"\n      },\n      \"relationships\": {\n        \"\
+        country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/118d2314-a173-4bf6-a935-cc13defb6ed6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/118d2314-a173-4bf6-a935-cc13defb6ed6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"6cdb85ba-d20b-4998-87eb-af6ec5acceb2\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Istria\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/6cdb85ba-d20b-4998-87eb-af6ec5acceb2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/6cdb85ba-d20b-4998-87eb-af6ec5acceb2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"69dd89c2-5d55-4f41-93ec-ac017938eaa7\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Koper, Postojna, Nova Gorica\"\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/areas/69dd89c2-5d55-4f41-93ec-ac017938eaa7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/69dd89c2-5d55-4f41-93ec-ac017938eaa7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a274119e-b691-4fcf-817b-d1cf876c37ef\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Kortrijk, Mouscron Comines - Warmeton\"\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/areas/a274119e-b691-4fcf-817b-d1cf876c37ef/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a274119e-b691-4fcf-817b-d1cf876c37ef/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4a6c1db4-d118-4343-af07-a285f1288a26\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Kranj\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4a6c1db4-d118-4343-af07-a285f1288a26/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4a6c1db4-d118-4343-af07-a285f1288a26/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4eb137ec-895f-40ad-a689-73b8fd6797ed\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"KwaZulu - Natal\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4eb137ec-895f-40ad-a689-73b8fd6797ed/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4eb137ec-895f-40ad-a689-73b8fd6797ed/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"873ba44a-c496-4c43-8541-18b6a4d1d504\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Lazio\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/873ba44a-c496-4c43-8541-18b6a4d1d504/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/873ba44a-c496-4c43-8541-18b6a4d1d504/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"eb712ca1-9dfe-4ffd-855a-9a07340be4b5\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Liguria\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/eb712ca1-9dfe-4ffd-855a-9a07340be4b5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/eb712ca1-9dfe-4ffd-855a-9a07340be4b5/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"932444bd-de40-4e73-bc54-d2020e0df58a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Limburg\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/932444bd-de40-4e73-bc54-d2020e0df58a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/932444bd-de40-4e73-bc54-d2020e0df58a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"29c79e29-03ad-4f6a-9a29-f4e993537709\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Limpopo\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/29c79e29-03ad-4f6a-9a29-f4e993537709/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/29c79e29-03ad-4f6a-9a29-f4e993537709/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"62618df8-0a48-43b0-b4b3-99baa4caf4a5\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Ljubljana\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/62618df8-0a48-43b0-b4b3-99baa4caf4a5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/62618df8-0a48-43b0-b4b3-99baa4caf4a5/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"2496ff52-39cf-4208-b5b6-d844ca9846c6\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Lombardy\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/2496ff52-39cf-4208-b5b6-d844ca9846c6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/2496ff52-39cf-4208-b5b6-d844ca9846c6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e5becfd4-d028-4da9-8ecb-437cc6d25f87\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Marche\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e5becfd4-d028-4da9-8ecb-437cc6d25f87/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e5becfd4-d028-4da9-8ecb-437cc6d25f87/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f2e0cbab-67f8-4ef6-a594-bb7c199bbc97\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Maribor, Murska Sobota, Ravne na Koro\\u0161kem\"\n      },\n      \"\
+        relationships\": {\n        \"country\": {\n          \"links\": {\n     \
+        \       \"self\": \"https://sandbox-api.didww.com/v3/areas/f2e0cbab-67f8-4ef6-a594-bb7c199bbc97/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f2e0cbab-67f8-4ef6-a594-bb7c199bbc97/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e63c7782-34e3-4ad0-8978-942ea89593b3\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Molise\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e63c7782-34e3-4ad0-8978-942ea89593b3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e63c7782-34e3-4ad0-8978-942ea89593b3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"58dc3261-364f-48e1-be2e-76e146e2db2a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Mpumalanga\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/58dc3261-364f-48e1-be2e-76e146e2db2a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/58dc3261-364f-48e1-be2e-76e146e2db2a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4bffd627-b180-4f7d-af9a-4a38958868f7\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Ninove\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/4bffd627-b180-4f7d-af9a-4a38958868f7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/4bffd627-b180-4f7d-af9a-4a38958868f7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f9a77fea-dee6-40c3-87a9-3563e3c60597\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Noord Brabant\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f9a77fea-dee6-40c3-87a9-3563e3c60597/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f9a77fea-dee6-40c3-87a9-3563e3c60597/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ec4eb6b9-2502-4414-8a6e-348c20c28ac4\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Noord Holland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/ec4eb6b9-2502-4414-8a6e-348c20c28ac4/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/ec4eb6b9-2502-4414-8a6e-348c20c28ac4/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"0aed3076-13cd-4df2-bb5f-7664788419ba\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Northeast France\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/0aed3076-13cd-4df2-bb5f-7664788419ba/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/0aed3076-13cd-4df2-bb5f-7664788419ba/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fe81ac19-de28-464f-961f-5039fd6a488a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"North West\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/fe81ac19-de28-464f-961f-5039fd6a488a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/fe81ac19-de28-464f-961f-5039fd6a488a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"593e1586-9571-4d1a-97fa-88a98eb4d26b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Northwest France\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/593e1586-9571-4d1a-97fa-88a98eb4d26b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/593e1586-9571-4d1a-97fa-88a98eb4d26b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"bb0440ec-6143-4ab2-a9f0-3ec7a927a82c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Novo Mesto, Kr\\u0161ko\"\n      },\n      \"relationships\": {\n    \
+        \    \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/bb0440ec-6143-4ab2-a9f0-3ec7a927a82c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/bb0440ec-6143-4ab2-a9f0-3ec7a927a82c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b4799af7-95f9-4729-83e2-64e166d9c45f\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Oostende\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b4799af7-95f9-4729-83e2-64e166d9c45f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b4799af7-95f9-4729-83e2-64e166d9c45f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b0c72342-3eaa-45c8-91b5-3025fc57da6b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Osijek-Baranja\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b0c72342-3eaa-45c8-91b5-3025fc57da6b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b0c72342-3eaa-45c8-91b5-3025fc57da6b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"26a3866c-f635-4d5b-8023-10a94ea82aed\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Oudenaarde\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/26a3866c-f635-4d5b-8023-10a94ea82aed/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/26a3866c-f635-4d5b-8023-10a94ea82aed/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"64ef6f73-763a-43ac-8736-db6363ec5dd1\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Overijssel\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/64ef6f73-763a-43ac-8736-db6363ec5dd1/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/64ef6f73-763a-43ac-8736-db6363ec5dd1/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"604448ed-c1e0-4119-a8ef-1d7139addb7a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Piedmont\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/604448ed-c1e0-4119-a8ef-1d7139addb7a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/604448ed-c1e0-4119-a8ef-1d7139addb7a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b76301b8-81a7-4769-95f5-58e4d6a4c9a3\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Primorje-Gorski Kotar\"\n      },\n      \"relationships\": {\n      \
+        \  \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b76301b8-81a7-4769-95f5-58e4d6a4c9a3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b76301b8-81a7-4769-95f5-58e4d6a4c9a3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f5001d81-1284-4917-92fa-74ac8b7967ec\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Roeselare\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f5001d81-1284-4917-92fa-74ac8b7967ec/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f5001d81-1284-4917-92fa-74ac8b7967ec/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5ad45180-619f-478f-a14e-03c6c6331f72\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Sarajevo Canton\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/5ad45180-619f-478f-a14e-03c6c6331f72/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/5ad45180-619f-478f-a14e-03c6c6331f72/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"074f02fe-1cb8-49c6-9539-e0863e2b2473\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Sardinia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/074f02fe-1cb8-49c6-9539-e0863e2b2473/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/074f02fe-1cb8-49c6-9539-e0863e2b2473/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"04b4019f-96fb-4168-bfca-ef95bb4f009c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Sicily\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/04b4019f-96fb-4168-bfca-ef95bb4f009c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/04b4019f-96fb-4168-bfca-ef95bb4f009c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ee6481a2-c1a5-4cc0-95f0-a11cad981ba5\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Southeast France\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/ee6481a2-c1a5-4cc0-95f0-a11cad981ba5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/ee6481a2-c1a5-4cc0-95f0-a11cad981ba5/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"6b121fe1-2992-4c41-b9d8-2dc28995b71b\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Southwest France\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/6b121fe1-2992-4c41-b9d8-2dc28995b71b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/6b121fe1-2992-4c41-b9d8-2dc28995b71b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"db2a2c8c-a005-4e29-90cf-8f0e28eedd5c\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Split-Dalmatia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/db2a2c8c-a005-4e29-90cf-8f0e28eedd5c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/db2a2c8c-a005-4e29-90cf-8f0e28eedd5c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d863c3a2-a1e8-4ecf-841d-1fc1a4784cce\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Trentino-Alto/Sudtirol\"\n      },\n      \"relationships\": {\n     \
+        \   \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/d863c3a2-a1e8-4ecf-841d-1fc1a4784cce/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/d863c3a2-a1e8-4ecf-841d-1fc1a4784cce/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ab2adc18-7c94-42d9-bdde-b28dfc373a22\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Tuscany\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c9367923-a2bf-4384-8e30-509f383a1c41\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Tuzla Canton\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/c9367923-a2bf-4384-8e30-509f383a1c41/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/c9367923-a2bf-4384-8e30-509f383a1c41/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9fffa34f-ab62-4857-a63f-e72f18daf920\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Umbria\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/9fffa34f-ab62-4857-a63f-e72f18daf920/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/9fffa34f-ab62-4857-a63f-e72f18daf920/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f0d874f2-3be4-4b6b-b40e-8143f4cc81c6\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Utrecht\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/f0d874f2-3be4-4b6b-b40e-8143f4cc81c6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/f0d874f2-3be4-4b6b-b40e-8143f4cc81c6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b10b452f-ecb6-4279-bf8c-78b52bdcfb45\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Veneto\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b10b452f-ecb6-4279-bf8c-78b52bdcfb45/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b10b452f-ecb6-4279-bf8c-78b52bdcfb45/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c1ab8401-779b-463f-a5dd-fd9e064a210a\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Veurne\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/c1ab8401-779b-463f-a5dd-fd9e064a210a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/c1ab8401-779b-463f-a5dd-fd9e064a210a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a733779c-8383-4c0f-a424-594be430cd29\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Walloon Region\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a733779c-8383-4c0f-a424-594be430cd29/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a733779c-8383-4c0f-a424-594be430cd29/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"2b2aa44a-0c3a-4163-b1a8-eb513bc84059\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Western Cape\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/2b2aa44a-0c3a-4163-b1a8-eb513bc84059/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/2b2aa44a-0c3a-4163-b1a8-eb513bc84059/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e486f30b-864f-48f8-b4d7-12af925b4789\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Zadar\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/e486f30b-864f-48f8-b4d7-12af925b4789/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/e486f30b-864f-48f8-b4d7-12af925b4789/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"aa583eba-a46b-43ec-b415-44d85ab74aa6\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Zagreb\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/aa583eba-a46b-43ec-b415-44d85ab74aa6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/aa583eba-a46b-43ec-b415-44d85ab74aa6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b72b7087-1a23-422e-9b2a-bc7d35563d0f\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Zeeland\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/b72b7087-1a23-422e-9b2a-bc7d35563d0f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/b72b7087-1a23-422e-9b2a-bc7d35563d0f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a8a1fe03-36a4-4eea-8c48-1fce4f13b37f\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Zenica-Doboj Canton\"\n      },\n      \"relationships\": {\n        \"\
+        country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/a8a1fe03-36a4-4eea-8c48-1fce4f13b37f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/a8a1fe03-36a4-4eea-8c48-1fce4f13b37f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90625ddb-5813-489b-8a8b-dfb98418b4c7\"\
+        ,\n      \"type\": \"areas\",\n      \"attributes\": {\n        \"name\":\
+        \ \"Zuid Holland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/areas/90625ddb-5813-489b-8a8b-dfb98418b4c7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/areas/90625ddb-5813-489b-8a8b-dfb98418b4c7/country\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 127,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"\
+        first\": \"https://sandbox-api.didww.com/v3/areas?page%5Bnumber%5D=1&page%5Bsize%5D=1000\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/areas?page%5Bnumber%5D=1&page%5Bsize%5D=1000\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

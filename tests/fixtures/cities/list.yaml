@@ -1,0 +1,137 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/cities
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"bba735f9-7c37-499b-8998-94a5fca5d158\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aachen\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"94f4e428-ae52-4b35-9507-9449d32c30a9\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aalst\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/94f4e428-ae52-4b35-9507-9449d32c30a9/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1ea1fc83-95ca-4dc4-a539-6d31a948b4af\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Abbeville\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/1ea1fc83-95ca-4dc4-a539-6d31a948b4af/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9c84190a-1f6e-4177-b866-efcaee7bb92d\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Abbotsford\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/9c84190a-1f6e-4177-b866-efcaee7bb92d/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4d12e415-21b8-43f4-9e0e-116be92ee3c0\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aberdeen\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/4d12e415-21b8-43f4-9e0e-116be92ee3c0/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"fe04ed98-808c-486a-be45-c2f593189d79\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Acapulco\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/fe04ed98-808c-486a-be45-c2f593189d79/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7a1557b7-fc6f-4efc-aee2-475ceecc843b\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"A Coruna\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/7a1557b7-fc6f-4efc-aee2-475ceecc843b/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"39f94fd9-c01f-42ef-863c-ac59871ed357\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Adana\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/39f94fd9-c01f-42ef-863c-ac59871ed357/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"081c15ab-7643-4ff1-9103-6259fb1c9891\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Adelaide\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/081c15ab-7643-4ff1-9103-6259fb1c9891/area\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a87445bf-6169-4bca-81a1-2cfb53616ac4\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aguadilla\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/region\"\
+        \n          }\n        },\n        \"area\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/area\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 1647,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"\
+        first\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=1&page%5Bsize%5D=10\"\
+        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=2&page%5Bsize%5D=10\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=165&page%5Bsize%5D=10\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

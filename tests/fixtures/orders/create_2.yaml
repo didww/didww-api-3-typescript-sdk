@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: '{"data":{"type":"orders","attributes":{"items":[{"type":"capacity_order_items","attributes":{"capacity_pool_id":"b7522a31-4bf3-4c23-81e8-e7a14b23663f","qty":1}}]}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/orders
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"68a46dd5-d405-4283-b7a5-62503267e9f8\"\
+        ,\n    \"type\": \"orders\",\n    \"attributes\": {\n      \"amount\": \"\
+        44.35\",\n      \"status\": \"Completed\",\n      \"created_at\": \"2018-12-28T14:08:38.304Z\"\
+        ,\n      \"description\": \"Capacity\",\n      \"reference\": \"RUG-725648\"\
+        ,\n      \"items\": [\n        {\n          \"type\": \"capacity_order_items\"\
+        ,\n          \"attributes\": {\n            \"qty\": 1,\n            \"nrc\"\
+        : \"25.0\",\n            \"mrc\": \"19.35\",\n            \"prorated_mrc\"\
+        : true,\n            \"billed_from\": \"2018-12-28\",\n            \"billed_to\"\
+        : \"2019-01-20\",\n            \"capacity_pool_id\": \"b7522a31-4bf3-4c23-81e8-e7a14b23663f\"\
+        \n          }\n        }\n      ],\n      \"callback_url\": null,\n      \"\
+        callback_method\": null\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

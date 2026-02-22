@@ -1,0 +1,51 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_groups
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"f6cc4ea6-6dda-4c51-9952-c1440441bc2f\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"864\",\n        \"features\": [\n          \"voice_in\",\n          \"\
+        sms_in\",\n          \"t38\"\n        ],\n        \"is_metered\": false,\n\
+        \        \"area_name\": \"Inman\",\n        \"allow_additional_channels\"\
+        : true\n      },\n      \"relationships\": {\n        \"country\": {\n   \
+        \       \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/stock_keeping_units\"\
+        \n          }\n        },\n        \"requirement\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/requirement\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/requirement\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"available_dids_enabled\"\
+        : false,\n        \"needs_registration\": false,\n        \"is_available\"\
+        : true,\n        \"total_count\": 1\n      }\n    }\n  ],\n  \"meta\": {\n\
+        \    \"total_records\": 1,\n    \"api_version\": \"2022-05-09\"\n  },\n  \"\
+        links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/did_groups?filter%5Bnanpa_prefix.id%5D=eeed293b-f3d8-4ef8-91ef-1b077d174b3b&page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/did_groups?filter%5Bnanpa_prefix.id%5D=eeed293b-f3d8-4ef8-91ef-1b077d174b3b&page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

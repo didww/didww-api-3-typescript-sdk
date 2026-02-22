@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/regions/c11b1f34-16cf-4ba6-8497-f305b53d5b01
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"c11b1f34-16cf-4ba6-8497-f305b53d5b01\"\
+        ,\n    \"type\": \"regions\",\n    \"attributes\": {\n      \"name\": \"California\"\
+        \n    },\n    \"relationships\": {\n      \"country\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/regions/c11b1f34-16cf-4ba6-8497-f305b53d5b01/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/regions/c11b1f34-16cf-4ba6-8497-f305b53d5b01/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\n        }\n   \
+        \   }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United States\",\n        \"prefix\": \"1\",\n        \"iso\": \"US\"\n\
+        \      }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

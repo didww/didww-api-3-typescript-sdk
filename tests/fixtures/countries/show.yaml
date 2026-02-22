@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/countries/7eda11bb-0e66-4146-98e7-57a5281f56c8
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"7eda11bb-0e66-4146-98e7-57a5281f56c8\"\
+        ,\n    \"type\": \"countries\",\n    \"attributes\": {\n      \"name\": \"\
+        United Kingdom\",\n      \"prefix\": \"44\",\n      \"iso\": \"GB\"\n    }\n\
+        \  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

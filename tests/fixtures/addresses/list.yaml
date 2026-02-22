@@ -1,0 +1,89 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/addresses
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"9d3f2582-a292-4b6b-828b-74c78b5a3780\"\
+        ,\n      \"type\": \"addresses\",\n      \"attributes\": {\n        \"city_name\"\
+        : \"Odessa\",\n        \"postal_code\": \"65000\",\n        \"address\": \"\
+        literurna 12\",\n        \"description\": \"1\",\n        \"created_at\":\
+        \ \"2020-11-02T15:49:10.769Z\",\n        \"verified\": false\n      },\n \
+        \     \"relationships\": {\n        \"identity\": {\n          \"links\":\
+        \ {\n            \"self\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/relationships/identity\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/identity\"\
+        \n          },\n          \"data\": {\n            \"type\": \"identities\"\
+        ,\n            \"id\": \"b4fe0262-a79e-4c1f-a313-bd32739c44e5\"\n        \
+        \  }\n        },\n        \"country\": {\n          \"links\": {\n       \
+        \     \"self\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/country\"\
+        \n          },\n          \"data\": {\n            \"type\": \"countries\"\
+        ,\n            \"id\": \"f0ce4464-dfeb-412f-8ad1-ee27a858d0c2\"\n        \
+        \  }\n        },\n        \"proofs\": {\n          \"links\": {\n        \
+        \    \"self\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/relationships/proofs\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/proofs\"\
+        \n          },\n          \"data\": [\n            {\n              \"type\"\
+        : \"proofs\",\n              \"id\": \"dd2f5f37-0d08-415d-9530-6488e6eb797b\"\
+        \n            }\n          ]\n        },\n        \"area\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/relationships/area\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/area\"\
+        \n          },\n          \"data\": null\n        },\n        \"city\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/9d3f2582-a292-4b6b-828b-74c78b5a3780/city\"\
+        \n          },\n          \"data\": null\n        }\n      }\n    }\n  ],\n\
+        \  \"included\": [\n    {\n      \"id\": \"b4fe0262-a79e-4c1f-a313-bd32739c44e5\"\
+        ,\n      \"type\": \"identities\",\n      \"attributes\": {\n        \"first_name\"\
+        : \"Denis\",\n        \"last_name\": \"Talakevich\",\n        \"phone_number\"\
+        : \"12345678\",\n        \"id_number\": null,\n        \"birth_date\": \"\
+        1987-01-02\",\n        \"company_name\": null,\n        \"company_reg_number\"\
+        : null,\n        \"vat_id\": null,\n        \"description\": null,\n     \
+        \   \"personal_tax_id\": null,\n        \"identity_type\": \"Personal\",\n\
+        \        \"created_at\": \"2020-10-09T10:21:04.835Z\",\n        \"external_reference_id\"\
+        : null,\n        \"verified\": false\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/country\"\
+        \n          }\n        },\n        \"proofs\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/relationships/proofs\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/proofs\"\
+        \n          }\n        },\n        \"addresses\": {\n          \"links\":\
+        \ {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/relationships/addresses\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/addresses\"\
+        \n          }\n        },\n        \"permanent_documents\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/relationships/permanent_documents\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/identities/b4fe0262-a79e-4c1f-a313-bd32739c44e5/permanent_documents\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f0ce4464-dfeb-412f-8ad1-ee27a858d0c2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ukraine\",\n        \"prefix\": \"380\",\n        \"iso\": \"UA\"\n  \
+        \    },\n      \"relationships\": {\n        \"regions\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/countries/f0ce4464-dfeb-412f-8ad1-ee27a858d0c2/relationships/regions\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/f0ce4464-dfeb-412f-8ad1-ee27a858d0c2/regions\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"dd2f5f37-0d08-415d-9530-6488e6eb797b\"\
+        ,\n      \"type\": \"proofs\",\n      \"attributes\": {\n        \"created_at\"\
+        : \"2020-11-02T15:49:10.775Z\",\n        \"expires_at\": null\n      },\n\
+        \      \"relationships\": {\n        \"proof_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/proofs/dd2f5f37-0d08-415d-9530-6488e6eb797b/relationships/proof_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/proofs/dd2f5f37-0d08-415d-9530-6488e6eb797b/proof_type\"\
+        \n          }\n        },\n        \"entity\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/proofs/dd2f5f37-0d08-415d-9530-6488e6eb797b/relationships/entity\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/proofs/dd2f5f37-0d08-415d-9530-6488e6eb797b/entity\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 1,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\"\
+        : \"https://sandbox-api.didww.com/v3/addresses?include=country%2Cidentity%2Cproofs%2Carea%2Ccity&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/addresses?include=country%2Cidentity%2Cproofs%2Carea%2Ccity&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_group_types/d6530a8c-924c-469a-98c0-9525602e6192
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"d6530a8c-924c-469a-98c0-9525602e6192\"\
+        ,\n    \"type\": \"did_group_types\",\n    \"attributes\": {\n      \"name\"\
+        : \"Global\"\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

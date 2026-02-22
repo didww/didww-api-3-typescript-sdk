@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/nanpa_prefixes
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"54943e12-88e9-4df9-be54-a72926c251dd\"\
+        ,\n      \"type\": \"nanpa_prefixes\",\n      \"attributes\": {\n        \"\
+        npa\": \"864\",\n        \"nxx\": \"200\"\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/nanpa_prefixes/54943e12-88e9-4df9-be54-a72926c251dd/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/54943e12-88e9-4df9-be54-a72926c251dd/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/54943e12-88e9-4df9-be54-a72926c251dd/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/54943e12-88e9-4df9-be54-a72926c251dd/region\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98\"\
+        ,\n      \"type\": \"nanpa_prefixes\",\n      \"attributes\": {\n        \"\
+        npa\": \"864\",\n        \"nxx\": \"920\"\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/region\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 2,\n    \"api_version\": \"2022-05-09\"\n  },\n  \"links\": {\n    \"first\"\
+        : \"https://sandbox-api.didww.com/v3/nanpa_prefixes?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

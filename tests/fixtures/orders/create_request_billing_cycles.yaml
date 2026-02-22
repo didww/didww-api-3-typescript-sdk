@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/orders
+  response:
+    body:
+      string: '{"data":{"type":"orders","attributes":{"items":[{"type":"did_order_items","attributes":{"sku_id":"f36d2812-2195-4385-85e8-e59c3484a8bc","qty":1,"billing_cycles_count":5}}],"allow_back_ordering":true}}}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_group_types
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"d6530a8c-924c-469a-98c0-9525602e6192\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Global\"\n      }\n    },\n    {\n      \"id\": \"994ea201-4a4d-4b27-ac4b-b5916ac969a3\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Local\"\n      }\n    },\n    {\n      \"id\": \"6bba60f1-e724-4d12-9ea4-a3a64705800f\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Mobile\"\n      }\n    },\n    {\n      \"id\": \"2c165e9d-c6f5-4fe1-ad0e-bacf5bab3d86\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"National\"\n      }\n    },\n    {\n      \"id\": \"e95378ee-e93f-459e-a2f6-9056c064f529\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Shared Cost\"\n      }\n    },\n    {\n      \"id\": \"ec95e831-fc36-489a-a531-0fd1984ab6e8\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Toll-free\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 6\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/did_group_types?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/did_group_types?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

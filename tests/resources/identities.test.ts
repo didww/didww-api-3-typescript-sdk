@@ -1,0 +1,21 @@
+import { describe, it, expect, afterEach } from 'vitest';
+import { createTestClient } from '../helpers/client.js';
+import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { ref } from '../../src/resources/base.js';
+
+describe('Identities', () => {
+  afterEach(() => cleanupNock());
+
+  it('creates an identity', async () => {
+    loadCassette('identities/create.yaml');
+    const client = createTestClient();
+    const result = await client.identities().create({
+      first_name: 'John',
+      last_name: 'Doe',
+      identity_type: 'Business',
+      country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),
+    });
+    expect(result.data.id).toBeDefined();
+    expect(result.data.type).toBe('identities');
+  });
+});

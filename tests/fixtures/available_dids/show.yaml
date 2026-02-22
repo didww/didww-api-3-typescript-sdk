@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/available_dids/0b76223b-9625-412f-b0f3-330551473e7e
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"0b76223b-9625-412f-b0f3-330551473e7e\"\
+        ,\n    \"type\": \"available_dids\",\n    \"attributes\": {\n      \"number\"\
+        : \"16169886810\"\n    },\n    \"relationships\": {\n      \"did_group\":\
+        \ {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/available_dids/0b76223b-9625-412f-b0f3-330551473e7e/relationships/did_group\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/available_dids/0b76223b-9625-412f-b0f3-330551473e7e/did_group\"\
+        \n        },\n        \"data\": {\n          \"type\": \"did_groups\",\n \
+        \         \"id\": \"a9e3d346-d7bc-4a85-adb0-8ef1119cf237\"\n        }\n  \
+        \    }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"a9e3d346-d7bc-4a85-adb0-8ef1119cf237\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"616\",\n        \"local_prefix\": \"\",\n        \"features\": [\n   \
+        \       \"voice\"\n        ],\n        \"is_metered\": false,\n        \"\
+        area_name\": \"Grand Rapids\",\n        \"allow_additional_channels\": true\n\
+        \      },\n      \"relationships\": {\n        \"country\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a9e3d346-d7bc-4a85-adb0-8ef1119cf237/stock_keeping_units\"\
+        \n          },\n          \"data\": [\n            {\n              \"type\"\
+        : \"stock_keeping_units\",\n              \"id\": \"bdff43ad-2db8-428c-a65c-f2d4d43720b6\"\
+        \n            },\n            {\n              \"type\": \"stock_keeping_units\"\
+        ,\n              \"id\": \"884835e7-fffb-4293-9847-89f65449d70c\"\n      \
+        \      }\n          ]\n        }\n      },\n      \"meta\": {\n        \"\
+        needs_registration\": false,\n        \"is_available\": true,\n        \"\
+        restrictions\": null,\n        \"available_dids_enabled\": true\n      }\n\
+        \    },\n    {\n      \"id\": \"bdff43ad-2db8-428c-a65c-f2d4d43720b6\",\n\
+        \      \"type\": \"stock_keeping_units\",\n      \"attributes\": {\n     \
+        \   \"setup_price\": \"0.0\",\n        \"monthly_price\": \"0.09\",\n    \
+        \    \"channels_included_count\": 0\n      }\n    },\n    {\n      \"id\"\
+        : \"884835e7-fffb-4293-9847-89f65449d70c\",\n      \"type\": \"stock_keeping_units\"\
+        ,\n      \"attributes\": {\n        \"setup_price\": \"0.0\",\n        \"\
+        monthly_price\": \"0.19\",\n        \"channels_included_count\": 2\n     \
+        \ }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

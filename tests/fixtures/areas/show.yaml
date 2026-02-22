@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"ab2adc18-7c94-42d9-bdde-b28dfc373a22\"\
+        ,\n    \"type\": \"areas\",\n    \"attributes\": {\n      \"name\": \"Tuscany\"\
+        \n    },\n    \"relationships\": {\n      \"country\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\n        }\n   \
+        \   }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Italy\",\n        \"prefix\": \"39\",\n        \"iso\": \"IT\"\n     \
+        \ },\n      \"relationships\": {\n        \"regions\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/relationships/regions\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/regions\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
+        : \"2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

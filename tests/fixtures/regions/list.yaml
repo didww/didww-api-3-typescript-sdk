@@ -1,0 +1,352 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/regions
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"d2716c9b-0bff-4de8-a25e-d12bf6408d3a\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Alabama\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/d2716c9b-0bff-4de8-a25e-d12bf6408d3a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/d2716c9b-0bff-4de8-a25e-d12bf6408d3a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"59d352b7-9a17-4722-a1fb-9a79b2c9007a\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Alaska\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/59d352b7-9a17-4722-a1fb-9a79b2c9007a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/59d352b7-9a17-4722-a1fb-9a79b2c9007a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"dd7bf52d-2418-4b41-a17d-9d01a46f22ff\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Alberta\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/dd7bf52d-2418-4b41-a17d-9d01a46f22ff/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/dd7bf52d-2418-4b41-a17d-9d01a46f22ff/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"8bef58e3-8e0e-43ba-8d03-1143968a6a47\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Arizona\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/8bef58e3-8e0e-43ba-8d03-1143968a6a47/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/8bef58e3-8e0e-43ba-8d03-1143968a6a47/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"6b7eb128-9c01-4d26-89e9-7918508cb213\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Arkansas\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/6b7eb128-9c01-4d26-89e9-7918508cb213/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/6b7eb128-9c01-4d26-89e9-7918508cb213/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4dae7cbc-9808-4b6b-b9cb-c4612039af01\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"British Columbia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/4dae7cbc-9808-4b6b-b9cb-c4612039af01/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/4dae7cbc-9808-4b6b-b9cb-c4612039af01/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c11b1f34-16cf-4ba6-8497-f305b53d5b01\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"California\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/c11b1f34-16cf-4ba6-8497-f305b53d5b01/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/c11b1f34-16cf-4ba6-8497-f305b53d5b01/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e1d5af11-ee35-4650-bc30-3c1ce939a6e7\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Colorado\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/e1d5af11-ee35-4650-bc30-3c1ce939a6e7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/e1d5af11-ee35-4650-bc30-3c1ce939a6e7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a8a12eaf-dc7f-4d7b-bfcd-a92eef4ef9a8\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Connecticut\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/a8a12eaf-dc7f-4d7b-bfcd-a92eef4ef9a8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/a8a12eaf-dc7f-4d7b-bfcd-a92eef4ef9a8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b734f7a1-13fa-4af1-bde0-9a1e34f0a377\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Delaware\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/b734f7a1-13fa-4af1-bde0-9a1e34f0a377/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/b734f7a1-13fa-4af1-bde0-9a1e34f0a377/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4916a6b6-2566-43ff-a854-089c5ebb15b7\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Florida\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/4916a6b6-2566-43ff-a854-089c5ebb15b7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/4916a6b6-2566-43ff-a854-089c5ebb15b7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"0aa9b37a-fb2a-4695-9d50-b1eceaee84e3\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Georgia\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/0aa9b37a-fb2a-4695-9d50-b1eceaee84e3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/0aa9b37a-fb2a-4695-9d50-b1eceaee84e3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"7719cc14-485c-4476-9b73-bb7961a276d8\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Hawaii\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/7719cc14-485c-4476-9b73-bb7961a276d8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/7719cc14-485c-4476-9b73-bb7961a276d8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f4e0e04a-fe25-41a0-9a67-b027899b71f5\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Idaho\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/f4e0e04a-fe25-41a0-9a67-b027899b71f5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/f4e0e04a-fe25-41a0-9a67-b027899b71f5/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"547b2ce1-ba2d-4cf2-8c09-9900aaf1291c\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Illinois\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/547b2ce1-ba2d-4cf2-8c09-9900aaf1291c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/547b2ce1-ba2d-4cf2-8c09-9900aaf1291c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"8e195638-db30-4aae-a0af-bd760ec46c8e\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Indiana\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/8e195638-db30-4aae-a0af-bd760ec46c8e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/8e195638-db30-4aae-a0af-bd760ec46c8e/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"27a229c7-9e98-4430-8420-7aed16440d73\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Iowa\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/27a229c7-9e98-4430-8420-7aed16440d73/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/27a229c7-9e98-4430-8420-7aed16440d73/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1818dc95-6480-481d-a6d9-521cca1de4e0\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kabulas\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/1818dc95-6480-481d-a6d9-521cca1de4e0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/1818dc95-6480-481d-a6d9-521cca1de4e0/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"93adb85e-9fd2-4631-b91f-1f399a1c90e3\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kansas\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/93adb85e-9fd2-4631-b91f-1f399a1c90e3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/93adb85e-9fd2-4631-b91f-1f399a1c90e3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"924d95a7-cdf2-494e-9671-53a22536f099\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kentucky\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/924d95a7-cdf2-494e-9671-53a22536f099/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/924d95a7-cdf2-494e-9671-53a22536f099/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"bc10843f-8bb7-48fd-8022-b634c50e4f2a\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Louisiana\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/bc10843f-8bb7-48fd-8022-b634c50e4f2a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/bc10843f-8bb7-48fd-8022-b634c50e4f2a/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1e93b572-cba1-461c-88fb-170f2db8e7ed\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Maine\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/1e93b572-cba1-461c-88fb-170f2db8e7ed/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/1e93b572-cba1-461c-88fb-170f2db8e7ed/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5d1ec5eb-8f2b-42f8-ad90-64023d74dabb\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Manitoba\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/5d1ec5eb-8f2b-42f8-ad90-64023d74dabb/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/5d1ec5eb-8f2b-42f8-ad90-64023d74dabb/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4f5e27f7-d2df-4097-bc5f-c272b67d89af\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Maryland\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/4f5e27f7-d2df-4097-bc5f-c272b67d89af/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/4f5e27f7-d2df-4097-bc5f-c272b67d89af/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"cd1c365b-7e07-48e0-b6ae-b18cb620b0d9\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Massachusetts\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/cd1c365b-7e07-48e0-b6ae-b18cb620b0d9/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/cd1c365b-7e07-48e0-b6ae-b18cb620b0d9/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"eb5ab037-2edd-486d-a121-7bce532167cb\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Michigan\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/eb5ab037-2edd-486d-a121-7bce532167cb/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/eb5ab037-2edd-486d-a121-7bce532167cb/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"56ba0b45-d819-4e1e-9c45-a50aad86e88e\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Minnesota\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/56ba0b45-d819-4e1e-9c45-a50aad86e88e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/56ba0b45-d819-4e1e-9c45-a50aad86e88e/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"5e960b5c-a7aa-428e-973d-bde0fe115fef\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mississippi\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/5e960b5c-a7aa-428e-973d-bde0fe115fef/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/5e960b5c-a7aa-428e-973d-bde0fe115fef/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"53ecfa1f-3310-4029-896d-ccd330503be6\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Missouri\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/53ecfa1f-3310-4029-896d-ccd330503be6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/53ecfa1f-3310-4029-896d-ccd330503be6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"50d81302-87e2-42d2-ba38-31d80b2dc7b4\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Montana\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/50d81302-87e2-42d2-ba38-31d80b2dc7b4/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/50d81302-87e2-42d2-ba38-31d80b2dc7b4/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c294b08b-e113-492f-8a59-3391f3582d35\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"N\\u2019Djamena\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/c294b08b-e113-492f-8a59-3391f3582d35/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/c294b08b-e113-492f-8a59-3391f3582d35/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"573b2794-7f53-4c07-8528-3f6b57041e5f\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nebraska\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/573b2794-7f53-4c07-8528-3f6b57041e5f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/573b2794-7f53-4c07-8528-3f6b57041e5f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"6de4c3be-876e-47e2-93e0-98c0310e54d6\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nevada\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/6de4c3be-876e-47e2-93e0-98c0310e54d6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/6de4c3be-876e-47e2-93e0-98c0310e54d6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"caba4832-474f-4185-83b9-504d77dc14cc\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Brunswick\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/caba4832-474f-4185-83b9-504d77dc14cc/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/caba4832-474f-4185-83b9-504d77dc14cc/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"e7bb7d87-5630-4d2e-8dab-28d05e1b366c\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Newfoundland And Labrador\"\n      },\n      \"relationships\": {\n  \
+        \      \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/e7bb7d87-5630-4d2e-8dab-28d05e1b366c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/e7bb7d87-5630-4d2e-8dab-28d05e1b366c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"abffd2a0-4b51-4ca6-8eaa-445598c92e73\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Hampshire\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/abffd2a0-4b51-4ca6-8eaa-445598c92e73/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/abffd2a0-4b51-4ca6-8eaa-445598c92e73/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"346e64c8-18c2-4a12-b1e2-20e090043fca\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Jersey\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/346e64c8-18c2-4a12-b1e2-20e090043fca/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/346e64c8-18c2-4a12-b1e2-20e090043fca/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b47787e5-8171-43fe-a60b-5f73495d177c\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Mexico\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/b47787e5-8171-43fe-a60b-5f73495d177c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/b47787e5-8171-43fe-a60b-5f73495d177c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ab7e83bc-814b-4cfa-a14c-d2df3de2a545\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New York\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/ab7e83bc-814b-4cfa-a14c-d2df3de2a545/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/ab7e83bc-814b-4cfa-a14c-d2df3de2a545/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a30e52bf-e8c0-4742-89d1-56d1809d8012\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"North Carolina\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/a30e52bf-e8c0-4742-89d1-56d1809d8012/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/a30e52bf-e8c0-4742-89d1-56d1809d8012/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f4d9190c-d3a9-49c1-a410-e359dde1c313\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"North Dakota\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/f4d9190c-d3a9-49c1-a410-e359dde1c313/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/f4d9190c-d3a9-49c1-a410-e359dde1c313/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"bbcae0f7-bc86-411f-bddd-f6c835c95512\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Northwest Territories\"\n      },\n      \"relationships\": {\n      \
+        \  \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/bbcae0f7-bc86-411f-bddd-f6c835c95512/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/bbcae0f7-bc86-411f-bddd-f6c835c95512/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"078a82db-c2f9-404c-afbf-095ccab9f403\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Nova Scotia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/078a82db-c2f9-404c-afbf-095ccab9f403/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/078a82db-c2f9-404c-afbf-095ccab9f403/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"15065563-7127-43ec-af8f-64ab24d039b3\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ohio\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/15065563-7127-43ec-af8f-64ab24d039b3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/15065563-7127-43ec-af8f-64ab24d039b3/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"c081ae51-578e-424f-b625-363224957c08\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Oklahoma\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/c081ae51-578e-424f-b625-363224957c08/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/c081ae51-578e-424f-b625-363224957c08/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"77e4427d-ab97-45e5-b2a0-551bf9e28ba0\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ontario\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/77e4427d-ab97-45e5-b2a0-551bf9e28ba0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/77e4427d-ab97-45e5-b2a0-551bf9e28ba0/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"487f62e1-1df5-4e13-a297-9f6b3d3bd26b\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Oregon\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/487f62e1-1df5-4e13-a297-9f6b3d3bd26b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/487f62e1-1df5-4e13-a297-9f6b3d3bd26b/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90a27209-3208-482a-af2e-65208c2ff8f8\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Pennsylvania\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/90a27209-3208-482a-af2e-65208c2ff8f8/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/90a27209-3208-482a-af2e-65208c2ff8f8/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f6e22abb-c49b-494c-90bc-b34048a47956\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Prince Edward Island\"\n      },\n      \"relationships\": {\n       \
+        \ \"country\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/f6e22abb-c49b-494c-90bc-b34048a47956/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/f6e22abb-c49b-494c-90bc-b34048a47956/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"874747e9-b2e8-4ed4-bd02-9e759f19d8e2\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Quebec\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/874747e9-b2e8-4ed4-bd02-9e759f19d8e2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/874747e9-b2e8-4ed4-bd02-9e759f19d8e2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"0d010096-e5fd-4a12-9b01-2da492b8edf7\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Rabat\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/0d010096-e5fd-4a12-9b01-2da492b8edf7/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/0d010096-e5fd-4a12-9b01-2da492b8edf7/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"ee58ac57-72e2-4ec2-a518-3c5fa80ae5aa\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Rhode Island\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/ee58ac57-72e2-4ec2-a518-3c5fa80ae5aa/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/ee58ac57-72e2-4ec2-a518-3c5fa80ae5aa/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1aca7960-a7ff-403c-b484-202e43a7e0d2\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Saskatchewan\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/1aca7960-a7ff-403c-b484-202e43a7e0d2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/1aca7960-a7ff-403c-b484-202e43a7e0d2/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"43bf7c1a-9a89-4cb0-bbfd-8d3bb82dbb20\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Carolina\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/43bf7c1a-9a89-4cb0-bbfd-8d3bb82dbb20/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/43bf7c1a-9a89-4cb0-bbfd-8d3bb82dbb20/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"05d38ee3-1b5d-4a12-a718-091a853d6b62\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Dakota\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/05d38ee3-1b5d-4a12-a718-091a853d6b62/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/05d38ee3-1b5d-4a12-a718-091a853d6b62/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9a8cb25c-14a4-4eca-8807-880a0a013bdb\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tennessee\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/9a8cb25c-14a4-4eca-8807-880a0a013bdb/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/9a8cb25c-14a4-4eca-8807-880a0a013bdb/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9ec3f82f-dd09-45cf-af5d-5345339340f6\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Texas\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/9ec3f82f-dd09-45cf-af5d-5345339340f6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/9ec3f82f-dd09-45cf-af5d-5345339340f6/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f282b69b-cbb4-43db-ae7f-b5ee7f1718fd\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Tralialia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/f282b69b-cbb4-43db-ae7f-b5ee7f1718fd/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/f282b69b-cbb4-43db-ae7f-b5ee7f1718fd/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"cff808c1-f8cf-454d-8c3f-46112fb7ba44\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Utah\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/cff808c1-f8cf-454d-8c3f-46112fb7ba44/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/cff808c1-f8cf-454d-8c3f-46112fb7ba44/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"cde3e90c-9432-4844-82ee-45ec5d1df946\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Vermont\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/cde3e90c-9432-4844-82ee-45ec5d1df946/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/cde3e90c-9432-4844-82ee-45ec5d1df946/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"351ae60f-1f38-4f86-ac1c-07baff1abe65\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Virginia\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/351ae60f-1f38-4f86-ac1c-07baff1abe65/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/351ae60f-1f38-4f86-ac1c-07baff1abe65/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"9ae4ce01-378e-480f-9a40-716713a27523\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Washington\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/9ae4ce01-378e-480f-9a40-716713a27523/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/9ae4ce01-378e-480f-9a40-716713a27523/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"2ed45c54-694c-4db1-9e7f-3c4441c49e64\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Washington DC\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/2ed45c54-694c-4db1-9e7f-3c4441c49e64/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/2ed45c54-694c-4db1-9e7f-3c4441c49e64/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"bb67b21c-fee8-459a-b395-1306742b8c7f\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Wisconsin\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/bb67b21c-fee8-459a-b395-1306742b8c7f/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/bb67b21c-fee8-459a-b395-1306742b8c7f/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"a101ad5b-40d5-4fc8-b30a-4735b6c4664c\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Wyoming\"\n      },\n      \"relationships\": {\n        \"country\":\
+        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/a101ad5b-40d5-4fc8-b30a-4735b6c4664c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/a101ad5b-40d5-4fc8-b30a-4735b6c4664c/country\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"82de821b-15fc-4ac1-a8fd-b0ca38019306\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"Yukon\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/82de821b-15fc-4ac1-a8fd-b0ca38019306/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/82de821b-15fc-4ac1-a8fd-b0ca38019306/country\"\
+        \n          }\n        }\n      }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

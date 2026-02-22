@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/dids/unknown-id
+  response:
+    body:
+      string: "{\n  \"errors\": [\n    {\n      \"title\": \"Param not allowed\",\n\
+        \      \"detail\": \"capacity_pools_id is not allowed.\",\n      \"code\"\
+        : \"105\",\n      \"status\": \"400\"\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

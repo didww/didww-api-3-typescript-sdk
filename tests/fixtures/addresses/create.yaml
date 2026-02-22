@@ -1,0 +1,47 @@
+interactions:
+- request:
+    body: '{"data":{"type":"addresses","attributes":{"city_name":"New York","postal_code":"123","address":"some
+      street","description":"test address"},"relationships":{"country":{"data":{"type":"countries","id":"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9"}},"identity":{"data":{"type":"identities","id":"5e9df058-50d2-4e34-b0d4-d1746b86f41a"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/addresses
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"bf69bc70-e1c2-442c-9f30-335ee299b663\"\
+        ,\n    \"type\": \"addresses\",\n    \"attributes\": {\n      \"city_name\"\
+        : \"New York\",\n      \"postal_code\": \"123\",\n      \"address\": \"some\
+        \ street\",\n      \"description\": \"test address\",\n      \"created_at\"\
+        : \"2021-04-01T14:59:47.128Z\",\n      \"verified\": false\n    },\n    \"\
+        relationships\": {\n      \"identity\": {\n        \"links\": {\n        \
+        \  \"self\": \"https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/relationships/identity\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/identity\"\
+        \n        }\n      },\n      \"country\": {\n        \"links\": {\n      \
+        \    \"self\": \"https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\n        }\n   \
+        \   },\n      \"proofs\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/relationships/proofs\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/addresses/bf69bc70-e1c2-442c-9f30-335ee299b663/proofs\"\
+        \n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\"\
+        : \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\",\n      \"type\": \"countries\"\
+        ,\n      \"attributes\": {\n        \"name\": \"United States\",\n       \
+        \ \"prefix\": \"1\",\n        \"iso\": \"US\"\n      },\n      \"relationships\"\
+        : {\n        \"regions\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/countries/1f6fc2bd-f081-4202-9b1a-d9cb88d942b9/relationships/regions\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/1f6fc2bd-f081-4202-9b1a-d9cb88d942b9/regions\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
+        : \"2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

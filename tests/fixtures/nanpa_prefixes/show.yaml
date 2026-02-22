@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/nanpa_prefixes/6c16d51d-d376-4395-91c4-012321317e48
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"6c16d51d-d376-4395-91c4-012321317e48\"\
+        ,\n    \"type\": \"nanpa_prefixes\",\n    \"attributes\": {\n      \"npa\"\
+        : \"864\",\n      \"nxx\": \"920\"\n    },\n    \"relationships\": {\n   \
+        \   \"country\": {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/6c16d51d-d376-4395-91c4-012321317e48/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/6c16d51d-d376-4395-91c4-012321317e48/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"e5b6999c-aba0-4ae4-b9f9-3dcf744a0ed1\"\n        }\n   \
+        \   },\n      \"region\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/nanpa_prefixes/6c16d51d-d376-4395-91c4-012321317e48/relationships/region\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/6c16d51d-d376-4395-91c4-012321317e48/region\"\
+        \n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\"\
+        : \"e5b6999c-aba0-4ae4-b9f9-3dcf744a0ed1\",\n      \"type\": \"countries\"\
+        ,\n      \"attributes\": {\n        \"name\": \"United States\",\n       \
+        \ \"prefix\": \"1\",\n        \"iso\": \"US\"\n      },\n      \"relationships\"\
+        : {\n        \"regions\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/countries/e5b6999c-aba0-4ae4-b9f9-3dcf744a0ed1/relationships/regions\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/e5b6999c-aba0-4ae4-b9f9-3dcf744a0ed1/regions\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
+        : \"2022-05-09\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

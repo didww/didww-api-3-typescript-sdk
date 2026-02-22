@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"2187c36d-28fb-436f-8861-5a0f5b5a3ee1\"\
+        ,\n    \"type\": \"did_groups\",\n    \"attributes\": {\n      \"prefix\"\
+        : \"241\",\n      \"local_prefix\": \"\",\n      \"features\": [\n       \
+        \ \"voice\"\n      ],\n      \"is_metered\": false,\n      \"area_name\":\
+        \ \"Aachen\",\n      \"allow_additional_channels\": true\n    },\n    \"relationships\"\
+        : {\n      \"country\": {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"dfd1a0a0-bd53-4f7a-9c8e-d2fc5dd1bf7e\"\n        }\n   \
+        \   },\n      \"city\": {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/city\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/city\"\
+        \n        },\n        \"data\": {\n          \"type\": \"cities\",\n     \
+        \     \"id\": \"bba735f9-7c37-499b-8998-94a5fca5d158\"\n        }\n      },\n\
+        \      \"did_group_type\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/did_group_type\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/did_group_type\"\
+        \n        },\n        \"data\": {\n          \"type\": \"did_group_types\"\
+        ,\n          \"id\": \"994ea201-4a4d-4b27-ac4b-b5916ac969a3\"\n        }\n\
+        \      },\n      \"region\": {\n        \"links\": {\n          \"self\":\
+        \ \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/region\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/region\"\
+        \n        },\n        \"data\": null\n      },\n      \"stock_keeping_units\"\
+        : {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/stock_keeping_units\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/stock_keeping_units\"\
+        \n        },\n        \"data\": [\n          {\n            \"type\": \"stock_keeping_units\"\
+        ,\n            \"id\": \"5c6f00cd-cfca-441f-9322-5d000458b44f\"\n        \
+        \  },\n          {\n            \"type\": \"stock_keeping_units\",\n     \
+        \       \"id\": \"afcb54cd-1e36-472a-9f5b-07328d0d187f\"\n          }\n  \
+        \      ]\n      }\n    },\n    \"meta\": {\n      \"needs_registration\":\
+        \ true,\n      \"is_available\": true,\n      \"restrictions\": \"German Geographic\
+        \ Registration:\\r\\n\\r\\nGerman Local DID registration requirements:\\r\\\
+        n1. Name, business name and contact phone number.\\r\\n2. Passport or ID copy.**\\\
+        r\\n3. Current address in Germany, must be from the same city in Germany as\
+        \ the DID ordered (street, building number, postal code, city).\\r\\n4. Proof\
+        \ of address form (a copy of utility bill no older than of 6 months).\\r5.\
+        \ Specific registration form is provided during registration process which\
+        \ has to be filled in and signed by the customer.\\r\\n\\r\\n* Number provided\
+        \ online is demo. Active number will be provided when registration process\
+        \ is complete.\\r\\n** In case registration process is performed under a company\
+        \ name, German company registration certificate shall be provided instead\
+        \ of passport or ID copy.\\r\\n\\r\\nInformation should be sent to customer.care@didww.com\
+        \ within 10 days.\\r\\n\\r\\nDID number will not be activated until full registration\
+        \ details are provided and approved.\\r\\n\",\n      \"available_dids_enabled\"\
+        : false\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"dfd1a0a0-bd53-4f7a-9c8e-d2fc5dd1bf7e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Germany\",\n        \"prefix\": \"49\",\n        \"iso\": \"DE\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"bba735f9-7c37-499b-8998-94a5fca5d158\"\
+        ,\n      \"type\": \"cities\",\n      \"attributes\": {\n        \"name\"\
+        : \"Aachen\"\n      },\n      \"relationships\": {\n        \"country\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/country\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/bba735f9-7c37-499b-8998-94a5fca5d158/region\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"994ea201-4a4d-4b27-ac4b-b5916ac969a3\"\
+        ,\n      \"type\": \"did_group_types\",\n      \"attributes\": {\n       \
+        \ \"name\": \"Local\"\n      }\n    },\n    {\n      \"id\": \"5c6f00cd-cfca-441f-9322-5d000458b44f\"\
+        ,\n      \"type\": \"stock_keeping_units\",\n      \"attributes\": {\n   \
+        \     \"setup_price\": \"0.4\",\n        \"monthly_price\": \"0.8\",\n   \
+        \     \"channels_included_count\": 0\n      }\n    },\n    {\n      \"id\"\
+        : \"afcb54cd-1e36-472a-9f5b-07328d0d187f\",\n      \"type\": \"stock_keeping_units\"\
+        ,\n      \"attributes\": {\n        \"setup_price\": \"1.0\",\n        \"\
+        monthly_price\": \"4.8\",\n        \"channels_included_count\": 2\n      }\n\
+        \    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

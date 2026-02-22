@@ -1,0 +1,28 @@
+interactions:
+- request:
+    body: '{"data":{"type":"did_reservations","attributes":{"description":"DIDWW"},"relationships":{"available_did":{"data":{"type":"available_dids","id":"857d1462-5f43-4238-b007-ff05f282e41b"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/did_reservations
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"fd38d3ff-80cf-4e67-a605-609a2884a5c4\"\
+        ,\n    \"type\": \"did_reservations\",\n    \"attributes\": {\n      \"expire_at\"\
+        : \"2018-12-28T16:22:00.417Z\",\n      \"created_at\": \"2018-12-28T16:12:00.440Z\"\
+        ,\n      \"description\": \"DIDWW\"\n    },\n    \"relationships\": {\n  \
+        \    \"available_did\": {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/relationships/available_did\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/available_did\"\
+        \n        }\n      }\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

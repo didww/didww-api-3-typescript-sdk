@@ -1,0 +1,34 @@
+interactions:
+- request:
+    body: '{"data":{"type":"orders","attributes":{"allow_back_ordering":true,"items":[{"type":"did_order_items","attributes":{"sku_id":"fe77889c-f05a-40ad-a845-96aca3c28054","nanpa_prefix_id":"eeed293b-f3d8-4ef8-91ef-1b077d174b3b","qty":1}}]}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/orders
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"c617f0ff-f819-477f-a17b-a8d248c4443e\"\
+        ,\n    \"type\": \"orders\",\n    \"attributes\": {\n      \"amount\": \"\
+        4.0\",\n      \"status\": \"Pending\",\n      \"created_at\": \"2022-06-22T22:02:23.333Z\"\
+        ,\n      \"description\": \"DID\",\n      \"reference\": \"WHT-994648\",\n\
+        \      \"items\": [\n        {\n          \"type\": \"did_order_items\",\n\
+        \          \"attributes\": {\n            \"qty\": 1,\n            \"nrc\"\
+        : \"2.0\",\n            \"mrc\": \"2.0\",\n            \"prorated_mrc\": false,\n\
+        \            \"billed_from\": null,\n            \"billed_to\": null,\n  \
+        \          \"setup_price\": \"2.0\",\n            \"monthly_price\": \"2.0\"\
+        ,\n            \"did_group_id\": \"8d909d98-9385-4635-b123-809d64b2d4bb\"\n\
+        \          }\n        }\n      ],\n      \"callback_method\": null,\n    \
+        \  \"callback_url\": null\n    }\n  },\n  \"meta\": {\n    \"api_version\"\
+        : \"2022-05-09\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

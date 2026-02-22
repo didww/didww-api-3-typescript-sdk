@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/encrypted_files/371eafbd-ac6a-485c-aadf-9e3c5da37eb4
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"371eafbd-ac6a-485c-aadf-9e3c5da37eb4\"\
+        ,\n    \"type\": \"encrypted_files\",\n    \"attributes\": {\n      \"description\"\
+        : null,\n      \"expire_at\": \"2021-04-06T16:38:34.437Z\"\n    }\n  },\n\
+        \  \"meta\": {\n    \"api_version\": \"2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

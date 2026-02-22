@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: '{"data":{"type":"proofs","attributes":{},"relationships":{"proof_type":{"data":{"type":"proof_types","id":"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1"}},"files":{"data":[{"type":"encrypted_files","id":"254b3c2d-c40c-4ff7-93b1-a677aee7fa10"}]}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/proofs
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"ed46925b-a830-482d-917d-015858cf7ab9\"\
+        ,\n    \"type\": \"proofs\",\n    \"attributes\": {\n      \"created_at\"\
+        : \"2021-04-01T15:03:49.672Z\",\n      \"expires_at\": null\n    },\n    \"\
+        relationships\": {\n      \"proof_type\": {\n        \"links\": {\n      \
+        \    \"self\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/proof_type\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/proof_type\"\
+        \n        },\n        \"data\": {\n          \"type\": \"proof_types\",\n\
+        \          \"id\": \"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1\"\n        }\n \
+        \     },\n      \"entity\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/entity\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/entity\"\
+        \n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\"\
+        : \"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1\",\n      \"type\": \"proof_types\"\
+        ,\n      \"attributes\": {\n        \"name\": \"Drivers License\",\n     \
+        \   \"entity_type\": \"Personal\"\n      }\n    }\n  ],\n  \"meta\": {\n \
+        \   \"api_version\": \"2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

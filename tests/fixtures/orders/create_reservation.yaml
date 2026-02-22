@@ -1,0 +1,39 @@
+interactions:
+- request:
+    body: '{"data":{"type":"orders","attributes":{"items":[{"type":"did_order_items","attributes":{"sku_id":"32840f64-5c3f-4278-8c8d-887fbe2f03f4","did_reservation_id":"e3ed9f97-1058-430c-9134-38f1c614ee9f"}}]}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/orders
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"5da18706-be9f-49b0-aeec-0480aacd49ad\"\
+        ,\n    \"type\": \"orders\",\n    \"attributes\": {\n      \"amount\": \"\
+        5.98\",\n      \"status\": \"Pending\",\n      \"created_at\": \"2018-12-29T12:16:45.813Z\"\
+        ,\n      \"description\": \"DID\",\n      \"reference\": \"JXK-923618\",\n\
+        \      \"items\": [\n        {\n          \"type\": \"did_order_items\",\n\
+        \          \"attributes\": {\n            \"qty\": 1,\n            \"nrc\"\
+        : \"0.0\",\n            \"mrc\": \"5.6\",\n            \"prorated_mrc\": false,\n\
+        \            \"billed_from\": null,\n            \"billed_to\": null,\n  \
+        \          \"setup_price\": \"0.0\",\n            \"monthly_price\": \"5.6\"\
+        ,\n            \"did_group_id\": \"899f0119-b4e9-47d0-9b2c-8a9f282fcbe2\"\n\
+        \          }\n        },\n        {\n          \"type\": \"did_order_items\"\
+        ,\n          \"attributes\": {\n            \"qty\": 2,\n            \"nrc\"\
+        : \"0.0\",\n            \"mrc\": \"0.19\",\n            \"prorated_mrc\":\
+        \ false,\n            \"billed_from\": null,\n            \"billed_to\": null,\n\
+        \            \"setup_price\": \"0.0\",\n            \"monthly_price\": \"\
+        0.19\",\n            \"did_group_id\": \"7156eea4-09af-4f82-a43e-3b572f9927d8\"\
+        \n          }\n        }\n      ],\n      \"callback_url\": null,\n      \"\
+        callback_method\": null\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

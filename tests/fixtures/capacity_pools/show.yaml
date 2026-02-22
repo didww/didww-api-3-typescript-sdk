@@ -1,0 +1,327 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"f288d07c-e2fc-4ae6-9837-b18fb469c324\"\
+        ,\n    \"type\": \"capacity_pools\",\n    \"attributes\": {\n      \"name\"\
+        : \"Standard\",\n      \"renew_date\": \"2019-01-21\",\n      \"total_channels_count\"\
+        : 34,\n      \"assigned_channels_count\": 24,\n      \"minimum_limit\": 0,\n\
+        \      \"minimum_qty_per_order\": 1,\n      \"setup_price\": \"0.0\",\n  \
+        \    \"monthly_price\": \"15.0\",\n      \"metered_rate\": \"1.0\"\n    },\n\
+        \    \"relationships\": {\n      \"countries\": {\n        \"links\": {\n\
+        \          \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/countries\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/countries\"\
+        \n        },\n        \"data\": [\n          {\n            \"type\": \"countries\"\
+        ,\n            \"id\": \"dac76647-14d5-438f-9de7-598c8d3d3149\"\n        \
+        \  },\n          {\n            \"type\": \"countries\",\n            \"id\"\
+        : \"8526a723-49dc-461b-b9fd-ee7c0742935c\"\n          },\n          {\n  \
+        \          \"type\": \"countries\",\n            \"id\": \"9a4c9414-5353-4fb3-81ee-f8e3e3587034\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"a84bb196-c3dd-40a2-af7d-baeee3660061\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"eb06b185-ff83-445f-96f7-16bfc98bc23e\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"dc9c1de5-6043-4726-bab2-63e915b7eae4\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"514e77da-5c87-4b86-9b5f-8c48b12a4d48\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"e413c0ce-8eee-42c2-9f4c-2e4c6c9fd5c3\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"a2618969-ac27-41e4-af10-cec2dee7ca92\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"eb89ebf7-2c8c-4e7d-9aea-89cddeced3c8\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"d17c184d-6f7d-4848-a87d-c5ed88020015\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"410c07fc-4fa6-4693-b217-90838c1750a8\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"3ba49d6a-5f02-4dbe-bb7f-b3509fec2b2a\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"93444592-cbb1-42c5-99e9-5ffeb150b7ec\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"5883ec41-eafe-46e9-99e8-5b3b386fea3a\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"7c0f34bc-2c6f-4a0a-a4ce-3690cd3be29c\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"c03605c9-b40d-4b13-9e83-c8e5bf41d9f4\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"9b0329f8-8295-45a7-8f2a-64129b87cdaa\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"3d1c2c4e-4b06-4c94-8f0b-43eea90929a0\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"d5ca867b-9a2f-49bf-bd50-1d37349e665e\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"b6f04bf7-f31a-44cb-a062-a36b3699429b\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"fd56bea6-8cbf-4846-9c2f-bd2742015529\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"f7e78968-b6e4-463f-b213-8681ab3760f8\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"134d9428-0cf1-469b-9657-bb65d1d9fcac\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"76bfece7-78d7-471e-baab-edd0325714c4\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"98513846-dd8f-487b-9828-e5f689bee3c6\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"6061dbd6-e5ff-45ed-8c98-489c397fc807\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"1d2c0df1-1b51-40f7-bb76-5397a3f25934\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"37a97e75-f2ac-4485-82d3-d5a49bd4e4a9\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"f782047c-09ae-4424-8de3-762408dc7ba9\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"93d5c5d4-e420-440b-9887-9693edd006ca\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"b84bc6d4-fb8d-46bb-9b95-a94c78cb82a0\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"be646dc6-dd7e-4947-a11b-79fe5871d3dd\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"7549be3c-1077-433d-9a77-25416373660d\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"5b156dc2-327e-4665-bdc5-35cd8729b885\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"de9ad7fd-115d-4f95-9a59-d357a9999e38\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"093df79a-c4d5-4ebd-8716-5a8523db2854\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"c7ff81e1-da30-4d87-8110-88c5aed0b619\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"6f8a6d1d-9341-4a64-a5d0-986639e24124\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"e369a791-dad8-4a48-a512-0fab3b54d4c2\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"661d8448-8897-4765-acda-00cc1740148d\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"5ff63a6f-075f-4d12-ba3a-d4a1e617eaeb\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"f711b8ee-7576-4d40-9dd4-f51a69cee8a7\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"60657766-0c13-4ad9-beb2-300ad1c66511\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"f25136bb-a336-43fa-b05f-34e52d75adaa\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"78347fe1-6f98-47ea-999f-2b93b6aceb58\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"3786d53f-2a7b-450f-ac57-c38850d1a0d9\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"7eda11bb-0e66-4146-98e7-57a5281f56c8\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"7d9f8011-40a4-4fd7-a970-c3b679a75daf\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"dfd1a0a0-bd53-4f7a-9c8e-d2fc5dd1bf7e\"\
+        \n          },\n          {\n            \"type\": \"countries\",\n      \
+        \      \"id\": \"24eb6e85-f628-4765-bbb2-420e48de76f2\"\n          },\n  \
+        \        {\n            \"type\": \"countries\",\n            \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        \n          }\n        ]\n      },\n      \"shared_capacity_groups\": {\n\
+        \        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/shared_capacity_groups\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/shared_capacity_groups\"\
+        \n        },\n        \"data\": [\n          {\n            \"type\": \"shared_capacity_groups\"\
+        ,\n            \"id\": \"e67b7be7-0698-41eb-9aca-7217903bf0e8\"\n        \
+        \  },\n          {\n            \"type\": \"shared_capacity_groups\",\n  \
+        \          \"id\": \"89f987e2-0862-4bf4-a3f4-cdc89af0d875\"\n          },\n\
+        \          {\n            \"type\": \"shared_capacity_groups\",\n        \
+        \    \"id\": \"206881de-7a92-4415-aa32-b05458c79623\"\n          }\n     \
+        \   ]\n      },\n      \"qty_based_pricings\": {\n        \"links\": {\n \
+        \         \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/qty_based_pricings\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/qty_based_pricings\"\
+        \n        },\n        \"data\": [\n          {\n            \"type\": \"qty_based_pricings\"\
+        ,\n            \"id\": \"1cd4a878-9f11-4bba-afe2-86e76ed21bb6\"\n        \
+        \  },\n          {\n            \"type\": \"qty_based_pricings\",\n      \
+        \      \"id\": \"46f8db15-a9e8-4de7-96f4-1b68f20642b8\"\n          },\n  \
+        \        {\n            \"type\": \"qty_based_pricings\",\n            \"\
+        id\": \"c43fd0e8-b6c6-4022-9d5e-ed14c1850dc1\"\n          }\n        ]\n \
+        \     }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"dac76647-14d5-438f-9de7-598c8d3d3149\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Peru\",\n        \"prefix\": \"51\",\n        \"iso\": \"PE\"\n      }\n\
+        \    },\n    {\n      \"id\": \"8526a723-49dc-461b-b9fd-ee7c0742935c\",\n\
+        \      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Iceland\",\n        \"prefix\": \"354\",\n        \"iso\": \"IS\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"9a4c9414-5353-4fb3-81ee-f8e3e3587034\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Australia\",\n        \"prefix\": \"61\",\n        \"iso\": \"AU\"\n \
+        \     }\n    },\n    {\n      \"id\": \"a84bb196-c3dd-40a2-af7d-baeee3660061\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Puerto Rico\",\n        \"prefix\": \"1\",\n        \"iso\": \"PR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"eb06b185-ff83-445f-96f7-16bfc98bc23e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Chile\",\n        \"prefix\": \"56\",\n        \"iso\": \"CL\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"dc9c1de5-6043-4726-bab2-63e915b7eae4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bahrain\",\n        \"prefix\": \"973\",\n        \"iso\": \"BH\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"514e77da-5c87-4b86-9b5f-8c48b12a4d48\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Israel\",\n        \"prefix\": \"972\",\n        \"iso\": \"IL\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"e413c0ce-8eee-42c2-9f4c-2e4c6c9fd5c3\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Hong Kong\",\n        \"prefix\": \"852\",\n        \"iso\": \"HK\"\n\
+        \      }\n    },\n    {\n      \"id\": \"a2618969-ac27-41e4-af10-cec2dee7ca92\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Dominican Republic\",\n        \"prefix\": \"1\",\n        \"iso\": \"\
+        DO\"\n      }\n    },\n    {\n      \"id\": \"eb89ebf7-2c8c-4e7d-9aea-89cddeced3c8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Japan\",\n        \"prefix\": \"81\",\n        \"iso\": \"JP\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"d17c184d-6f7d-4848-a87d-c5ed88020015\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Norway\",\n        \"prefix\": \"47\",\n        \"iso\": \"NO\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"410c07fc-4fa6-4693-b217-90838c1750a8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Mexico\",\n        \"prefix\": \"52\",\n        \"iso\": \"MX\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"3ba49d6a-5f02-4dbe-bb7f-b3509fec2b2a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Luxembourg\",\n        \"prefix\": \"352\",\n        \"iso\": \"LU\"\n\
+        \      }\n    },\n    {\n      \"id\": \"93444592-cbb1-42c5-99e9-5ffeb150b7ec\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Greece\",\n        \"prefix\": \"30\",\n        \"iso\": \"GR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"5883ec41-eafe-46e9-99e8-5b3b386fea3a\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Finland\",\n        \"prefix\": \"358\",\n        \"iso\": \"FI\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"7c0f34bc-2c6f-4a0a-a4ce-3690cd3be29c\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Malta\",\n        \"prefix\": \"356\",\n        \"iso\": \"MT\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"c03605c9-b40d-4b13-9e83-c8e5bf41d9f4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Switzerland\",\n        \"prefix\": \"41\",\n        \"iso\": \"CH\"\n\
+        \      }\n    },\n    {\n      \"id\": \"9b0329f8-8295-45a7-8f2a-64129b87cdaa\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"South Africa\",\n        \"prefix\": \"27\",\n        \"iso\": \"ZA\"\n\
+        \      }\n    },\n    {\n      \"id\": \"3d1c2c4e-4b06-4c94-8f0b-43eea90929a0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Argentina\",\n        \"prefix\": \"54\",\n        \"iso\": \"AR\"\n \
+        \     }\n    },\n    {\n      \"id\": \"d5ca867b-9a2f-49bf-bd50-1d37349e665e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Panama\",\n        \"prefix\": \"507\",\n        \"iso\": \"PA\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"b6f04bf7-f31a-44cb-a062-a36b3699429b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Georgia\",\n        \"prefix\": \"995\",\n        \"iso\": \"GE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"fd56bea6-8cbf-4846-9c2f-bd2742015529\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Brazil\",\n        \"prefix\": \"55\",\n        \"iso\": \"BR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"f7e78968-b6e4-463f-b213-8681ab3760f8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Kazakhstan\",\n        \"prefix\": \"7\",\n        \"iso\": \"KZ\"\n \
+        \     }\n    },\n    {\n      \"id\": \"134d9428-0cf1-469b-9657-bb65d1d9fcac\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Russian Federation\",\n        \"prefix\": \"7\",\n        \"iso\": \"\
+        RU\"\n      }\n    },\n    {\n      \"id\": \"76bfece7-78d7-471e-baab-edd0325714c4\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Costa Rica\",\n        \"prefix\": \"506\",\n        \"iso\": \"CR\"\n\
+        \      }\n    },\n    {\n      \"id\": \"98513846-dd8f-487b-9828-e5f689bee3c6\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"New Zealand\",\n        \"prefix\": \"64\",\n        \"iso\": \"NZ\"\n\
+        \      }\n    },\n    {\n      \"id\": \"6061dbd6-e5ff-45ed-8c98-489c397fc807\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Cyprus\",\n        \"prefix\": \"357\",\n        \"iso\": \"CY\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"1d2c0df1-1b51-40f7-bb76-5397a3f25934\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Czech Republic\",\n        \"prefix\": \"420\",\n        \"iso\": \"CZ\"\
+        \n      }\n    },\n    {\n      \"id\": \"37a97e75-f2ac-4485-82d3-d5a49bd4e4a9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Poland\",\n        \"prefix\": \"48\",\n        \"iso\": \"PL\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"f782047c-09ae-4424-8de3-762408dc7ba9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Denmark\",\n        \"prefix\": \"45\",\n        \"iso\": \"DK\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"93d5c5d4-e420-440b-9887-9693edd006ca\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Romania\",\n        \"prefix\": \"40\",\n        \"iso\": \"RO\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"b84bc6d4-fb8d-46bb-9b95-a94c78cb82a0\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Portugal\",\n        \"prefix\": \"351\",\n        \"iso\": \"PT\"\n \
+        \     }\n    },\n    {\n      \"id\": \"be646dc6-dd7e-4947-a11b-79fe5871d3dd\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Slovakia\",\n        \"prefix\": \"421\",\n        \"iso\": \"SK\"\n \
+        \     }\n    },\n    {\n      \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Italy\",\n        \"prefix\": \"39\",\n        \"iso\": \"IT\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"7549be3c-1077-433d-9a77-25416373660d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Sweden\",\n        \"prefix\": \"46\",\n        \"iso\": \"SE\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"5b156dc2-327e-4665-bdc5-35cd8729b885\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Spain\",\n        \"prefix\": \"34\",\n        \"iso\": \"ES\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"de9ad7fd-115d-4f95-9a59-d357a9999e38\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Slovenia\",\n        \"prefix\": \"386\",\n        \"iso\": \"SI\"\n \
+        \     }\n    },\n    {\n      \"id\": \"093df79a-c4d5-4ebd-8716-5a8523db2854\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Hungary\",\n        \"prefix\": \"36\",\n        \"iso\": \"HU\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"c7ff81e1-da30-4d87-8110-88c5aed0b619\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Singapore\",\n        \"prefix\": \"65\",\n        \"iso\": \"SG\"\n \
+        \     }\n    },\n    {\n      \"id\": \"6f8a6d1d-9341-4a64-a5d0-986639e24124\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Netherlands\",\n        \"prefix\": \"31\",\n        \"iso\": \"NL\"\n\
+        \      }\n    },\n    {\n      \"id\": \"e369a791-dad8-4a48-a512-0fab3b54d4c2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Estonia\",\n        \"prefix\": \"372\",\n        \"iso\": \"EE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"661d8448-8897-4765-acda-00cc1740148d\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Lithuania\",\n        \"prefix\": \"370\",\n        \"iso\": \"LT\"\n\
+        \      }\n    },\n    {\n      \"id\": \"5ff63a6f-075f-4d12-ba3a-d4a1e617eaeb\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Ireland\",\n        \"prefix\": \"353\",\n        \"iso\": \"IE\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"f711b8ee-7576-4d40-9dd4-f51a69cee8a7\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Belgium\",\n        \"prefix\": \"32\",\n        \"iso\": \"BE\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"60657766-0c13-4ad9-beb2-300ad1c66511\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Austria\",\n        \"prefix\": \"43\",\n        \"iso\": \"AT\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"f25136bb-a336-43fa-b05f-34e52d75adaa\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Bulgaria\",\n        \"prefix\": \"359\",\n        \"iso\": \"BG\"\n \
+        \     }\n    },\n    {\n      \"id\": \"78347fe1-6f98-47ea-999f-2b93b6aceb58\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Croatia\",\n        \"prefix\": \"385\",\n        \"iso\": \"HR\"\n  \
+        \    }\n    },\n    {\n      \"id\": \"3786d53f-2a7b-450f-ac57-c38850d1a0d9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Latvia\",\n        \"prefix\": \"371\",\n        \"iso\": \"LV\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"7eda11bb-0e66-4146-98e7-57a5281f56c8\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United Kingdom\",\n        \"prefix\": \"44\",\n        \"iso\": \"GB\"\
+        \n      }\n    },\n    {\n      \"id\": \"7d9f8011-40a4-4fd7-a970-c3b679a75daf\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"France\",\n        \"prefix\": \"33\",\n        \"iso\": \"FR\"\n    \
+        \  }\n    },\n    {\n      \"id\": \"dfd1a0a0-bd53-4f7a-9c8e-d2fc5dd1bf7e\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Germany\",\n        \"prefix\": \"49\",\n        \"iso\": \"DE\"\n   \
+        \   }\n    },\n    {\n      \"id\": \"24eb6e85-f628-4765-bbb2-420e48de76f2\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"Canada\",\n        \"prefix\": \"1\",\n        \"iso\": \"CA\"\n     \
+        \ }\n    },\n    {\n      \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United States\",\n        \"prefix\": \"1\",\n        \"iso\": \"US\"\n\
+        \      }\n    },\n    {\n      \"id\": \"e67b7be7-0698-41eb-9aca-7217903bf0e8\"\
+        ,\n      \"type\": \"shared_capacity_groups\",\n      \"attributes\": {\n\
+        \        \"name\": \"test\",\n        \"shared_channels_count\": 5,\n    \
+        \    \"created_at\": \"2018-06-19T12:26:48.938Z\",\n        \"metered_channels_count\"\
+        : 5\n      },\n      \"relationships\": {\n        \"capacity_pool\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/e67b7be7-0698-41eb-9aca-7217903bf0e8/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/e67b7be7-0698-41eb-9aca-7217903bf0e8/capacity_pool\"\
+        \n          }\n        },\n        \"dids\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/e67b7be7-0698-41eb-9aca-7217903bf0e8/relationships/dids\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/e67b7be7-0698-41eb-9aca-7217903bf0e8/dids\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"89f987e2-0862-4bf4-a3f4-cdc89af0d875\"\
+        ,\n      \"type\": \"shared_capacity_groups\",\n      \"attributes\": {\n\
+        \        \"name\": \"didww\",\n        \"shared_channels_count\": 19,\n  \
+        \      \"created_at\": \"2018-06-19T11:41:21.644Z\",\n        \"metered_channels_count\"\
+        : 0\n      },\n      \"relationships\": {\n        \"capacity_pool\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/capacity_pool\"\
+        \n          }\n        },\n        \"dids\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/dids\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/dids\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"206881de-7a92-4415-aa32-b05458c79623\"\
+        ,\n      \"type\": \"shared_capacity_groups\",\n      \"attributes\": {\n\
+        \        \"name\": \"Pay Per Minute\",\n        \"shared_channels_count\"\
+        : 0,\n        \"created_at\": \"2018-06-19T11:41:21.644Z\",\n        \"metered_channels_count\"\
+        : 100\n      },\n      \"relationships\": {\n        \"capacity_pool\": {\n\
+        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/206881de-7a92-4415-aa32-b05458c79623/relationships/capacity_pool\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/206881de-7a92-4415-aa32-b05458c79623/capacity_pool\"\
+        \n          }\n        },\n        \"dids\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/206881de-7a92-4415-aa32-b05458c79623/relationships/dids\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/206881de-7a92-4415-aa32-b05458c79623/dids\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"1cd4a878-9f11-4bba-afe2-86e76ed21bb6\"\
+        ,\n      \"type\": \"qty_based_pricings\",\n      \"attributes\": {\n    \
+        \    \"qty\": 30,\n        \"monthly_price\": \"10.0\",\n        \"setup_price\"\
+        : \"10.0\"\n      }\n    },\n    {\n      \"id\": \"46f8db15-a9e8-4de7-96f4-1b68f20642b8\"\
+        ,\n      \"type\": \"qty_based_pricings\",\n      \"attributes\": {\n    \
+        \    \"qty\": 300,\n        \"monthly_price\": \"8.0\",\n        \"setup_price\"\
+        : \"8.0\"\n      }\n    },\n    {\n      \"id\": \"c43fd0e8-b6c6-4022-9d5e-ed14c1850dc1\"\
+        ,\n      \"type\": \"qty_based_pricings\",\n      \"attributes\": {\n    \
+        \    \"qty\": 990,\n        \"monthly_price\": \"7.0\",\n        \"setup_price\"\
+        : \"7.0\"\n      }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

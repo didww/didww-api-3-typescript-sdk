@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: '{"data":{"type":"requirement_validations","attributes":{},"relationships":{"identity":{"data":{"type":"identities","id":"5e9df058-50d2-4e34-b0d4-d1746b86f41a"}},"address":{"data":{"type":"addresses","id":"d3414687-40f4-4346-a267-c2c65117d28c"}},"requirement":{"data":{"type":"requirements","id":"2efc3427-8ba6-4d50-875d-f2de4a068de8"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/requirement_validations
+  response:
+    body:
+      string: "{\n  \"errors\": [\n    {\n      \"title\": \"Identity Place of Birth\
+        \ must be Belgium\",\n      \"detail\": \"Identity Place of Birth must be\
+        \ Belgium\",\n      \"code\": \"100\",\n      \"source\": {\n        \"pointer\"\
+        : \"/data\"\n      },\n      \"status\": \"422\"\n    },\n    {\n      \"\
+        title\": \"Following Supporting Document(s) required (Belgium Registration\
+        \ Form)\",\n      \"detail\": \"Following Supporting Document(s) required\
+        \ (Belgium Registration Form)\",\n      \"code\": \"100\",\n      \"source\"\
+        : {\n        \"pointer\": \"/data\"\n      },\n      \"status\": \"422\"\n\
+        \    },\n    {\n      \"title\": \"Address in Belgium required\",\n      \"\
+        detail\": \"Address in Belgium required\",\n      \"code\": \"100\",\n   \
+        \   \"source\": {\n        \"pointer\": \"/data\"\n      },\n      \"status\"\
+        : \"422\"\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

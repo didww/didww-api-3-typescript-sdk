@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/dids/unknown-id
+  response:
+    body:
+      string: "{\n  \"errors\": [\n    {\n      \"title\": \"is invalid\",\n     \
+        \ \"detail\": \"voice_in_trunk_group - is invalid\",\n      \"code\": \"100\"\
+        ,\n      \"source\": {\n        \"pointer\": \"/data/attributes/voice_in_trunk_group_id\"\
+        \n      },\n      \"status\": \"422\"\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

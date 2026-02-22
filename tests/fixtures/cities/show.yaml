@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/cities/368bf92f-c36e-473f-96fc-d53ed1b4028b
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"368bf92f-c36e-473f-96fc-d53ed1b4028b\"\
+        ,\n    \"type\": \"cities\",\n    \"attributes\": {\n      \"name\": \"New\
+        \ York\"\n    },\n    \"relationships\": {\n      \"country\": {\n       \
+        \ \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/cities/368bf92f-c36e-473f-96fc-d53ed1b4028b/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/cities/368bf92f-c36e-473f-96fc-d53ed1b4028b/country\"\
+        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
+        \        \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\n        }\n   \
+        \   },\n      \"region\": {\n        \"links\": {\n          \"self\": \"\
+        https://sandbox-api.didww.com/v3/cities/368bf92f-c36e-473f-96fc-d53ed1b4028b/relationships/region\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/cities/368bf92f-c36e-473f-96fc-d53ed1b4028b/region\"\
+        \n        },\n        \"data\": {\n          \"type\": \"regions\",\n    \
+        \      \"id\": \"ab7e83bc-814b-4cfa-a14c-d2df3de2a545\"\n        }\n     \
+        \ }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1f6fc2bd-f081-4202-9b1a-d9cb88d942b9\"\
+        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
+        : \"United States\",\n        \"prefix\": \"1\",\n        \"iso\": \"US\"\n\
+        \      }\n    },\n    {\n      \"id\": \"ab7e83bc-814b-4cfa-a14c-d2df3de2a545\"\
+        ,\n      \"type\": \"regions\",\n      \"attributes\": {\n        \"name\"\
+        : \"New York\"\n      },\n      \"relationships\": {\n        \"country\"\
+        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/regions/ab7e83bc-814b-4cfa-a14c-d2df3de2a545/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/ab7e83bc-814b-4cfa-a14c-d2df3de2a545/country\"\
+        \n          }\n        }\n      }\n    }\n  ]\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"e96ae7d1-11d5-42bc-a5c5-211f3c3788ae\"\
+        ,\n    \"type\": \"identities\",\n    \"attributes\": {\n      \"first_name\"\
+        : \"Jake\",\n      \"last_name\": \"Johnson\",\n      \"phone_number\": \"\
+        1111111\",\n      \"id_number\": \"CED4321\",\n      \"birth_date\": \"1979-01-01\"\
+        ,\n      \"company_name\": \"Some Company Limited\",\n      \"company_reg_number\"\
+        : \"1222776\",\n      \"vat_id\": \"GB1235\",\n      \"description\": \"test\"\
+        ,\n      \"personal_tax_id\": \"983217654\",\n      \"identity_type\": \"\
+        Business\",\n      \"created_at\": \"2021-04-01T14:56:34.637Z\",\n      \"\
+        external_reference_id\": \"112\",\n      \"verified\": false\n    },\n   \
+        \ \"relationships\": {\n      \"country\": {\n        \"links\": {\n     \
+        \     \"self\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/relationships/country\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/country\"\
+        \n        }\n      },\n      \"proofs\": {\n        \"links\": {\n       \
+        \   \"self\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/relationships/proofs\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/proofs\"\
+        \n        }\n      },\n      \"addresses\": {\n        \"links\": {\n    \
+        \      \"self\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/relationships/addresses\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/addresses\"\
+        \n        }\n      },\n      \"permanent_documents\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/relationships/permanent_documents\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/permanent_documents\"\
+        \n        }\n      }\n    }\n  },\n  \"meta\": {\n    \"api_version\": \"\
+        2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

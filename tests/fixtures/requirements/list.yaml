@@ -1,0 +1,206 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/requirements
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"b6c80acb-3952-4d53-9e62-fe2348c0636b\"\
+        ,\n      \"type\": \"requirements\",\n      \"attributes\": {\n        \"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
+        \        \"business_area_level\": \"WorldWide\",\n        \"address_area_level\"\
+        : \"Area\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
+        : 2,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
+        : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
+        : null,\n        \"service_description_required\": false,\n        \"restriction_message\"\
+        : \"Needs end user registration.\"\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/country\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/did_group_type\"\
+        \n          }\n        },\n        \"personal_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/personal_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/personal_permanent_document\"\
+        \n          }\n        },\n        \"business_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/business_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/business_permanent_document\"\
+        \n          }\n        },\n        \"personal_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/personal_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/personal_onetime_document\"\
+        \n          }\n        },\n        \"business_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/business_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/business_onetime_document\"\
+        \n          }\n        },\n        \"personal_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/personal_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/personal_proof_types\"\
+        \n          }\n        },\n        \"business_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/business_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/business_proof_types\"\
+        \n          }\n        },\n        \"address_proof_types\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/relationships/address_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/address_proof_types\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"51b293af-a496-4bf2-9c68-5221b3b0dc1e\"\
+        ,\n      \"type\": \"requirements\",\n      \"attributes\": {\n        \"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
+        \        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
+        : \"Country\",\n        \"personal_proof_qty\": 2,\n        \"business_proof_qty\"\
+        : 1,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
+        : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
+        : [\n          \"Country\"\n        ],\n        \"service_description_required\"\
+        : false,\n        \"restriction_message\": \"restriction_message\"\n     \
+        \ },\n      \"relationships\": {\n        \"country\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/country\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/did_group_type\"\
+        \n          }\n        },\n        \"personal_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/personal_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/personal_permanent_document\"\
+        \n          }\n        },\n        \"business_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/business_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/business_permanent_document\"\
+        \n          }\n        },\n        \"personal_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/personal_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/personal_onetime_document\"\
+        \n          }\n        },\n        \"business_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/business_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/business_onetime_document\"\
+        \n          }\n        },\n        \"personal_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/personal_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/personal_proof_types\"\
+        \n          }\n        },\n        \"business_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/business_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/business_proof_types\"\
+        \n          }\n        },\n        \"address_proof_types\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/relationships/address_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/address_proof_types\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f7c2a9a4-a40e-4f22-98ff-0f53c86052ac\"\
+        ,\n      \"type\": \"requirements\",\n      \"attributes\": {\n        \"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"WorldWide\"\
+        ,\n        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
+        : \"WorldWide\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
+        : 1,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
+        : null,\n        \"business_mandatory_fields\": [\n          \"Country\"\n\
+        \        ],\n        \"service_description_required\": false,\n        \"\
+        restriction_message\": \"restriction_message\"\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/country\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/did_group_type\"\
+        \n          }\n        },\n        \"personal_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/personal_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/personal_permanent_document\"\
+        \n          }\n        },\n        \"business_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/business_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/business_permanent_document\"\
+        \n          }\n        },\n        \"personal_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/personal_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/personal_onetime_document\"\
+        \n          }\n        },\n        \"business_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/business_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/business_onetime_document\"\
+        \n          }\n        },\n        \"personal_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/personal_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/personal_proof_types\"\
+        \n          }\n        },\n        \"business_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/business_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/business_proof_types\"\
+        \n          }\n        },\n        \"address_proof_types\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/relationships/address_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/address_proof_types\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"edb71cff-d5e8-44ff-ba36-6f758066c175\"\
+        ,\n      \"type\": \"requirements\",\n      \"attributes\": {\n        \"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
+        \        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
+        : \"Country\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
+        : 1,\n        \"address_proof_qty\": 0,\n        \"personal_mandatory_fields\"\
+        : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
+        : [\n          \"Country\"\n        ],\n        \"service_description_required\"\
+        : true,\n        \"restriction_message\": \"restriction_message\"\n      },\n\
+        \      \"relationships\": {\n        \"country\": {\n          \"links\":\
+        \ {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/country\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/did_group_type\"\
+        \n          }\n        },\n        \"personal_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/personal_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/personal_permanent_document\"\
+        \n          }\n        },\n        \"business_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/business_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/business_permanent_document\"\
+        \n          }\n        },\n        \"personal_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/personal_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/personal_onetime_document\"\
+        \n          }\n        },\n        \"business_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/business_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/business_onetime_document\"\
+        \n          }\n        },\n        \"personal_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/personal_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/personal_proof_types\"\
+        \n          }\n        },\n        \"business_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/business_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/business_proof_types\"\
+        \n          }\n        },\n        \"address_proof_types\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/relationships/address_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/address_proof_types\"\
+        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90b72a1a-1ebd-4771-b818-f7123f8ff7ec\"\
+        ,\n      \"type\": \"requirements\",\n      \"attributes\": {\n        \"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"WorldWide\"\
+        ,\n        \"business_area_level\": \"WorldWide\",\n        \"address_area_level\"\
+        : \"WorldWide\",\n        \"personal_proof_qty\": 0,\n        \"business_proof_qty\"\
+        : 0,\n        \"address_proof_qty\": 0,\n        \"personal_mandatory_fields\"\
+        : null,\n        \"business_mandatory_fields\": null,\n        \"service_description_required\"\
+        : false,\n        \"restriction_message\": \"restriction_message\"\n     \
+        \ },\n      \"relationships\": {\n        \"country\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/country\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/did_group_type\"\
+        \n          }\n        },\n        \"personal_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/personal_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/personal_permanent_document\"\
+        \n          }\n        },\n        \"business_permanent_document\": {\n  \
+        \        \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/business_permanent_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/business_permanent_document\"\
+        \n          }\n        },\n        \"personal_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/personal_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/personal_onetime_document\"\
+        \n          }\n        },\n        \"business_onetime_document\": {\n    \
+        \      \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/business_onetime_document\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/business_onetime_document\"\
+        \n          }\n        },\n        \"personal_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/personal_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/personal_proof_types\"\
+        \n          }\n        },\n        \"business_proof_types\": {\n         \
+        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/business_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/business_proof_types\"\
+        \n          }\n        },\n        \"address_proof_types\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/address_proof_types\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/address_proof_types\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
+        : 73,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\"\
+        : \"https://sandbox-api.didww.com/v3/requirements?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/requirements?page%5Bnumber%5D=2&page%5Bsize%5D=5\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/requirements?page%5Bnumber%5D=15&page%5Bsize%5D=5\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

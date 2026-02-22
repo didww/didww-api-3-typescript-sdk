@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/available_dids
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"aa13b01c-36c8-405c-b5a8-1427aa7966ea\"\
+        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
+        number\": \"18649204444\"\n      },\n      \"relationships\": {\n        \"\
+        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/aa13b01c-36c8-405c-b5a8-1427aa7966ea/relationships/did_group\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/aa13b01c-36c8-405c-b5a8-1427aa7966ea/did_group\"\
+        \n          }\n        },\n        \"nanpa_prefix\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/aa13b01c-36c8-405c-b5a8-1427aa7966ea/relationships/nanpa_prefix\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/aa13b01c-36c8-405c-b5a8-1427aa7966ea/nanpa_prefix\"\
+        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_count\"\
+        : 1,\n    \"api_version\": \"2022-05-09\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

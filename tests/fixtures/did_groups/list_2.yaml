@@ -1,0 +1,1126 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_groups
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"2187c36d-28fb-436f-8861-5a0f5b5a3ee1\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"241\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Aachen\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"9ed5d612-e107-4d43-967f-3181f1fa394c\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"334\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Abbeville\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/9ed5d612-e107-4d43-967f-3181f1fa394c/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"af7b65c4-6276-4aec-a029-ed4174720875\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"1224\",\n        \"features\": [\n          \"voice\"\n        ],\n  \
+        \      \"is_metered\": false,\n        \"area_name\": \"Aberdeen\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/af7b65c4-6276-4aec-a029-ed4174720875/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"e70e5ec1-8668-4ae3-893d-d04a592a5a71\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"744\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Acapulco\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e70e5ec1-8668-4ae3-893d-d04a592a5a71/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"26fab939-29c2-4918-b495-cfab95c078db\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"881\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"A Coruna\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/26fab939-29c2-4918-b495-cfab95c078db/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"f83e2aa5-3262-4932-b7c9-a1b49daf9ebb\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"322\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Adana\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f83e2aa5-3262-4932-b7c9-a1b49daf9ebb/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"92c30efd-d503-4dbb-8bd3-07bfb8771459\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"87\",\n        \"features\": [\n          \"voice\",\n          \"voice_out\"\
+        \n        ],\n        \"is_metered\": false,\n        \"area_name\": \"Adelaide\"\
+        ,\n        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92c30efd-d503-4dbb-8bd3-07bfb8771459/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"cefd01db-da7b-4133-8eee-b9b19c97dfa3\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"787\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Aguadilla\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/cefd01db-da7b-4133-8eee-b9b19c97dfa3/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"5b9337d9-2125-474a-a690-8c637f01742a\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"449\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Aguascalientes\",\n\
+        \        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/5b9337d9-2125-474a-a690-8c637f01742a/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"2ec3b4d3-2e55-47d5-9f46-858c358dd67a\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"289\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Ajax-Pickering\",\n\
+        \        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2ec3b4d3-2e55-47d5-9f46-858c358dd67a/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"83850b12-8933-410a-b965-101f9b48cbb5\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"63\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Akershus\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/83850b12-8933-410a-b965-101f9b48cbb5/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"7c652e1f-0cfc-443e-9fd7-6f371edf9fd0\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"330\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Akron\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/7c652e1f-0cfc-443e-9fd7-6f371edf9fd0/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"e1e6db01-2b85-453a-9ff3-f8a944370651\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"96\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Alacant\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e1e6db01-2b85-453a-9ff3-f8a944370651/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"ceb98056-30e4-427d-9bf5-274af5417a38\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"86\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Alacant\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/ceb98056-30e4-427d-9bf5-274af5417a38/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"945\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Alava\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b0dfdfcb-d2b1-44f1-bce9-ee49e8f3fa62/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"77b0aaa1-d469-4737-bfb4-3204dc05cf8a\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"967\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Albacete\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/77b0aaa1-d469-4737-bfb4-3204dc05cf8a/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"89ce7c81-4e1f-40dd-8524-fa258c55e7f3\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"518\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Albany\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/89ce7c81-4e1f-40dd-8524-fa258c55e7f3/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"b9f94ae8-a0ec-405c-8372-c402b3ebb46e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"505\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Albuqurque\",\n   \
+        \     \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/b9f94ae8-a0ec-405c-8372-c402b3ebb46e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"12759fa7-41f0-4369-972e-7b0c25345e6c\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"318\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Alexandria\",\n   \
+        \     \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/12759fa7-41f0-4369-972e-7b0c25345e6c/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"d0b607fd-3bbb-4bcf-9b80-33691422fe8e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"224\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Algonquin\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0b607fd-3bbb-4bcf-9b80-33691422fe8e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"417e9f42-508b-4b7c-812e-2f32f484af39\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"626\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Alhambra\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/417e9f42-508b-4b7c-812e-2f32f484af39/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"872ba08f-880d-4a64-b77c-f47e638e193e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"303\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Allens Park Lyons\"\
+        ,\n        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/872ba08f-880d-4a64-b77c-f47e638e193e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"72006362-01e1-4577-b680-c2af15a8b1e2\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"610\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Allentown\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/72006362-01e1-4577-b680-c2af15a8b1e2/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"a567fefd-f594-4d0f-a8dd-20b0329aeb2c\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"484\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Allentown\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/a567fefd-f594-4d0f-a8dd-20b0329aeb2c/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"df0e67f3-6aec-4d93-b339-19f8cfbcdd96\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"581\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Alma\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/df0e67f3-6aec-4d93-b339-19f8cfbcdd96/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"92bcc142-eede-4ad4-b4af-dc471de0c1a5\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"36\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Almere\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92bcc142-eede-4ad4-b4af-dc471de0c1a5/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"1d5b93cd-e39c-477a-ae28-f8c51eadf4d9\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"950\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Almeria\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1d5b93cd-e39c-477a-ae28-f8c51eadf4d9/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"6059151f-d6f0-42da-bba8-6a83f80aaf73\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"618\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Alton\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/6059151f-d6f0-42da-bba8-6a83f80aaf73/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"81e1f8f1-ab2f-4260-b132-a98d000d9c35\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"1420\",\n        \"features\": [\n          \"voice\"\n        ],\n  \
+        \      \"is_metered\": false,\n        \"area_name\": \"Alton\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/81e1f8f1-ab2f-4260-b132-a98d000d9c35/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"3bdc6002-4859-46b0-9cf7-ae95d1af66e2\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"6560\",\n        \"features\": [\n          \"voice\"\n        ],\n  \
+        \      \"is_metered\": false,\n        \"area_name\": \"Alushta\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/3bdc6002-4859-46b0-9cf7-ae95d1af66e2/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"509cbd5c-5997-41a3-a1f9-aed86f42c3e5\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"20\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Amsterdam\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/509cbd5c-5997-41a3-a1f9-aed86f42c3e5/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"d26601b3-db99-45e5-afd2-54a84f30ed77\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"714\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Anaheim\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d26601b3-db99-45e5-afd2-54a84f30ed77/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"605efca2-d9b0-4b54-b10b-5fcfe343796d\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"289\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Ancaster\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/605efca2-d9b0-4b54-b10b-5fcfe343796d/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"92adc6cb-428f-4d78-98de-dfcb77154094\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"765\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Anderson\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/92adc6cb-428f-4d78-98de-dfcb77154094/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"24e1f333-6da2-4180-b73a-43a9a3bfa688\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"864\",\n        \"features\": [\n          \"voice\",\n          \"t38\"\
+        \n        ],\n        \"is_metered\": false,\n        \"area_name\": \"Anderson\"\
+        ,\n        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/24e1f333-6da2-4180-b73a-43a9a3bfa688/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"80da4aee-c30b-496e-8b84-221ae87e452e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"312\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Ankara\",\n       \
+        \ \"allow_additional_channels\": true\n      },\n      \"relationships\":\
+        \ {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/80da4aee-c30b-496e-8b84-221ae87e452e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"d0bf176f-05c5-4499-b163-a60e013d065e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"734\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Ann Arbor\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/d0bf176f-05c5-4499-b163-a60e013d065e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"8303fc4e-cbab-4336-9dea-b5f7ad2c0238\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"242\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Antalya\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/8303fc4e-cbab-4336-9dea-b5f7ad2c0238/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"49562b96-65bc-4ed9-ae4d-6c5353a31a02\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"552\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Antofagasta\",\n  \
+        \      \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/49562b96-65bc-4ed9-ae4d-6c5353a31a02/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"16f7a8ea-cbfd-4429-8b94-995421d73814\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"3\",\n        \"features\": [\n          \"voice\"\n        ],\n     \
+        \   \"is_metered\": false,\n        \"area_name\": \"Antwerp\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/16f7a8ea-cbfd-4429-8b94-995421d73814/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"1e413391-8353-42fc-98fd-1334a3ee04f4\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"55\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Apeldoorn\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/1e413391-8353-42fc-98fd-1334a3ee04f4/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : true,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"85f564b8-6929-49c3-a3ee-e565db10ec1c\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"920\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Appleton\",\n     \
+        \   \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/85f564b8-6929-49c3-a3ee-e565db10ec1c/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"63767eee-a2c5-45ab-9be5-95cb8557b63d\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"831\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Aptos\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/63767eee-a2c5-45ab-9be5-95cb8557b63d/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"e4edd6ab-a483-44fe-bc4a-b4571efb937e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"357\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arad\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/e4edd6ab-a483-44fe-bc4a-b4571efb937e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": false,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"2d981adc-d353-496f-a5b0-5f5e9dc4eff6\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"787\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arecibo\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2d981adc-d353-496f-a5b0-5f5e9dc4eff6/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"60b4bd4c-f547-4061-a777-c4ccba4d773e\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"54\",\n        \"features\": [\n          \"voice\"\n        ],\n    \
+        \    \"is_metered\": false,\n        \"area_name\": \"Arequipa\",\n      \
+        \  \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/60b4bd4c-f547-4061-a777-c4ccba4d773e/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"f87dd7cb-800b-4a4e-b459-ea424c55c7ad\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"582\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arica\",\n        \"\
+        allow_additional_channels\": true\n      },\n      \"relationships\": {\n\
+        \        \"country\": {\n          \"links\": {\n            \"self\": \"\
+        https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f87dd7cb-800b-4a4e-b459-ea424c55c7ad/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : false\n      }\n    },\n    {\n      \"id\": \"32011159-7f96-4fa8-a211-a0e9d9f978ab\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"682\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arlington\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/32011159-7f96-4fa8-a211-a0e9d9f978ab/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"42cd9dd9-7fd9-46f0-973c-c39d4067af97\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"817\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arlington\",\n    \
+        \    \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/42cd9dd9-7fd9-46f0-973c-c39d4067af97/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    },\n    {\n      \"id\": \"4c660348-5ea0-488e-9a8d-06c14b0c0b30\"\
+        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
+        : \"224\",\n        \"features\": [\n          \"voice\"\n        ],\n   \
+        \     \"is_metered\": false,\n        \"area_name\": \"Arlington Heights\"\
+        ,\n        \"allow_additional_channels\": true\n      },\n      \"relationships\"\
+        : {\n        \"country\": {\n          \"links\": {\n            \"self\"\
+        : \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/country\"\
+        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
+        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/relationships/city\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/city\"\
+        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/did_group_type\"\
+        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
+        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/relationships/region\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/region\"\
+        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
+        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/relationships/stock_keeping_units\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/4c660348-5ea0-488e-9a8d-06c14b0c0b30/stock_keeping_units\"\
+        \n          }\n        }\n      },\n      \"meta\": {\n        \"needs_registration\"\
+        : false,\n        \"is_available\": true,\n        \"available_dids_enabled\"\
+        : true\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 1476\n\
+        \  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/did_groups?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
+        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/did_groups?page%5Bnumber%5D=2&page%5Bsize%5D=50\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/did_groups?page%5Bnumber%5D=30&page%5Bsize%5D=50\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

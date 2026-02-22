@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/proof_types
+  response:
+    body:
+      string: "{\n  \"data\": [\n    {\n      \"id\": \"ab1fb565-ac55-4c73-bc55-64dc61e70169\"\
+        ,\n      \"type\": \"proof_types\",\n      \"attributes\": {\n        \"name\"\
+        : \"Utility Bill\",\n        \"entity_type\": \"Address\"\n      }\n    },\n\
+        \    {\n      \"id\": \"634aea96-43d9-49a2-bd4e-6e8e2ce4e5e9\",\n      \"\
+        type\": \"proof_types\",\n      \"attributes\": {\n        \"name\": \"Rental\
+        \ Receipt\",\n        \"entity_type\": \"Address\"\n      }\n    },\n    {\n\
+        \      \"id\": \"49f42cbd-d051-43e0-9d30-883e154bad0d\",\n      \"type\":\
+        \ \"proof_types\",\n      \"attributes\": {\n        \"name\": \"Other\",\n\
+        \        \"entity_type\": \"Address\"\n      }\n    },\n    {\n      \"id\"\
+        : \"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1\",\n      \"type\": \"proof_types\"\
+        ,\n      \"attributes\": {\n        \"name\": \"Drivers License\",\n     \
+        \   \"entity_type\": \"Personal\"\n      }\n    },\n    {\n      \"id\": \"\
+        d2c1b3fb-29f7-46ca-ba82-b617f4630b78\",\n      \"type\": \"proof_types\",\n\
+        \      \"attributes\": {\n        \"name\": \"Copy of Phone Bill\",\n    \
+        \    \"entity_type\": \"Address\"\n      }\n    }\n  ],\n  \"meta\": {\n \
+        \   \"total_records\": 17,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"\
+        links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=2&page%5Bsize%5D=5\"\
+        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=4&page%5Bsize%5D=5\"\
+        \n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

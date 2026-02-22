@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: '{"data":{"type":"requirement_validations","attributes":{},"relationships":{"address":{"data":{"type":"addresses","id":"d3414687-40f4-4346-a267-c2c65117d28c"}},"requirement":{"data":{"type":"requirements","id":"aea92b24-a044-4864-9740-89d3e15b65c7"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/requirement_validations
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"aea92b24-a044-4864-9740-89d3e15b65c7\"\
+        ,\n    \"type\": \"requirement_validations\"\n  },\n  \"meta\": {\n    \"\
+        api_version\": \"2021-04-19\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

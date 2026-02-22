@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"89f987e2-0862-4bf4-a3f4-cdc89af0d875\"\
+        ,\n    \"type\": \"shared_capacity_groups\",\n    \"attributes\": {\n    \
+        \  \"name\": \"didww1\",\n      \"shared_channels_count\": 10,\n      \"created_at\"\
+        : \"2018-06-19T11:41:21.644Z\",\n      \"metered_channels_count\": 2\n   \
+        \ },\n    \"relationships\": {\n      \"capacity_pool\": {\n        \"links\"\
+        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/capacity_pool\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/capacity_pool\"\
+        \n        }\n      },\n      \"dids\": {\n        \"links\": {\n         \
+        \ \"self\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/relationships/dids\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/shared_capacity_groups/89f987e2-0862-4bf4-a3f4-cdc89af0d875/dids\"\
+        \n        }\n      }\n    }\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

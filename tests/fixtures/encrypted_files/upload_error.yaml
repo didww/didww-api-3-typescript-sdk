@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - multipart/form-data
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/encrypted_files
+  response:
+    body:
+      string: '{"data":{"id":"6eed102c-66a9-4a9b-a95f-4312d70ec12a","type":"encrypted_files","attributes":{"description":"some description","expire_at":"2021-04-06T16:38:34.396Z"}}}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 201
+      message: Created
+version: 1

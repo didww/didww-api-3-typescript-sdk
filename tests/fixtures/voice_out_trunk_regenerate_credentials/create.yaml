@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: '{"data":{"type":"voice_out_trunk_regenerate_credentials","attributes":{}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/voice_out_trunk_regenerate_credentials
+  response:
+    body:
+      string: "{\n  \"data\": {\n    \"id\": \"5fc59e7e-79eb-498a-8779-800416b5c68a\"\
+        ,\n    \"type\": \"voice_out_trunk_regenerate_credentials\"\n  },\n  \"meta\"\
+        : {\n    \"api_version\": \"2021-12-15\"\n  }\n}"
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1
