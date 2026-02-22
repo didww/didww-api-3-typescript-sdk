@@ -22,4 +22,10 @@ describe('VoiceInTrunkGroups', () => {
     expect(result.data.id).toBeDefined();
     expect(result.data.name).toBe('trunk group sample with 2 trunks');
   });
+
+  it('deletes a voice in trunk group', async () => {
+    loadCassette('voice_in_trunk_groups/delete.yaml');
+    const client = createTestClient();
+    await expect(client.voiceInTrunkGroups().remove('b2319703-ce6c-480d-bb53-614e7abcfc96')).resolves.toBeUndefined();
+  });
 });

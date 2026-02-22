@@ -16,4 +16,12 @@ describe('PermanentSupportingDocuments', () => {
     });
     expect(result.data.id).toBe('19510da3-c07e-4fa9-a696-6b9ab89cc172');
   });
+
+  it('deletes a permanent supporting document', async () => {
+    loadCassette('permanent_supporting_documents/delete.yaml');
+    const client = createTestClient();
+    await expect(
+      client.permanentSupportingDocuments().remove('19510da3-c07e-4fa9-a696-6b9ab89cc172'),
+    ).resolves.toBeUndefined();
+  });
 });

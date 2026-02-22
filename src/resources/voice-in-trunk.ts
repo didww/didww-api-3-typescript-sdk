@@ -1,5 +1,6 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
+import type { CliFormat } from '../enums.js';
 import { serializeTrunkConfiguration, deserializeTrunkConfiguration } from '../nested/trunk-configuration.js';
 
 export interface VoiceInTrunk {
@@ -8,7 +9,7 @@ export interface VoiceInTrunk {
   name: string;
   priority: number;
   weight: number;
-  cli_format: string;
+  cli_format: CliFormat;
   cli_prefix: string;
   description: string;
   ringing_timeout: number;
@@ -23,7 +24,7 @@ export interface VoiceInTrunkWrite {
   name?: string;
   priority?: number;
   weight?: number;
-  cli_format?: string;
+  cli_format?: CliFormat;
   cli_prefix?: string;
   description?: string;
   ringing_timeout?: number;

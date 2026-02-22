@@ -291,7 +291,7 @@ export class DidwwClient implements HttpClient {
     return new Repository<Identity, IdentityWrite>(this, IDENTITY_META);
   }
   encryptedFiles() {
-    return new ReadOnlyRepository<EncryptedFile>(this, ENCRYPTED_FILE_META);
+    return new Repository<EncryptedFile>(this, ENCRYPTED_FILE_META);
   }
 
   // Create-only repositories

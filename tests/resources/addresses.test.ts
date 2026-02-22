@@ -20,4 +20,10 @@ describe('Addresses', () => {
     expect(result.data.id).toBeDefined();
     expect(result.data.type).toBe('addresses');
   });
+
+  it('deletes an address', async () => {
+    loadCassette('addresses/delete.yaml');
+    const client = createTestClient();
+    await expect(client.addresses().remove('bf69bc70-e1c2-442c-9f30-335ee299b663')).resolves.toBeUndefined();
+  });
 });

@@ -1,12 +1,13 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { AddressVerificationStatus, CallbackMethod } from '../enums.js';
 
 export interface AddressVerification {
   id: string;
   type: 'address_verifications';
   service_description: string;
   callback_url: string | null;
-  callback_method: string | null;
-  status: string;
+  callback_method: CallbackMethod | null;
+  status: AddressVerificationStatus;
   reject_reasons: string[];
   reference: string;
   created_at: string;
@@ -17,7 +18,7 @@ export interface AddressVerification {
 export interface AddressVerificationWrite {
   service_description?: string;
   callback_url?: string | null;
-  callback_method?: string | null;
+  callback_method?: CallbackMethod | null;
   address?: ResourceRef;
   dids?: ResourceRef[];
 }

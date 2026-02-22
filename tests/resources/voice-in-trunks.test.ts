@@ -74,6 +74,12 @@ describe('VoiceInTrunks', () => {
     expect(result.data.configuration).toBeDefined();
     expect(result.data.configuration.type).toBe('pstn_configurations');
   });
+
+  it('deletes a voice in trunk', async () => {
+    loadCassette('voice_in_trunks/delete.yaml');
+    const client = createTestClient();
+    await expect(client.voiceInTrunks().remove('41b94706-325e-4704-a433-d65105758836')).resolves.toBeUndefined();
+  });
 });
 
 describe('TrunkConfiguration serialization', () => {

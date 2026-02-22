@@ -1,18 +1,19 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { OnCliMismatchAction, VoiceOutTrunkStatus, MediaEncryptionMode, DefaultDstAction } from '../enums.js';
 
 export interface VoiceOutTrunk {
   id: string;
   type: 'voice_out_trunks';
   name: string;
   allowed_sip_ips: string[];
-  on_cli_mismatch_action: number;
+  on_cli_mismatch_action: OnCliMismatchAction;
   allowed_rtp_ips: string[];
   allow_any_did_as_cli: boolean;
-  status: string;
+  status: VoiceOutTrunkStatus;
   capacity_limit: number;
   threshold_amount: string;
-  media_encryption_mode: string;
-  default_dst_action: string;
+  media_encryption_mode: MediaEncryptionMode;
+  default_dst_action: DefaultDstAction;
   dst_prefixes: string[];
   force_symmetric_rtp: boolean;
   rtp_ping: boolean;
@@ -28,14 +29,14 @@ export interface VoiceOutTrunk {
 export interface VoiceOutTrunkWrite {
   name?: string;
   allowed_sip_ips?: string[];
-  on_cli_mismatch_action?: number;
+  on_cli_mismatch_action?: OnCliMismatchAction;
   allowed_rtp_ips?: string[];
   allow_any_did_as_cli?: boolean;
-  status?: string;
+  status?: VoiceOutTrunkStatus;
   capacity_limit?: number;
   threshold_amount?: string;
-  media_encryption_mode?: string;
-  default_dst_action?: string;
+  media_encryption_mode?: MediaEncryptionMode;
+  default_dst_action?: DefaultDstAction;
   dst_prefixes?: string[];
   force_symmetric_rtp?: boolean;
   rtp_ping?: boolean;
