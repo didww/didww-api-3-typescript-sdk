@@ -73,14 +73,15 @@ const balance = await client.balance().find();
 
 ```typescript
 // Voice In Trunks
-import { sipConfiguration, ref } from '@didww/sdk';
+import { sipConfiguration, ref, Codec, TransportProtocol } from '@didww/sdk';
 
 const trunk = await client.voiceInTrunks().create({
   name: 'My SIP Trunk',
   configuration: sipConfiguration({
     host: 'sip.example.com',
     port: 5060,
-    codec_ids: [9, 10],
+    codec_ids: [Codec.PCMU, Codec.PCMA],
+    transport_protocol_id: TransportProtocol.UDP,
   }),
   pop: ref('pops', 'pop-id'),
 });
@@ -137,12 +138,51 @@ import {
   h323Configuration,
   iax2Configuration,
   pstnConfiguration,
+  Codec,
+  TransportProtocol,
+  MediaEncryptionMode,
 } from '@didww/sdk';
 
-const sip = sipConfiguration({ host: 'sip.example.com', port: 5060, codec_ids: [9, 10] });
-const h323 = h323Configuration({ dst: '1234', host: 'h323.example.com', port: 1720, codec_ids: [9] });
-const iax2 = iax2Configuration({ dst: '1234', host: 'iax.example.com', port: 4569, codec_ids: [9] });
+const sip = sipConfiguration({
+  host: 'sip.example.com',
+  port: 5060,
+  codec_ids: [Codec.PCMU, Codec.PCMA],
+  transport_protocol_id: TransportProtocol.UDP,
+  media_encryption_mode: MediaEncryptionMode.DISABLED,
+});
+const h323 = h323Configuration({ dst: '1234', host: 'h323.example.com', port: 1720, codec_ids: [Codec.PCMU] });
+const iax2 = iax2Configuration({ dst: '1234', host: 'iax.example.com', port: 4569, codec_ids: [Codec.PCMU] });
 const pstn = pstnConfiguration({ dst: '1234567890' });
+```
+
+## Enums
+
+Type-safe enums are provided for all API constant fields:
+
+```typescript
+import {
+  // String enums
+  CallbackMethod,          // POST, GET
+  AddressVerificationStatus, // PENDING, APPROVED, REJECTED
+  ExportType,              // CDR_IN, CDR_OUT
+  ExportStatus,            // PENDING, PROCESSING, COMPLETED
+  IdentityType,            // PERSONAL, BUSINESS, ANY
+  OrderStatus,             // PENDING, CANCELED, COMPLETED
+  OnCliMismatchAction,     // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI
+  MediaEncryptionMode,     // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
+  DefaultDstAction,        // ALLOW_ALL, REJECT_ALL
+  VoiceOutTrunkStatus,     // ACTIVE, BLOCKED
+  CliFormat,               // RAW, E164, LOCAL
+  AreaLevel,               // WORLDWIDE, COUNTRY, AREA, CITY
+  Feature,                 // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT
+  StirShakenMode,          // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
+  // Integer enums
+  TransportProtocol,       // UDP=1, TCP=2, TLS=3
+  RxDtmfFormat,            // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
+  TxDtmfFormat,            // DISABLED=1, RFC_2833=2, SIP_INFO_RELAY=3, SIP_INFO_DTMF=4
+  SstRefreshMethod,        // INVITE=1, UPDATE=2, UPDATE_FALLBACK_INVITE=3
+  Codec,                   // TELEPHONE_EVENT=6, G723=7, G729=8, PCMU=9, PCMA=10, ...
+} from '@didww/sdk';
 ```
 
 ## File Encryption & Upload
