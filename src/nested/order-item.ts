@@ -43,7 +43,7 @@ export function capacityOrderItem(attrs: Omit<CapacityOrderItem, 'type'>): Capac
 }
 
 export function serializeOrderItems(items: OrderItem[]): Record<string, unknown>[] {
-  return items.map(item => {
+  return items.map((item) => {
     const { type, ...attributes } = item;
     const filtered: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(attributes)) {
@@ -57,7 +57,7 @@ export function serializeOrderItems(items: OrderItem[]): Record<string, unknown>
 
 export function deserializeOrderItems(data: unknown[]): OrderItem[] {
   if (!Array.isArray(data)) return [];
-  return data.map(item => {
+  return data.map((item) => {
     if (!item || typeof item !== 'object') return item as OrderItem;
     const obj = item as Record<string, unknown>;
     const type = obj.type as string;

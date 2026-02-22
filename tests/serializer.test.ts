@@ -52,9 +52,7 @@ describe('Serializer', () => {
             country: { data: { type: 'countries', id: '2' } },
           },
         },
-        included: [
-          { type: 'countries', id: '2', attributes: { name: 'US', iso: 'US' } },
-        ],
+        included: [{ type: 'countries', id: '2', attributes: { name: 'US', iso: 'US' } }],
       };
       const result = deserialize(body);
       const data = result.data as any;

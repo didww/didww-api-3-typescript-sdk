@@ -29,23 +29,18 @@ describe('EncryptedFiles', () => {
     const ids = await client.uploadEncryptedFiles(
       'c74684d7863639169c21c4d04747f8d6fa05cfe3:::8a586bd37fa0000501715321b2e6a7b3ca57894c',
       [
-        { name: 'file1.enc', data: Buffer.from('file-content-1') },
-        { name: 'file2.enc', data: Buffer.from('file-content-2') },
+        { data: Buffer.from('file-content-1'), description: 'some description', filename: 'file1.enc' },
+        { data: Buffer.from('file-content-2'), filename: 'file2.enc' },
       ],
     );
-    expect(ids).toEqual([
-      '6eed102c-66a9-4a9b-a95f-4312d70ec12a',
-      '371eafbd-ac6a-485c-aadf-9e3c5da37eb4',
-    ]);
+    expect(ids).toEqual(['6eed102c-66a9-4a9b-a95f-4312d70ec12a', '371eafbd-ac6a-485c-aadf-9e3c5da37eb4']);
   });
 
   it('throws on unexpected upload response', async () => {
     loadCassette('encrypted_files/upload_error.yaml');
     const client = createTestClient();
     try {
-      await client.uploadEncryptedFiles('fingerprint-123', [
-        { name: 'file.enc', data: Buffer.from('example') },
-      ]);
+      await client.uploadEncryptedFiles('fingerprint-123', [{ data: Buffer.from('example') }]);
       expect.unreachable('Should have thrown');
     } catch (err) {
       expect(err).toBeInstanceOf(DidwwClientError);

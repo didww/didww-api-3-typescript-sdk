@@ -37,9 +37,17 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
   type: 'voice_in_trunks',
   path: 'voice_in_trunks',
   writableKeys: [
-    'name', 'priority', 'weight', 'cli_format', 'cli_prefix',
-    'description', 'ringing_timeout', 'capacity_limit', 'configuration',
-    'pop', 'voice_in_trunk_group',
+    'name',
+    'priority',
+    'weight',
+    'cli_format',
+    'cli_prefix',
+    'description',
+    'ringing_timeout',
+    'capacity_limit',
+    'configuration',
+    'pop',
+    'voice_in_trunk_group',
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};

@@ -39,9 +39,15 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
   type: 'dids',
   path: 'dids',
   writableKeys: [
-    'billing_cycles_count', 'capacity_limit', 'description', 'terminated',
-    'dedicated_channels_count', 'voice_in_trunk', 'voice_in_trunk_group',
-    'capacity_pool', 'shared_capacity_group',
+    'billing_cycles_count',
+    'capacity_limit',
+    'description',
+    'terminated',
+    'dedicated_channels_count',
+    'voice_in_trunk',
+    'voice_in_trunk_group',
+    'capacity_pool',
+    'shared_capacity_group',
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};

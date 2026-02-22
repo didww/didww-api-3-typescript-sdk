@@ -6,36 +6,42 @@ const client = new DidwwClient({
 });
 
 async function main() {
+  // Get a country to use
+  const countries = await client.countries().list({ filter: { iso: 'US' } });
+  if (countries.data.length === 0) {
+    console.log('No countries found');
+    return;
+  }
+  const country = countries.data[0];
+  console.log(`Using country: ${country.name} (${country.id})`);
+
   // Create an identity
   const identity = await client.identities().create({
     identity_type: 'Personal',
     first_name: 'John',
     last_name: 'Doe',
-    phone_number: '+1234567890',
+    phone_number: '1234567890',
     id_number: 'AB123456',
-    country: ref('countries', 'some-country-id'),
+    country: ref('countries', country.id),
   });
-  console.log('Identity created:', identity.data.id);
+  console.log(`Identity created: ${identity.data.id}`);
 
   // Create an address
   const address = await client.addresses().create({
-    city_name: 'London',
-    postal_code: 'SW1A 1AA',
-    address: '10 Downing Street',
+    city_name: 'New York',
+    postal_code: '10001',
+    address: '123 Main Street',
     description: 'Test address',
-    country: ref('countries', 'some-country-id'),
+    country: ref('countries', country.id),
     identity: ref('identities', identity.data.id),
   });
-  console.log('Address created:', address.data.id);
+  console.log(`Address created: ${address.data.id}`);
 
-  // Create an address verification
-  const verification = await client.addressVerifications().create({
-    service_description: 'Test service',
-    address: ref('addresses', address.data.id),
-    dids: [ref('dids', 'some-did-id')],
-  });
-  console.log('Verification created:', verification.data.id);
-  console.log('Status:', verification.data.status);
+  // Clean up
+  await client.addresses().remove(address.data.id);
+  console.log('Address deleted');
+  await client.identities().remove(identity.data.id);
+  console.log('Identity deleted');
 }
 
 main().catch(console.error);

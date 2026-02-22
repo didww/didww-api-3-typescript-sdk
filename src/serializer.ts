@@ -23,14 +23,9 @@ export function deserialize<T>(body: unknown): DeserializedResponse<T> | Deseria
   return result as any;
 }
 
-export function serializeForCreate<TWrite>(
-  meta: ResourceMeta<any, TWrite>,
-  data: TWrite,
-): Record<string, unknown> {
+export function serializeForCreate<TWrite>(meta: ResourceMeta<any, TWrite>, data: TWrite): Record<string, unknown> {
   const filtered = filterWritableKeys(data, meta.writableKeys);
-  const toSerialize = meta.serializeCustom
-    ? meta.serializeCustom(data, 'POST')
-    : filtered;
+  const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
   const prepared = wrapRelationships(toSerialize);
   return serialise(meta.type, prepared, 'POST', KITSU_OPTS);
 }
@@ -41,17 +36,12 @@ export function serializeForUpdate<TWrite>(
 ): Record<string, unknown> {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   (filtered as any).id = data.id;
-  const toSerialize = meta.serializeCustom
-    ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id }
-    : filtered;
+  const toSerialize = meta.serializeCustom ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id } : filtered;
   const prepared = wrapRelationships(toSerialize);
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 
-function filterWritableKeys<TWrite>(
-  data: TWrite,
-  writableKeys: (keyof TWrite)[],
-): Record<string, unknown> {
+function filterWritableKeys<TWrite>(data: TWrite, writableKeys: (keyof TWrite)[]): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const key of writableKeys) {
     if (key in (data as any)) {
@@ -86,7 +76,7 @@ function wrapRelationships(data: Record<string, unknown>): Record<string, unknow
     if (isResourceRef(value)) {
       result[key] = { data: { id: value.id, type: value.type } };
     } else if (isResourceRefArray(value)) {
-      result[key] = { data: value.map(r => ({ id: r.id, type: r.type })) };
+      result[key] = { data: value.map((r) => ({ id: r.id, type: r.type })) };
     } else {
       result[key] = value;
     }

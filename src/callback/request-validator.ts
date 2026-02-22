@@ -34,9 +34,7 @@ export class RequestValidator {
 
   private normalizeUrl(url: string): string {
     const parsed = new URL(url);
-    const port = parsed.port
-      ? `:${parsed.port}`
-      : '';
+    const port = parsed.port ? `:${parsed.port}` : '';
     const base = `${parsed.protocol}//${parsed.username ? parsed.username + '@' : ''}${parsed.hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';

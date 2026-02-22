@@ -15,8 +15,8 @@ describe('Serialization - excludes read-only fields', () => {
   it('DID excludes read-only fields', () => {
     const data = {
       description: 'test',
-      number: '12345',         // read-only
-      blocked: true,           // read-only
+      number: '12345', // read-only
+      blocked: true, // read-only
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForUpdate(DID_META, { ...data, id: '1' });
@@ -31,9 +31,9 @@ describe('Serialization - excludes read-only fields', () => {
     const data = {
       allow_back_ordering: true,
       items: [],
-      amount: '100.00',    // read-only
+      amount: '100.00', // read-only
       status: 'Completed', // read-only
-      reference: 'REF',    // read-only
+      reference: 'REF', // read-only
     };
     const result = serializeForCreate(ORDER_META, data);
     const attrs = (result.data as any).attributes;
@@ -47,9 +47,9 @@ describe('Serialization - excludes read-only fields', () => {
     const data = {
       export_type: 'cdr_in',
       filters: {},
-      status: 'Completed',  // read-only
-      url: 'http://...',    // read-only
-      created_at: '2024',   // read-only
+      status: 'Completed', // read-only
+      url: 'http://...', // read-only
+      created_at: '2024', // read-only
     };
     const result = serializeForCreate(EXPORT_META, data);
     const attrs = (result.data as any).attributes;
@@ -64,7 +64,7 @@ describe('Serialization - excludes read-only fields', () => {
       first_name: 'John',
       last_name: 'Doe',
       created_at: '2024-01-01', // read-only
-      verified: true,           // read-only
+      verified: true, // read-only
     };
     const result = serializeForCreate(IDENTITY_META, data);
     const attrs = (result.data as any).attributes;
@@ -79,7 +79,7 @@ describe('Serialization - excludes read-only fields', () => {
       city_name: 'London',
       postal_code: 'SW1A',
       created_at: '2024-01-01', // read-only
-      verified: false,          // read-only
+      verified: false, // read-only
     };
     const result = serializeForCreate(ADDRESS_META, data);
     const attrs = (result.data as any).attributes;
@@ -91,9 +91,9 @@ describe('Serialization - excludes read-only fields', () => {
   it('AddressVerification excludes read-only fields', () => {
     const data = {
       service_description: 'test',
-      status: 'Pending',       // read-only
-      reject_reasons: [],      // read-only
-      reference: 'REF',        // read-only
+      status: 'Pending', // read-only
+      reject_reasons: [], // read-only
+      reference: 'REF', // read-only
     };
     const result = serializeForCreate(ADDRESS_VERIFICATION_META, data);
     const attrs = (result.data as any).attributes;
@@ -144,10 +144,10 @@ describe('Serialization - excludes read-only fields', () => {
     const data = {
       name: 'test out trunk',
       allowed_sip_ips: ['127.0.0.1'],
-      username: 'readonly',      // read-only
-      password: 'readonly',      // read-only
-      threshold_reached: true,   // read-only
-      created_at: '2024-01-01',  // read-only
+      username: 'readonly', // read-only
+      password: 'readonly', // read-only
+      threshold_reached: true, // read-only
+      created_at: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_OUT_TRUNK_META, data);
     const attrs = (result.data as any).attributes;

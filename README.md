@@ -31,6 +31,15 @@ for (const country of countries.data) {
 }
 ```
 
+For more examples visit [examples](examples/).
+
+For details on obtaining your API key please visit https://doc.didww.com/api#introduction-api-keys
+
+## Examples
+
+- Source code: [examples/](examples/)
+- How to run: [examples/README.md](examples/README.md)
+
 ## Resources
 
 ### Read-Only Resources
@@ -52,7 +61,6 @@ client.requirements()
 client.supportingDocumentTemplates()
 client.stockKeepingUnits()
 client.qtyBasedPricings()
-client.capacityPools()
 ```
 
 ### Singleton Resources
@@ -151,7 +159,7 @@ const pems: [string, string] = [keys.data[0].key, keys.data[1].key];
 const fingerprint = calculateFingerprint(pems);
 const encrypted = encryptWithKeys(readFileSync('document.pdf'), pems);
 const ids = await client.uploadEncryptedFiles(fingerprint, [
-  { name: 'document.pdf.enc', data: encrypted },
+  { data: encrypted, description: 'My document', filename: 'document.pdf.enc' },
 ]);
 
 // Create proof with uploaded files
@@ -191,6 +199,7 @@ try {
 | Resource | list | find | create | update | delete |
 |----------|------|------|--------|--------|--------|
 | Country, Region, City, Area, Pop, etc. | ✓ | ✓ | - | - | - |
+| CapacityPool | ✓ | ✓ | - | ✓ | - |
 | Balance | - | ✓ | - | - | - |
 | VoiceInTrunk, VoiceOutTrunk | ✓ | ✓ | ✓ | ✓ | ✓ |
 | VoiceInTrunkGroup, SharedCapacityGroup | ✓ | ✓ | ✓ | ✓ | ✓ |

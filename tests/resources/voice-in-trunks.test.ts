@@ -30,7 +30,7 @@ describe('VoiceInTrunks', () => {
     loadCassette('voice_in_trunks/list.yaml');
     const client = createTestClient();
     const result = await client.voiceInTrunks().list();
-    const sipTrunk = result.data.find(t => t.configuration?.type === 'sip_configurations');
+    const sipTrunk = result.data.find((t) => t.configuration?.type === 'sip_configurations');
     expect(sipTrunk).toBeDefined();
     const config = sipTrunk!.configuration as SipConfiguration;
     expect(config.username).toBe('username');

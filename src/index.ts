@@ -41,10 +41,16 @@ export type { Address, AddressWrite } from './resources/address.js';
 export type { Identity, IdentityWrite } from './resources/identity.js';
 export type { EncryptedFile } from './resources/encrypted-file.js';
 export type { AddressVerification, AddressVerificationWrite } from './resources/address-verification.js';
-export type { PermanentSupportingDocument, PermanentSupportingDocumentWrite } from './resources/permanent-supporting-document.js';
+export type {
+  PermanentSupportingDocument,
+  PermanentSupportingDocumentWrite,
+} from './resources/permanent-supporting-document.js';
 export type { Proof, ProofWrite } from './resources/proof.js';
 export type { RequirementValidation, RequirementValidationWrite } from './resources/requirement-validation.js';
-export type { VoiceOutTrunkRegenerateCredential, VoiceOutTrunkRegenerateCredentialWrite } from './resources/voice-out-trunk-regenerate-credential.js';
+export type {
+  VoiceOutTrunkRegenerateCredential,
+  VoiceOutTrunkRegenerateCredentialWrite,
+} from './resources/voice-out-trunk-regenerate-credential.js';
 
 // Nested types
 export type {
@@ -61,12 +67,7 @@ export {
   pstnConfiguration,
 } from './nested/trunk-configuration.js';
 
-export type {
-  OrderItem,
-  DidOrderItem,
-  CapacityOrderItem,
-  GenericOrderItem,
-} from './nested/order-item.js';
+export type { OrderItem, DidOrderItem, CapacityOrderItem, GenericOrderItem } from './nested/order-item.js';
 export { didOrderItem, capacityOrderItem } from './nested/order-item.js';
 
 // Repository types

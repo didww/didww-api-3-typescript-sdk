@@ -15,7 +15,10 @@ export interface PermanentSupportingDocumentWrite {
   files?: ResourceRef[];
 }
 
-export const PERMANENT_SUPPORTING_DOCUMENT_META: ResourceMeta<PermanentSupportingDocument, PermanentSupportingDocumentWrite> = {
+export const PERMANENT_SUPPORTING_DOCUMENT_META: ResourceMeta<
+  PermanentSupportingDocument,
+  PermanentSupportingDocumentWrite
+> = {
   type: 'permanent_supporting_documents',
   path: 'permanent_supporting_documents',
   writableKeys: ['identity', 'template', 'files'],

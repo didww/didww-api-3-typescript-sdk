@@ -1,10 +1,4 @@
-import {
-  createCipheriv,
-  createHash,
-  publicEncrypt,
-  randomBytes,
-  constants,
-} from 'node:crypto';
+import { createCipheriv, createHash, publicEncrypt, randomBytes, constants } from 'node:crypto';
 
 export function encryptWithKeys(binaryData: Buffer, publicKeyPems: [string, string]): Buffer {
   const aesKey = randomBytes(32);
@@ -41,7 +35,7 @@ function encryptRsaOaep(pemKey: string, data: Buffer): Buffer {
 
 function fingerprintFor(pemKey: string): string {
   // Extract DER from PEM
-  const lines = pemKey.split('\n').filter(l => !l.startsWith('-----'));
+  const lines = pemKey.split('\n').filter((l) => !l.startsWith('-----'));
   const der = Buffer.from(lines.join(''), 'base64');
   return createHash('sha1').update(der).digest('hex');
 }

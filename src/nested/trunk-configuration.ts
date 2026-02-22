@@ -55,11 +55,7 @@ export interface PstnConfiguration {
   dst: string;
 }
 
-export type TrunkConfiguration =
-  | SipConfiguration
-  | H323Configuration
-  | Iax2Configuration
-  | PstnConfiguration;
+export type TrunkConfiguration = SipConfiguration | H323Configuration | Iax2Configuration | PstnConfiguration;
 
 export function sipConfiguration(attrs: Omit<SipConfiguration, 'type'>): SipConfiguration {
   return { type: 'sip_configurations', ...attrs };
