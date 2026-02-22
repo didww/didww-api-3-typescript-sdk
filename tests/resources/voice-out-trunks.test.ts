@@ -47,4 +47,10 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.name).toBe('ts-test');
     expect(result.data.status).toBe('active');
   });
+
+  it('deletes a voice out trunk', async () => {
+    loadCassette('voice_out_trunks/delete.yaml');
+    const client = createTestClient();
+    await expect(client.voiceOutTrunks().remove('425ce763-a3a9-49b4-af5b-ada1a65c8864')).resolves.toBeUndefined();
+  });
 });

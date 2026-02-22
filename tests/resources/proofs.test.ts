@@ -15,4 +15,10 @@ describe('Proofs', () => {
     });
     expect(result.data.id).toBe('ed46925b-a830-482d-917d-015858cf7ab9');
   });
+
+  it('deletes a proof', async () => {
+    loadCassette('proofs/delete.yaml');
+    const client = createTestClient();
+    await expect(client.proofs().remove('ed46925b-a830-482d-917d-015858cf7ab9')).resolves.toBeUndefined();
+  });
 });

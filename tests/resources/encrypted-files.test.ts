@@ -36,6 +36,12 @@ describe('EncryptedFiles', () => {
     expect(ids).toEqual(['6eed102c-66a9-4a9b-a95f-4312d70ec12a', '371eafbd-ac6a-485c-aadf-9e3c5da37eb4']);
   });
 
+  it('deletes an encrypted file', async () => {
+    loadCassette('encrypted_files/delete.yaml');
+    const client = createTestClient();
+    await expect(client.encryptedFiles().remove('7f2fbdca-8008-44ce-bcb6-3537ea5efaac')).resolves.toBeUndefined();
+  });
+
   it('throws on unexpected upload response', async () => {
     loadCassette('encrypted_files/upload_error.yaml');
     const client = createTestClient();

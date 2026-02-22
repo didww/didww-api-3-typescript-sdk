@@ -18,4 +18,10 @@ describe('Identities', () => {
     expect(result.data.id).toBeDefined();
     expect(result.data.type).toBe('identities');
   });
+
+  it('deletes an identity', async () => {
+    loadCassette('identities/delete.yaml');
+    const client = createTestClient();
+    await expect(client.identities().remove('e96ae7d1-11d5-42bc-a5c5-211f3c3788ae')).resolves.toBeUndefined();
+  });
 });

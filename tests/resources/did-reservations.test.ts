@@ -24,4 +24,10 @@ describe('DidReservations', () => {
     expect(result.data.id).toBeDefined();
     expect(result.data.type).toBe('did_reservations');
   });
+
+  it('deletes a DID reservation', async () => {
+    loadCassette('did_reservations/delete.yaml');
+    const client = createTestClient();
+    await expect(client.didReservations().remove('8a18a19f-b082-42f3-acca-99ea402a4e5d')).resolves.toBeUndefined();
+  });
 });

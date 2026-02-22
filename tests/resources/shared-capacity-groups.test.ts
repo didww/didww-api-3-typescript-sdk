@@ -34,4 +34,10 @@ describe('SharedCapacityGroups', () => {
     expect(result.data.shared_channels_count).toBe(10);
     expect(result.data.metered_channels_count).toBe(2);
   });
+
+  it('deletes a shared capacity group', async () => {
+    loadCassette('shared_capacity_groups/delete.yaml');
+    const client = createTestClient();
+    await expect(client.sharedCapacityGroups().remove('3688a9c3-354f-4e16-b458-1d2df9f02547')).resolves.toBeUndefined();
+  });
 });
