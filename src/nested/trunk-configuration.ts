@@ -41,42 +41,15 @@ export interface SipConfiguration {
   allowed_rtp_ips?: string[];
 }
 
-export interface H323Configuration {
-  type: 'h323_configurations';
-  dst: string;
-  host: string;
-  port: number;
-  codec_ids: Codec[];
-}
-
-export interface Iax2Configuration {
-  type: 'iax2_configurations';
-  dst: string;
-  host: string;
-  port: number;
-  codec_ids: Codec[];
-  auth_enabled?: boolean;
-  auth_user?: string;
-  auth_password?: string;
-}
-
 export interface PstnConfiguration {
   type: 'pstn_configurations';
   dst: string;
 }
 
-export type TrunkConfiguration = SipConfiguration | H323Configuration | Iax2Configuration | PstnConfiguration;
+export type TrunkConfiguration = SipConfiguration | PstnConfiguration;
 
 export function sipConfiguration(attrs: Omit<SipConfiguration, 'type'>): SipConfiguration {
   return { type: 'sip_configurations', ...attrs };
-}
-
-export function h323Configuration(attrs: Omit<H323Configuration, 'type'>): H323Configuration {
-  return { type: 'h323_configurations', ...attrs };
-}
-
-export function iax2Configuration(attrs: Omit<Iax2Configuration, 'type'>): Iax2Configuration {
-  return { type: 'iax2_configurations', ...attrs };
 }
 
 export function pstnConfiguration(attrs: Omit<PstnConfiguration, 'type'>): PstnConfiguration {

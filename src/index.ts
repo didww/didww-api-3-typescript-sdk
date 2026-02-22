@@ -53,19 +53,8 @@ export type {
 } from './resources/voice-out-trunk-regenerate-credential.js';
 
 // Nested types
-export type {
-  TrunkConfiguration,
-  SipConfiguration,
-  H323Configuration,
-  Iax2Configuration,
-  PstnConfiguration,
-} from './nested/trunk-configuration.js';
-export {
-  sipConfiguration,
-  h323Configuration,
-  iax2Configuration,
-  pstnConfiguration,
-} from './nested/trunk-configuration.js';
+export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './nested/trunk-configuration.js';
+export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
 
 export type { OrderItem, DidOrderItem, CapacityOrderItem, GenericOrderItem } from './nested/order-item.js';
 export { didOrderItem, capacityOrderItem } from './nested/order-item.js';
