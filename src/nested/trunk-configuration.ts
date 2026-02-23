@@ -6,6 +6,7 @@ import type {
   SstRefreshMethod,
   MediaEncryptionMode,
   StirShakenMode,
+  ReroutingDisconnectCode,
 } from '../enums.js';
 
 export interface SipConfiguration {
@@ -33,7 +34,7 @@ export interface SipConfiguration {
   dns_srv_failover_timer?: number;
   rtp_ping?: boolean;
   force_symmetric_rtp?: boolean;
-  rerouting_disconnect_code_ids?: number[];
+  rerouting_disconnect_code_ids?: ReroutingDisconnectCode[];
   max_transfers?: number;
   max_30x_redirects?: number;
   media_encryption_mode?: MediaEncryptionMode;
