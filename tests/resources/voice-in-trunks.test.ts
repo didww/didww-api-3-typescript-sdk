@@ -5,8 +5,6 @@ import {
   serializeTrunkConfiguration,
   deserializeTrunkConfiguration,
   sipConfiguration,
-  h323Configuration,
-  iax2Configuration,
   pstnConfiguration,
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration } from '../../src/nested/trunk-configuration.js';
@@ -22,8 +20,8 @@ describe('VoiceInTrunks', () => {
     expect(Array.isArray(result.data)).toBe(true);
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
-    expect(first.id).toBe('9cbadd6f-0665-46bc-b3aa-687d22157808');
-    expect(first.name).toBe('iax2 trunk sample');
+    expect(first.id).toBe('2b4b1fcf-fe6a-4de9-8a58-7df46820ba13');
+    expect(first.name).toBe('sample trunk pstn');
   });
 
   it('lists SIP configuration attributes', async () => {
@@ -104,30 +102,6 @@ describe('TrunkConfiguration serialization', () => {
     expect((data.attributes as any).username).toBe('user');
     expect((data.attributes as any).host).toBe('example.com');
     expect((data.attributes as any).codec_ids).toEqual([9, 10, 8]);
-  });
-
-  it('serializes H323 configuration', () => {
-    const config = h323Configuration({
-      dst: '{CALL_DID}',
-      host: '127.0.0.1',
-      port: 1720,
-      codec_ids: [9, 10],
-    });
-    const data = serializeTrunkConfiguration(config);
-    expect(data.type).toBe('h323_configurations');
-    expect((data.attributes as any).dst).toBe('{CALL_DID}');
-  });
-
-  it('serializes IAX2 configuration', () => {
-    const config = iax2Configuration({
-      dst: 'test',
-      host: '127.0.0.1',
-      port: 4569,
-      codec_ids: [9],
-    });
-    const data = serializeTrunkConfiguration(config);
-    expect(data.type).toBe('iax2_configurations');
-    expect((data.attributes as any).dst).toBe('test');
   });
 
   it('deserializes configuration', () => {

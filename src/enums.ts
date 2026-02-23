@@ -133,8 +133,6 @@ export enum Codec {
 
 export enum ConfigurationType {
   SIP = 'sip_configurations',
-  H323 = 'h323_configurations',
-  IAX2 = 'iax2_configurations',
   PSTN = 'pstn_configurations',
 }
 

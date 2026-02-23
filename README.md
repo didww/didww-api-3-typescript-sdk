@@ -130,13 +130,11 @@ const result = await client.didGroups().list({
 
 ## Trunk Configurations
 
-Four configuration types are supported:
+Two configuration types are supported:
 
 ```typescript
 import {
   sipConfiguration,
-  h323Configuration,
-  iax2Configuration,
   pstnConfiguration,
   Codec,
   TransportProtocol,
@@ -150,8 +148,6 @@ const sip = sipConfiguration({
   transport_protocol_id: TransportProtocol.UDP,
   media_encryption_mode: MediaEncryptionMode.DISABLED,
 });
-const h323 = h323Configuration({ dst: '1234', host: 'h323.example.com', port: 1720, codec_ids: [Codec.PCMU] });
-const iax2 = iax2Configuration({ dst: '1234', host: 'iax.example.com', port: 4569, codec_ids: [Codec.PCMU] });
 const pstn = pstnConfiguration({ dst: '1234567890' });
 ```
 
