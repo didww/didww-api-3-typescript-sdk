@@ -18,12 +18,21 @@ export interface DeserializedListResponse<T> {
   links?: Record<string, unknown>;
 }
 
+export interface SerializedResource {
+  data: {
+    type: string;
+    id?: string;
+    attributes: Record<string, unknown>;
+    relationships?: Record<string, unknown>;
+  };
+}
+
 export function deserialize<T>(body: unknown): DeserializedResponse<T> | DeserializedListResponse<T> {
   const result = deserialise(body);
   return result as any;
 }
 
-export function serializeForCreate<TWrite>(meta: ResourceMeta<any, TWrite>, data: TWrite): Record<string, unknown> {
+export function serializeForCreate<TWrite>(meta: ResourceMeta<any, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
   const prepared = wrapRelationships(toSerialize);
@@ -33,7 +42,7 @@ export function serializeForCreate<TWrite>(meta: ResourceMeta<any, TWrite>, data
 export function serializeForUpdate<TWrite>(
   meta: ResourceMeta<any, TWrite>,
   data: TWrite & { id: string },
-): Record<string, unknown> {
+): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   (filtered as any).id = data.id;
   const toSerialize = meta.serializeCustom ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id } : filtered;

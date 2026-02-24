@@ -57,7 +57,12 @@ export function pstnConfiguration(attrs: Omit<PstnConfiguration, 'type'>): PstnC
   return { type: 'pstn_configurations', ...attrs };
 }
 
-export function serializeTrunkConfiguration(config: TrunkConfiguration): Record<string, unknown> {
+export interface SerializedTrunkConfiguration {
+  type: string;
+  attributes: Record<string, unknown>;
+}
+
+export function serializeTrunkConfiguration(config: TrunkConfiguration): SerializedTrunkConfiguration {
   const { type, ...attributes } = config;
   return { type, attributes };
 }
