@@ -20,7 +20,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForUpdate(DID_META, { ...data, id: '1' });
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.description).toBe('test');
     expect(attrs.number).toBeUndefined();
     expect(attrs.blocked).toBeUndefined();
@@ -36,7 +36,7 @@ describe('Serialization - excludes read-only fields', () => {
       reference: 'REF', // read-only
     };
     const result = serializeForCreate(ORDER_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.allow_back_ordering).toBe(true);
     expect(attrs.amount).toBeUndefined();
     expect(attrs.status).toBeUndefined();
@@ -52,7 +52,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024', // read-only
     };
     const result = serializeForCreate(EXPORT_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.export_type).toBe('cdr_in');
     expect(attrs.status).toBeUndefined();
     expect(attrs.url).toBeUndefined();
@@ -67,7 +67,7 @@ describe('Serialization - excludes read-only fields', () => {
       verified: true, // read-only
     };
     const result = serializeForCreate(IDENTITY_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.first_name).toBe('John');
     expect(attrs.last_name).toBe('Doe');
     expect(attrs.created_at).toBeUndefined();
@@ -82,7 +82,7 @@ describe('Serialization - excludes read-only fields', () => {
       verified: false, // read-only
     };
     const result = serializeForCreate(ADDRESS_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.city_name).toBe('London');
     expect(attrs.created_at).toBeUndefined();
     expect(attrs.verified).toBeUndefined();
@@ -96,7 +96,7 @@ describe('Serialization - excludes read-only fields', () => {
       reference: 'REF', // read-only
     };
     const result = serializeForCreate(ADDRESS_VERIFICATION_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.service_description).toBe('test');
     expect(attrs.status).toBeUndefined();
     expect(attrs.reject_reasons).toBeUndefined();
@@ -110,7 +110,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForCreate(SHARED_CAPACITY_GROUP_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.name).toBe('test');
     expect(attrs.shared_channels_count).toBe(5);
     expect(attrs.created_at).toBeUndefined();
@@ -123,7 +123,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_IN_TRUNK_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.name).toBe('test trunk');
     expect(attrs.created_at).toBeUndefined();
   });
@@ -135,7 +135,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_IN_TRUNK_GROUP_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.name).toBe('test group');
     expect(attrs.created_at).toBeUndefined();
   });
@@ -150,7 +150,7 @@ describe('Serialization - excludes read-only fields', () => {
       created_at: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_OUT_TRUNK_META, data);
-    const attrs = (result.data as any).attributes;
+    const attrs = result.data.attributes;
     expect(attrs.name).toBe('test out trunk');
     expect(attrs.username).toBeUndefined();
     expect(attrs.password).toBeUndefined();

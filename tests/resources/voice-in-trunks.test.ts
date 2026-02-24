@@ -160,10 +160,10 @@ describe('TrunkConfiguration serialization', () => {
     });
     const data = serializeTrunkConfiguration(config);
     expect(data.type).toBe('sip_configurations');
-    expect((data.attributes as any).username).toBe('user');
-    expect((data.attributes as any).host).toBe('example.com');
-    expect((data.attributes as any).codec_ids).toEqual([Codec.PCMU, Codec.PCMA, Codec.G729]);
-    expect((data.attributes as any).rerouting_disconnect_code_ids).toEqual([
+    expect(data.attributes.username).toBe('user');
+    expect(data.attributes.host).toBe('example.com');
+    expect(data.attributes.codec_ids).toEqual([Codec.PCMU, Codec.PCMA, Codec.G729]);
+    expect(data.attributes.rerouting_disconnect_code_ids).toEqual([
       ReroutingDisconnectCode.SIP_486_BUSY_HERE,
       ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
       ReroutingDisconnectCode.RINGING_TIMEOUT,
