@@ -109,8 +109,11 @@ client.proofTypes();
 client.publicKeys();
 client.requirements();
 client.supportingDocumentTemplates();
-client.stockKeepingUnits();
-client.qtyBasedPricings();
+
+// Stock keeping units and qty-based pricings are include-only resources:
+// - StockKeepingUnit: include on didGroups (see above)
+// - QtyBasedPricing: include on capacityPools
+const pools = await client.capacityPools().list({ include: 'qty_based_pricings' });
 
 // Balance (singleton)
 const balance = await client.balance().find();
@@ -190,6 +193,8 @@ const group = await client.voiceInTrunkGroups().create({
 
 ### Voice Out Trunks
 
+> **Note:** Voice Out Trunks and some `OnCliMismatchAction` values (`REPLACE_CLI`, `RANDOMIZE_CLI`) require additional account configuration. Contact DIDWW support to enable these features.
+
 ```typescript
 import { DefaultDstAction, OnCliMismatchAction } from '@didww/sdk';
 
@@ -197,7 +202,7 @@ const voTrunk = await client.voiceOutTrunks().create({
   name: 'My Outbound Trunk',
   allowedSipIps: ['0.0.0.0/0'],
   defaultDstAction: DefaultDstAction.ALLOW_ALL,
-  onCliMismatchAction: OnCliMismatchAction.REPLACE_CLI,
+  onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
 });
 ```
 
@@ -368,7 +373,7 @@ import {
   ExportStatus, // PENDING, PROCESSING, COMPLETED
   IdentityType, // PERSONAL, BUSINESS, ANY
   OrderStatus, // PENDING, CANCELED, COMPLETED
-  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI
+  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI*
   MediaEncryptionMode, // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
   DefaultDstAction, // ALLOW_ALL, REJECT_ALL
   VoiceOutTrunkStatus, // ACTIVE, BLOCKED
@@ -476,8 +481,8 @@ try {
 | PublicKey                         | `client.publicKeys()`                         | list, find                         |
 | Requirement                       | `client.requirements()`                       | list, find                         |
 | SupportingDocumentTemplate        | `client.supportingDocumentTemplates()`        | list, find                         |
-| StockKeepingUnit                  | `client.stockKeepingUnits()`                  | list, find                         |
-| QtyBasedPricing                   | `client.qtyBasedPricings()`                   | list, find                         |
+| StockKeepingUnit                  | include on `didGroups()`                      | include only                       |
+| QtyBasedPricing                   | include on `capacityPools()`                  | include only                       |
 | Balance                           | `client.balance()`                            | find                               |
 | Did                               | `client.dids()`                               | list, find, update, delete         |
 | VoiceInTrunk                      | `client.voiceInTrunks()`                      | list, find, create, update, delete |

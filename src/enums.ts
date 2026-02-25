@@ -37,7 +37,8 @@ export enum OrderStatus {
 export enum OnCliMismatchAction {
   SEND_ORIGINAL_CLI = 'send_original_cli',
   REJECT_CALL = 'reject_call',
-  REPLACE_CLI = 'replace_cli',
+  REPLACE_CLI = 'replace_cli', // requires account configuration
+  RANDOMIZE_CLI = 'randomize_cli', // requires account configuration
 }
 
 export enum MediaEncryptionMode {

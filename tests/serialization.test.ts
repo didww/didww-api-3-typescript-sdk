@@ -194,3 +194,71 @@ describe('Order item factories', () => {
     expect(item.qty).toBe(5);
   });
 });
+
+describe('DID trunk/trunk group exclusive relationships', () => {
+  it('assigning voiceInTrunk auto-nullifies voiceInTrunkGroup', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      voiceInTrunk: { id: 'trunk-1', type: 'voice_in_trunks' },
+    });
+    // trunk should be set as relationship
+    expect(result.data.relationships?.voice_in_trunk).toEqual({
+      data: { id: 'trunk-1', type: 'voice_in_trunks' },
+    });
+    // trunk group should be auto-nullified
+    expect(result.data.relationships?.voice_in_trunk_group).toEqual({
+      data: null,
+    });
+  });
+
+  it('assigning voiceInTrunkGroup auto-nullifies voiceInTrunk', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      voiceInTrunkGroup: { id: 'group-1', type: 'voice_in_trunk_groups' },
+    });
+    // trunk group should be set as relationship
+    expect(result.data.relationships?.voice_in_trunk_group).toEqual({
+      data: { id: 'group-1', type: 'voice_in_trunk_groups' },
+    });
+    // trunk should be auto-nullified
+    expect(result.data.relationships?.voice_in_trunk).toEqual({
+      data: null,
+    });
+  });
+
+  it('setting voiceInTrunk to null does not auto-nullify voiceInTrunkGroup', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      voiceInTrunk: null,
+    });
+    // trunk should be nullified
+    expect(result.data.relationships?.voice_in_trunk).toEqual({
+      data: null,
+    });
+    // trunk group should NOT be touched
+    expect(result.data.relationships?.voice_in_trunk_group).toBeUndefined();
+  });
+
+  it('setting voiceInTrunkGroup to null does not auto-nullify voiceInTrunk', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      voiceInTrunkGroup: null,
+    });
+    // trunk group should be nullified
+    expect(result.data.relationships?.voice_in_trunk_group).toEqual({
+      data: null,
+    });
+    // trunk should NOT be touched
+    expect(result.data.relationships?.voice_in_trunk).toBeUndefined();
+  });
+
+  it('updating only description does not affect trunk relationships', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      description: 'updated',
+    });
+    expect(result.data.attributes.description).toBe('updated');
+    expect(result.data.relationships?.voice_in_trunk).toBeUndefined();
+    expect(result.data.relationships?.voice_in_trunk_group).toBeUndefined();
+  });
+});
