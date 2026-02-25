@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 import type { ExportType, ExportStatus, CallbackMethod } from '../enums.js';
 
 export interface Export {
@@ -20,7 +20,7 @@ export interface ExportWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-export const EXPORT_META: ResourceMeta<Export, ExportWrite> = {
+export const EXPORT_RESOURCE: ResourceConfig<Export, ExportWrite> = {
   type: 'exports',
   path: 'exports',
   writableKeys: ['exportType', 'filters', 'callbackUrl', 'callbackMethod'],

@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { VoiceInTrunk } from './voice-in-trunk.js';
 
 export interface VoiceInTrunkGroup {
@@ -16,7 +16,7 @@ export interface VoiceInTrunkGroupWrite {
   voiceInTrunks?: ResourceRef[];
 }
 
-export const VOICE_IN_TRUNK_GROUP_META: ResourceMeta<VoiceInTrunkGroup, VoiceInTrunkGroupWrite> = {
+export const VOICE_IN_TRUNK_GROUP_RESOURCE: ResourceConfig<VoiceInTrunkGroup, VoiceInTrunkGroupWrite> = {
   type: 'voice_in_trunk_groups',
   path: 'voice_in_trunk_groups',
   writableKeys: ['name', 'capacityLimit', 'voiceInTrunks'],

@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { serializeForCreate, serializeForUpdate } from '../src/serializer.js';
-import { DID_META } from '../src/resources/did.js';
-import { ORDER_META } from '../src/resources/order.js';
-import { EXPORT_META } from '../src/resources/export.js';
-import { IDENTITY_META } from '../src/resources/identity.js';
-import { ADDRESS_META } from '../src/resources/address.js';
-import { ADDRESS_VERIFICATION_META } from '../src/resources/address-verification.js';
-import { SHARED_CAPACITY_GROUP_META } from '../src/resources/shared-capacity-group.js';
-import { VOICE_IN_TRUNK_META } from '../src/resources/voice-in-trunk.js';
-import { VOICE_IN_TRUNK_GROUP_META } from '../src/resources/voice-in-trunk-group.js';
-import { VOICE_OUT_TRUNK_META } from '../src/resources/voice-out-trunk.js';
+import { DID_RESOURCE } from '../src/resources/did.js';
+import { ORDER_RESOURCE } from '../src/resources/order.js';
+import { EXPORT_RESOURCE } from '../src/resources/export.js';
+import { IDENTITY_RESOURCE } from '../src/resources/identity.js';
+import { ADDRESS_RESOURCE } from '../src/resources/address.js';
+import { ADDRESS_VERIFICATION_RESOURCE } from '../src/resources/address-verification.js';
+import { SHARED_CAPACITY_GROUP_RESOURCE } from '../src/resources/shared-capacity-group.js';
+import { VOICE_IN_TRUNK_RESOURCE } from '../src/resources/voice-in-trunk.js';
+import { VOICE_IN_TRUNK_GROUP_RESOURCE } from '../src/resources/voice-in-trunk-group.js';
+import { VOICE_OUT_TRUNK_RESOURCE } from '../src/resources/voice-out-trunk.js';
 import {
   didOrderItem,
   availableDidOrderItem,
@@ -25,7 +25,7 @@ describe('Serialization - excludes read-only fields', () => {
       blocked: true, // read-only
       createdAt: '2024-01-01', // read-only
     };
-    const result = serializeForUpdate(DID_META, { ...data, id: '1' });
+    const result = serializeForUpdate(DID_RESOURCE, { ...data, id: '1' });
     const attrs = result.data.attributes;
     expect(attrs.description).toBe('test');
     expect(attrs.number).toBeUndefined();
@@ -41,7 +41,7 @@ describe('Serialization - excludes read-only fields', () => {
       status: 'Completed', // read-only
       reference: 'REF', // read-only
     };
-    const result = serializeForCreate(ORDER_META, data);
+    const result = serializeForCreate(ORDER_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.allow_back_ordering).toBe(true);
     expect(attrs.amount).toBeUndefined();
@@ -57,7 +57,7 @@ describe('Serialization - excludes read-only fields', () => {
       url: 'http://...', // read-only
       createdAt: '2024', // read-only
     };
-    const result = serializeForCreate(EXPORT_META, data);
+    const result = serializeForCreate(EXPORT_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.export_type).toBe('cdr_in');
     expect(attrs.status).toBeUndefined();
@@ -72,7 +72,7 @@ describe('Serialization - excludes read-only fields', () => {
       createdAt: '2024-01-01', // read-only
       verified: true, // read-only
     };
-    const result = serializeForCreate(IDENTITY_META, data);
+    const result = serializeForCreate(IDENTITY_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.first_name).toBe('John');
     expect(attrs.last_name).toBe('Doe');
@@ -87,7 +87,7 @@ describe('Serialization - excludes read-only fields', () => {
       createdAt: '2024-01-01', // read-only
       verified: false, // read-only
     };
-    const result = serializeForCreate(ADDRESS_META, data);
+    const result = serializeForCreate(ADDRESS_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.city_name).toBe('London');
     expect(attrs.created_at).toBeUndefined();
@@ -101,7 +101,7 @@ describe('Serialization - excludes read-only fields', () => {
       rejectReasons: [], // read-only
       reference: 'REF', // read-only
     };
-    const result = serializeForCreate(ADDRESS_VERIFICATION_META, data);
+    const result = serializeForCreate(ADDRESS_VERIFICATION_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.service_description).toBe('test');
     expect(attrs.status).toBeUndefined();
@@ -115,7 +115,7 @@ describe('Serialization - excludes read-only fields', () => {
       sharedChannelsCount: 5,
       createdAt: '2024-01-01', // read-only
     };
-    const result = serializeForCreate(SHARED_CAPACITY_GROUP_META, data);
+    const result = serializeForCreate(SHARED_CAPACITY_GROUP_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.name).toBe('test');
     expect(attrs.shared_channels_count).toBe(5);
@@ -128,7 +128,7 @@ describe('Serialization - excludes read-only fields', () => {
       configuration: { type: 'pstn_configurations' as const, dst: '123' },
       createdAt: '2024-01-01', // read-only
     };
-    const result = serializeForCreate(VOICE_IN_TRUNK_META, data);
+    const result = serializeForCreate(VOICE_IN_TRUNK_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.name).toBe('test trunk');
     expect(attrs.created_at).toBeUndefined();
@@ -140,7 +140,7 @@ describe('Serialization - excludes read-only fields', () => {
       capacityLimit: 'shared',
       createdAt: '2024-01-01', // read-only
     };
-    const result = serializeForCreate(VOICE_IN_TRUNK_GROUP_META, data);
+    const result = serializeForCreate(VOICE_IN_TRUNK_GROUP_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.name).toBe('test group');
     expect(attrs.created_at).toBeUndefined();
@@ -155,7 +155,7 @@ describe('Serialization - excludes read-only fields', () => {
       thresholdReached: true, // read-only
       createdAt: '2024-01-01', // read-only
     };
-    const result = serializeForCreate(VOICE_OUT_TRUNK_META, data);
+    const result = serializeForCreate(VOICE_OUT_TRUNK_RESOURCE, data);
     const attrs = result.data.attributes;
     expect(attrs.name).toBe('test out trunk');
     expect(attrs.username).toBeUndefined();

@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface Balance {
   id: string;
@@ -8,7 +8,7 @@ export interface Balance {
   credit: string;
 }
 
-export const BALANCE_META: ResourceMeta<Balance> = {
+export const BALANCE_RESOURCE: ResourceConfig<Balance> = {
   type: 'balances',
   path: 'balance',
   writableKeys: [],

@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { AddressVerificationStatus, CallbackMethod } from '../enums.js';
 import type { Address } from './address.js';
 import type { Did } from './did.js';
@@ -25,7 +25,7 @@ export interface AddressVerificationWrite {
   dids?: ResourceRef[];
 }
 
-export const ADDRESS_VERIFICATION_META: ResourceMeta<AddressVerification, AddressVerificationWrite> = {
+export const ADDRESS_VERIFICATION_RESOURCE: ResourceConfig<AddressVerification, AddressVerificationWrite> = {
   type: 'address_verifications',
   path: 'address_verifications',
   writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'address', 'dids'],

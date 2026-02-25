@@ -7,63 +7,67 @@ import { Repository } from './repositories/repository.js';
 import { SingletonRepository } from './repositories/singleton-repository.js';
 import { CreateOnlyRepository } from './repositories/create-only-repository.js';
 
-import { COUNTRY_META, type Country } from './resources/country.js';
-import { REGION_META, type Region } from './resources/region.js';
-import { CITY_META, type City } from './resources/city.js';
-import { AREA_META, type Area } from './resources/area.js';
-import { POP_META, type Pop } from './resources/pop.js';
-import { BALANCE_META, type Balance } from './resources/balance.js';
-import { DID_GROUP_TYPE_META, type DidGroupType } from './resources/did-group-type.js';
-import { DID_GROUP_META, type DidGroup } from './resources/did-group.js';
-import { AVAILABLE_DID_META, type AvailableDid } from './resources/available-did.js';
-import { NANPA_PREFIX_META, type NanpaPrefix } from './resources/nanpa-prefix.js';
-import { PROOF_TYPE_META, type ProofType } from './resources/proof-type.js';
-import { PUBLIC_KEY_META, type PublicKey } from './resources/public-key.js';
-import { REQUIREMENT_META, type Requirement } from './resources/requirement.js';
+import { COUNTRY_RESOURCE, type Country } from './resources/country.js';
+import { REGION_RESOURCE, type Region } from './resources/region.js';
+import { CITY_RESOURCE, type City } from './resources/city.js';
+import { AREA_RESOURCE, type Area } from './resources/area.js';
+import { POP_RESOURCE, type Pop } from './resources/pop.js';
+import { BALANCE_RESOURCE, type Balance } from './resources/balance.js';
+import { DID_GROUP_TYPE_RESOURCE, type DidGroupType } from './resources/did-group-type.js';
+import { DID_GROUP_RESOURCE, type DidGroup } from './resources/did-group.js';
+import { AVAILABLE_DID_RESOURCE, type AvailableDid } from './resources/available-did.js';
+import { NANPA_PREFIX_RESOURCE, type NanpaPrefix } from './resources/nanpa-prefix.js';
+import { PROOF_TYPE_RESOURCE, type ProofType } from './resources/proof-type.js';
+import { PUBLIC_KEY_RESOURCE, type PublicKey } from './resources/public-key.js';
+import { REQUIREMENT_RESOURCE, type Requirement } from './resources/requirement.js';
 import {
-  SUPPORTING_DOCUMENT_TEMPLATE_META,
+  SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE,
   type SupportingDocumentTemplate,
 } from './resources/supporting-document-template.js';
-import { STOCK_KEEPING_UNIT_META, type StockKeepingUnit } from './resources/stock-keeping-unit.js';
-import { QTY_BASED_PRICING_META, type QtyBasedPricing } from './resources/qty-based-pricing.js';
-import { CAPACITY_POOL_META, type CapacityPool, type CapacityPoolWrite } from './resources/capacity-pool.js';
-import { VOICE_IN_TRUNK_META, type VoiceInTrunk, type VoiceInTrunkWrite } from './resources/voice-in-trunk.js';
+import { STOCK_KEEPING_UNIT_RESOURCE, type StockKeepingUnit } from './resources/stock-keeping-unit.js';
+import { QTY_BASED_PRICING_RESOURCE, type QtyBasedPricing } from './resources/qty-based-pricing.js';
+import { CAPACITY_POOL_RESOURCE, type CapacityPool, type CapacityPoolWrite } from './resources/capacity-pool.js';
+import { VOICE_IN_TRUNK_RESOURCE, type VoiceInTrunk, type VoiceInTrunkWrite } from './resources/voice-in-trunk.js';
 import {
-  VOICE_IN_TRUNK_GROUP_META,
+  VOICE_IN_TRUNK_GROUP_RESOURCE,
   type VoiceInTrunkGroup,
   type VoiceInTrunkGroupWrite,
 } from './resources/voice-in-trunk-group.js';
-import { VOICE_OUT_TRUNK_META, type VoiceOutTrunk, type VoiceOutTrunkWrite } from './resources/voice-out-trunk.js';
+import { VOICE_OUT_TRUNK_RESOURCE, type VoiceOutTrunk, type VoiceOutTrunkWrite } from './resources/voice-out-trunk.js';
 import {
-  SHARED_CAPACITY_GROUP_META,
+  SHARED_CAPACITY_GROUP_RESOURCE,
   type SharedCapacityGroup,
   type SharedCapacityGroupWrite,
 } from './resources/shared-capacity-group.js';
-import { DID_META, type Did, type DidWrite } from './resources/did.js';
-import { ORDER_META, type Order, type OrderWrite } from './resources/order.js';
-import { EXPORT_META, type Export, type ExportWrite } from './resources/export.js';
-import { DID_RESERVATION_META, type DidReservation, type DidReservationWrite } from './resources/did-reservation.js';
-import { ADDRESS_META, type Address, type AddressWrite } from './resources/address.js';
-import { IDENTITY_META, type Identity, type IdentityWrite } from './resources/identity.js';
-import { ENCRYPTED_FILE_META, type EncryptedFile } from './resources/encrypted-file.js';
+import { DID_RESOURCE, type Did, type DidWrite } from './resources/did.js';
+import { ORDER_RESOURCE, type Order, type OrderWrite } from './resources/order.js';
+import { EXPORT_RESOURCE, type Export, type ExportWrite } from './resources/export.js';
 import {
-  ADDRESS_VERIFICATION_META,
+  DID_RESERVATION_RESOURCE,
+  type DidReservation,
+  type DidReservationWrite,
+} from './resources/did-reservation.js';
+import { ADDRESS_RESOURCE, type Address, type AddressWrite } from './resources/address.js';
+import { IDENTITY_RESOURCE, type Identity, type IdentityWrite } from './resources/identity.js';
+import { ENCRYPTED_FILE_RESOURCE, type EncryptedFile } from './resources/encrypted-file.js';
+import {
+  ADDRESS_VERIFICATION_RESOURCE,
   type AddressVerification,
   type AddressVerificationWrite,
 } from './resources/address-verification.js';
 import {
-  PERMANENT_SUPPORTING_DOCUMENT_META,
+  PERMANENT_SUPPORTING_DOCUMENT_RESOURCE,
   type PermanentSupportingDocument,
   type PermanentSupportingDocumentWrite,
 } from './resources/permanent-supporting-document.js';
-import { PROOF_META, type Proof, type ProofWrite } from './resources/proof.js';
+import { PROOF_RESOURCE, type Proof, type ProofWrite } from './resources/proof.js';
 import {
-  REQUIREMENT_VALIDATION_META,
+  REQUIREMENT_VALIDATION_RESOURCE,
   type RequirementValidation,
   type RequirementValidationWrite,
 } from './resources/requirement-validation.js';
 import {
-  VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_META,
+  VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE,
   type VoiceOutTrunkRegenerateCredential,
   type VoiceOutTrunkRegenerateCredentialWrite,
 } from './resources/voice-out-trunk-regenerate-credential.js';
@@ -223,117 +227,117 @@ export class DidwwClient implements HttpClient {
 
   // Read-only repositories
   countries() {
-    return new ReadOnlyRepository<Country>(this, COUNTRY_META);
+    return new ReadOnlyRepository<Country>(this, COUNTRY_RESOURCE);
   }
   regions() {
-    return new ReadOnlyRepository<Region>(this, REGION_META);
+    return new ReadOnlyRepository<Region>(this, REGION_RESOURCE);
   }
   cities() {
-    return new ReadOnlyRepository<City>(this, CITY_META);
+    return new ReadOnlyRepository<City>(this, CITY_RESOURCE);
   }
   areas() {
-    return new ReadOnlyRepository<Area>(this, AREA_META);
+    return new ReadOnlyRepository<Area>(this, AREA_RESOURCE);
   }
   pops() {
-    return new ReadOnlyRepository<Pop>(this, POP_META);
+    return new ReadOnlyRepository<Pop>(this, POP_RESOURCE);
   }
   didGroupTypes() {
-    return new ReadOnlyRepository<DidGroupType>(this, DID_GROUP_TYPE_META);
+    return new ReadOnlyRepository<DidGroupType>(this, DID_GROUP_TYPE_RESOURCE);
   }
   didGroups() {
-    return new ReadOnlyRepository<DidGroup>(this, DID_GROUP_META);
+    return new ReadOnlyRepository<DidGroup>(this, DID_GROUP_RESOURCE);
   }
   availableDids() {
-    return new ReadOnlyRepository<AvailableDid>(this, AVAILABLE_DID_META);
+    return new ReadOnlyRepository<AvailableDid>(this, AVAILABLE_DID_RESOURCE);
   }
   nanpaPrefixes() {
-    return new ReadOnlyRepository<NanpaPrefix>(this, NANPA_PREFIX_META);
+    return new ReadOnlyRepository<NanpaPrefix>(this, NANPA_PREFIX_RESOURCE);
   }
   proofTypes() {
-    return new ReadOnlyRepository<ProofType>(this, PROOF_TYPE_META);
+    return new ReadOnlyRepository<ProofType>(this, PROOF_TYPE_RESOURCE);
   }
   publicKeys() {
-    return new ReadOnlyRepository<PublicKey>(this, PUBLIC_KEY_META);
+    return new ReadOnlyRepository<PublicKey>(this, PUBLIC_KEY_RESOURCE);
   }
   requirements() {
-    return new ReadOnlyRepository<Requirement>(this, REQUIREMENT_META);
+    return new ReadOnlyRepository<Requirement>(this, REQUIREMENT_RESOURCE);
   }
   supportingDocumentTemplates() {
-    return new ReadOnlyRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_META);
+    return new ReadOnlyRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
   }
   stockKeepingUnits() {
-    return new ReadOnlyRepository<StockKeepingUnit>(this, STOCK_KEEPING_UNIT_META);
+    return new ReadOnlyRepository<StockKeepingUnit>(this, STOCK_KEEPING_UNIT_RESOURCE);
   }
   qtyBasedPricings() {
-    return new ReadOnlyRepository<QtyBasedPricing>(this, QTY_BASED_PRICING_META);
+    return new ReadOnlyRepository<QtyBasedPricing>(this, QTY_BASED_PRICING_RESOURCE);
   }
   capacityPools() {
-    return new Repository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_META);
+    return new Repository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_RESOURCE);
   }
 
   // Singleton
   balance() {
-    return new SingletonRepository<Balance>(this, BALANCE_META);
+    return new SingletonRepository<Balance>(this, BALANCE_RESOURCE);
   }
 
   // Full CRUD repositories
   voiceInTrunks() {
-    return new Repository<VoiceInTrunk, VoiceInTrunkWrite>(this, VOICE_IN_TRUNK_META);
+    return new Repository<VoiceInTrunk, VoiceInTrunkWrite>(this, VOICE_IN_TRUNK_RESOURCE);
   }
   voiceInTrunkGroups() {
-    return new Repository<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>(this, VOICE_IN_TRUNK_GROUP_META);
+    return new Repository<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>(this, VOICE_IN_TRUNK_GROUP_RESOURCE);
   }
   voiceOutTrunks() {
-    return new Repository<VoiceOutTrunk, VoiceOutTrunkWrite>(this, VOICE_OUT_TRUNK_META);
+    return new Repository<VoiceOutTrunk, VoiceOutTrunkWrite>(this, VOICE_OUT_TRUNK_RESOURCE);
   }
   sharedCapacityGroups() {
-    return new Repository<SharedCapacityGroup, SharedCapacityGroupWrite>(this, SHARED_CAPACITY_GROUP_META);
+    return new Repository<SharedCapacityGroup, SharedCapacityGroupWrite>(this, SHARED_CAPACITY_GROUP_RESOURCE);
   }
   dids() {
-    return new Repository<Did, DidWrite>(this, DID_META);
+    return new Repository<Did, DidWrite>(this, DID_RESOURCE);
   }
   orders() {
-    return new Repository<Order, OrderWrite>(this, ORDER_META);
+    return new Repository<Order, OrderWrite>(this, ORDER_RESOURCE);
   }
   exports() {
-    return new Repository<Export, ExportWrite>(this, EXPORT_META);
+    return new Repository<Export, ExportWrite>(this, EXPORT_RESOURCE);
   }
   didReservations() {
-    return new Repository<DidReservation, DidReservationWrite>(this, DID_RESERVATION_META);
+    return new Repository<DidReservation, DidReservationWrite>(this, DID_RESERVATION_RESOURCE);
   }
   addresses() {
-    return new Repository<Address, AddressWrite>(this, ADDRESS_META);
+    return new Repository<Address, AddressWrite>(this, ADDRESS_RESOURCE);
   }
   identities() {
-    return new Repository<Identity, IdentityWrite>(this, IDENTITY_META);
+    return new Repository<Identity, IdentityWrite>(this, IDENTITY_RESOURCE);
   }
   encryptedFiles() {
-    return new Repository<EncryptedFile>(this, ENCRYPTED_FILE_META);
+    return new Repository<EncryptedFile>(this, ENCRYPTED_FILE_RESOURCE);
   }
 
   // Create-only repositories
   addressVerifications() {
-    return new CreateOnlyRepository<AddressVerification, AddressVerificationWrite>(this, ADDRESS_VERIFICATION_META);
+    return new CreateOnlyRepository<AddressVerification, AddressVerificationWrite>(this, ADDRESS_VERIFICATION_RESOURCE);
   }
   permanentSupportingDocuments() {
     return new CreateOnlyRepository<PermanentSupportingDocument, PermanentSupportingDocumentWrite>(
       this,
-      PERMANENT_SUPPORTING_DOCUMENT_META,
+      PERMANENT_SUPPORTING_DOCUMENT_RESOURCE,
     );
   }
   proofs() {
-    return new CreateOnlyRepository<Proof, ProofWrite>(this, PROOF_META);
+    return new CreateOnlyRepository<Proof, ProofWrite>(this, PROOF_RESOURCE);
   }
   requirementValidations() {
     return new CreateOnlyRepository<RequirementValidation, RequirementValidationWrite>(
       this,
-      REQUIREMENT_VALIDATION_META,
+      REQUIREMENT_VALIDATION_RESOURCE,
     );
   }
   voiceOutTrunkRegenerateCredentials() {
     return new CreateOnlyRepository<VoiceOutTrunkRegenerateCredential, VoiceOutTrunkRegenerateCredentialWrite>(
       this,
-      VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_META,
+      VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE,
     );
   }
 }

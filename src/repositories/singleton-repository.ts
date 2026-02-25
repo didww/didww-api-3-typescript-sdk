@@ -1,4 +1,4 @@
-import type { ResourceMeta } from '../resources/base.js';
+import type { ResourceConfig } from '../resources/base.js';
 import type { QueryParams } from '../query-params.js';
 import type { ApiResponse } from './types.js';
 import type { HttpClient } from './read-only-repository.js';
@@ -7,7 +7,7 @@ import { deserialize } from '../serializer.js';
 export class SingletonRepository<T> {
   constructor(
     private readonly client: HttpClient,
-    private readonly meta: ResourceMeta<T>,
+    private readonly meta: ResourceConfig<T>,
   ) {}
 
   async find(params?: QueryParams): Promise<ApiResponse<T>> {

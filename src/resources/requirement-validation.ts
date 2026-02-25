@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Requirement } from './requirement.js';
 import type { Identity } from './identity.js';
 import type { Address } from './address.js';
@@ -17,7 +17,7 @@ export interface RequirementValidationWrite {
   address?: ResourceRef;
 }
 
-export const REQUIREMENT_VALIDATION_META: ResourceMeta<RequirementValidation, RequirementValidationWrite> = {
+export const REQUIREMENT_VALIDATION_RESOURCE: ResourceConfig<RequirementValidation, RequirementValidationWrite> = {
   type: 'requirement_validations',
   path: 'requirement_validations',
   writableKeys: ['requirement', 'identity', 'address'],

@@ -5,7 +5,7 @@ export { DidwwApiError, DidwwClientError, type JsonApiError } from './errors.js'
 export { type QueryParams } from './query-params.js';
 
 // Base
-export { ref, isIncluded, type ResourceRef, type ResourceMeta } from './resources/base.js';
+export { ref, isIncluded, type ResourceRef, type ResourceConfig } from './resources/base.js';
 
 // Enums
 export * from './enums.js';

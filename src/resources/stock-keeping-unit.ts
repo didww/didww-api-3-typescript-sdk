@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface StockKeepingUnit {
   id: string;
@@ -8,7 +8,7 @@ export interface StockKeepingUnit {
   channelsIncludedCount: number;
 }
 
-export const STOCK_KEEPING_UNIT_META: ResourceMeta<StockKeepingUnit> = {
+export const STOCK_KEEPING_UNIT_RESOURCE: ResourceConfig<StockKeepingUnit> = {
   type: 'stock_keeping_units',
   path: 'stock_keeping_units',
   writableKeys: [],

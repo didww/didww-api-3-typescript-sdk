@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface DidGroupType {
   id: string;
@@ -6,7 +6,7 @@ export interface DidGroupType {
   name: string;
 }
 
-export const DID_GROUP_TYPE_META: ResourceMeta<DidGroupType> = {
+export const DID_GROUP_TYPE_RESOURCE: ResourceConfig<DidGroupType> = {
   type: 'did_group_types',
   path: 'did_group_types',
   writableKeys: [],

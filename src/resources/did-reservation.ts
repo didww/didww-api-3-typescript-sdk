@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { AvailableDid } from './available-did.js';
 
 export interface DidReservation {
@@ -15,7 +15,7 @@ export interface DidReservationWrite {
   availableDid?: ResourceRef;
 }
 
-export const DID_RESERVATION_META: ResourceMeta<DidReservation, DidReservationWrite> = {
+export const DID_RESERVATION_RESOURCE: ResourceConfig<DidReservation, DidReservationWrite> = {
   type: 'did_reservations',
   path: 'did_reservations',
   writableKeys: ['description', 'availableDid'],

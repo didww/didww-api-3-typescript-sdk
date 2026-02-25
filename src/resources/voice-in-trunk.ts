@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
 import type { Pop } from './pop.js';
@@ -36,7 +36,7 @@ export interface VoiceInTrunkWrite {
   voiceInTrunkGroup?: ResourceRef;
 }
 
-export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> = {
+export const VOICE_IN_TRUNK_RESOURCE: ResourceConfig<VoiceInTrunk, VoiceInTrunkWrite> = {
   type: 'voice_in_trunks',
   path: 'voice_in_trunks',
   writableKeys: [
@@ -54,7 +54,7 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
-    for (const key of VOICE_IN_TRUNK_META.writableKeys) {
+    for (const key of VOICE_IN_TRUNK_RESOURCE.writableKeys) {
       if (key in (data as Record<string, unknown>)) {
         result[key as string] = (data as Record<string, unknown>)[key];
       }

@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Country } from './country.js';
 import type { SharedCapacityGroup } from './shared-capacity-group.js';
 import type { QtyBasedPricing } from './qty-based-pricing.js';
@@ -24,7 +24,7 @@ export interface CapacityPoolWrite {
   totalChannelsCount?: number;
 }
 
-export const CAPACITY_POOL_META: ResourceMeta<CapacityPool, CapacityPoolWrite> = {
+export const CAPACITY_POOL_RESOURCE: ResourceConfig<CapacityPool, CapacityPoolWrite> = {
   type: 'capacity_pools',
   path: 'capacity_pools',
   writableKeys: ['totalChannelsCount'],

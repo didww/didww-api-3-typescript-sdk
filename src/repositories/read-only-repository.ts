@@ -1,4 +1,4 @@
-import type { ResourceMeta } from '../resources/base.js';
+import type { ResourceConfig } from '../resources/base.js';
 import type { QueryParams } from '../query-params.js';
 import type { ApiResponse, ListResponse } from './types.js';
 import { deserialize } from '../serializer.js';
@@ -13,7 +13,7 @@ export interface HttpClient {
 export class ReadOnlyRepository<T, TWrite = Record<string, unknown>> {
   constructor(
     protected readonly client: HttpClient,
-    protected readonly meta: ResourceMeta<T, TWrite>,
+    protected readonly meta: ResourceConfig<T, TWrite>,
   ) {}
 
   async list(params?: QueryParams): Promise<ListResponse<T>> {
