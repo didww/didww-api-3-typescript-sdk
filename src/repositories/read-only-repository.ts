@@ -28,21 +28,12 @@ export class ReadOnlyRepository<T, TWrite = Record<string, unknown>> {
 
   protected deserializeSingle(body: unknown): ApiResponse<T> {
     const result = deserialize<T>(body);
-    const data = this.applyCustomDeserialize(result.data as T);
-    return { data: data as T, meta: result.meta, links: result.links };
+    return { data: result.data as T, meta: result.meta, links: result.links };
   }
 
   protected deserializeList(body: unknown): ListResponse<T> {
     const result = deserialize<T>(body);
-    const items = Array.isArray(result.data) ? result.data : [result.data];
-    const data = items.map((item: T) => this.applyCustomDeserialize(item));
+    const data = Array.isArray(result.data) ? result.data : [result.data];
     return { data, meta: result.meta, links: result.links };
-  }
-
-  private applyCustomDeserialize(item: T): T {
-    if (this.meta.deserializeCustom && item) {
-      return { ...item, ...this.meta.deserializeCustom(item) };
-    }
-    return item;
   }
 }

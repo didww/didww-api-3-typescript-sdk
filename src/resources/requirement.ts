@@ -1,5 +1,9 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { IdentityType, AreaLevel } from '../enums.js';
+import type { Country } from './country.js';
+import type { DidGroupType } from './did-group-type.js';
+import type { SupportingDocumentTemplate } from './supporting-document-template.js';
+import type { ProofType } from './proof-type.js';
 
 export interface Requirement {
   id: string;
@@ -15,15 +19,15 @@ export interface Requirement {
   businessMandatoryFields: string[];
   serviceDescriptionRequired: boolean;
   restrictionMessage: string | null;
-  country?: ResourceRef;
-  didGroupType?: ResourceRef;
-  personalPermanentDocument?: ResourceRef;
-  businessPermanentDocument?: ResourceRef;
-  personalOnetimeDocument?: ResourceRef;
-  businessOnetimeDocument?: ResourceRef;
-  personalProofTypes?: ResourceRef[];
-  businessProofTypes?: ResourceRef[];
-  addressProofTypes?: ResourceRef[];
+  country?: Country | ResourceRef;
+  didGroupType?: DidGroupType | ResourceRef;
+  personalPermanentDocument?: SupportingDocumentTemplate | ResourceRef;
+  businessPermanentDocument?: SupportingDocumentTemplate | ResourceRef;
+  personalOnetimeDocument?: SupportingDocumentTemplate | ResourceRef;
+  businessOnetimeDocument?: SupportingDocumentTemplate | ResourceRef;
+  personalProofTypes?: (ProofType | ResourceRef)[];
+  businessProofTypes?: (ProofType | ResourceRef)[];
+  addressProofTypes?: (ProofType | ResourceRef)[];
 }
 
 export const REQUIREMENT_META: ResourceMeta<Requirement> = {

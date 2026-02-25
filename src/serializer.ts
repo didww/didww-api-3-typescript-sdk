@@ -1,5 +1,6 @@
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceMeta, ResourceRef } from './resources/base.js';
+import { getResourceMeta } from './registry.js';
 
 const KITSU_OPTS = {
   camelCaseTypes: (s: string) => s,
@@ -49,7 +50,82 @@ export interface SerializedResource {
 
 export function deserialize<T>(body: unknown): DeserializedResponse<T> | DeserializedListResponse<T> {
   const result = deserialise(body);
-  return snakeToCamelKeys(result) as DeserializedResponse<T> | DeserializedListResponse<T>;
+  const camelCased = snakeToCamelKeys(result) as Record<string, unknown>;
+  if (Array.isArray(camelCased.data)) {
+    camelCased.data = (camelCased.data as unknown[]).map(unwrapResourceProps).map(applyRegistryDeserialize);
+  } else if (camelCased.data && typeof camelCased.data === 'object') {
+    camelCased.data = applyRegistryDeserialize(unwrapResourceProps(camelCased.data));
+  }
+  return camelCased as unknown as DeserializedResponse<T> | DeserializedListResponse<T>;
+}
+
+function isResourceLike(val: unknown): boolean {
+  return typeof val === 'object' && val !== null && 'id' in val && 'type' in val;
+}
+
+function isRelationshipWrapper(obj: Record<string, unknown>): boolean {
+  const keys = Object.keys(obj);
+  if (!keys.every((k) => k === 'data' || k === 'links')) return false;
+  if ('links' in obj) {
+    const links = obj.links;
+    if (typeof links === 'object' && links !== null && ('self' in links || 'related' in links)) return true;
+  }
+  if (keys.length === 1 && 'data' in obj) {
+    const data = obj.data;
+    if (data === null) return true;
+    if (Array.isArray(data)) return data.length === 0 || isResourceLike(data[0]);
+    return isResourceLike(data);
+  }
+  return false;
+}
+
+function unwrapResourceProps(resource: unknown): unknown {
+  if (typeof resource !== 'object' || resource === null) return resource;
+  const record = resource as Record<string, unknown>;
+  return Object.fromEntries(
+    Object.entries(record)
+      .map(([k, v]) => {
+        if (v !== null && typeof v === 'object' && !Array.isArray(v)) {
+          const obj = v as Record<string, unknown>;
+          if (isRelationshipWrapper(obj)) {
+            if ('data' in obj && obj.data !== undefined) {
+              const inner = obj.data;
+              if (Array.isArray(inner)) return [k, inner.map(unwrapResourceProps)];
+              return [k, unwrapResourceProps(inner)];
+            }
+            return [k, undefined];
+          }
+        }
+        return [k, v];
+      })
+      .filter(([, v]) => v !== undefined),
+  );
+}
+
+function applyRegistryDeserialize(resource: unknown): unknown {
+  if (typeof resource !== 'object' || resource === null) return resource;
+  const record = resource as Record<string, unknown>;
+
+  // Recursively process nested resource-like objects (included relationships)
+  for (const [key, value] of Object.entries(record)) {
+    if (value !== null && typeof value === 'object' && !Array.isArray(value) && isResourceLike(value)) {
+      record[key] = applyRegistryDeserialize(value);
+    } else if (Array.isArray(value)) {
+      record[key] = value.map((item) =>
+        item !== null && typeof item === 'object' && isResourceLike(item) ? applyRegistryDeserialize(item) : item,
+      );
+    }
+  }
+
+  // Apply deserializeCustom for this resource if registry has one
+  if ('type' in record && typeof record.type === 'string') {
+    const meta = getResourceMeta(record.type);
+    if (meta?.deserializeCustom) {
+      return { ...record, ...meta.deserializeCustom(record) };
+    }
+  }
+
+  return record;
 }
 
 export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {

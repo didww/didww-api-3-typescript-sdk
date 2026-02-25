@@ -14,3 +14,8 @@ export interface ResourceMeta<T = Record<string, unknown>, TWrite = Record<strin
 export function ref(type: string, id: string): ResourceRef {
   return { id, type };
 }
+
+export function isIncluded<T extends ResourceRef>(value: T | ResourceRef | undefined | null): value is T {
+  if (!value || typeof value !== 'object') return false;
+  return Object.keys(value).length > 2;
+}

@@ -1,13 +1,15 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ProofType } from './proof-type.js';
+import type { EncryptedFile } from './encrypted-file.js';
 
 export interface Proof {
   id: string;
   type: 'proofs';
   createdAt: string;
   expiresAt: string | null;
-  proofType?: ResourceRef;
+  proofType?: ProofType | ResourceRef;
   entity?: ResourceRef;
-  files?: ResourceRef[];
+  files?: (EncryptedFile | ResourceRef)[];
 }
 
 export interface ProofWrite {

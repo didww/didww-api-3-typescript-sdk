@@ -1,5 +1,7 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { AddressVerificationStatus, CallbackMethod } from '../enums.js';
+import type { Address } from './address.js';
+import type { Did } from './did.js';
 
 export interface AddressVerification {
   id: string;
@@ -11,8 +13,8 @@ export interface AddressVerification {
   rejectReasons: string[];
   reference: string;
   createdAt: string;
-  address?: ResourceRef;
-  dids?: ResourceRef[];
+  address?: Address | ResourceRef;
+  dids?: (Did | ResourceRef)[];
 }
 
 export interface AddressVerificationWrite {

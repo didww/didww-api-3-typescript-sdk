@@ -1,6 +1,8 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
+import type { Pop } from './pop.js';
+import type { VoiceInTrunkGroup } from './voice-in-trunk-group.js';
 import { serializeTrunkConfiguration, deserializeTrunkConfiguration } from '../nested/trunk-configuration.js';
 
 export interface VoiceInTrunk {
@@ -16,8 +18,8 @@ export interface VoiceInTrunk {
   capacityLimit: string;
   configuration: TrunkConfiguration;
   createdAt: string;
-  pop?: ResourceRef;
-  voiceInTrunkGroup?: ResourceRef;
+  pop?: Pop | ResourceRef;
+  voiceInTrunkGroup?: VoiceInTrunkGroup | ResourceRef;
 }
 
 export interface VoiceInTrunkWrite {

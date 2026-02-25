@@ -1,11 +1,14 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Requirement } from './requirement.js';
+import type { Identity } from './identity.js';
+import type { Address } from './address.js';
 
 export interface RequirementValidation {
   id: string;
   type: 'requirement_validations';
-  requirement?: ResourceRef;
-  identity?: ResourceRef;
-  address?: ResourceRef;
+  requirement?: Requirement | ResourceRef;
+  identity?: Identity | ResourceRef;
+  address?: Address | ResourceRef;
 }
 
 export interface RequirementValidationWrite {

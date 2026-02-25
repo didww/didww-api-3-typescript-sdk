@@ -1,4 +1,5 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { VoiceInTrunk } from './voice-in-trunk.js';
 
 export interface VoiceInTrunkGroup {
   id: string;
@@ -6,7 +7,7 @@ export interface VoiceInTrunkGroup {
   name: string;
   capacityLimit: string;
   createdAt: string;
-  voiceInTrunks?: ResourceRef[];
+  voiceInTrunks?: (VoiceInTrunk | ResourceRef)[];
 }
 
 export interface VoiceInTrunkGroupWrite {

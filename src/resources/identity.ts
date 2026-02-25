@@ -1,5 +1,9 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { IdentityType } from '../enums.js';
+import type { Country } from './country.js';
+import type { Proof } from './proof.js';
+import type { Address } from './address.js';
+import type { PermanentSupportingDocument } from './permanent-supporting-document.js';
 
 export interface Identity {
   id: string;
@@ -19,10 +23,10 @@ export interface Identity {
   contactEmail: string;
   createdAt: string;
   verified: boolean;
-  country?: ResourceRef;
-  proofs?: ResourceRef[];
-  addresses?: ResourceRef[];
-  permanentDocuments?: ResourceRef[];
+  country?: Country | ResourceRef;
+  proofs?: (Proof | ResourceRef)[];
+  addresses?: (Address | ResourceRef)[];
+  permanentDocuments?: (PermanentSupportingDocument | ResourceRef)[];
 }
 
 export interface IdentityWrite {

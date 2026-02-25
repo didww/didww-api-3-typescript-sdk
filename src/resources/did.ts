@@ -1,4 +1,11 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Order } from './order.js';
+import type { DidGroup } from './did-group.js';
+import type { VoiceInTrunk } from './voice-in-trunk.js';
+import type { VoiceInTrunkGroup } from './voice-in-trunk-group.js';
+import type { CapacityPool } from './capacity-pool.js';
+import type { SharedCapacityGroup } from './shared-capacity-group.js';
+import type { AddressVerification } from './address-verification.js';
 
 export interface Did {
   id: string;
@@ -14,13 +21,13 @@ export interface Did {
   billingCyclesCount: number;
   createdAt: string;
   expiresAt: string | null;
-  order?: ResourceRef;
-  didGroup?: ResourceRef;
-  voiceInTrunk?: ResourceRef | null;
-  voiceInTrunkGroup?: ResourceRef | null;
-  capacityPool?: ResourceRef;
-  sharedCapacityGroup?: ResourceRef | null;
-  addressVerification?: ResourceRef;
+  order?: Order | ResourceRef;
+  didGroup?: DidGroup | ResourceRef;
+  voiceInTrunk?: VoiceInTrunk | ResourceRef | null;
+  voiceInTrunkGroup?: VoiceInTrunkGroup | ResourceRef | null;
+  capacityPool?: CapacityPool | ResourceRef;
+  sharedCapacityGroup?: SharedCapacityGroup | ResourceRef | null;
+  addressVerification?: AddressVerification | ResourceRef;
 }
 
 export interface DidWrite {

@@ -1,12 +1,15 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Identity } from './identity.js';
+import type { SupportingDocumentTemplate } from './supporting-document-template.js';
+import type { EncryptedFile } from './encrypted-file.js';
 
 export interface PermanentSupportingDocument {
   id: string;
   type: 'permanent_supporting_documents';
   createdAt: string;
-  identity?: ResourceRef;
-  template?: ResourceRef;
-  files?: ResourceRef[];
+  identity?: Identity | ResourceRef;
+  template?: SupportingDocumentTemplate | ResourceRef;
+  files?: (EncryptedFile | ResourceRef)[];
 }
 
 export interface PermanentSupportingDocumentWrite {

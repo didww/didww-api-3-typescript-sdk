@@ -19,10 +19,9 @@ async function main() {
 
   // Find a group with SKUs
   let selectedGroup = null;
-  let sku: any = null;
+  let sku: Record<string, unknown> | null = null;
   for (const group of groups.data) {
-    const skuRel = (group as any).stockKeepingUnits;
-    const skus = skuRel?.data || (Array.isArray(skuRel) ? skuRel : null);
+    const skus = group.stockKeepingUnits;
     if (Array.isArray(skus) && skus.length > 0) {
       selectedGroup = group;
       sku = skus[0];

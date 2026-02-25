@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { deserialize, serializeForCreate, serializeForUpdate } from '../src/serializer.js';
+import { isIncluded } from '../src/resources/base.js';
+import type { Region } from '../src/resources/region.js';
+import type { Country } from '../src/resources/country.js';
 
 describe('Serializer', () => {
   describe('deserialize', () => {
@@ -54,10 +57,47 @@ describe('Serializer', () => {
         },
         included: [{ type: 'countries', id: '2', attributes: { name: 'US', iso: 'US' } }],
       };
+      const result = deserialize<Region>(body);
+      const data = result.data as Region;
+      expect(data.country).toBeDefined();
+      const country = data.country as Country;
+      expect(country.name).toBe('US');
+    });
+
+    it('applies deserializeCustom to included resources via registry', () => {
+      const body = {
+        data: {
+          id: '1',
+          type: 'dids',
+          attributes: { number: '+1234567890' },
+          relationships: {
+            voice_in_trunk: { data: { type: 'voice_in_trunks', id: '2' } },
+          },
+        },
+        included: [
+          {
+            type: 'voice_in_trunks',
+            id: '2',
+            attributes: {
+              name: 'My Trunk',
+              configuration: {
+                type: 'sip_configurations',
+                attributes: { username: 'user1', host: '10.0.0.1' },
+              },
+            },
+          },
+        ],
+      };
       const result = deserialize(body);
       const data = result.data as Record<string, unknown>;
-      expect(data.country).toBeDefined();
-      expect(data.country.data.name).toBe('US');
+      const trunk = data.voiceInTrunk as Record<string, unknown>;
+      expect(trunk).toBeDefined();
+      expect(trunk.name).toBe('My Trunk');
+      // deserializeCustom should have unwrapped the nested configuration
+      const config = trunk.configuration as Record<string, unknown>;
+      expect(config.type).toBe('sip_configurations');
+      expect(config.username).toBe('user1');
+      expect(config.host).toBe('10.0.0.1');
     });
   });
 
@@ -115,5 +155,20 @@ describe('Serializer', () => {
       expect(jsonData.type).toBe('voice_in_trunk_groups');
       expect(jsonData.attributes.name).toBe('Updated');
     });
+  });
+});
+
+describe('isIncluded', () => {
+  it('returns false for undefined/null', () => {
+    expect(isIncluded(undefined)).toBe(false);
+    expect(isIncluded(null)).toBe(false);
+  });
+
+  it('returns false for a bare ResourceRef (only id + type)', () => {
+    expect(isIncluded({ id: '1', type: 'countries' })).toBe(false);
+  });
+
+  it('returns true for a fully included resource', () => {
+    expect(isIncluded<Country>({ id: '1', type: 'countries', name: 'US', prefix: '1', iso: 'US' })).toBe(true);
   });
 });
