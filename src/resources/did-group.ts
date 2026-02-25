@@ -6,14 +6,14 @@ export interface DidGroup {
   type: 'did_groups';
   prefix: string;
   features: Feature[];
-  is_metered: boolean;
-  area_name: string;
-  allow_additional_channels: boolean;
+  isMetered: boolean;
+  areaName: string;
+  allowAdditionalChannels: boolean;
   country?: ResourceRef;
   region?: ResourceRef;
   city?: ResourceRef;
-  did_group_type?: ResourceRef;
-  stock_keeping_units?: ResourceRef[];
+  didGroupType?: ResourceRef;
+  stockKeepingUnits?: ResourceRef[];
   requirement?: ResourceRef;
 }
 

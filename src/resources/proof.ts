@@ -3,15 +3,15 @@ import type { ResourceMeta, ResourceRef } from './base.js';
 export interface Proof {
   id: string;
   type: 'proofs';
-  created_at: string;
-  expires_at: string | null;
-  proof_type?: ResourceRef;
+  createdAt: string;
+  expiresAt: string | null;
+  proofType?: ResourceRef;
   entity?: ResourceRef;
   files?: ResourceRef[];
 }
 
 export interface ProofWrite {
-  proof_type?: ResourceRef;
+  proofType?: ResourceRef;
   entity?: ResourceRef;
   files?: ResourceRef[];
 }
@@ -19,5 +19,5 @@ export interface ProofWrite {
 export const PROOF_META: ResourceMeta<Proof, ProofWrite> = {
   type: 'proofs',
   path: 'proofs',
-  writableKeys: ['proof_type', 'entity', 'files'],
+  writableKeys: ['proofType', 'entity', 'files'],
 };

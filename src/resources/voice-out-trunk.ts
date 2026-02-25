@@ -5,43 +5,43 @@ export interface VoiceOutTrunk {
   id: string;
   type: 'voice_out_trunks';
   name: string;
-  allowed_sip_ips: string[];
-  on_cli_mismatch_action: OnCliMismatchAction;
-  allowed_rtp_ips: string[];
-  allow_any_did_as_cli: boolean;
+  allowedSipIps: string[];
+  onCliMismatchAction: OnCliMismatchAction;
+  allowedRtpIps: string[];
+  allowAnyDidAsCli: boolean;
   status: VoiceOutTrunkStatus;
-  capacity_limit: number;
-  threshold_amount: string;
-  media_encryption_mode: MediaEncryptionMode;
-  default_dst_action: DefaultDstAction;
-  dst_prefixes: string[];
-  force_symmetric_rtp: boolean;
-  rtp_ping: boolean;
-  callback_url: string | null;
+  capacityLimit: number;
+  thresholdAmount: string;
+  mediaEncryptionMode: MediaEncryptionMode;
+  defaultDstAction: DefaultDstAction;
+  dstPrefixes: string[];
+  forceSymmetricRtp: boolean;
+  rtpPing: boolean;
+  callbackUrl: string | null;
   username: string;
   password: string;
-  threshold_reached: boolean;
-  created_at: string;
-  default_did?: ResourceRef;
+  thresholdReached: boolean;
+  createdAt: string;
+  defaultDid?: ResourceRef;
   dids?: ResourceRef[];
 }
 
 export interface VoiceOutTrunkWrite {
   name?: string;
-  allowed_sip_ips?: string[];
-  on_cli_mismatch_action?: OnCliMismatchAction;
-  allowed_rtp_ips?: string[];
-  allow_any_did_as_cli?: boolean;
+  allowedSipIps?: string[];
+  onCliMismatchAction?: OnCliMismatchAction;
+  allowedRtpIps?: string[];
+  allowAnyDidAsCli?: boolean;
   status?: VoiceOutTrunkStatus;
-  capacity_limit?: number;
-  threshold_amount?: string;
-  media_encryption_mode?: MediaEncryptionMode;
-  default_dst_action?: DefaultDstAction;
-  dst_prefixes?: string[];
-  force_symmetric_rtp?: boolean;
-  rtp_ping?: boolean;
-  callback_url?: string | null;
-  default_did?: ResourceRef | null;
+  capacityLimit?: number;
+  thresholdAmount?: string;
+  mediaEncryptionMode?: MediaEncryptionMode;
+  defaultDstAction?: DefaultDstAction;
+  dstPrefixes?: string[];
+  forceSymmetricRtp?: boolean;
+  rtpPing?: boolean;
+  callbackUrl?: string | null;
+  defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
 }
 
@@ -50,20 +50,20 @@ export const VOICE_OUT_TRUNK_META: ResourceMeta<VoiceOutTrunk, VoiceOutTrunkWrit
   path: 'voice_out_trunks',
   writableKeys: [
     'name',
-    'allowed_sip_ips',
-    'on_cli_mismatch_action',
-    'allowed_rtp_ips',
-    'allow_any_did_as_cli',
+    'allowedSipIps',
+    'onCliMismatchAction',
+    'allowedRtpIps',
+    'allowAnyDidAsCli',
     'status',
-    'capacity_limit',
-    'threshold_amount',
-    'media_encryption_mode',
-    'default_dst_action',
-    'dst_prefixes',
-    'force_symmetric_rtp',
-    'rtp_ping',
-    'callback_url',
-    'default_did',
+    'capacityLimit',
+    'thresholdAmount',
+    'mediaEncryptionMode',
+    'defaultDstAction',
+    'dstPrefixes',
+    'forceSymmetricRtp',
+    'rtpPing',
+    'callbackUrl',
+    'defaultDid',
     'dids',
   ],
 };

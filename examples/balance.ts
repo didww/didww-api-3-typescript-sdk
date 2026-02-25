@@ -9,7 +9,7 @@ async function main() {
   const result = await client.balance().find();
   console.log('Balance:', result.data.balance);
   console.log('Credit:', result.data.credit);
-  console.log('Total:', result.data.total_balance);
+  console.log('Total:', result.data.totalBalance);
 }
 
 main().catch(console.error);

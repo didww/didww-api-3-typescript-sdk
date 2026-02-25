@@ -18,14 +18,14 @@ describe('Exports', () => {
     const result = await client.exports().find('da15f006-5da4-45ca-b0df-735baeadf423');
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
     expect(result.data.status).toBe('Completed');
-    expect(result.data.export_type).toBe('cdr_in');
+    expect(result.data.exportType).toBe('cdr_in');
   });
 
   it('creates an export', async () => {
     loadCassette('exports/create.yaml');
     const client = createTestClient();
     const result = await client.exports().create({
-      export_type: 'cdr_in',
+      exportType: 'cdr_in',
       filters: { did_number: '1234556789', year: '2019', month: '01' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');

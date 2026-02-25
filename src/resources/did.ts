@@ -5,53 +5,53 @@ export interface Did {
   type: 'dids';
   number: string;
   blocked: boolean;
-  awaiting_registration: boolean;
+  awaitingRegistration: boolean;
   terminated: boolean;
   description: string;
-  capacity_limit: string;
-  channels_included_count: number;
-  dedicated_channels_count: number;
-  billing_cycles_count: number;
-  created_at: string;
-  expires_at: string | null;
+  capacityLimit: string;
+  channelsIncludedCount: number;
+  dedicatedChannelsCount: number;
+  billingCyclesCount: number;
+  createdAt: string;
+  expiresAt: string | null;
   order?: ResourceRef;
-  did_group?: ResourceRef;
-  voice_in_trunk?: ResourceRef | null;
-  voice_in_trunk_group?: ResourceRef | null;
-  capacity_pool?: ResourceRef;
-  shared_capacity_group?: ResourceRef | null;
-  address_verification?: ResourceRef;
+  didGroup?: ResourceRef;
+  voiceInTrunk?: ResourceRef | null;
+  voiceInTrunkGroup?: ResourceRef | null;
+  capacityPool?: ResourceRef;
+  sharedCapacityGroup?: ResourceRef | null;
+  addressVerification?: ResourceRef;
 }
 
 export interface DidWrite {
-  billing_cycles_count?: number;
-  capacity_limit?: string;
+  billingCyclesCount?: number;
+  capacityLimit?: string;
   description?: string;
   terminated?: boolean;
-  dedicated_channels_count?: number;
-  voice_in_trunk?: ResourceRef | null;
-  voice_in_trunk_group?: ResourceRef | null;
-  capacity_pool?: ResourceRef | null;
-  shared_capacity_group?: ResourceRef | null;
+  dedicatedChannelsCount?: number;
+  voiceInTrunk?: ResourceRef | null;
+  voiceInTrunkGroup?: ResourceRef | null;
+  capacityPool?: ResourceRef | null;
+  sharedCapacityGroup?: ResourceRef | null;
 }
 
 export const DID_META: ResourceMeta<Did, DidWrite> = {
   type: 'dids',
   path: 'dids',
   writableKeys: [
-    'billing_cycles_count',
-    'capacity_limit',
+    'billingCyclesCount',
+    'capacityLimit',
     'description',
     'terminated',
-    'dedicated_channels_count',
-    'voice_in_trunk',
-    'voice_in_trunk_group',
-    'capacity_pool',
-    'shared_capacity_group',
+    'dedicatedChannelsCount',
+    'voiceInTrunk',
+    'voiceInTrunkGroup',
+    'capacityPool',
+    'sharedCapacityGroup',
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
-    const RELATIONSHIP_KEYS = ['voice_in_trunk', 'voice_in_trunk_group', 'capacity_pool', 'shared_capacity_group'];
+    const RELATIONSHIP_KEYS = ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'];
     for (const key of DID_META.writableKeys) {
       if (key in (data as Record<string, unknown>)) {
         const value = (data as Record<string, unknown>)[key];
@@ -63,15 +63,15 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
         }
       }
     }
-    // Exclusive relationships: setting voice_in_trunk nullifies voice_in_trunk_group and vice versa
-    if ('voice_in_trunk' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voice_in_trunk !== undefined) {
-      if ((data as Record<string, unknown>).voice_in_trunk !== null) {
-        result.voice_in_trunk_group = { data: null };
+    // Exclusive relationships: setting voiceInTrunk nullifies voiceInTrunkGroup and vice versa
+    if ('voiceInTrunk' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voiceInTrunk !== undefined) {
+      if ((data as Record<string, unknown>).voiceInTrunk !== null) {
+        result.voiceInTrunkGroup = { data: null };
       }
     }
-    if ('voice_in_trunk_group' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voice_in_trunk_group !== undefined) {
-      if ((data as Record<string, unknown>).voice_in_trunk_group !== null) {
-        result.voice_in_trunk = { data: null };
+    if ('voiceInTrunkGroup' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voiceInTrunkGroup !== undefined) {
+      if ((data as Record<string, unknown>).voiceInTrunkGroup !== null) {
+        result.voiceInTrunk = { data: null };
       }
     }
     return result;

@@ -19,7 +19,7 @@ async function main() {
   // Purchase capacity
   const order = await client.orders().create({
     items: [
-      capacityOrderItem({ capacity_pool_id: pool.id, qty: 1 }),
+      capacityOrderItem({ capacityPoolId: pool.id, qty: 1 }),
     ],
   });
   console.log(`Order ${order.data.id} status=${order.data.status} items=${order.data.items.length}`);

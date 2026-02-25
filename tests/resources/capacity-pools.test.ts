@@ -26,11 +26,11 @@ describe('CapacityPools', () => {
     const client = createTestClient();
     const result = await client.capacityPools().update({
       id: 'f288d07c-e2fc-4ae6-9837-b18fb469c324',
-      total_channels_count: 25,
+      totalChannelsCount: 25,
     });
     expect(result.data.id).toBe('f288d07c-e2fc-4ae6-9837-b18fb469c324');
     expect(result.data.name).toBe('Standard');
-    expect(result.data.total_channels_count).toBe(25);
-    expect(result.data.assigned_channels_count).toBe(24);
+    expect(result.data.totalChannelsCount).toBe(25);
+    expect(result.data.assignedChannelsCount).toBe(24);
   });
 });

@@ -9,29 +9,29 @@ export interface VoiceInTrunk {
   name: string;
   priority: number;
   weight: number;
-  cli_format: CliFormat;
-  cli_prefix: string;
+  cliFormat: CliFormat;
+  cliPrefix: string;
   description: string;
-  ringing_timeout: number;
-  capacity_limit: string;
+  ringingTimeout: number;
+  capacityLimit: string;
   configuration: TrunkConfiguration;
-  created_at: string;
+  createdAt: string;
   pop?: ResourceRef;
-  voice_in_trunk_group?: ResourceRef;
+  voiceInTrunkGroup?: ResourceRef;
 }
 
 export interface VoiceInTrunkWrite {
   name?: string;
   priority?: number;
   weight?: number;
-  cli_format?: CliFormat;
-  cli_prefix?: string;
+  cliFormat?: CliFormat;
+  cliPrefix?: string;
   description?: string;
-  ringing_timeout?: number;
-  capacity_limit?: string;
+  ringingTimeout?: number;
+  capacityLimit?: string;
   configuration?: TrunkConfiguration;
   pop?: ResourceRef;
-  voice_in_trunk_group?: ResourceRef;
+  voiceInTrunkGroup?: ResourceRef;
 }
 
 export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> = {
@@ -41,14 +41,14 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
     'name',
     'priority',
     'weight',
-    'cli_format',
-    'cli_prefix',
+    'cliFormat',
+    'cliPrefix',
     'description',
-    'ringing_timeout',
-    'capacity_limit',
+    'ringingTimeout',
+    'capacityLimit',
     'configuration',
     'pop',
-    'voice_in_trunk_group',
+    'voiceInTrunkGroup',
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};

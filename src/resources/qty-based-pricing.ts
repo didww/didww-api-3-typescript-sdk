@@ -4,8 +4,8 @@ export interface QtyBasedPricing {
   id: string;
   type: 'qty_based_pricings';
   qty: number;
-  setup_price: string;
-  monthly_price: string;
+  setupPrice: string;
+  monthlyPrice: string;
 }
 
 export const QTY_BASED_PRICING_META: ResourceMeta<QtyBasedPricing> = {

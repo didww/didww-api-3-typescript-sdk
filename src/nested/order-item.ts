@@ -1,22 +1,22 @@
 export interface DidOrderItem {
   type: 'did_order_items';
-  sku_id: string;
+  skuId: string;
   qty?: number;
-  billing_cycles_count?: number;
-  nanpa_prefix_id?: string;
-  available_did_id?: string;
-  did_reservation_id?: string;
+  billingCyclesCount?: number;
+  nanpaPrefixId?: string;
+  availableDidId?: string;
+  didReservationId?: string;
   nrc?: string;
   mrc?: string;
-  prorated_mrc?: string;
-  billed_from?: string;
-  billed_to?: string;
-  did_group_id?: string;
+  proratedMrc?: string;
+  billedFrom?: string;
+  billedTo?: string;
+  didGroupId?: string;
 }
 
 export interface CapacityOrderItem {
   type: 'capacity_order_items';
-  capacity_pool_id: string;
+  capacityPoolId: string;
   qty: number;
   nrc?: string;
   mrc?: string;
@@ -27,9 +27,9 @@ export interface GenericOrderItem {
   qty?: number;
   nrc?: string;
   mrc?: string;
-  prorated_mrc?: string;
-  billed_from?: string;
-  billed_to?: string;
+  proratedMrc?: string;
+  billedFrom?: string;
+  billedTo?: string;
 }
 
 export type OrderItem = DidOrderItem | CapacityOrderItem | GenericOrderItem;
@@ -38,11 +38,11 @@ export function didOrderItem(attrs: Omit<DidOrderItem, 'type'>): DidOrderItem {
   return { type: 'did_order_items', ...attrs };
 }
 
-export function availableDidOrderItem(attrs: { sku_id: string; available_did_id: string }): DidOrderItem {
+export function availableDidOrderItem(attrs: { skuId: string; availableDidId: string }): DidOrderItem {
   return { type: 'did_order_items', ...attrs };
 }
 
-export function reservationDidOrderItem(attrs: { sku_id: string; did_reservation_id: string }): DidOrderItem {
+export function reservationDidOrderItem(attrs: { skuId: string; didReservationId: string }): DidOrderItem {
   return { type: 'did_order_items', ...attrs };
 }
 

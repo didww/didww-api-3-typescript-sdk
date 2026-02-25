@@ -21,13 +21,13 @@ async function main() {
   let selectedGroup = null;
   let sku: any = null;
   for (const group of groups.data) {
-    const skuRel = (group as any).stock_keeping_units;
+    const skuRel = (group as any).stockKeepingUnits;
     const skus = skuRel?.data || (Array.isArray(skuRel) ? skuRel : null);
     if (Array.isArray(skus) && skus.length > 0) {
       selectedGroup = group;
       sku = skus[0];
-      console.log(`DID Group: ${group.prefix} - ${group.area_name}`);
-      console.log(`  SKU: ${sku.id} (${sku.channels_included_count} channels, $${sku.monthly_price}/mo)`);
+      console.log(`DID Group: ${group.prefix} - ${group.areaName}`);
+      console.log(`  SKU: ${sku.id} (${sku.channelsIncludedCount} channels, $${sku.monthlyPrice}/mo)`);
       break;
     }
   }
@@ -39,10 +39,10 @@ async function main() {
 
   // Create an order
   const order = await client.orders().create({
-    allow_back_ordering: true,
+    allowBackOrdering: true,
     items: [
       didOrderItem({
-        sku_id: sku.id,
+        skuId: sku.id,
         qty: 1,
       }),
     ],

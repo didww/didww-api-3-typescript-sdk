@@ -1,10 +1,30 @@
-import { deserialise, serialise } from 'kitsu-core';
+import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceMeta, ResourceRef } from './resources/base.js';
 
 const KITSU_OPTS = {
   camelCaseTypes: (s: string) => s,
   pluralTypes: (s: string) => s,
 };
+
+function snakeToCamelKeys(obj: unknown): unknown {
+  if (Array.isArray(obj)) return obj.map(snakeToCamelKeys);
+  if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj as Record<string, unknown>).map(([k, v]) => [camel(k), snakeToCamelKeys(v)]),
+    );
+  }
+  return obj;
+}
+
+function camelToSnakeKeys(obj: unknown): unknown {
+  if (Array.isArray(obj)) return obj.map(camelToSnakeKeys);
+  if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj as Record<string, unknown>).map(([k, v]) => [snake(k), camelToSnakeKeys(v)]),
+    );
+  }
+  return obj;
+}
 
 export interface DeserializedResponse<T> {
   data: T;
@@ -29,13 +49,14 @@ export interface SerializedResource {
 
 export function deserialize<T>(body: unknown): DeserializedResponse<T> | DeserializedListResponse<T> {
   const result = deserialise(body);
-  return result as DeserializedResponse<T> | DeserializedListResponse<T>;
+  return snakeToCamelKeys(result) as DeserializedResponse<T> | DeserializedListResponse<T>;
 }
 
 export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
-  const prepared = wrapRelationships(toSerialize);
+  const snaked = camelToSnakeKeys(toSerialize) as Record<string, unknown>;
+  const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'POST', KITSU_OPTS);
 }
 
@@ -46,7 +67,8 @@ export function serializeForUpdate<T, TWrite>(
   const filtered = filterWritableKeys(data, meta.writableKeys);
   (filtered as Record<string, unknown>).id = data.id;
   const toSerialize = meta.serializeCustom ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id } : filtered;
-  const prepared = wrapRelationships(toSerialize);
+  const snaked = camelToSnakeKeys(toSerialize) as Record<string, unknown>;
+  const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 

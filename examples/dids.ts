@@ -29,7 +29,7 @@ async function main() {
     // Assign trunk to DID
     const updated = await client.dids().update({
       id: did.id,
-      voice_in_trunk: ref('voice_in_trunks', trunk.id),
+      voiceInTrunk: ref('voice_in_trunks', trunk.id),
     });
     console.log(`Assigned trunk ${trunk.id} to DID`);
   }
@@ -41,15 +41,15 @@ async function main() {
 
     const saved = await client.dids().update({
       id: did.id,
-      capacity_pool: ref('capacity_pools', pool.id),
-      dedicated_channels_count: 1,
-      capacity_limit: '5',
+      capacityPool: ref('capacity_pools', pool.id),
+      dedicatedChannelsCount: 1,
+      capacityLimit: '5',
       description: 'Updated via SDK',
     });
     console.log(`DID ${saved.data.id}`);
     console.log(`  description: ${saved.data.description}`);
-    console.log(`  capacity_limit: ${saved.data.capacity_limit}`);
-    console.log(`  dedicated_channels: ${saved.data.dedicated_channels_count}`);
+    console.log(`  capacityLimit: ${saved.data.capacityLimit}`);
+    console.log(`  dedicatedChannels: ${saved.data.dedicatedChannelsCount}`);
   }
 }
 

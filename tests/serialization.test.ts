@@ -23,7 +23,7 @@ describe('Serialization - excludes read-only fields', () => {
       description: 'test',
       number: '12345', // read-only
       blocked: true, // read-only
-      created_at: '2024-01-01', // read-only
+      createdAt: '2024-01-01', // read-only
     };
     const result = serializeForUpdate(DID_META, { ...data, id: '1' });
     const attrs = result.data.attributes;
@@ -35,7 +35,7 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('Order excludes read-only fields', () => {
     const data = {
-      allow_back_ordering: true,
+      allowBackOrdering: true,
       items: [],
       amount: '100.00', // read-only
       status: 'Completed', // read-only
@@ -51,11 +51,11 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('Export excludes read-only fields', () => {
     const data = {
-      export_type: 'cdr_in',
+      exportType: 'cdr_in',
       filters: {},
       status: 'Completed', // read-only
       url: 'http://...', // read-only
-      created_at: '2024', // read-only
+      createdAt: '2024', // read-only
     };
     const result = serializeForCreate(EXPORT_META, data);
     const attrs = result.data.attributes;
@@ -67,9 +67,9 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('Identity excludes read-only fields', () => {
     const data = {
-      first_name: 'John',
-      last_name: 'Doe',
-      created_at: '2024-01-01', // read-only
+      firstName: 'John',
+      lastName: 'Doe',
+      createdAt: '2024-01-01', // read-only
       verified: true, // read-only
     };
     const result = serializeForCreate(IDENTITY_META, data);
@@ -82,9 +82,9 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('Address excludes read-only fields', () => {
     const data = {
-      city_name: 'London',
-      postal_code: 'SW1A',
-      created_at: '2024-01-01', // read-only
+      cityName: 'London',
+      postalCode: 'SW1A',
+      createdAt: '2024-01-01', // read-only
       verified: false, // read-only
     };
     const result = serializeForCreate(ADDRESS_META, data);
@@ -96,9 +96,9 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('AddressVerification excludes read-only fields', () => {
     const data = {
-      service_description: 'test',
+      serviceDescription: 'test',
       status: 'Pending', // read-only
-      reject_reasons: [], // read-only
+      rejectReasons: [], // read-only
       reference: 'REF', // read-only
     };
     const result = serializeForCreate(ADDRESS_VERIFICATION_META, data);
@@ -112,8 +112,8 @@ describe('Serialization - excludes read-only fields', () => {
   it('SharedCapacityGroup excludes read-only fields', () => {
     const data = {
       name: 'test',
-      shared_channels_count: 5,
-      created_at: '2024-01-01', // read-only
+      sharedChannelsCount: 5,
+      createdAt: '2024-01-01', // read-only
     };
     const result = serializeForCreate(SHARED_CAPACITY_GROUP_META, data);
     const attrs = result.data.attributes;
@@ -126,7 +126,7 @@ describe('Serialization - excludes read-only fields', () => {
     const data = {
       name: 'test trunk',
       configuration: { type: 'pstn_configurations' as const, dst: '123' },
-      created_at: '2024-01-01', // read-only
+      createdAt: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_IN_TRUNK_META, data);
     const attrs = result.data.attributes;
@@ -137,8 +137,8 @@ describe('Serialization - excludes read-only fields', () => {
   it('VoiceInTrunkGroup excludes read-only fields', () => {
     const data = {
       name: 'test group',
-      capacity_limit: 'shared',
-      created_at: '2024-01-01', // read-only
+      capacityLimit: 'shared',
+      createdAt: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_IN_TRUNK_GROUP_META, data);
     const attrs = result.data.attributes;
@@ -149,11 +149,11 @@ describe('Serialization - excludes read-only fields', () => {
   it('VoiceOutTrunk excludes read-only fields', () => {
     const data = {
       name: 'test out trunk',
-      allowed_sip_ips: ['127.0.0.1'],
+      allowedSipIps: ['127.0.0.1'],
       username: 'readonly', // read-only
       password: 'readonly', // read-only
-      threshold_reached: true, // read-only
-      created_at: '2024-01-01', // read-only
+      thresholdReached: true, // read-only
+      createdAt: '2024-01-01', // read-only
     };
     const result = serializeForCreate(VOICE_OUT_TRUNK_META, data);
     const attrs = result.data.attributes;
@@ -167,30 +167,30 @@ describe('Serialization - excludes read-only fields', () => {
 
 describe('Order item factories', () => {
   it('didOrderItem sets type and passes attributes', () => {
-    const item = didOrderItem({ sku_id: 'sku-1', qty: 2 });
+    const item = didOrderItem({ skuId: 'sku-1', qty: 2 });
     expect(item.type).toBe('did_order_items');
-    expect(item.sku_id).toBe('sku-1');
+    expect(item.skuId).toBe('sku-1');
     expect(item.qty).toBe(2);
   });
 
   it('availableDidOrderItem sets type and required fields', () => {
-    const item = availableDidOrderItem({ sku_id: 'sku-1', available_did_id: 'ad-1' });
+    const item = availableDidOrderItem({ skuId: 'sku-1', availableDidId: 'ad-1' });
     expect(item.type).toBe('did_order_items');
-    expect(item.sku_id).toBe('sku-1');
-    expect(item.available_did_id).toBe('ad-1');
+    expect(item.skuId).toBe('sku-1');
+    expect(item.availableDidId).toBe('ad-1');
   });
 
   it('reservationDidOrderItem sets type and required fields', () => {
-    const item = reservationDidOrderItem({ sku_id: 'sku-1', did_reservation_id: 'res-1' });
+    const item = reservationDidOrderItem({ skuId: 'sku-1', didReservationId: 'res-1' });
     expect(item.type).toBe('did_order_items');
-    expect(item.sku_id).toBe('sku-1');
-    expect(item.did_reservation_id).toBe('res-1');
+    expect(item.skuId).toBe('sku-1');
+    expect(item.didReservationId).toBe('res-1');
   });
 
   it('capacityOrderItem sets type and passes attributes', () => {
-    const item = capacityOrderItem({ capacity_pool_id: 'pool-1', qty: 5 });
+    const item = capacityOrderItem({ capacityPoolId: 'pool-1', qty: 5 });
     expect(item.type).toBe('capacity_order_items');
-    expect(item.capacity_pool_id).toBe('pool-1');
+    expect(item.capacityPoolId).toBe('pool-1');
     expect(item.qty).toBe(5);
   });
 });

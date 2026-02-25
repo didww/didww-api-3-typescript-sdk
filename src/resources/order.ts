@@ -10,24 +10,24 @@ export interface Order {
   status: OrderStatus;
   description: string;
   reference: string;
-  created_at: string;
-  allow_back_ordering: boolean;
-  callback_url: string | null;
-  callback_method: CallbackMethod | null;
+  createdAt: string;
+  allowBackOrdering: boolean;
+  callbackUrl: string | null;
+  callbackMethod: CallbackMethod | null;
   items: OrderItem[];
 }
 
 export interface OrderWrite {
-  allow_back_ordering?: boolean;
+  allowBackOrdering?: boolean;
   items?: OrderItem[];
-  callback_url?: string | null;
-  callback_method?: CallbackMethod | null;
+  callbackUrl?: string | null;
+  callbackMethod?: CallbackMethod | null;
 }
 
 export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
   type: 'orders',
   path: 'orders',
-  writableKeys: ['allow_back_ordering', 'items', 'callback_url', 'callback_method'],
+  writableKeys: ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of ORDER_META.writableKeys) {

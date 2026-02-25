@@ -37,7 +37,7 @@ async function main() {
   });
   let skuForQty: string | null = null;
   for (const dg of didGroups.data) {
-    const skus = (dg as any).stock_keeping_units?.data || (dg as any).stock_keeping_units || [];
+    const skus = (dg as any).stockKeepingUnits?.data || (dg as any).stockKeepingUnits || [];
     if (Array.isArray(skus) && skus.length > 0) {
       skuForQty = skus[0].id;
       console.log(`SKU for qty order: ${skuForQty} (group=${dg.id})`);
@@ -45,30 +45,30 @@ async function main() {
     }
   }
   if (!skuForQty) {
-    console.log('No DID group with stock_keeping_units found');
+    console.log('No DID group with stockKeepingUnits found');
     return;
   }
 
   // --- Reserve the second available DID ---
   const reservation = await client.didReservations().create({
     description: 'Reserved for order example',
-    available_did: ref('available_dids', ad2.id),
+    availableDid: ref('available_dids', ad2.id),
   });
   console.log(`Reservation: ${reservation.data.id}`);
 
   // --- Build order with all three item types ---
   const order = await client.orders().create({
     items: [
-      didOrderItem({ sku_id: skuForQty, qty: 1 }),
-      availableDidOrderItem({ sku_id: skuId1, available_did_id: ad1.id }),
-      reservationDidOrderItem({ sku_id: skuId2, did_reservation_id: reservation.data.id }),
+      didOrderItem({ skuId: skuForQty, qty: 1 }),
+      availableDidOrderItem({ skuId: skuId1, availableDidId: ad1.id }),
+      reservationDidOrderItem({ skuId: skuId2, didReservationId: reservation.data.id }),
     ],
   });
 
   console.log(`\nOrder ID: ${order.data.id}`);
   console.log(`Amount: ${order.data.amount}`);
   console.log(`Status: ${order.data.status}`);
-  console.log(`Created at: ${order.data.created_at}`);
+  console.log(`Created at: ${order.data.createdAt}`);
   console.log(`Reference: ${order.data.reference}`);
   console.log(`Items count: ${order.data.items.length}`);
   for (let i = 0; i < order.data.items.length; i++) {
@@ -81,15 +81,15 @@ async function main() {
   });
   console.log(`\nDIDs in order (${dids.data.length}):`);
   for (const did of dids.data) {
-    console.log(`  ${did.id} | ${did.number} | capacity_limit=${did.capacity_limit}`);
+    console.log(`  ${did.id} | ${did.number} | capacityLimit=${did.capacityLimit}`);
   }
 }
 
 function getSku(ad: any): string {
-  const didGroup = (ad as any).did_group;
-  const skus = didGroup?.stock_keeping_units?.data || didGroup?.stock_keeping_units || [];
+  const didGroup = (ad as any).didGroup;
+  const skus = didGroup?.stockKeepingUnits?.data || didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
-    throw new Error(`No stock_keeping_units for available DID ${ad.id}`);
+    throw new Error(`No stockKeepingUnits for available DID ${ad.id}`);
   }
   return skus[0].id;
 }

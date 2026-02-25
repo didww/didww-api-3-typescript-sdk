@@ -4,8 +4,8 @@ export interface EncryptedFile {
   id: string;
   type: 'encrypted_files';
   description: string;
-  expire_at: string;
-  created_at: string;
+  expireAt: string;
+  createdAt: string;
 }
 
 export const ENCRYPTED_FILE_META: ResourceMeta<EncryptedFile> = {

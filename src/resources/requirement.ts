@@ -4,26 +4,26 @@ import type { IdentityType, AreaLevel } from '../enums.js';
 export interface Requirement {
   id: string;
   type: 'requirements';
-  identity_type: IdentityType;
-  personal_area_level: AreaLevel;
-  business_area_level: AreaLevel;
-  address_area_level: AreaLevel;
-  personal_proof_qty: number;
-  business_proof_qty: number;
-  address_proof_qty: number;
-  personal_mandatory_fields: string[];
-  business_mandatory_fields: string[];
-  service_description_required: boolean;
-  restriction_message: string | null;
+  identityType: IdentityType;
+  personalAreaLevel: AreaLevel;
+  businessAreaLevel: AreaLevel;
+  addressAreaLevel: AreaLevel;
+  personalProofQty: number;
+  businessProofQty: number;
+  addressProofQty: number;
+  personalMandatoryFields: string[];
+  businessMandatoryFields: string[];
+  serviceDescriptionRequired: boolean;
+  restrictionMessage: string | null;
   country?: ResourceRef;
-  did_group_type?: ResourceRef;
-  personal_permanent_document?: ResourceRef;
-  business_permanent_document?: ResourceRef;
-  personal_onetime_document?: ResourceRef;
-  business_onetime_document?: ResourceRef;
-  personal_proof_types?: ResourceRef[];
-  business_proof_types?: ResourceRef[];
-  address_proof_types?: ResourceRef[];
+  didGroupType?: ResourceRef;
+  personalPermanentDocument?: ResourceRef;
+  businessPermanentDocument?: ResourceRef;
+  personalOnetimeDocument?: ResourceRef;
+  businessOnetimeDocument?: ResourceRef;
+  personalProofTypes?: ResourceRef[];
+  businessProofTypes?: ResourceRef[];
+  addressProofTypes?: ResourceRef[];
 }
 
 export const REQUIREMENT_META: ResourceMeta<Requirement> = {

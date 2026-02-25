@@ -19,10 +19,10 @@ async function main() {
   console.log(`Available DID: ${ad.number}`);
 
   // Resolve SKU from included DID group
-  const didGroup = (ad as any).did_group;
-  const skus = didGroup?.stock_keeping_units?.data || didGroup?.stock_keeping_units || [];
+  const didGroup = (ad as any).didGroup;
+  const skus = didGroup?.stockKeepingUnits?.data || didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
-    console.log('No stock_keeping_units found in included did_group');
+    console.log('No stockKeepingUnits found in included didGroup');
     return;
   }
   const skuId = skus[0].id;
@@ -30,14 +30,14 @@ async function main() {
   // Reserve the DID
   const reservation = await client.didReservations().create({
     description: 'Reserved via SDK',
-    available_did: ref('available_dids', ad.id),
+    availableDid: ref('available_dids', ad.id),
   });
-  console.log(`Reserved: ${reservation.data.id} expires=${reservation.data.expire_at}`);
+  console.log(`Reserved: ${reservation.data.id} expires=${reservation.data.expireAt}`);
 
   // Order the reserved DID
   const order = await client.orders().create({
     items: [
-      reservationDidOrderItem({ sku_id: skuId, did_reservation_id: reservation.data.id }),
+      reservationDidOrderItem({ skuId: skuId, didReservationId: reservation.data.id }),
     ],
   });
   console.log(`Order ${order.data.id} status=${order.data.status} items=${order.data.items.length}`);

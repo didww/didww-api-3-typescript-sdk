@@ -3,7 +3,7 @@ import type { ResourceMeta } from './base.js';
 export interface Balance {
   id: string;
   type: 'balances';
-  total_balance: string;
+  totalBalance: string;
   balance: string;
   credit: string;
 }

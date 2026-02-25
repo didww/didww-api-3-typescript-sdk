@@ -20,15 +20,15 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.type).toBe('voice_out_trunks');
     expect(result.data.name).toBe('test');
     expect(result.data.status).toBe('blocked');
-    expect(result.data.allowed_sip_ips).toEqual(['10.11.12.13/32']);
-    expect(result.data.capacity_limit).toBe(123);
-    expect(result.data.allow_any_did_as_cli).toBe(false);
-    expect(result.data.media_encryption_mode).toBe('srtp_sdes');
-    expect(result.data.force_symmetric_rtp).toBe(true);
-    expect(result.data.rtp_ping).toBe(true);
-    expect(result.data.threshold_reached).toBe(false);
-    expect(result.data.threshold_amount).toBe('200.0');
-    expect(result.data.callback_url).toBeNull();
+    expect(result.data.allowedSipIps).toEqual(['10.11.12.13/32']);
+    expect(result.data.capacityLimit).toBe(123);
+    expect(result.data.allowAnyDidAsCli).toBe(false);
+    expect(result.data.mediaEncryptionMode).toBe('srtp_sdes');
+    expect(result.data.forceSymmetricRtp).toBe(true);
+    expect(result.data.rtpPing).toBe(true);
+    expect(result.data.thresholdReached).toBe(false);
+    expect(result.data.thresholdAmount).toBe('200.0');
+    expect(result.data.callbackUrl).toBeNull();
     expect(result.data.username).toBe('dpjgwbbac9');
     expect(result.data.password).toBe('z0hshvbcy7');
   });
@@ -38,9 +38,9 @@ describe('VoiceOutTrunks', () => {
     const client = createTestClient();
     const result = await client.voiceOutTrunks().create({
       name: 'ts-test',
-      allowed_sip_ips: ['0.0.0.0/0'],
-      on_cli_mismatch_action: 1,
-      default_did: { id: '7a028c32-e6b6-4c86-bf01-90f901b37012', type: 'dids' },
+      allowedSipIps: ['0.0.0.0/0'],
+      onCliMismatchAction: 1,
+      defaultDid: { id: '7a028c32-e6b6-4c86-bf01-90f901b37012', type: 'dids' },
       dids: [{ id: '7a028c32-e6b6-4c86-bf01-90f901b37012', type: 'dids' }],
     });
     expect(result.data.id).toBe('b60201c1-21f0-4d9a-aafa-0e6d1e12f22e');

@@ -19,14 +19,14 @@ async function main() {
   const suffix = Math.random().toString(36).substring(2, 10);
   const created = await client.sharedCapacityGroups().create({
     name: `My Channel Group ${suffix}`,
-    metered_channels_count: 10,
-    shared_channels_count: 1,
-    capacity_pool: ref('capacity_pools', pool.id),
+    meteredChannelsCount: 10,
+    sharedChannelsCount: 1,
+    capacityPool: ref('capacity_pools', pool.id),
   });
   console.log(`Created: ${created.data.id}`);
   console.log(`  name: ${created.data.name}`);
-  console.log(`  metered: ${created.data.metered_channels_count}`);
-  console.log(`  shared: ${created.data.shared_channels_count}`);
+  console.log(`  metered: ${created.data.meteredChannelsCount}`);
+  console.log(`  shared: ${created.data.sharedChannelsCount}`);
 
   // Clean up
   await client.sharedCapacityGroups().remove(created.data.id);

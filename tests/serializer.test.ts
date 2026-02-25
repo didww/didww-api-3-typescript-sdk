@@ -39,7 +39,7 @@ describe('Serializer', () => {
         meta: { total_count: 100 },
       };
       const result = deserialize(body);
-      expect(result.meta).toEqual({ total_count: 100 });
+      expect(result.meta).toEqual({ totalCount: 100 });
     });
 
     it('resolves included relationships', () => {
@@ -66,9 +66,9 @@ describe('Serializer', () => {
       const meta = {
         type: 'voice_in_trunk_groups',
         path: 'voice_in_trunk_groups',
-        writableKeys: ['name', 'capacity_limit'] as string[],
+        writableKeys: ['name', 'capacityLimit'] as string[],
       };
-      const data = { name: 'Test Group', capacity_limit: 'shared', extra: 'ignored' };
+      const data = { name: 'Test Group', capacityLimit: 'shared', extra: 'ignored' };
       const result = serializeForCreate(meta, data);
       expect(result).toHaveProperty('data');
       const jsonData = result.data as Record<string, unknown>;
@@ -82,11 +82,11 @@ describe('Serializer', () => {
       const meta = {
         type: 'dids',
         path: 'dids',
-        writableKeys: ['description', 'voice_in_trunk'] as string[],
+        writableKeys: ['description', 'voiceInTrunk'] as string[],
       };
       const data = {
         description: 'test',
-        voice_in_trunk: { id: '123', type: 'voice_in_trunks' },
+        voiceInTrunk: { id: '123', type: 'voice_in_trunks' },
       };
       const result = serializeForCreate(meta, data);
       const jsonData = result.data as Record<string, unknown>;
