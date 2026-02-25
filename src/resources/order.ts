@@ -31,8 +31,8 @@ export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of ORDER_META.writableKeys) {
-      if (key in (data as any)) {
-        result[key as string] = (data as any)[key];
+      if (key in (data as Record<string, unknown>)) {
+        result[key as string] = (data as Record<string, unknown>)[key];
       }
     }
     if (result.items && Array.isArray(result.items)) {
@@ -41,9 +41,9 @@ export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
     return result;
   },
   deserializeCustom(data) {
-    const items = (data as any).items;
+    const items = (data as Record<string, unknown>).items;
     if (Array.isArray(items)) {
-      return { items: deserializeOrderItems(items) } as any;
+      return { items: deserializeOrderItems(items) } as Partial<Order>;
     }
     return {};
   },

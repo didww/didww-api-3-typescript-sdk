@@ -30,7 +30,7 @@ describe('Serializer', () => {
       };
       const result = deserialize(body);
       expect(Array.isArray(result.data)).toBe(true);
-      expect((result.data as any[]).length).toBe(2);
+      expect((result.data as unknown[]).length).toBe(2);
     });
 
     it('preserves meta', () => {
@@ -55,7 +55,7 @@ describe('Serializer', () => {
         included: [{ type: 'countries', id: '2', attributes: { name: 'US', iso: 'US' } }],
       };
       const result = deserialize(body);
-      const data = result.data as any;
+      const data = result.data as Record<string, unknown>;
       expect(data.country).toBeDefined();
       expect(data.country.data.name).toBe('US');
     });
@@ -66,12 +66,12 @@ describe('Serializer', () => {
       const meta = {
         type: 'voice_in_trunk_groups',
         path: 'voice_in_trunk_groups',
-        writableKeys: ['name', 'capacity_limit'] as any[],
+        writableKeys: ['name', 'capacity_limit'] as string[],
       };
       const data = { name: 'Test Group', capacity_limit: 'shared', extra: 'ignored' };
       const result = serializeForCreate(meta, data);
       expect(result).toHaveProperty('data');
-      const jsonData = result.data as any;
+      const jsonData = result.data as Record<string, unknown>;
       expect(jsonData.type).toBe('voice_in_trunk_groups');
       expect(jsonData.attributes.name).toBe('Test Group');
       expect(jsonData.attributes.capacity_limit).toBe('shared');
@@ -82,14 +82,14 @@ describe('Serializer', () => {
       const meta = {
         type: 'dids',
         path: 'dids',
-        writableKeys: ['description', 'voice_in_trunk'] as any[],
+        writableKeys: ['description', 'voice_in_trunk'] as string[],
       };
       const data = {
         description: 'test',
         voice_in_trunk: { id: '123', type: 'voice_in_trunks' },
       };
       const result = serializeForCreate(meta, data);
-      const jsonData = result.data as any;
+      const jsonData = result.data as Record<string, unknown>;
       expect(jsonData.attributes.description).toBe('test');
       // wrapRelationships converts ResourceRef → { data: { id, type } }
       // kitsu-core then detects it as a relationship
@@ -106,11 +106,11 @@ describe('Serializer', () => {
       const meta = {
         type: 'voice_in_trunk_groups',
         path: 'voice_in_trunk_groups',
-        writableKeys: ['name'] as any[],
+        writableKeys: ['name'] as string[],
       };
       const data = { id: 'abc-123', name: 'Updated' };
       const result = serializeForUpdate(meta, data);
-      const jsonData = result.data as any;
+      const jsonData = result.data as Record<string, unknown>;
       expect(jsonData.id).toBe('abc-123');
       expect(jsonData.type).toBe('voice_in_trunk_groups');
       expect(jsonData.attributes.name).toBe('Updated');

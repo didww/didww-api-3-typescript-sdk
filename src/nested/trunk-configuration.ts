@@ -68,7 +68,7 @@ export function serializeTrunkConfiguration(config: TrunkConfiguration): Seriali
 }
 
 export function deserializeTrunkConfiguration(data: Record<string, unknown>): TrunkConfiguration {
-  if (!data || typeof data !== 'object') return data as any;
+  if (!data || typeof data !== 'object') return data as unknown as TrunkConfiguration;
   const type = data.type as string;
   const attributes = (data.attributes as Record<string, unknown>) || {};
   return { type, ...attributes } as TrunkConfiguration;

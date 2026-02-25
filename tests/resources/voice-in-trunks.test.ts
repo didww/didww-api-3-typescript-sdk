@@ -7,7 +7,7 @@ import {
   sipConfiguration,
   pstnConfiguration,
 } from '../../src/nested/trunk-configuration.js';
-import type { SipConfiguration } from '../../src/nested/trunk-configuration.js';
+import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
 
 describe('VoiceInTrunks', () => {
@@ -174,11 +174,11 @@ describe('TrunkConfiguration serialization', () => {
     const pstnData = { type: 'pstn_configurations', attributes: { dst: '12345' } };
     const pstn = deserializeTrunkConfiguration(pstnData);
     expect(pstn.type).toBe('pstn_configurations');
-    expect((pstn as any).dst).toBe('12345');
+    expect((pstn as PstnConfiguration).dst).toBe('12345');
 
     const sipData = { type: 'sip_configurations', attributes: { username: 'user' } };
     const sip = deserializeTrunkConfiguration(sipData);
     expect(sip.type).toBe('sip_configurations');
-    expect((sip as any).username).toBe('user');
+    expect((sip as SipConfiguration).username).toBe('user');
   });
 });

@@ -53,8 +53,8 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of VOICE_IN_TRUNK_META.writableKeys) {
-      if (key in (data as any)) {
-        result[key as string] = (data as any)[key];
+      if (key in (data as Record<string, unknown>)) {
+        result[key as string] = (data as Record<string, unknown>)[key];
       }
     }
     if (result.configuration) {
@@ -63,9 +63,9 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
     return result;
   },
   deserializeCustom(data) {
-    const config = (data as any).configuration;
+    const config = (data as Record<string, unknown>).configuration;
     if (config && typeof config === 'object' && 'type' in config && 'attributes' in config) {
-      return { configuration: deserializeTrunkConfiguration(config as Record<string, unknown>) } as any;
+      return { configuration: deserializeTrunkConfiguration(config as Record<string, unknown>) } as Partial<VoiceInTrunk>;
     }
     return {};
   },

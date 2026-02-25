@@ -53,8 +53,8 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
     const result: Record<string, unknown> = {};
     const RELATIONSHIP_KEYS = ['voice_in_trunk', 'voice_in_trunk_group', 'capacity_pool', 'shared_capacity_group'];
     for (const key of DID_META.writableKeys) {
-      if (key in (data as any)) {
-        const value = (data as any)[key];
+      if (key in (data as Record<string, unknown>)) {
+        const value = (data as Record<string, unknown>)[key];
         // Null relationships need { data: null } format for JSON:API
         if (value === null && RELATIONSHIP_KEYS.includes(key as string)) {
           result[key as string] = { data: null };
@@ -64,13 +64,13 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
       }
     }
     // Exclusive relationships: setting voice_in_trunk nullifies voice_in_trunk_group and vice versa
-    if ('voice_in_trunk' in (data as any) && (data as any).voice_in_trunk !== undefined) {
-      if ((data as any).voice_in_trunk !== null) {
+    if ('voice_in_trunk' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voice_in_trunk !== undefined) {
+      if ((data as Record<string, unknown>).voice_in_trunk !== null) {
         result.voice_in_trunk_group = { data: null };
       }
     }
-    if ('voice_in_trunk_group' in (data as any) && (data as any).voice_in_trunk_group !== undefined) {
-      if ((data as any).voice_in_trunk_group !== null) {
+    if ('voice_in_trunk_group' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voice_in_trunk_group !== undefined) {
+      if ((data as Record<string, unknown>).voice_in_trunk_group !== null) {
         result.voice_in_trunk = { data: null };
       }
     }

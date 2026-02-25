@@ -10,10 +10,10 @@ export interface HttpClient {
   delete(path: string): Promise<void>;
 }
 
-export class ReadOnlyRepository<T> {
+export class ReadOnlyRepository<T, TWrite = Record<string, unknown>> {
   constructor(
     protected readonly client: HttpClient,
-    protected readonly meta: ResourceMeta<T>,
+    protected readonly meta: ResourceMeta<T, TWrite>,
   ) {}
 
   async list(params?: QueryParams): Promise<ListResponse<T>> {
@@ -28,18 +28,18 @@ export class ReadOnlyRepository<T> {
 
   protected deserializeSingle(body: unknown): ApiResponse<T> {
     const result = deserialize<T>(body);
-    const data = this.applyCustomDeserialize(result.data as any);
+    const data = this.applyCustomDeserialize(result.data as T);
     return { data: data as T, meta: result.meta, links: result.links };
   }
 
   protected deserializeList(body: unknown): ListResponse<T> {
     const result = deserialize<T>(body);
     const items = Array.isArray(result.data) ? result.data : [result.data];
-    const data = items.map((item: any) => this.applyCustomDeserialize(item) as T);
+    const data = items.map((item: T) => this.applyCustomDeserialize(item));
     return { data, meta: result.meta, links: result.links };
   }
 
-  private applyCustomDeserialize(item: any): any {
+  private applyCustomDeserialize(item: T): T {
     if (this.meta.deserializeCustom && item) {
       return { ...item, ...this.meta.deserializeCustom(item) };
     }

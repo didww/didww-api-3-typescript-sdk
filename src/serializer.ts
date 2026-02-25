@@ -29,22 +29,22 @@ export interface SerializedResource {
 
 export function deserialize<T>(body: unknown): DeserializedResponse<T> | DeserializedListResponse<T> {
   const result = deserialise(body);
-  return result as any;
+  return result as DeserializedResponse<T> | DeserializedListResponse<T>;
 }
 
-export function serializeForCreate<TWrite>(meta: ResourceMeta<any, TWrite>, data: TWrite): SerializedResource {
+export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
   const prepared = wrapRelationships(toSerialize);
   return serialise(meta.type, prepared, 'POST', KITSU_OPTS);
 }
 
-export function serializeForUpdate<TWrite>(
-  meta: ResourceMeta<any, TWrite>,
+export function serializeForUpdate<T, TWrite>(
+  meta: ResourceMeta<T, TWrite>,
   data: TWrite & { id: string },
 ): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
-  (filtered as any).id = data.id;
+  (filtered as Record<string, unknown>).id = data.id;
   const toSerialize = meta.serializeCustom ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id } : filtered;
   const prepared = wrapRelationships(toSerialize);
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
@@ -53,8 +53,8 @@ export function serializeForUpdate<TWrite>(
 function filterWritableKeys<TWrite>(data: TWrite, writableKeys: (keyof TWrite)[]): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const key of writableKeys) {
-    if (key in (data as any)) {
-      result[key as string] = (data as any)[key];
+    if (key in (data as Record<string, unknown>)) {
+      result[key as string] = (data as Record<string, unknown>)[key as string];
     }
   }
   return result;
@@ -64,10 +64,10 @@ function isResourceRef(value: unknown): value is ResourceRef {
   return (
     value !== null &&
     typeof value === 'object' &&
-    'id' in (value as any) &&
-    'type' in (value as any) &&
-    typeof (value as any).id === 'string' &&
-    typeof (value as any).type === 'string'
+    'id' in (value as Record<string, unknown>) &&
+    'type' in (value as Record<string, unknown>) &&
+    typeof (value as Record<string, unknown>).id === 'string' &&
+    typeof (value as Record<string, unknown>).type === 'string'
   );
 }
 

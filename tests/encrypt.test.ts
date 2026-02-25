@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { generateKeyPairSync } from 'node:crypto';
 import { Encrypt, encryptWithKeys, calculateFingerprint } from '../src/encrypt.js';
+import type { DidwwClient } from '../src/client.js';
 
 function generateTestKeyPair(): string {
   const { publicKey } = generateKeyPairSync('rsa', {
@@ -50,7 +51,7 @@ describe('Encrypt class', () => {
           ],
         }),
       }),
-    } as any;
+    } as unknown as DidwwClient;
   }
 
   it('encrypts data after auto-initialization', async () => {
@@ -92,7 +93,7 @@ describe('Encrypt class', () => {
       publicKeys: () => ({
         list: vi.fn().mockResolvedValue({ data: [{ id: '1', type: 'public_keys', key: pemA }] }),
       }),
-    } as any;
+    } as unknown as DidwwClient;
     const enc = new Encrypt(client);
     await expect(enc.encrypt(Buffer.from('data'))).rejects.toThrow('Expected at least 2 public keys');
   });

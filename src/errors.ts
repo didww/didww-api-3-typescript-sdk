@@ -16,7 +16,8 @@ export class DidwwApiError extends Error {
   public readonly body: unknown;
 
   constructor(status: number, body: unknown) {
-    const errors = Array.isArray((body as any)?.errors) ? ((body as any).errors as JsonApiError[]) : [];
+    const obj = body as Record<string, unknown> | null | undefined;
+    const errors = obj && Array.isArray(obj.errors) ? (obj.errors as JsonApiError[]) : [];
     const message =
       errors.length > 0 ? errors.map((e) => e.detail || e.title || 'Unknown error').join('; ') : `API error ${status}`;
     super(message);

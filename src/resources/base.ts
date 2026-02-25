@@ -3,7 +3,7 @@ export interface ResourceRef {
   type: string;
 }
 
-export interface ResourceMeta<T = any, TWrite = any> {
+export interface ResourceMeta<T = Record<string, unknown>, TWrite = Record<string, unknown>> {
   type: string;
   path: string;
   writableKeys: (keyof TWrite)[];
