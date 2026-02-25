@@ -31,6 +31,7 @@ DIDWW_API_KEY=your_api_key npx tsx examples/balance.ts
 | [`countries.ts`](countries.ts) | Lists countries and fetches one country by ID. |
 | [`regions.ts`](regions.ts) | Lists regions filtered by country with includes. |
 | [`did-groups.ts`](did-groups.ts) | Fetches DID groups with included relationships. |
+| [`includes.ts`](includes.ts) | Demonstrates `isIncluded` type guard with regions and countries. |
 | [`dids.ts`](dids.ts) | Lists DIDs, assigns trunk and capacity pool. |
 | [`trunks.ts`](trunks.ts) | Creates a PSTN trunk, lists all trunks, updates and deletes. |
 | [`shared-capacity-groups.ts`](shared-capacity-groups.ts) | Creates and deletes a shared capacity group. |
@@ -41,6 +42,13 @@ DIDWW_API_KEY=your_api_key npx tsx examples/balance.ts
 | [`orders-all-item-types.ts`](orders-all-item-types.ts) | Creates an order with all three item types combined. |
 | [`upload-file.ts`](upload-file.ts) | Encrypts sample data and uploads to `encrypted_files`. |
 | [`identity-address-proofs.ts`](identity-address-proofs.ts) | Creates identity and address, then cleans up. |
+| [`voice-in-trunk-groups.ts`](voice-in-trunk-groups.ts) | CRUD for trunk groups with trunk relationships. |
+| [`voice-out-trunks.ts`](voice-out-trunks.ts) | CRUD for voice out trunks (requires account config). |
+| [`did-trunk-assignment.ts`](did-trunk-assignment.ts) | Demonstrates exclusive trunk/trunk group assignment on DIDs. |
+| [`did-reservations.ts`](did-reservations.ts) | Creates, lists, finds and deletes DID reservations. |
+| [`exports.ts`](exports.ts) | Creates and lists CDR exports. |
+| [`capacity-pools.ts`](capacity-pools.ts) | Lists capacity pools with included shared capacity groups. |
+| [`test-readme.ts`](test-readme.ts) | Runs all README code examples against the sandbox API. |
 
 ## Upload file example
 

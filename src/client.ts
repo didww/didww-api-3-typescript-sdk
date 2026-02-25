@@ -24,8 +24,6 @@ import {
   SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE,
   type SupportingDocumentTemplate,
 } from './resources/supporting-document-template.js';
-import { STOCK_KEEPING_UNIT_RESOURCE, type StockKeepingUnit } from './resources/stock-keeping-unit.js';
-import { QTY_BASED_PRICING_RESOURCE, type QtyBasedPricing } from './resources/qty-based-pricing.js';
 import { CAPACITY_POOL_RESOURCE, type CapacityPool, type CapacityPoolWrite } from './resources/capacity-pool.js';
 import { VOICE_IN_TRUNK_RESOURCE, type VoiceInTrunk, type VoiceInTrunkWrite } from './resources/voice-in-trunk.js';
 import {
@@ -265,12 +263,8 @@ export class DidwwClient implements HttpClient {
   supportingDocumentTemplates() {
     return new ReadOnlyRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
   }
-  stockKeepingUnits() {
-    return new ReadOnlyRepository<StockKeepingUnit>(this, STOCK_KEEPING_UNIT_RESOURCE);
-  }
-  qtyBasedPricings() {
-    return new ReadOnlyRepository<QtyBasedPricing>(this, QTY_BASED_PRICING_RESOURCE);
-  }
+  // stockKeepingUnits and qtyBasedPricings have no standalone endpoints.
+  // Access them via include on didGroups and capacityPools respectively.
   capacityPools() {
     return new Repository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_RESOURCE);
   }
