@@ -72,8 +72,7 @@ export interface DidwwClientOptions {
   apiKey: string;
   environment?: Environment;
   baseUrl?: string;
-  connectTimeout?: number;
-  readTimeout?: number;
+  timeout?: number;
 }
 
 export class DidwwClient implements HttpClient {
@@ -91,8 +90,7 @@ export class DidwwClient implements HttpClient {
     if (this.baseUrl.endsWith('/')) {
       this.baseUrl = this.baseUrl.slice(0, -1);
     }
-    // Use readTimeout if provided, fall back to connectTimeout
-    this.timeout = options.readTimeout ?? options.connectTimeout;
+    this.timeout = options.timeout;
   }
 
   private fetchOptions(): RequestInit {

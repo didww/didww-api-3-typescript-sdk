@@ -54,8 +54,7 @@ For details on obtaining your API key please visit https://doc.didww.com/api#int
 const client = new DidwwClient({
   apiKey: 'your-api-key',
   environment: Environment.PRODUCTION,
-  connectTimeout: 10_000, // 10 seconds
-  readTimeout: 30_000,    // 30 seconds
+  timeout: 30_000, // 30 seconds
 });
 ```
 

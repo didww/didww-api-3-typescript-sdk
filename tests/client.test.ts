@@ -29,18 +29,8 @@ describe('DidwwClient', () => {
     expect(() => new DidwwClient({ apiKey: '' })).toThrow(DidwwClientError);
   });
 
-  it('accepts connectTimeout option', () => {
-    const client = new DidwwClient({ apiKey: 'test', connectTimeout: 10_000 });
-    expect(client).toBeDefined();
-  });
-
-  it('accepts readTimeout option', () => {
-    const client = new DidwwClient({ apiKey: 'test', readTimeout: 30_000 });
-    expect(client).toBeDefined();
-  });
-
-  it('accepts both timeout options', () => {
-    const client = new DidwwClient({ apiKey: 'test', connectTimeout: 10_000, readTimeout: 30_000 });
+  it('accepts timeout option', () => {
+    const client = new DidwwClient({ apiKey: 'test', timeout: 30_000 });
     expect(client).toBeDefined();
   });
 });
