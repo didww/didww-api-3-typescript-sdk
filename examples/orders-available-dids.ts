@@ -29,9 +29,7 @@ async function main() {
 
   // Create order with available DID
   const order = await client.orders().create({
-    items: [
-      availableDidOrderItem({ skuId: skuId, availableDidId: ad.id }),
-    ],
+    items: [availableDidOrderItem({ skuId: skuId, availableDidId: ad.id })],
   });
   console.log(`Order ${order.data.id} status=${order.data.status} items=${order.data.items.length}`);
 }

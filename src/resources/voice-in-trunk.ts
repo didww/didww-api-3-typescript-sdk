@@ -65,7 +65,9 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
   deserializeCustom(data) {
     const config = (data as Record<string, unknown>).configuration;
     if (config && typeof config === 'object' && 'type' in config && 'attributes' in config) {
-      return { configuration: deserializeTrunkConfiguration(config as Record<string, unknown>) } as Partial<VoiceInTrunk>;
+      return {
+        configuration: deserializeTrunkConfiguration(config as Record<string, unknown>),
+      } as Partial<VoiceInTrunk>;
     }
     return {};
   },

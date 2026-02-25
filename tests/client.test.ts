@@ -48,9 +48,7 @@ describe('DidwwClient', () => {
 describe('DidwwApiError', () => {
   it('parses code field from JSON:API error response', () => {
     const body = {
-      errors: [
-        { status: '422', code: 'invalid', detail: 'is invalid', source: { pointer: '/data/attributes/name' } },
-      ],
+      errors: [{ status: '422', code: 'invalid', detail: 'is invalid', source: { pointer: '/data/attributes/name' } }],
     };
     const error = new DidwwApiError(422, body);
     expect(error.status).toBe(422);

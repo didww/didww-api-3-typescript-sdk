@@ -56,7 +56,12 @@ export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './
 export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
 
 export type { OrderItem, DidOrderItem, CapacityOrderItem, GenericOrderItem } from './nested/order-item.js';
-export { didOrderItem, availableDidOrderItem, reservationDidOrderItem, capacityOrderItem } from './nested/order-item.js';
+export {
+  didOrderItem,
+  availableDidOrderItem,
+  reservationDidOrderItem,
+  capacityOrderItem,
+} from './nested/order-item.js';
 
 // Repository types
 export type { ApiResponse, ListResponse } from './repositories/types.js';

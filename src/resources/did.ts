@@ -64,12 +64,18 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
       }
     }
     // Exclusive relationships: setting voiceInTrunk nullifies voiceInTrunkGroup and vice versa
-    if ('voiceInTrunk' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voiceInTrunk !== undefined) {
+    if (
+      'voiceInTrunk' in (data as Record<string, unknown>) &&
+      (data as Record<string, unknown>).voiceInTrunk !== undefined
+    ) {
       if ((data as Record<string, unknown>).voiceInTrunk !== null) {
         result.voiceInTrunkGroup = { data: null };
       }
     }
-    if ('voiceInTrunkGroup' in (data as Record<string, unknown>) && (data as Record<string, unknown>).voiceInTrunkGroup !== undefined) {
+    if (
+      'voiceInTrunkGroup' in (data as Record<string, unknown>) &&
+      (data as Record<string, unknown>).voiceInTrunkGroup !== undefined
+    ) {
       if ((data as Record<string, unknown>).voiceInTrunkGroup !== null) {
         result.voiceInTrunk = { data: null };
       }
@@ -77,4 +83,3 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
     return result;
   },
 };
-

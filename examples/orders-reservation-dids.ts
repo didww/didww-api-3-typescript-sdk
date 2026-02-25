@@ -36,9 +36,7 @@ async function main() {
 
   // Order the reserved DID
   const order = await client.orders().create({
-    items: [
-      reservationDidOrderItem({ skuId: skuId, didReservationId: reservation.data.id }),
-    ],
+    items: [reservationDidOrderItem({ skuId: skuId, didReservationId: reservation.data.id })],
   });
   console.log(`Order ${order.data.id} status=${order.data.status} items=${order.data.items.length}`);
 }
