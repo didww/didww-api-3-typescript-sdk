@@ -5,7 +5,7 @@ export class Encrypt {
   private readonly client: DidwwClient;
   private publicKeyPems!: [string, string];
   private _fingerprint!: string;
-  private initialized = false;
+  private initPromise: Promise<void> | null = null;
 
   constructor(client: DidwwClient) {
     this.client = client;
@@ -18,13 +18,13 @@ export class Encrypt {
     }
     this.publicKeyPems = [keys.data[0].key, keys.data[1].key];
     this._fingerprint = calculateFingerprint(this.publicKeyPems);
-    this.initialized = true;
   }
 
-  private async ensureInitialized(): Promise<void> {
-    if (!this.initialized) {
-      await this.init();
+  private ensureInitialized(): Promise<void> {
+    if (!this.initPromise) {
+      this.initPromise = this.init();
     }
+    return this.initPromise;
   }
 
   async encrypt(data: Buffer): Promise<Buffer> {
@@ -38,8 +38,8 @@ export class Encrypt {
   }
 
   async reset(): Promise<void> {
-    this.initialized = false;
-    await this.init();
+    this.initPromise = null;
+    await this.ensureInitialized();
   }
 }
 
