@@ -1,4 +1,9 @@
-import { DidwwClient, Environment, encryptWithKeys, calculateFingerprint, ref } from '../src/index.js';
+import { readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { DidwwClient, Environment, encryptWithKeys, calculateFingerprint } from '../src/index.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -17,14 +22,18 @@ async function main() {
   const fingerprint = calculateFingerprint(publicKeyPems);
   console.log('Fingerprint:', fingerprint);
 
-  // Encrypt sample data (in real usage, this would be a file)
-  const sampleData = Buffer.from('Sample document content for testing');
-  const encrypted = encryptWithKeys(sampleData, publicKeyPems);
+  // Read the sample PDF file
+  const pdfPath = resolve(__dirname, 'sample.pdf');
+  const pdfData = readFileSync(pdfPath);
+  console.log(`Read PDF file: ${pdfPath} (${pdfData.length} bytes)`);
+
+  // Encrypt the PDF
+  const encrypted = encryptWithKeys(pdfData, publicKeyPems);
   console.log(`Encrypted data size: ${encrypted.length} bytes`);
 
   // Upload
   const ids = await client.uploadEncryptedFiles(fingerprint, [
-    { data: encrypted, description: 'Test document', filename: 'document.pdf.enc' },
+    { data: encrypted, description: 'Sample PDF document', filename: 'sample.pdf.enc' },
   ]);
   console.log('Uploaded file IDs:', ids);
 
