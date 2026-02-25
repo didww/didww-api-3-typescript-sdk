@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 import type { OrderItem } from '../nested/order-item.js';
 import type { OrderStatus, CallbackMethod } from '../enums.js';
 import { serializeOrderItems, deserializeOrderItems } from '../nested/order-item.js';
@@ -24,13 +24,13 @@ export interface OrderWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
+export const ORDER_RESOURCE: ResourceConfig<Order, OrderWrite> = {
   type: 'orders',
   path: 'orders',
   writableKeys: ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
-    for (const key of ORDER_META.writableKeys) {
+    for (const key of ORDER_RESOURCE.writableKeys) {
       if (key in (data as Record<string, unknown>)) {
         result[key as string] = (data as Record<string, unknown>)[key];
       }

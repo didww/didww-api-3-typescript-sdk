@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface PublicKey {
   id: string;
@@ -6,7 +6,7 @@ export interface PublicKey {
   key: string;
 }
 
-export const PUBLIC_KEY_META: ResourceMeta<PublicKey> = {
+export const PUBLIC_KEY_RESOURCE: ResourceConfig<PublicKey> = {
   type: 'public_keys',
   path: 'public_keys',
   writableKeys: [],

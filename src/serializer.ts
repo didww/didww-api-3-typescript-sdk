@@ -1,6 +1,6 @@
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
-import type { ResourceMeta, ResourceRef } from './resources/base.js';
-import { getResourceMeta } from './registry.js';
+import type { ResourceConfig, ResourceRef } from './resources/base.js';
+import { getResourceConfig } from './registry.js';
 
 const KITSU_OPTS = {
   camelCaseTypes: (s: string) => s,
@@ -119,7 +119,7 @@ function applyRegistryDeserialize(resource: unknown): unknown {
 
   // Apply deserializeCustom for this resource if registry has one
   if ('type' in record && typeof record.type === 'string') {
-    const meta = getResourceMeta(record.type);
+    const meta = getResourceConfig(record.type);
     if (meta?.deserializeCustom) {
       return { ...record, ...meta.deserializeCustom(record) };
     }
@@ -128,7 +128,7 @@ function applyRegistryDeserialize(resource: unknown): unknown {
   return record;
 }
 
-export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {
+export function serializeForCreate<T, TWrite>(meta: ResourceConfig<T, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
   const snaked = camelToSnakeKeys(toSerialize) as Record<string, unknown>;
@@ -137,7 +137,7 @@ export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, dat
 }
 
 export function serializeForUpdate<T, TWrite>(
-  meta: ResourceMeta<T, TWrite>,
+  meta: ResourceConfig<T, TWrite>,
   data: TWrite & { id: string },
 ): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);

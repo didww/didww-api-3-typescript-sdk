@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface EncryptedFile {
   id: string;
@@ -8,7 +8,7 @@ export interface EncryptedFile {
   createdAt: string;
 }
 
-export const ENCRYPTED_FILE_META: ResourceMeta<EncryptedFile> = {
+export const ENCRYPTED_FILE_RESOURCE: ResourceConfig<EncryptedFile> = {
   type: 'encrypted_files',
   path: 'encrypted_files',
   writableKeys: [],

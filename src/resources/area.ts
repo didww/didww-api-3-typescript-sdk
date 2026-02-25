@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Country } from './country.js';
 
 export interface Area {
@@ -8,7 +8,7 @@ export interface Area {
   country?: Country | ResourceRef;
 }
 
-export const AREA_META: ResourceMeta<Area> = {
+export const AREA_RESOURCE: ResourceConfig<Area> = {
   type: 'areas',
   path: 'areas',
   writableKeys: [],

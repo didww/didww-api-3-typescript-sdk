@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface Country {
   id: string;
@@ -8,7 +8,7 @@ export interface Country {
   iso: string;
 }
 
-export const COUNTRY_META: ResourceMeta<Country> = {
+export const COUNTRY_RESOURCE: ResourceConfig<Country> = {
   type: 'countries',
   path: 'countries',
   writableKeys: [],

@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { VoiceOutTrunk } from './voice-out-trunk.js';
 
 export interface VoiceOutTrunkRegenerateCredential {
@@ -11,7 +11,7 @@ export interface VoiceOutTrunkRegenerateCredentialWrite {
   voiceOutTrunk?: ResourceRef;
 }
 
-export const VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_META: ResourceMeta<
+export const VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE: ResourceConfig<
   VoiceOutTrunkRegenerateCredential,
   VoiceOutTrunkRegenerateCredentialWrite
 > = {

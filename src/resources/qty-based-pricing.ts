@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface QtyBasedPricing {
   id: string;
@@ -8,7 +8,7 @@ export interface QtyBasedPricing {
   monthlyPrice: string;
 }
 
-export const QTY_BASED_PRICING_META: ResourceMeta<QtyBasedPricing> = {
+export const QTY_BASED_PRICING_RESOURCE: ResourceConfig<QtyBasedPricing> = {
   type: 'qty_based_pricings',
   path: 'qty_based_pricings',
   writableKeys: [],

@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Feature } from '../enums.js';
 import type { Country } from './country.js';
 import type { Region } from './region.js';
@@ -23,7 +23,7 @@ export interface DidGroup {
   requirement?: Requirement | ResourceRef;
 }
 
-export const DID_GROUP_META: ResourceMeta<DidGroup> = {
+export const DID_GROUP_RESOURCE: ResourceConfig<DidGroup> = {
   type: 'did_groups',
   path: 'did_groups',
   writableKeys: [],

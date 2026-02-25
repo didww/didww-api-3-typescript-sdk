@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Country } from './country.js';
 import type { Identity } from './identity.js';
 import type { Proof } from './proof.js';
@@ -32,7 +32,7 @@ export interface AddressWrite {
   city?: ResourceRef;
 }
 
-export const ADDRESS_META: ResourceMeta<Address, AddressWrite> = {
+export const ADDRESS_RESOURCE: ResourceConfig<Address, AddressWrite> = {
   type: 'addresses',
   path: 'addresses',
   writableKeys: ['cityName', 'postalCode', 'address', 'description', 'country', 'identity', 'area', 'city'],

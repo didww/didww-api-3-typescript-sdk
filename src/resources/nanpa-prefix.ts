@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Country } from './country.js';
 import type { Region } from './region.js';
 
@@ -11,7 +11,7 @@ export interface NanpaPrefix {
   region?: Region | ResourceRef;
 }
 
-export const NANPA_PREFIX_META: ResourceMeta<NanpaPrefix> = {
+export const NANPA_PREFIX_RESOURCE: ResourceConfig<NanpaPrefix> = {
   type: 'nanpa_prefixes',
   path: 'nanpa_prefixes',
   writableKeys: [],

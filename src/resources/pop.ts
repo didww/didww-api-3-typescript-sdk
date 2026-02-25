@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface Pop {
   id: string;
@@ -6,7 +6,7 @@ export interface Pop {
   name: string;
 }
 
-export const POP_META: ResourceMeta<Pop> = {
+export const POP_RESOURCE: ResourceConfig<Pop> = {
   type: 'pops',
   path: 'pops',
   writableKeys: [],

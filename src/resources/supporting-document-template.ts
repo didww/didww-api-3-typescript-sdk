@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface SupportingDocumentTemplate {
   id: string;
@@ -8,7 +8,7 @@ export interface SupportingDocumentTemplate {
   url: string;
 }
 
-export const SUPPORTING_DOCUMENT_TEMPLATE_META: ResourceMeta<SupportingDocumentTemplate> = {
+export const SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE: ResourceConfig<SupportingDocumentTemplate> = {
   type: 'supporting_document_templates',
   path: 'supporting_document_templates',
   writableKeys: [],

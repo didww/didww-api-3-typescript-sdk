@@ -1,4 +1,4 @@
-import type { ResourceMeta, ResourceRef } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
 import type { Identity } from './identity.js';
 import type { SupportingDocumentTemplate } from './supporting-document-template.js';
 import type { EncryptedFile } from './encrypted-file.js';
@@ -18,7 +18,7 @@ export interface PermanentSupportingDocumentWrite {
   files?: ResourceRef[];
 }
 
-export const PERMANENT_SUPPORTING_DOCUMENT_META: ResourceMeta<
+export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE: ResourceConfig<
   PermanentSupportingDocument,
   PermanentSupportingDocumentWrite
 > = {

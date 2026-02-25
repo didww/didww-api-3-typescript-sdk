@@ -1,4 +1,4 @@
-import type { ResourceMeta } from './base.js';
+import type { ResourceConfig } from './base.js';
 
 export interface ProofType {
   id: string;
@@ -7,7 +7,7 @@ export interface ProofType {
   entityType: string;
 }
 
-export const PROOF_TYPE_META: ResourceMeta<ProofType> = {
+export const PROOF_TYPE_RESOURCE: ResourceConfig<ProofType> = {
   type: 'proof_types',
   path: 'proof_types',
   writableKeys: [],
