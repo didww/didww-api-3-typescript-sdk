@@ -42,6 +42,7 @@
     "nock": "^14.0.1",
     "prettier": "^3.8.1",
     "tsup": "^8.0.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.56.0",
     "vitest": "^2.1.8",
