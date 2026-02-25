@@ -69,7 +69,6 @@ describe('Encrypt class', () => {
 
   it('fetches public keys only once', async () => {
     const mockClient = createMockClient();
-    const listFn = mockClient.publicKeys().list;
     const enc = new Encrypt(mockClient);
     await enc.encrypt(Buffer.from('a'));
     await enc.encrypt(Buffer.from('b'));
