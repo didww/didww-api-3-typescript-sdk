@@ -57,7 +57,7 @@ describe('Serializer', () => {
       const result = deserialize(body);
       const data = result.data as Record<string, unknown>;
       expect(data.country).toBeDefined();
-      expect(data.country.data.name).toBe('US');
+      expect(data.country.name).toBe('US');
     });
   });
 

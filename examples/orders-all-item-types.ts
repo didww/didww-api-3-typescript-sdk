@@ -37,7 +37,7 @@ async function main() {
   });
   let skuForQty: string | null = null;
   for (const dg of didGroups.data) {
-    const skus = (dg as any).stockKeepingUnits?.data || [];
+    const skus = dg.stockKeepingUnits || [];
     if (Array.isArray(skus) && skus.length > 0) {
       skuForQty = skus[0].id;
       console.log(`SKU for qty order: ${skuForQty} (group=${dg.id})`);
@@ -85,9 +85,8 @@ async function main() {
   }
 }
 
-function getSku(ad: any): string {
-  const didGroup = ad.didGroup?.data;
-  const skus = didGroup?.stockKeepingUnits?.data || [];
+function getSku(ad: Record<string, unknown>): string {
+  const skus = ad.didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
     throw new Error(`No stockKeepingUnits for available DID ${ad.id}`);
   }

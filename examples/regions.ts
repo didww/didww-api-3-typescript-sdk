@@ -14,7 +14,8 @@ async function main() {
   });
   console.log(`Found ${regions.data.length} regions`);
   for (const region of regions.data) {
-    console.log(`  ${region.id} - ${region.name}`);
+    const country = region.country as Record<string, unknown> | undefined;
+    console.log(`  ${region.id} - ${region.name} (${country?.name ?? 'no country'})`);
   }
 
   // Find a specific region with included country
@@ -22,7 +23,8 @@ async function main() {
     const region = await client.regions().find(regions.data[0].id, {
       include: 'country',
     });
-    console.log(`\nRegion details: ${region.data.name}`);
+    const country = region.data.country as Record<string, unknown> | undefined;
+    console.log(`\nRegion details: ${region.data.name} — ${country?.name}`);
   }
 }
 

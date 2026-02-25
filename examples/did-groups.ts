@@ -6,14 +6,16 @@ const client = new DidwwClient({
 });
 
 async function main() {
-  // List DID groups with country include
+  // List DID groups with country and stock keeping units
   const didGroups = await client.didGroups().list({
-    include: 'country',
+    include: 'country,stock_keeping_units',
     page: { size: 5 },
   });
   console.log(`Found ${didGroups.data.length} DID groups`);
   for (const group of didGroups.data) {
-    console.log(`  ${group.prefix} - ${group.areaName} (metered: ${group.isMetered})`);
+    const country = group.country as Record<string, unknown> | undefined;
+    const skus = (group.stockKeepingUnits || []) as Record<string, unknown>[];
+    console.log(`  ${group.prefix} - ${group.areaName} (${country?.name ?? 'unknown'}, ${skus.length} SKUs)`);
   }
 }
 

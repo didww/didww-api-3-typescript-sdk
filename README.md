@@ -30,7 +30,7 @@ const client = new DidwwClient({
 
 // Check balance
 const balance = await client.balance().find();
-console.log(balance.data.total_balance);
+console.log(balance.data.totalBalance);
 
 // List countries
 const countries = await client.countries().list();
@@ -60,10 +60,10 @@ const client = new DidwwClient({
 
 ### Environments
 
-| Environment | Base URL |
-|-------------|----------|
-| `Environment.PRODUCTION` | `https://api.didww.com/v3` |
-| `Environment.SANDBOX` | `https://sandbox-api.didww.com/v3` |
+| Environment              | Base URL                           |
+| ------------------------ | ---------------------------------- |
+| `Environment.PRODUCTION` | `https://api.didww.com/v3`         |
+| `Environment.SANDBOX`    | `https://sandbox-api.didww.com/v3` |
 
 ## Resources
 
@@ -86,21 +86,31 @@ const pops = await client.pops().list();
 const groups = await client.didGroups().list({
   include: 'stock_keeping_units',
 });
+// Access included SKUs directly on each group
+for (const group of groups.data) {
+  const skus = group.stockKeepingUnits; // resolved array
+  console.log(group.prefix, skus?.length, 'SKUs');
+}
 
 // Available DIDs (with DID group and stock keeping units)
 const available = await client.availableDids().list({
   include: 'did_group.stock_keeping_units',
 });
+// Access nested includes
+const ad = available.data[0];
+const didGroup = ad.didGroup; // resolved DidGroup
+const skus = didGroup?.stockKeepingUnits; // resolved StockKeepingUnit[]
+console.log(ad.number, didGroup?.prefix, skus?.[0]?.monthlyPrice);
 
 // Other read-only resources
-client.didGroupTypes()
-client.nanpaPrefixes()
-client.proofTypes()
-client.publicKeys()
-client.requirements()
-client.supportingDocumentTemplates()
-client.stockKeepingUnits()
-client.qtyBasedPricings()
+client.didGroupTypes();
+client.nanpaPrefixes();
+client.proofTypes();
+client.publicKeys();
+client.requirements();
+client.supportingDocumentTemplates();
+client.stockKeepingUnits();
+client.qtyBasedPricings();
 
 // Balance (singleton)
 const balance = await client.balance().find();
@@ -117,22 +127,22 @@ const dids = await client.dids().list();
 // Assign a trunk to a DID (automatically nullifies trunk group)
 await client.dids().update({
   id: 'did-id',
-  voice_in_trunk: ref('voice_in_trunks', 'trunk-id'),
+  voiceInTrunk: ref('voice_in_trunks', 'trunk-id'),
 });
 
 // Assign capacity pool and update attributes in one call
 await client.dids().update({
   id: 'did-id',
-  capacity_pool: ref('capacity_pools', 'pool-id'),
-  dedicated_channels_count: 1,
-  capacity_limit: '5',
+  capacityPool: ref('capacity_pools', 'pool-id'),
+  dedicatedChannelsCount: 1,
+  capacityLimit: '5',
   description: 'Updated',
 });
 
 // Unassign a trunk (set to null)
 await client.dids().update({
   id: 'did-id',
-  voice_in_trunk: null,
+  voiceInTrunk: null,
 });
 ```
 
@@ -147,8 +157,8 @@ const trunk = await client.voiceInTrunks().create({
   configuration: sipConfiguration({
     host: 'sip.example.com',
     port: 5060,
-    codec_ids: [Codec.PCMU, Codec.PCMA],
-    transport_protocol_id: TransportProtocol.UDP,
+    codecIds: [Codec.PCMU, Codec.PCMA],
+    transportProtocolId: TransportProtocol.UDP,
   }),
   pop: ref('pops', 'pop-id'),
 });
@@ -174,58 +184,47 @@ await client.voiceInTrunks().remove(trunk.data.id);
 ```typescript
 const group = await client.voiceInTrunkGroups().create({
   name: 'Primary Group',
-  capacity_limit: 50,
+  capacityLimit: 50,
 });
 ```
 
 ### Voice Out Trunks
 
 ```typescript
+import { DefaultDstAction, OnCliMismatchAction } from '@didww/sdk';
+
 const voTrunk = await client.voiceOutTrunks().create({
   name: 'My Outbound Trunk',
-  allowed_sip_ips: ['0.0.0.0/0'],
-  default_dst_action: 'allow_all',
-  on_cli_mismatch_action: 'replace_cli',
+  allowedSipIps: ['0.0.0.0/0'],
+  defaultDstAction: DefaultDstAction.ALLOW_ALL,
+  onCliMismatchAction: OnCliMismatchAction.REPLACE_CLI,
 });
 ```
 
 ### Orders
 
 ```typescript
-import {
-  didOrderItem,
-  availableDidOrderItem,
-  reservationDidOrderItem,
-  capacityOrderItem,
-} from '@didww/sdk';
+import { didOrderItem, availableDidOrderItem, reservationDidOrderItem, capacityOrderItem } from '@didww/sdk';
 
 // Order by SKU
 const order = await client.orders().create({
-  allow_back_ordering: true,
-  items: [
-    didOrderItem({ sku_id: 'sku-id', qty: 2 }),
-  ],
+  allowBackOrdering: true,
+  items: [didOrderItem({ skuId: 'sku-id', qty: 2 })],
 });
 
 // Order a specific available DID
 const order2 = await client.orders().create({
-  items: [
-    availableDidOrderItem({ sku_id: 'sku-id', available_did_id: 'available-did-id' }),
-  ],
+  items: [availableDidOrderItem({ skuId: 'sku-id', availableDidId: 'available-did-id' })],
 });
 
 // Order a reserved DID
 const order3 = await client.orders().create({
-  items: [
-    reservationDidOrderItem({ sku_id: 'sku-id', did_reservation_id: 'reservation-id' }),
-  ],
+  items: [reservationDidOrderItem({ skuId: 'sku-id', didReservationId: 'reservation-id' })],
 });
 
 // Order capacity
 const order4 = await client.orders().create({
-  items: [
-    capacityOrderItem({ capacity_pool_id: 'pool-id', qty: 1 }),
-  ],
+  items: [capacityOrderItem({ capacityPoolId: 'pool-id', qty: 1 })],
 });
 ```
 
@@ -234,7 +233,7 @@ const order4 = await client.orders().create({
 ```typescript
 const reservation = await client.didReservations().create({
   description: 'Reserved for client',
-  available_did: ref('available_dids', 'available-did-id'),
+  availableDid: ref('available_dids', 'available-did-id'),
 });
 
 await client.didReservations().remove(reservation.data.id);
@@ -245,8 +244,8 @@ await client.didReservations().remove(reservation.data.id);
 ```typescript
 const scg = await client.sharedCapacityGroups().create({
   name: 'Shared Group',
-  shared_channels_count: 20,
-  capacity_pool: ref('capacity_pools', 'pool-id'),
+  sharedChannelsCount: 20,
+  capacityPool: ref('capacity_pools', 'pool-id'),
 });
 ```
 
@@ -256,10 +255,10 @@ const scg = await client.sharedCapacityGroups().create({
 import { IdentityType, ref } from '@didww/sdk';
 
 const identity = await client.identities().create({
-  identity_type: IdentityType.PERSONAL,
-  first_name: 'John',
-  last_name: 'Doe',
-  phone_number: '12125551234',
+  identityType: IdentityType.PERSONAL,
+  firstName: 'John',
+  lastName: 'Doe',
+  phoneNumber: '12125551234',
   country: ref('countries', 'country-id'),
 });
 ```
@@ -268,8 +267,8 @@ const identity = await client.identities().create({
 
 ```typescript
 const address = await client.addresses().create({
-  city_name: 'New York',
-  postal_code: '10001',
+  cityName: 'New York',
+  postalCode: '10001',
   address: '123 Main St',
   identity: ref('identities', 'identity-id'),
   country: ref('countries', 'country-id'),
@@ -279,13 +278,54 @@ const address = await client.addresses().create({
 ### Exports
 
 ```typescript
+import { ExportType } from '@didww/sdk';
+
 const exp = await client.exports().create({
-  export_type: 'cdr_in',
+  exportType: ExportType.CDR_IN,
   filters: { year: 2025, month: 1 },
 });
 
 // Download when completed
 const data = await client.downloadExport(exp.data.url);
+```
+
+## Included Resources
+
+Use the `include` parameter to sideload related resources. Included relationships are resolved directly on the parent object:
+
+```typescript
+// Regions with their country
+const regions = await client.regions().list({
+  include: 'country',
+});
+for (const region of regions.data) {
+  console.log(region.name, region.country?.name);
+}
+
+// DID groups with nested stock keeping units
+const groups = await client.didGroups().list({
+  include: 'stock_keeping_units',
+});
+for (const group of groups.data) {
+  for (const sku of group.stockKeepingUnits || []) {
+    console.log(group.prefix, sku.monthlyPrice);
+  }
+}
+
+// Available DIDs with nested includes (did_group → stock_keeping_units)
+const available = await client.availableDids().list({
+  include: 'did_group.stock_keeping_units',
+});
+const ad = available.data[0];
+const skuId = ad.didGroup?.stockKeepingUnits?.[0]?.id;
+
+// DIDs with voice trunk and capacity pool
+const dids = await client.dids().list({
+  include: 'voice_in_trunk,capacity_pool',
+});
+for (const did of dids.data) {
+  console.log(did.number, did.voiceInTrunk?.name, did.capacityPool?.name);
+}
 ```
 
 ## Query Parameters
@@ -301,19 +341,19 @@ const result = await client.regions().list({
 
 ## Trunk Configuration Types
 
-| Type | Factory |
-|------|---------|
-| SIP | `sipConfiguration({ host, port, codec_ids, ... })` |
-| PSTN | `pstnConfiguration({ dst })` |
+| Type | Factory                                           |
+| ---- | ------------------------------------------------- |
+| SIP  | `sipConfiguration({ host, port, codecIds, ... })` |
+| PSTN | `pstnConfiguration({ dst })`                      |
 
 ## Order Item Types
 
-| Type | Factory |
-|------|---------|
-| DID (by SKU) | `didOrderItem({ sku_id, qty })` |
-| Available DID | `availableDidOrderItem({ sku_id, available_did_id })` |
-| Reservation DID | `reservationDidOrderItem({ sku_id, did_reservation_id })` |
-| Capacity | `capacityOrderItem({ capacity_pool_id, qty })` |
+| Type            | Factory                                                |
+| --------------- | ------------------------------------------------------ |
+| DID (by SKU)    | `didOrderItem({ skuId, qty })`                         |
+| Available DID   | `availableDidOrderItem({ skuId, availableDidId })`     |
+| Reservation DID | `reservationDidOrderItem({ skuId, didReservationId })` |
+| Capacity        | `capacityOrderItem({ capacityPoolId, qty })`           |
 
 ## Enums
 
@@ -322,26 +362,26 @@ Type-safe enums are provided for all API constant fields:
 ```typescript
 import {
   // String enums
-  CallbackMethod,          // POST, GET
+  CallbackMethod, // POST, GET
   AddressVerificationStatus, // PENDING, APPROVED, REJECTED
-  ExportType,              // CDR_IN, CDR_OUT
-  ExportStatus,            // PENDING, PROCESSING, COMPLETED
-  IdentityType,            // PERSONAL, BUSINESS, ANY
-  OrderStatus,             // PENDING, CANCELED, COMPLETED
-  OnCliMismatchAction,     // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI
-  MediaEncryptionMode,     // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
-  DefaultDstAction,        // ALLOW_ALL, REJECT_ALL
-  VoiceOutTrunkStatus,     // ACTIVE, BLOCKED
-  CliFormat,               // RAW, E164, LOCAL
-  AreaLevel,               // WORLDWIDE, COUNTRY, AREA, CITY
-  Feature,                 // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT
-  StirShakenMode,          // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
+  ExportType, // CDR_IN, CDR_OUT
+  ExportStatus, // PENDING, PROCESSING, COMPLETED
+  IdentityType, // PERSONAL, BUSINESS, ANY
+  OrderStatus, // PENDING, CANCELED, COMPLETED
+  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI
+  MediaEncryptionMode, // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
+  DefaultDstAction, // ALLOW_ALL, REJECT_ALL
+  VoiceOutTrunkStatus, // ACTIVE, BLOCKED
+  CliFormat, // RAW, E164, LOCAL
+  AreaLevel, // WORLDWIDE, COUNTRY, AREA, CITY
+  Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT
+  StirShakenMode, // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
   // Integer enums
-  TransportProtocol,       // UDP=1, TCP=2, TLS=3
-  RxDtmfFormat,            // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
-  TxDtmfFormat,            // DISABLED=1, RFC_2833=2, SIP_INFO_RELAY=3, SIP_INFO_DTMF=4
-  SstRefreshMethod,        // INVITE=1, UPDATE=2, UPDATE_FALLBACK_INVITE=3
-  Codec,                   // TELEPHONE_EVENT=6, G723=7, G729=8, PCMU=9, PCMA=10, ...
+  TransportProtocol, // UDP=1, TCP=2, TLS=3
+  RxDtmfFormat, // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
+  TxDtmfFormat, // DISABLED=1, RFC_2833=2, SIP_INFO_RELAY=3, SIP_INFO_DTMF=4
+  SstRefreshMethod, // INVITE=1, UPDATE=2, UPDATE_FALLBACK_INVITE=3
+  Codec, // TELEPHONE_EVENT=6, G723=7, G729=8, PCMU=9, PCMA=10, ...
 } from '@didww/sdk';
 ```
 
@@ -377,9 +417,9 @@ const ids = await client.uploadEncryptedFiles(fingerprint, [
 
 // Create proof with uploaded files
 await client.proofs().create({
-  proof_type: ref('proof_types', 'type-id'),
+  proofType: ref('proof_types', 'type-id'),
   entity: ref('identities', 'identity-id'),
-  files: ids.map(id => ref('encrypted_files', id)),
+  files: ids.map((id) => ref('encrypted_files', id)),
 });
 ```
 
@@ -394,9 +434,9 @@ const validator = new RequestValidator('your-api-key');
 
 // In your webhook handler:
 const valid = validator.validate(
-  requestUrl,    // full original URL
-  payload,       // Record<string, string> of payload key-value pairs
-  signature,     // value of X-DIDWW-Signature header
+  requestUrl, // full original URL
+  payload, // Record<string, string> of payload key-value pairs
+  signature, // value of X-DIDWW-Signature header
 );
 ```
 
@@ -406,7 +446,9 @@ const valid = validator.validate(
 import { DidwwApiError } from '@didww/sdk';
 
 try {
-  await client.orders().create({ /* ... */ });
+  await client.orders().create({
+    /* ... */
+  });
 } catch (error) {
   if (error instanceof DidwwApiError) {
     console.log('Status:', error.status);
@@ -419,41 +461,41 @@ try {
 
 ## All Supported Resources
 
-| Resource | Repository | Operations |
-|----------|-----------|------------|
-| Country | `client.countries()` | list, find |
-| Region | `client.regions()` | list, find |
-| City | `client.cities()` | list, find |
-| Area | `client.areas()` | list, find |
-| NanpaPrefix | `client.nanpaPrefixes()` | list, find |
-| Pop | `client.pops()` | list, find |
-| DidGroupType | `client.didGroupTypes()` | list, find |
-| DidGroup | `client.didGroups()` | list, find |
-| AvailableDid | `client.availableDids()` | list, find |
-| ProofType | `client.proofTypes()` | list, find |
-| PublicKey | `client.publicKeys()` | list, find |
-| Requirement | `client.requirements()` | list, find |
-| SupportingDocumentTemplate | `client.supportingDocumentTemplates()` | list, find |
-| StockKeepingUnit | `client.stockKeepingUnits()` | list, find |
-| QtyBasedPricing | `client.qtyBasedPricings()` | list, find |
-| Balance | `client.balance()` | find |
-| Did | `client.dids()` | list, find, update, delete |
-| VoiceInTrunk | `client.voiceInTrunks()` | list, find, create, update, delete |
-| VoiceInTrunkGroup | `client.voiceInTrunkGroups()` | list, find, create, update, delete |
-| VoiceOutTrunk | `client.voiceOutTrunks()` | list, find, create, update, delete |
-| VoiceOutTrunkRegenerateCredential | `client.voiceOutTrunkRegenerateCredentials()` | create |
-| DidReservation | `client.didReservations()` | list, find, create, update, delete |
-| CapacityPool | `client.capacityPools()` | list, find, update |
-| SharedCapacityGroup | `client.sharedCapacityGroups()` | list, find, create, update, delete |
-| Order | `client.orders()` | list, find, create, update, delete |
-| Export | `client.exports()` | list, find, create, update, delete |
-| Address | `client.addresses()` | list, find, create, update, delete |
-| AddressVerification | `client.addressVerifications()` | list, find, create, delete |
-| Identity | `client.identities()` | list, find, create, update, delete |
-| EncryptedFile | `client.encryptedFiles()` | list, find, delete |
-| PermanentSupportingDocument | `client.permanentSupportingDocuments()` | create, delete |
-| Proof | `client.proofs()` | create, delete |
-| RequirementValidation | `client.requirementValidations()` | create |
+| Resource                          | Repository                                    | Operations                         |
+| --------------------------------- | --------------------------------------------- | ---------------------------------- |
+| Country                           | `client.countries()`                          | list, find                         |
+| Region                            | `client.regions()`                            | list, find                         |
+| City                              | `client.cities()`                             | list, find                         |
+| Area                              | `client.areas()`                              | list, find                         |
+| NanpaPrefix                       | `client.nanpaPrefixes()`                      | list, find                         |
+| Pop                               | `client.pops()`                               | list, find                         |
+| DidGroupType                      | `client.didGroupTypes()`                      | list, find                         |
+| DidGroup                          | `client.didGroups()`                          | list, find                         |
+| AvailableDid                      | `client.availableDids()`                      | list, find                         |
+| ProofType                         | `client.proofTypes()`                         | list, find                         |
+| PublicKey                         | `client.publicKeys()`                         | list, find                         |
+| Requirement                       | `client.requirements()`                       | list, find                         |
+| SupportingDocumentTemplate        | `client.supportingDocumentTemplates()`        | list, find                         |
+| StockKeepingUnit                  | `client.stockKeepingUnits()`                  | list, find                         |
+| QtyBasedPricing                   | `client.qtyBasedPricings()`                   | list, find                         |
+| Balance                           | `client.balance()`                            | find                               |
+| Did                               | `client.dids()`                               | list, find, update, delete         |
+| VoiceInTrunk                      | `client.voiceInTrunks()`                      | list, find, create, update, delete |
+| VoiceInTrunkGroup                 | `client.voiceInTrunkGroups()`                 | list, find, create, update, delete |
+| VoiceOutTrunk                     | `client.voiceOutTrunks()`                     | list, find, create, update, delete |
+| VoiceOutTrunkRegenerateCredential | `client.voiceOutTrunkRegenerateCredentials()` | create                             |
+| DidReservation                    | `client.didReservations()`                    | list, find, create, update, delete |
+| CapacityPool                      | `client.capacityPools()`                      | list, find, update                 |
+| SharedCapacityGroup               | `client.sharedCapacityGroups()`               | list, find, create, update, delete |
+| Order                             | `client.orders()`                             | list, find, create, update, delete |
+| Export                            | `client.exports()`                            | list, find, create, update, delete |
+| Address                           | `client.addresses()`                          | list, find, create, update, delete |
+| AddressVerification               | `client.addressVerifications()`               | list, find, create, delete         |
+| Identity                          | `client.identities()`                         | list, find, create, update, delete |
+| EncryptedFile                     | `client.encryptedFiles()`                     | list, find, delete                 |
+| PermanentSupportingDocument       | `client.permanentSupportingDocuments()`       | create, delete                     |
+| Proof                             | `client.proofs()`                             | create, delete                     |
+| RequirementValidation             | `client.requirementValidations()`             | create                             |
 
 ## Contributing
 

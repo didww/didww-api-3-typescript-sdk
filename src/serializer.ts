@@ -49,7 +49,56 @@ export interface SerializedResource {
 
 export function deserialize<T>(body: unknown): DeserializedResponse<T> | DeserializedListResponse<T> {
   const result = deserialise(body);
-  return snakeToCamelKeys(result) as DeserializedResponse<T> | DeserializedListResponse<T>;
+  const camelCased = snakeToCamelKeys(result) as Record<string, unknown>;
+  if (Array.isArray(camelCased.data)) {
+    camelCased.data = (camelCased.data as unknown[]).map(unwrapResourceProps);
+  } else if (camelCased.data && typeof camelCased.data === 'object') {
+    camelCased.data = unwrapResourceProps(camelCased.data);
+  }
+  return camelCased as unknown as DeserializedResponse<T> | DeserializedListResponse<T>;
+}
+
+function isResourceLike(val: unknown): boolean {
+  return typeof val === 'object' && val !== null && 'id' in val && 'type' in val;
+}
+
+function isRelationshipWrapper(obj: Record<string, unknown>): boolean {
+  const keys = Object.keys(obj);
+  if (!keys.every((k) => k === 'data' || k === 'links')) return false;
+  if ('links' in obj) {
+    const links = obj.links;
+    if (typeof links === 'object' && links !== null && ('self' in links || 'related' in links)) return true;
+  }
+  if (keys.length === 1 && 'data' in obj) {
+    const data = obj.data;
+    if (data === null) return true;
+    if (Array.isArray(data)) return data.length === 0 || isResourceLike(data[0]);
+    return isResourceLike(data);
+  }
+  return false;
+}
+
+function unwrapResourceProps(resource: unknown): unknown {
+  if (typeof resource !== 'object' || resource === null) return resource;
+  const record = resource as Record<string, unknown>;
+  return Object.fromEntries(
+    Object.entries(record)
+      .map(([k, v]) => {
+        if (v !== null && typeof v === 'object' && !Array.isArray(v)) {
+          const obj = v as Record<string, unknown>;
+          if (isRelationshipWrapper(obj)) {
+            if ('data' in obj && obj.data !== undefined) {
+              const inner = obj.data;
+              if (Array.isArray(inner)) return [k, inner.map(unwrapResourceProps)];
+              return [k, unwrapResourceProps(inner)];
+            }
+            return [k, undefined];
+          }
+        }
+        return [k, v];
+      })
+      .filter(([, v]) => v !== undefined),
+  );
 }
 
 export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {

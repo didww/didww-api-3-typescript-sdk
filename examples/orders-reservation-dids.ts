@@ -19,8 +19,8 @@ async function main() {
   console.log(`Available DID: ${ad.number}`);
 
   // Resolve SKU from included DID group
-  const didGroup = (ad as any).didGroup?.data;
-  const skus = didGroup?.stockKeepingUnits?.data || [];
+  const didGroup = ad.didGroup;
+  const skus = didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
     console.log('No stockKeepingUnits found in included didGroup');
     return;
