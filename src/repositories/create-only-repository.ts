@@ -5,7 +5,7 @@ import type { HttpClient } from './read-only-repository.js';
 import { ReadOnlyRepository } from './read-only-repository.js';
 import { serializeForCreate } from '../serializer.js';
 
-export class CreateOnlyRepository<T, TWrite = Partial<T>> extends ReadOnlyRepository<T> {
+export class CreateOnlyRepository<T, TWrite = Partial<T>> extends ReadOnlyRepository<T, TWrite> {
   constructor(client: HttpClient, meta: ResourceMeta<T, TWrite>) {
     super(client, meta);
   }

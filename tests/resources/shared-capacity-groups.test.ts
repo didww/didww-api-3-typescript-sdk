@@ -27,12 +27,12 @@ describe('SharedCapacityGroups', () => {
     const result = await client.sharedCapacityGroups().update({
       id: '89f987e2-0862-4bf4-a3f4-cdc89af0d875',
       name: 'didww1',
-      shared_channels_count: 10,
-      metered_channels_count: 2,
+      sharedChannelsCount: 10,
+      meteredChannelsCount: 2,
     });
     expect(result.data.name).toBe('didww1');
-    expect(result.data.shared_channels_count).toBe(10);
-    expect(result.data.metered_channels_count).toBe(2);
+    expect(result.data.sharedChannelsCount).toBe(10);
+    expect(result.data.meteredChannelsCount).toBe(2);
   });
 
   it('deletes a shared capacity group', async () => {

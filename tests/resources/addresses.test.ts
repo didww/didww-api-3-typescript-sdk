@@ -10,8 +10,8 @@ describe('Addresses', () => {
     loadCassette('addresses/create.yaml');
     const client = createTestClient();
     const result = await client.addresses().create({
-      city_name: 'New York',
-      postal_code: '10001',
+      cityName: 'New York',
+      postalCode: '10001',
       address: '123 Main St',
       description: 'Test address',
       country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),

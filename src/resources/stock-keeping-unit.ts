@@ -3,9 +3,9 @@ import type { ResourceMeta } from './base.js';
 export interface StockKeepingUnit {
   id: string;
   type: 'stock_keeping_units';
-  setup_price: string;
-  monthly_price: string;
-  channels_included_count: number;
+  setupPrice: string;
+  monthlyPrice: string;
+  channelsIncludedCount: number;
 }
 
 export const STOCK_KEEPING_UNIT_META: ResourceMeta<StockKeepingUnit> = {

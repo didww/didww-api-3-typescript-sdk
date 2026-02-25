@@ -7,7 +7,7 @@ import {
   sipConfiguration,
   pstnConfiguration,
 } from '../../src/nested/trunk-configuration.js';
-import type { SipConfiguration } from '../../src/nested/trunk-configuration.js';
+import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
 
 describe('VoiceInTrunks', () => {
@@ -35,30 +35,30 @@ describe('VoiceInTrunks', () => {
     expect(config.username).toBe('username');
     expect(config.host).toBe('216.58.215.78');
     expect(config.port).toBe(8060);
-    expect(config.codec_ids).toEqual([9, 10, 8]);
-    expect(config.transport_protocol_id).toBe(1);
-    expect(config.auth_enabled).toBe(true);
-    expect(config.auth_user).toBe('auth_user');
-    expect(config.auth_password).toBe('auth_password');
-    expect(config.auth_from_user).toBe('');
-    expect(config.auth_from_domain).toBe('');
-    expect(config.resolve_ruri).toBe(true);
-    expect(config.rx_dtmf_format_id).toBe(1);
-    expect(config.tx_dtmf_format_id).toBe(1);
-    expect(config.sst_enabled).toBe(false);
-    expect(config.sst_min_timer).toBe(600);
-    expect(config.sst_max_timer).toBe(900);
-    expect(config.sst_accept_501).toBe(true);
-    expect(config.sip_timer_b).toBe(8000);
-    expect(config.dns_srv_failover_timer).toBe(2000);
-    expect(config.rtp_ping).toBe(false);
-    expect(config.force_symmetric_rtp).toBe(false);
-    expect(config.rerouting_disconnect_code_ids).toBeNull();
-    expect(config.max_transfers).toBe(2);
-    expect(config.max_30x_redirects).toBe(5);
-    expect(config.media_encryption_mode).toBe('disabled');
-    expect(config.stir_shaken_mode).toBe('disabled');
-    expect(config.allowed_rtp_ips).toBeNull();
+    expect(config.codecIds).toEqual([9, 10, 8]);
+    expect(config.transportProtocolId).toBe(1);
+    expect(config.authEnabled).toBe(true);
+    expect(config.authUser).toBe('auth_user');
+    expect(config.authPassword).toBe('auth_password');
+    expect(config.authFromUser).toBe('');
+    expect(config.authFromDomain).toBe('');
+    expect(config.resolveRuri).toBe(true);
+    expect(config.rxDtmfFormatId).toBe(1);
+    expect(config.txDtmfFormatId).toBe(1);
+    expect(config.sstEnabled).toBe(false);
+    expect(config.sstMinTimer).toBe(600);
+    expect(config.sstMaxTimer).toBe(900);
+    expect(config.sstAccept_501).toBe(true);
+    expect(config.sipTimerB).toBe(8000);
+    expect(config.dnsSrvFailoverTimer).toBe(2000);
+    expect(config.rtpPing).toBe(false);
+    expect(config.forceSymmetricRtp).toBe(false);
+    expect(config.reroutingDisconnectCodeIds).toBeNull();
+    expect(config.maxTransfers).toBe(2);
+    expect(config.max_30xRedirects).toBe(5);
+    expect(config.mediaEncryptionMode).toBe('disabled');
+    expect(config.stirShakenMode).toBe('disabled');
+    expect(config.allowedRtpIps).toBeNull();
   });
 
   it('creates a voice in trunk with SIP config and rerouting disconnect codes', async () => {
@@ -70,8 +70,8 @@ describe('VoiceInTrunks', () => {
         username: 'username',
         host: '216.58.215.110',
         port: 5060,
-        codec_ids: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
-        rerouting_disconnect_code_ids: [
+        codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
+        reroutingDisconnectCodeIds: [
           ReroutingDisconnectCode.SIP_400_BAD_REQUEST,
           ReroutingDisconnectCode.SIP_402_PAYMENT_REQUIRED,
           ReroutingDisconnectCode.SIP_403_FORBIDDEN,
@@ -84,10 +84,10 @@ describe('VoiceInTrunks', () => {
     expect(result.data.id).toBe('a80006b6-4183-4865-8b99-7ebbd359a762');
     const config = result.data.configuration as SipConfiguration;
     expect(config.type).toBe('sip_configurations');
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.SIP_400_BAD_REQUEST);
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.SIP_486_BUSY_HERE);
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.SIP_502_BAD_GATEWAY);
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.RINGING_TIMEOUT);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.SIP_400_BAD_REQUEST);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.SIP_486_BUSY_HERE);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.SIP_502_BAD_GATEWAY);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.RINGING_TIMEOUT);
   });
 
   it('updates a voice in trunk with rerouting disconnect codes', async () => {
@@ -100,8 +100,8 @@ describe('VoiceInTrunks', () => {
         username: 'new-username',
         host: '216.58.215.110',
         port: 5060,
-        codec_ids: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
-        rerouting_disconnect_code_ids: [
+        codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
+        reroutingDisconnectCodeIds: [
           ReroutingDisconnectCode.SIP_400_BAD_REQUEST,
           ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
         ],
@@ -111,8 +111,8 @@ describe('VoiceInTrunks', () => {
     expect(result.data.name).toBe('hello, updated test sip trunk');
     const config = result.data.configuration as SipConfiguration;
     expect(config.username).toBe('new-username');
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.SIP_400_BAD_REQUEST);
-    expect(config.rerouting_disconnect_code_ids).toContain(ReroutingDisconnectCode.RINGING_TIMEOUT);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.SIP_400_BAD_REQUEST);
+    expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.RINGING_TIMEOUT);
   });
 
   it('creates a voice in trunk with PSTN config', async () => {
@@ -150,9 +150,9 @@ describe('TrunkConfiguration serialization', () => {
     const config = sipConfiguration({
       host: 'example.com',
       port: 5060,
-      codec_ids: [Codec.PCMU, Codec.PCMA, Codec.G729],
+      codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729],
       username: 'user',
-      rerouting_disconnect_code_ids: [
+      reroutingDisconnectCodeIds: [
         ReroutingDisconnectCode.SIP_486_BUSY_HERE,
         ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
         ReroutingDisconnectCode.RINGING_TIMEOUT,
@@ -162,8 +162,8 @@ describe('TrunkConfiguration serialization', () => {
     expect(data.type).toBe('sip_configurations');
     expect(data.attributes.username).toBe('user');
     expect(data.attributes.host).toBe('example.com');
-    expect(data.attributes.codec_ids).toEqual([Codec.PCMU, Codec.PCMA, Codec.G729]);
-    expect(data.attributes.rerouting_disconnect_code_ids).toEqual([
+    expect(data.attributes.codecIds).toEqual([Codec.PCMU, Codec.PCMA, Codec.G729]);
+    expect(data.attributes.reroutingDisconnectCodeIds).toEqual([
       ReroutingDisconnectCode.SIP_486_BUSY_HERE,
       ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
       ReroutingDisconnectCode.RINGING_TIMEOUT,
@@ -174,11 +174,11 @@ describe('TrunkConfiguration serialization', () => {
     const pstnData = { type: 'pstn_configurations', attributes: { dst: '12345' } };
     const pstn = deserializeTrunkConfiguration(pstnData);
     expect(pstn.type).toBe('pstn_configurations');
-    expect((pstn as any).dst).toBe('12345');
+    expect((pstn as PstnConfiguration).dst).toBe('12345');
 
     const sipData = { type: 'sip_configurations', attributes: { username: 'user' } };
     const sip = deserializeTrunkConfiguration(sipData);
     expect(sip.type).toBe('sip_configurations');
-    expect((sip as any).username).toBe('user');
+    expect((sip as SipConfiguration).username).toBe('user');
   });
 });

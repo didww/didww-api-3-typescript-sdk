@@ -10,9 +10,9 @@ describe('Identities', () => {
     loadCassette('identities/create.yaml');
     const client = createTestClient();
     const result = await client.identities().create({
-      first_name: 'John',
-      last_name: 'Doe',
-      identity_type: 'Business',
+      firstName: 'John',
+      lastName: 'Doe',
+      identityType: 'Business',
       country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),
     });
     expect(result.data.id).toBeDefined();

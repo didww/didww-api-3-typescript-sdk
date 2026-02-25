@@ -10,29 +10,29 @@ export interface Order {
   status: OrderStatus;
   description: string;
   reference: string;
-  created_at: string;
-  allow_back_ordering: boolean;
-  callback_url: string | null;
-  callback_method: CallbackMethod | null;
+  createdAt: string;
+  allowBackOrdering: boolean;
+  callbackUrl: string | null;
+  callbackMethod: CallbackMethod | null;
   items: OrderItem[];
 }
 
 export interface OrderWrite {
-  allow_back_ordering?: boolean;
+  allowBackOrdering?: boolean;
   items?: OrderItem[];
-  callback_url?: string | null;
-  callback_method?: CallbackMethod | null;
+  callbackUrl?: string | null;
+  callbackMethod?: CallbackMethod | null;
 }
 
 export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
   type: 'orders',
   path: 'orders',
-  writableKeys: ['allow_back_ordering', 'items', 'callback_url', 'callback_method'],
+  writableKeys: ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of ORDER_META.writableKeys) {
-      if (key in (data as any)) {
-        result[key as string] = (data as any)[key];
+      if (key in (data as Record<string, unknown>)) {
+        result[key as string] = (data as Record<string, unknown>)[key];
       }
     }
     if (result.items && Array.isArray(result.items)) {
@@ -41,9 +41,9 @@ export const ORDER_META: ResourceMeta<Order, OrderWrite> = {
     return result;
   },
   deserializeCustom(data) {
-    const items = (data as any).items;
+    const items = (data as Record<string, unknown>).items;
     if (Array.isArray(items)) {
-      return { items: deserializeOrderItems(items) } as any;
+      return { items: deserializeOrderItems(items) } as Partial<Order>;
     }
     return {};
   },

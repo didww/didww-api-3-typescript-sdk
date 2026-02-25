@@ -9,29 +9,29 @@ export interface VoiceInTrunk {
   name: string;
   priority: number;
   weight: number;
-  cli_format: CliFormat;
-  cli_prefix: string;
+  cliFormat: CliFormat;
+  cliPrefix: string;
   description: string;
-  ringing_timeout: number;
-  capacity_limit: string;
+  ringingTimeout: number;
+  capacityLimit: string;
   configuration: TrunkConfiguration;
-  created_at: string;
+  createdAt: string;
   pop?: ResourceRef;
-  voice_in_trunk_group?: ResourceRef;
+  voiceInTrunkGroup?: ResourceRef;
 }
 
 export interface VoiceInTrunkWrite {
   name?: string;
   priority?: number;
   weight?: number;
-  cli_format?: CliFormat;
-  cli_prefix?: string;
+  cliFormat?: CliFormat;
+  cliPrefix?: string;
   description?: string;
-  ringing_timeout?: number;
-  capacity_limit?: string;
+  ringingTimeout?: number;
+  capacityLimit?: string;
   configuration?: TrunkConfiguration;
   pop?: ResourceRef;
-  voice_in_trunk_group?: ResourceRef;
+  voiceInTrunkGroup?: ResourceRef;
 }
 
 export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> = {
@@ -41,20 +41,20 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
     'name',
     'priority',
     'weight',
-    'cli_format',
-    'cli_prefix',
+    'cliFormat',
+    'cliPrefix',
     'description',
-    'ringing_timeout',
-    'capacity_limit',
+    'ringingTimeout',
+    'capacityLimit',
     'configuration',
     'pop',
-    'voice_in_trunk_group',
+    'voiceInTrunkGroup',
   ],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of VOICE_IN_TRUNK_META.writableKeys) {
-      if (key in (data as any)) {
-        result[key as string] = (data as any)[key];
+      if (key in (data as Record<string, unknown>)) {
+        result[key as string] = (data as Record<string, unknown>)[key];
       }
     }
     if (result.configuration) {
@@ -63,9 +63,11 @@ export const VOICE_IN_TRUNK_META: ResourceMeta<VoiceInTrunk, VoiceInTrunkWrite> 
     return result;
   },
   deserializeCustom(data) {
-    const config = (data as any).configuration;
+    const config = (data as Record<string, unknown>).configuration;
     if (config && typeof config === 'object' && 'type' in config && 'attributes' in config) {
-      return { configuration: deserializeTrunkConfiguration(config as Record<string, unknown>) } as any;
+      return {
+        configuration: deserializeTrunkConfiguration(config as Record<string, unknown>),
+      } as Partial<VoiceInTrunk>;
     }
     return {};
   },

@@ -4,7 +4,7 @@ export interface ProofType {
   id: string;
   type: 'proof_types';
   name: string;
-  entity_type: string;
+  entityType: string;
 }
 
 export const PROOF_TYPE_META: ResourceMeta<ProofType> = {

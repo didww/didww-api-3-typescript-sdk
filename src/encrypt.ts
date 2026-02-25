@@ -1,4 +1,47 @@
 import { createCipheriv, createHash, publicEncrypt, randomBytes, constants } from 'node:crypto';
+import type { DidwwClient } from './client.js';
+
+export class Encrypt {
+  private readonly client: DidwwClient;
+  private publicKeyPems!: [string, string];
+  private _fingerprint!: string;
+  private initPromise: Promise<void> | null = null;
+
+  constructor(client: DidwwClient) {
+    this.client = client;
+  }
+
+  async init(): Promise<void> {
+    const keys = await this.client.publicKeys().list();
+    if (keys.data.length < 2) {
+      throw new Error('Expected at least 2 public keys from API');
+    }
+    this.publicKeyPems = [keys.data[0].key, keys.data[1].key];
+    this._fingerprint = calculateFingerprint(this.publicKeyPems);
+  }
+
+  private ensureInitialized(): Promise<void> {
+    if (!this.initPromise) {
+      this.initPromise = this.init();
+    }
+    return this.initPromise;
+  }
+
+  async encrypt(data: Buffer): Promise<Buffer> {
+    await this.ensureInitialized();
+    return encryptWithKeys(data, this.publicKeyPems);
+  }
+
+  async getFingerprint(): Promise<string> {
+    await this.ensureInitialized();
+    return this._fingerprint;
+  }
+
+  async reset(): Promise<void> {
+    this.initPromise = null;
+    await this.ensureInitialized();
+  }
+}
 
 export function encryptWithKeys(binaryData: Buffer, publicKeyPems: [string, string]): Buffer {
   const aesKey = randomBytes(32);

@@ -13,7 +13,7 @@ async function main() {
   });
   console.log(`Found ${didGroups.data.length} DID groups`);
   for (const group of didGroups.data) {
-    console.log(`  ${group.prefix} - ${group.area_name} (metered: ${group.is_metered})`);
+    console.log(`  ${group.prefix} - ${group.areaName} (metered: ${group.isMetered})`);
   }
 }
 

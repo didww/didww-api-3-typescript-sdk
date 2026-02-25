@@ -19,6 +19,6 @@ describe('DidGroups', () => {
     const result = await client.didGroups().find('2187c36d-28fb-436f-8861-5a0f5b5a3ee1');
     expect(result.data.id).toBe('2187c36d-28fb-436f-8861-5a0f5b5a3ee1');
     expect(result.data.prefix).toBe('241');
-    expect(result.data.area_name).toBe('Aachen');
+    expect(result.data.areaName).toBe('Aachen');
   });
 });

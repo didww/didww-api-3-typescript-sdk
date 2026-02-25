@@ -17,19 +17,19 @@ async function main() {
 
   // Create an identity
   const identity = await client.identities().create({
-    identity_type: IdentityType.PERSONAL,
-    first_name: 'John',
-    last_name: 'Doe',
-    phone_number: '1234567890',
-    id_number: 'AB123456',
+    identityType: IdentityType.PERSONAL,
+    firstName: 'John',
+    lastName: 'Doe',
+    phoneNumber: '1234567890',
+    idNumber: 'AB123456',
     country: ref('countries', country.id),
   });
   console.log(`Identity created: ${identity.data.id}`);
 
   // Create an address
   const address = await client.addresses().create({
-    city_name: 'New York',
-    postal_code: '10001',
+    cityName: 'New York',
+    postalCode: '10001',
     address: '123 Main Street',
     description: 'Test address',
     country: ref('countries', country.id),

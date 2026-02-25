@@ -4,8 +4,8 @@ export interface AvailableDid {
   id: string;
   type: 'available_dids';
   number: string;
-  did_group?: ResourceRef;
-  nanpa_prefix?: ResourceRef;
+  didGroup?: ResourceRef;
+  nanpaPrefix?: ResourceRef;
 }
 
 export const AVAILABLE_DID_META: ResourceMeta<AvailableDid> = {

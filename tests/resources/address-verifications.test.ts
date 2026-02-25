@@ -18,7 +18,7 @@ describe('AddressVerifications', () => {
     loadCassette('address_verifications/create.yaml');
     const client = createTestClient();
     const result = await client.addressVerifications().create({
-      service_description: 'Test service',
+      serviceDescription: 'Test service',
       address: ref('addresses', 'bf69bc70-e1c2-442c-9f30-335ee299b663'),
       dids: [ref('dids', '9df99644-f1a5-4a3c-99a4-559d758eb96b')],
     });

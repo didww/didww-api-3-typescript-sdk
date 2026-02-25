@@ -19,7 +19,7 @@ describe('DidReservations', () => {
     const client = createTestClient();
     const result = await client.didReservations().create({
       description: 'test reservation',
-      available_did: ref('available_dids', '0b76223b-9625-412f-b0f3-330551473e7e'),
+      availableDid: ref('available_dids', '0b76223b-9625-412f-b0f3-330551473e7e'),
     });
     expect(result.data.id).toBeDefined();
     expect(result.data.type).toBe('did_reservations');

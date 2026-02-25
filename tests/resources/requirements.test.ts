@@ -18,6 +18,6 @@ describe('Requirements', () => {
     const client = createTestClient();
     const result = await client.requirements().find('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.id).toBe('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
-    expect(result.data.identity_type).toBe('Any');
+    expect(result.data.identityType).toBe('Any');
   });
 });

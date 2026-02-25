@@ -3,7 +3,7 @@ import type { ResourceMeta, ResourceRef } from './base.js';
 export interface PermanentSupportingDocument {
   id: string;
   type: 'permanent_supporting_documents';
-  created_at: string;
+  createdAt: string;
   identity?: ResourceRef;
   template?: ResourceRef;
   files?: ResourceRef[];
