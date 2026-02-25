@@ -1,5 +1,6 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
 import type { OnCliMismatchAction, VoiceOutTrunkStatus, MediaEncryptionMode, DefaultDstAction } from '../enums.js';
+import type { Did } from './did.js';
 
 export interface VoiceOutTrunk {
   id: string;
@@ -22,8 +23,8 @@ export interface VoiceOutTrunk {
   password: string;
   thresholdReached: boolean;
   createdAt: string;
-  defaultDid?: ResourceRef;
-  dids?: ResourceRef[];
+  defaultDid?: Did | ResourceRef;
+  dids?: (Did | ResourceRef)[];
 }
 
 export interface VoiceOutTrunkWrite {

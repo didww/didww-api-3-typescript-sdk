@@ -1,4 +1,5 @@
-import { DidwwClient, Environment } from '../src/index.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { Country, StockKeepingUnit } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -13,8 +14,8 @@ async function main() {
   });
   console.log(`Found ${didGroups.data.length} DID groups`);
   for (const group of didGroups.data) {
-    const country = group.country as Record<string, unknown> | undefined;
-    const skus = (group.stockKeepingUnits || []) as Record<string, unknown>[];
+    const country = isIncluded<Country>(group.country) ? group.country : undefined;
+    const skus = (group.stockKeepingUnits || []).filter((s): s is StockKeepingUnit => isIncluded(s));
     console.log(`  ${group.prefix} - ${group.areaName} (${country?.name ?? 'unknown'}, ${skus.length} SKUs)`);
   }
 }

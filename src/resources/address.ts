@@ -1,4 +1,9 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Country } from './country.js';
+import type { Identity } from './identity.js';
+import type { Proof } from './proof.js';
+import type { Area } from './area.js';
+import type { City } from './city.js';
 
 export interface Address {
   id: string;
@@ -9,11 +14,11 @@ export interface Address {
   description: string;
   createdAt: string;
   verified: boolean;
-  country?: ResourceRef;
-  identity?: ResourceRef;
-  proofs?: ResourceRef[];
-  area?: ResourceRef;
-  city?: ResourceRef;
+  country?: Country | ResourceRef;
+  identity?: Identity | ResourceRef;
+  proofs?: (Proof | ResourceRef)[];
+  area?: Area | ResourceRef;
+  city?: City | ResourceRef;
 }
 
 export interface AddressWrite {

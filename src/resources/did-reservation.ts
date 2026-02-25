@@ -1,4 +1,5 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { AvailableDid } from './available-did.js';
 
 export interface DidReservation {
   id: string;
@@ -6,7 +7,7 @@ export interface DidReservation {
   description: string;
   expireAt: string;
   createdAt: string;
-  availableDid?: ResourceRef;
+  availableDid?: AvailableDid | ResourceRef;
 }
 
 export interface DidReservationWrite {

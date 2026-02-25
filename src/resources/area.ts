@@ -1,10 +1,11 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Country } from './country.js';
 
 export interface Area {
   id: string;
   type: 'areas';
   name: string;
-  country?: ResourceRef;
+  country?: Country | ResourceRef;
 }
 
 export const AREA_META: ResourceMeta<Area> = {

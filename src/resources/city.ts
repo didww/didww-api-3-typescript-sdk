@@ -1,12 +1,15 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Country } from './country.js';
+import type { Region } from './region.js';
+import type { Area } from './area.js';
 
 export interface City {
   id: string;
   type: 'cities';
   name: string;
-  country?: ResourceRef;
-  region?: ResourceRef;
-  area?: ResourceRef;
+  country?: Country | ResourceRef;
+  region?: Region | ResourceRef;
+  area?: Area | ResourceRef;
 }
 
 export const CITY_META: ResourceMeta<City> = {

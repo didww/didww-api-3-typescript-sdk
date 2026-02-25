@@ -1,4 +1,6 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { CapacityPool } from './capacity-pool.js';
+import type { Did } from './did.js';
 
 export interface SharedCapacityGroup {
   id: string;
@@ -7,8 +9,8 @@ export interface SharedCapacityGroup {
   sharedChannelsCount: number;
   meteredChannelsCount: number;
   createdAt: string;
-  capacityPool?: ResourceRef;
-  dids?: ResourceRef[];
+  capacityPool?: CapacityPool | ResourceRef;
+  dids?: (Did | ResourceRef)[];
 }
 
 export interface SharedCapacityGroupWrite {

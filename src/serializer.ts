@@ -1,5 +1,6 @@
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceMeta, ResourceRef } from './resources/base.js';
+import { getResourceMeta } from './registry.js';
 
 const KITSU_OPTS = {
   camelCaseTypes: (s: string) => s,
@@ -51,9 +52,9 @@ export function deserialize<T>(body: unknown): DeserializedResponse<T> | Deseria
   const result = deserialise(body);
   const camelCased = snakeToCamelKeys(result) as Record<string, unknown>;
   if (Array.isArray(camelCased.data)) {
-    camelCased.data = (camelCased.data as unknown[]).map(unwrapResourceProps);
+    camelCased.data = (camelCased.data as unknown[]).map(unwrapResourceProps).map(applyRegistryDeserialize);
   } else if (camelCased.data && typeof camelCased.data === 'object') {
-    camelCased.data = unwrapResourceProps(camelCased.data);
+    camelCased.data = applyRegistryDeserialize(unwrapResourceProps(camelCased.data));
   }
   return camelCased as unknown as DeserializedResponse<T> | DeserializedListResponse<T>;
 }
@@ -99,6 +100,32 @@ function unwrapResourceProps(resource: unknown): unknown {
       })
       .filter(([, v]) => v !== undefined),
   );
+}
+
+function applyRegistryDeserialize(resource: unknown): unknown {
+  if (typeof resource !== 'object' || resource === null) return resource;
+  const record = resource as Record<string, unknown>;
+
+  // Recursively process nested resource-like objects (included relationships)
+  for (const [key, value] of Object.entries(record)) {
+    if (value !== null && typeof value === 'object' && !Array.isArray(value) && isResourceLike(value)) {
+      record[key] = applyRegistryDeserialize(value);
+    } else if (Array.isArray(value)) {
+      record[key] = value.map((item) =>
+        item !== null && typeof item === 'object' && isResourceLike(item) ? applyRegistryDeserialize(item) : item,
+      );
+    }
+  }
+
+  // Apply deserializeCustom for this resource if registry has one
+  if ('type' in record && typeof record.type === 'string') {
+    const meta = getResourceMeta(record.type);
+    if (meta?.deserializeCustom) {
+      return { ...record, ...meta.deserializeCustom(record) };
+    }
+  }
+
+  return record;
 }
 
 export function serializeForCreate<T, TWrite>(meta: ResourceMeta<T, TWrite>, data: TWrite): SerializedResource {

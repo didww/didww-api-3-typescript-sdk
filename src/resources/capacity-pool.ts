@@ -1,4 +1,7 @@
 import type { ResourceMeta, ResourceRef } from './base.js';
+import type { Country } from './country.js';
+import type { SharedCapacityGroup } from './shared-capacity-group.js';
+import type { QtyBasedPricing } from './qty-based-pricing.js';
 
 export interface CapacityPool {
   id: string;
@@ -12,9 +15,9 @@ export interface CapacityPool {
   setupPrice: string;
   monthlyPrice: string;
   meteredRate: string;
-  countries?: ResourceRef[];
-  sharedCapacityGroups?: ResourceRef[];
-  qtyBasedPricings?: ResourceRef[];
+  countries?: (Country | ResourceRef)[];
+  sharedCapacityGroups?: (SharedCapacityGroup | ResourceRef)[];
+  qtyBasedPricings?: (QtyBasedPricing | ResourceRef)[];
 }
 
 export interface CapacityPoolWrite {

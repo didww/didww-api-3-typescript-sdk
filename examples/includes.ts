@@ -1,4 +1,5 @@
-import { DidwwClient, Environment } from '../src/index.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { Country, Region, DidGroup, VoiceInTrunk, StockKeepingUnit } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -13,7 +14,7 @@ async function main() {
     page: { size: 3 },
   });
   for (const region of regions.data) {
-    const country = region.country as Record<string, unknown> | undefined;
+    const country = isIncluded<Country>(region.country) ? region.country : undefined;
     console.log(`  ${region.name} (${region.iso}) — country: ${country?.name}`);
   }
 
@@ -24,7 +25,7 @@ async function main() {
     page: { size: 3 },
   });
   for (const group of groups.data) {
-    const skus = (group.stockKeepingUnits || []) as Record<string, unknown>[];
+    const skus = (group.stockKeepingUnits || []).filter((s): s is StockKeepingUnit => isIncluded(s));
     console.log(`  ${group.prefix} ${group.areaName} — ${skus.length} SKU(s)`);
     for (const sku of skus) {
       console.log(`    $${sku.monthlyPrice}/mo, ${sku.channelsIncludedCount} channels`);
@@ -38,8 +39,8 @@ async function main() {
     page: { size: 3 },
   });
   for (const ad of available.data) {
-    const didGroup = ad.didGroup as Record<string, unknown> | undefined;
-    const skus = (didGroup?.stockKeepingUnits || []) as Record<string, unknown>[];
+    const didGroup = isIncluded<DidGroup>(ad.didGroup) ? ad.didGroup : undefined;
+    const skus = didGroup?.stockKeepingUnits?.filter((s): s is StockKeepingUnit => isIncluded(s)) || [];
     console.log(`  ${ad.number} — group: ${didGroup?.prefix} ${didGroup?.areaName}, ${skus.length} SKU(s)`);
   }
 
@@ -50,7 +51,7 @@ async function main() {
     page: { size: 3 },
   });
   for (const did of dids.data) {
-    const trunk = did.voiceInTrunk as Record<string, unknown> | undefined;
+    const trunk = isIncluded<VoiceInTrunk>(did.voiceInTrunk) ? did.voiceInTrunk : undefined;
     console.log(`  ${did.number} — trunk: ${trunk?.name ?? '(none)'}`);
   }
 
@@ -61,8 +62,8 @@ async function main() {
     page: { size: 3 },
   });
   for (const city of cities.data) {
-    const country = city.country as Record<string, unknown> | undefined;
-    const region = city.region as Record<string, unknown> | undefined;
+    const country = isIncluded<Country>(city.country) ? city.country : undefined;
+    const region = isIncluded<Region>(city.region) ? city.region : undefined;
     console.log(`  ${city.name} — ${region?.name ?? '(no region)'}, ${country?.name}`);
   }
 }

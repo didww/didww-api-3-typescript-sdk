@@ -1,4 +1,5 @@
-import { DidwwClient, Environment } from '../src/index.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { Country } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -14,7 +15,7 @@ async function main() {
   });
   console.log(`Found ${regions.data.length} regions`);
   for (const region of regions.data) {
-    const country = region.country as Record<string, unknown> | undefined;
+    const country = isIncluded<Country>(region.country) ? region.country : undefined;
     console.log(`  ${region.id} - ${region.name} (${country?.name ?? 'no country'})`);
   }
 
@@ -23,7 +24,7 @@ async function main() {
     const region = await client.regions().find(regions.data[0].id, {
       include: 'country',
     });
-    const country = region.data.country as Record<string, unknown> | undefined;
+    const country = isIncluded<Country>(region.data.country) ? region.data.country : undefined;
     console.log(`\nRegion details: ${region.data.name} — ${country?.name}`);
   }
 }
