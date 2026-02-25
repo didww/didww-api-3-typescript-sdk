@@ -33,7 +33,6 @@ export type { VoiceInTrunkGroup, VoiceInTrunkGroupWrite } from './resources/voic
 export type { VoiceOutTrunk, VoiceOutTrunkWrite } from './resources/voice-out-trunk.js';
 export type { SharedCapacityGroup, SharedCapacityGroupWrite } from './resources/shared-capacity-group.js';
 export type { Did, DidWrite } from './resources/did.js';
-export { assignVoiceInTrunk, assignVoiceInTrunkGroup } from './resources/did.js';
 export type { Order, OrderWrite } from './resources/order.js';
 export type { Export, ExportWrite } from './resources/export.js';
 export type { DidReservation, DidReservationWrite } from './resources/did-reservation.js';
@@ -57,7 +56,7 @@ export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './
 export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
 
 export type { OrderItem, DidOrderItem, CapacityOrderItem, GenericOrderItem } from './nested/order-item.js';
-export { didOrderItem, capacityOrderItem } from './nested/order-item.js';
+export { didOrderItem, availableDidOrderItem, reservationDidOrderItem, capacityOrderItem } from './nested/order-item.js';
 
 // Repository types
 export type { ApiResponse, ListResponse } from './repositories/types.js';
@@ -67,7 +66,7 @@ export { SingletonRepository } from './repositories/singleton-repository.js';
 export { CreateOnlyRepository } from './repositories/create-only-repository.js';
 
 // Encryption
-export { encryptWithKeys, calculateFingerprint } from './encrypt.js';
+export { Encrypt, encryptWithKeys, calculateFingerprint } from './encrypt.js';
 
 // Callback
 export { RequestValidator } from './callback/request-validator.js';

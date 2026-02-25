@@ -72,11 +72,14 @@ export interface DidwwClientOptions {
   apiKey: string;
   environment?: Environment;
   baseUrl?: string;
+  connectTimeout?: number;
+  readTimeout?: number;
 }
 
 export class DidwwClient implements HttpClient {
   private readonly apiKey: string;
   private readonly baseUrl: string;
+  private readonly timeout?: number;
 
   constructor(options: DidwwClientOptions) {
     if (!options.apiKey) {
@@ -88,6 +91,16 @@ export class DidwwClient implements HttpClient {
     if (this.baseUrl.endsWith('/')) {
       this.baseUrl = this.baseUrl.slice(0, -1);
     }
+    // Use readTimeout if provided, fall back to connectTimeout
+    this.timeout = options.readTimeout ?? options.connectTimeout;
+  }
+
+  private fetchOptions(): RequestInit {
+    const opts: RequestInit = {};
+    if (this.timeout !== undefined) {
+      opts.signal = AbortSignal.timeout(this.timeout);
+    }
+    return opts;
   }
 
   private headers(): Record<string, string> {
@@ -104,6 +117,7 @@ export class DidwwClient implements HttpClient {
     const response = await fetch(url, {
       method: 'GET',
       headers: this.headers(),
+      ...this.fetchOptions(),
     });
     return this.handleResponse(response);
   }
@@ -115,6 +129,7 @@ export class DidwwClient implements HttpClient {
       method: 'POST',
       headers: this.headers(),
       body: JSON.stringify(body),
+      ...this.fetchOptions(),
     });
     return this.handleResponse(response);
   }
@@ -126,6 +141,7 @@ export class DidwwClient implements HttpClient {
       method: 'PATCH',
       headers: this.headers(),
       body: JSON.stringify(body),
+      ...this.fetchOptions(),
     });
     return this.handleResponse(response);
   }
@@ -135,6 +151,7 @@ export class DidwwClient implements HttpClient {
     const response = await fetch(url, {
       method: 'DELETE',
       headers: this.headers(),
+      ...this.fetchOptions(),
     });
     if (response.status === 204) return;
     if (!response.ok) {
@@ -161,6 +178,7 @@ export class DidwwClient implements HttpClient {
         'Api-Key': this.apiKey,
       },
       body: formData,
+      ...this.fetchOptions(),
     });
     if (!response.ok) {
       const body = await this.parseBody(response);
@@ -177,6 +195,7 @@ export class DidwwClient implements HttpClient {
     const response = await fetch(url, {
       method: 'GET',
       headers: { 'Api-Key': this.apiKey },
+      ...this.fetchOptions(),
     });
     if (!response.ok) {
       throw new DidwwApiError(response.status, { errors: [{ detail: 'Download failed' }] });

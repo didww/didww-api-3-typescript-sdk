@@ -10,6 +10,12 @@ import { SHARED_CAPACITY_GROUP_META } from '../src/resources/shared-capacity-gro
 import { VOICE_IN_TRUNK_META } from '../src/resources/voice-in-trunk.js';
 import { VOICE_IN_TRUNK_GROUP_META } from '../src/resources/voice-in-trunk-group.js';
 import { VOICE_OUT_TRUNK_META } from '../src/resources/voice-out-trunk.js';
+import {
+  didOrderItem,
+  availableDidOrderItem,
+  reservationDidOrderItem,
+  capacityOrderItem,
+} from '../src/nested/order-item.js';
 
 describe('Serialization - excludes read-only fields', () => {
   it('DID excludes read-only fields', () => {
@@ -156,5 +162,35 @@ describe('Serialization - excludes read-only fields', () => {
     expect(attrs.password).toBeUndefined();
     expect(attrs.threshold_reached).toBeUndefined();
     expect(attrs.created_at).toBeUndefined();
+  });
+});
+
+describe('Order item factories', () => {
+  it('didOrderItem sets type and passes attributes', () => {
+    const item = didOrderItem({ sku_id: 'sku-1', qty: 2 });
+    expect(item.type).toBe('did_order_items');
+    expect(item.sku_id).toBe('sku-1');
+    expect(item.qty).toBe(2);
+  });
+
+  it('availableDidOrderItem sets type and required fields', () => {
+    const item = availableDidOrderItem({ sku_id: 'sku-1', available_did_id: 'ad-1' });
+    expect(item.type).toBe('did_order_items');
+    expect(item.sku_id).toBe('sku-1');
+    expect(item.available_did_id).toBe('ad-1');
+  });
+
+  it('reservationDidOrderItem sets type and required fields', () => {
+    const item = reservationDidOrderItem({ sku_id: 'sku-1', did_reservation_id: 'res-1' });
+    expect(item.type).toBe('did_order_items');
+    expect(item.sku_id).toBe('sku-1');
+    expect(item.did_reservation_id).toBe('res-1');
+  });
+
+  it('capacityOrderItem sets type and passes attributes', () => {
+    const item = capacityOrderItem({ capacity_pool_id: 'pool-1', qty: 5 });
+    expect(item.type).toBe('capacity_order_items');
+    expect(item.capacity_pool_id).toBe('pool-1');
+    expect(item.qty).toBe(5);
   });
 });

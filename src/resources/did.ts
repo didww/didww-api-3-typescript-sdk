@@ -78,16 +78,3 @@ export const DID_META: ResourceMeta<Did, DidWrite> = {
   },
 };
 
-export function assignVoiceInTrunk(didId: string, trunkId: string): DidWrite & { id: string } {
-  return {
-    id: didId,
-    voice_in_trunk: { id: trunkId, type: 'voice_in_trunks' },
-  };
-}
-
-export function assignVoiceInTrunkGroup(didId: string, groupId: string): DidWrite & { id: string } {
-  return {
-    id: didId,
-    voice_in_trunk_group: { id: groupId, type: 'voice_in_trunk_groups' },
-  };
-}

@@ -38,6 +38,14 @@ export function didOrderItem(attrs: Omit<DidOrderItem, 'type'>): DidOrderItem {
   return { type: 'did_order_items', ...attrs };
 }
 
+export function availableDidOrderItem(attrs: { sku_id: string; available_did_id: string }): DidOrderItem {
+  return { type: 'did_order_items', ...attrs };
+}
+
+export function reservationDidOrderItem(attrs: { sku_id: string; did_reservation_id: string }): DidOrderItem {
+  return { type: 'did_order_items', ...attrs };
+}
+
 export function capacityOrderItem(attrs: Omit<CapacityOrderItem, 'type'>): CapacityOrderItem {
   return { type: 'capacity_order_items', ...attrs };
 }
