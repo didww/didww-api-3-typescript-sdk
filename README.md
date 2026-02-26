@@ -506,6 +506,12 @@ try {
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/didww/didww-api-3-typescript-sdk
 
+## Releasing
+
+1. Update `version` in `package.json`
+2. `npm run build`
+3. `npm publish --access public`
+
 ## License
 
 MIT
