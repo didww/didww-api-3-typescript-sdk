@@ -33,6 +33,28 @@ describe('DidwwClient', () => {
     const client = new DidwwClient({ apiKey: 'test', timeout: 30_000 });
     expect(client).toBeDefined();
   });
+
+  it('uses custom fetch function when provided', async () => {
+    const mockFetch = async (_input: string | URL | Request, _init?: RequestInit): Promise<Response> => {
+      return new Response(JSON.stringify({ data: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test', fetch: mockFetch });
+    const result = await client.countries().list();
+    expect(result.data).toEqual([]);
+  });
+
+  it('accepts custom fetch without modifying it', () => {
+    const mockFetch = async (_input: string | URL | Request, _init?: RequestInit): Promise<Response> => {
+      return new Response('{}', { status: 200 });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test', fetch: mockFetch });
+    expect(client).toBeDefined();
+  });
 });
 
 describe('DidwwApiError', () => {

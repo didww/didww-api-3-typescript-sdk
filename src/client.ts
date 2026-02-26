@@ -70,17 +70,21 @@ import {
   type VoiceOutTrunkRegenerateCredentialWrite,
 } from './resources/voice-out-trunk-regenerate-credential.js';
 
+export type FetchFunction = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
+
 export interface DidwwClientOptions {
   apiKey: string;
   environment?: Environment;
   baseUrl?: string;
   timeout?: number;
+  fetch?: FetchFunction;
 }
 
 export class DidwwClient implements HttpClient {
   private readonly apiKey: string;
   private readonly baseUrl: string;
   private readonly timeout?: number;
+  private readonly _fetch: FetchFunction;
 
   constructor(options: DidwwClientOptions) {
     if (!options.apiKey) {
@@ -93,6 +97,7 @@ export class DidwwClient implements HttpClient {
       this.baseUrl = this.baseUrl.slice(0, -1);
     }
     this.timeout = options.timeout;
+    this._fetch = options.fetch ?? globalThis.fetch.bind(globalThis);
   }
 
   private fetchOptions(): RequestInit {
@@ -114,7 +119,7 @@ export class DidwwClient implements HttpClient {
   async get(path: string, params?: QueryParams): Promise<unknown> {
     const qs = buildQueryString(params);
     const url = `${this.baseUrl}/${path}${qs}`;
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'GET',
       headers: this.headers(),
       ...this.fetchOptions(),
@@ -125,7 +130,7 @@ export class DidwwClient implements HttpClient {
   async post(path: string, body: unknown, params?: QueryParams): Promise<unknown> {
     const qs = buildQueryString(params);
     const url = `${this.baseUrl}/${path}${qs}`;
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'POST',
       headers: this.headers(),
       body: JSON.stringify(body),
@@ -137,7 +142,7 @@ export class DidwwClient implements HttpClient {
   async patch(path: string, body: unknown, params?: QueryParams): Promise<unknown> {
     const qs = buildQueryString(params);
     const url = `${this.baseUrl}/${path}${qs}`;
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'PATCH',
       headers: this.headers(),
       body: JSON.stringify(body),
@@ -148,7 +153,7 @@ export class DidwwClient implements HttpClient {
 
   async delete(path: string): Promise<void> {
     const url = `${this.baseUrl}/${path}`;
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'DELETE',
       headers: this.headers(),
       ...this.fetchOptions(),
@@ -172,7 +177,7 @@ export class DidwwClient implements HttpClient {
       formData.append('encrypted_files[items][][file]', blob, file.filename || 'file.enc');
     }
     const url = `${this.baseUrl}/encrypted_files`;
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'POST',
       headers: {
         'Api-Key': this.apiKey,
@@ -192,7 +197,7 @@ export class DidwwClient implements HttpClient {
   }
 
   async downloadExport(url: string): Promise<Buffer> {
-    const response = await fetch(url, {
+    const response = await this._fetch(url, {
       method: 'GET',
       headers: { 'Api-Key': this.apiKey },
       ...this.fetchOptions(),

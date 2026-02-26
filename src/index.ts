@@ -1,8 +1,9 @@
 // Client
-export { DidwwClient, type DidwwClientOptions } from './client.js';
+export { DidwwClient, type DidwwClientOptions, type FetchFunction } from './client.js';
 export { Environment } from './configuration.js';
 export { DidwwApiError, DidwwClientError, type JsonApiError } from './errors.js';
 export { type QueryParams } from './query-params.js';
+export type { HttpClient } from './repositories/read-only-repository.js';
 
 // Base
 export { ref, isIncluded, type ResourceRef, type ResourceConfig } from './resources/base.js';
