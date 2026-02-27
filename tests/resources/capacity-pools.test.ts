@@ -25,9 +25,7 @@ describe('CapacityPools', () => {
     expect(result.data.name).toBe('Standard');
     expect(result.data.countries).toBeDefined();
     expect(result.data.countries!.length).toBe(53);
-    const usCountry = result.data.countries!.find(
-      (c) => isIncluded(c) && (c as Country).iso === 'US',
-    ) as Country;
+    const usCountry = result.data.countries!.find((c) => isIncluded(c) && (c as Country).iso === 'US') as Country;
     expect(usCountry).toBeDefined();
     expect(usCountry.name).toBe('United States');
     expect(result.data.sharedCapacityGroups).toBeDefined();
