@@ -60,7 +60,8 @@ describe('DidwwClient', () => {
     const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
     await client.publicKeys().list();
     expect(capturedHeaders).toBeDefined();
-    expect(capturedHeaders).not.toHaveProperty('Api-Key');
+    const headers = new Headers(capturedHeaders);
+    expect(headers.has('Api-Key')).toBe(false);
   });
 
   it('sends Api-Key header for non-public_keys endpoints', async () => {
@@ -76,7 +77,8 @@ describe('DidwwClient', () => {
     const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
     await client.countries().list();
     expect(capturedHeaders).toBeDefined();
-    expect(capturedHeaders).toHaveProperty('Api-Key', 'test-key');
+    const headers = new Headers(capturedHeaders);
+    expect(headers.get('Api-Key')).toBe('test-key');
   });
 
   it('accepts custom fetch without modifying it', () => {

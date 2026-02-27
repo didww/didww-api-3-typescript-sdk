@@ -113,7 +113,7 @@ export class DidwwClient implements HttpClient {
       Accept: 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
     };
-    if (!path.includes('public_keys')) {
+    if (!(path === PUBLIC_KEY_RESOURCE.path || path.startsWith(`${PUBLIC_KEY_RESOURCE.path}/`))) {
       headers['Api-Key'] = this.apiKey;
     }
     return headers;
@@ -200,9 +200,10 @@ export class DidwwClient implements HttpClient {
   }
 
   async downloadExport(url: string): Promise<Buffer> {
+    const path = new URL(url).pathname.replace(/^\//, '');
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: { 'Api-Key': this.apiKey },
+      headers: this.headers(path),
       ...this.fetchOptions(),
     });
     if (!response.ok) {

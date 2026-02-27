@@ -67,7 +67,9 @@ const client = new DidwwClient({
 
 ### HTTPS Proxy
 
-You can pass a custom `fetch` function to route requests through an HTTPS proxy:
+You can pass a custom `fetch` function to route requests through an HTTPS proxy.
+
+> **Note:** [undici](https://github.com/nodejs/undici) must be installed separately: `npm install undici`
 
 ```typescript
 import { DidwwClient, Environment } from '@didww/sdk';
