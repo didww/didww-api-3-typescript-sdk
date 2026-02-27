@@ -1,10 +1,30 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
-import { ref } from '../../src/resources/base.js';
+import { ref, isIncluded } from '../../src/resources/base.js';
+import type { Did } from '../../src/resources/did.js';
+import type { Address } from '../../src/resources/address.js';
 
 describe('AddressVerifications', () => {
   afterEach(() => cleanupNock());
+
+  it('lists address verifications', async () => {
+    loadCassette('address_verifications/list.yaml');
+    const client = createTestClient();
+    const result = await client.addressVerifications().list();
+    expect(result.data.length).toBeGreaterThan(0);
+    const first = result.data[0];
+    expect(first.status).toBe('Pending');
+    expect(first.dids).toBeDefined();
+    expect(Array.isArray(first.dids)).toBe(true);
+    expect(first.dids!.length).toBe(1);
+    expect(isIncluded(first.dids![0])).toBe(true);
+    expect((first.dids![0] as Did).number).toBe('13472013835');
+    const address = first.address;
+    expect(address).toBeDefined();
+    expect(isIncluded(address!)).toBe(true);
+    expect((address as Address).cityName).toBe('Chicago');
+  });
 
   it('finds an address verification', async () => {
     loadCassette('address_verifications/show.yaml');
@@ -24,5 +44,9 @@ describe('AddressVerifications', () => {
     });
     expect(result.data.id).toBeDefined();
     expect(result.data.status).toBe('Pending');
+    const addr = result.data.address;
+    expect(addr).toBeDefined();
+    expect(isIncluded(addr!)).toBe(true);
+    expect((addr as Address).cityName).toBe('Chicago');
   });
 });

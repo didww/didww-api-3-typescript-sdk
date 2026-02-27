@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { Region } from '../../src/resources/region.js';
 
 describe('Countries', () => {
   afterEach(() => cleanupNock());
@@ -28,5 +30,22 @@ describe('Countries', () => {
     expect(result.data.name).toBe('United Kingdom');
     expect(result.data.prefix).toBe('44');
     expect(result.data.iso).toBe('GB');
+  });
+
+  it('finds a country with regions', async () => {
+    loadCassette('countries/show_with_regions.yaml');
+    const client = createTestClient();
+    const result = await client.countries().find('661d8448-8897-4765-acda-00cc1740148d', {
+      include: 'regions',
+    });
+    expect(result.data.name).toBe('Lithuania');
+    expect(result.data.prefix).toBe('370');
+    expect(result.data.iso).toBe('LT');
+    expect(result.data.regions).toBeDefined();
+    expect(Array.isArray(result.data.regions)).toBe(true);
+    expect(result.data.regions!.length).toBe(10);
+    const regionNames = result.data.regions!.filter(isIncluded).map((r: Region) => r.name);
+    expect(regionNames).toContain('Vilniaus Apskritis');
+    expect(regionNames).toContain('Kauno Apskritis');
   });
 });

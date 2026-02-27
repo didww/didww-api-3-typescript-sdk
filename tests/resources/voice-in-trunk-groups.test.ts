@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('VoiceInTrunkGroups', () => {
   afterEach(() => cleanupNock());
@@ -11,6 +13,11 @@ describe('VoiceInTrunkGroups', () => {
     const result = await client.voiceInTrunkGroups().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('voice_in_trunk_groups');
+    const trunks = result.data[0].voiceInTrunks;
+    expect(trunks).toBeDefined();
+    expect(trunks!.length).toBe(2);
+    expect(isIncluded(trunks![0])).toBe(true);
+    expect((trunks![0] as VoiceInTrunk).name).toBe('URI 33141081249');
   });
 
   it('creates a voice in trunk group', async () => {
@@ -21,6 +28,11 @@ describe('VoiceInTrunkGroups', () => {
     });
     expect(result.data.id).toBeDefined();
     expect(result.data.name).toBe('trunk group sample with 2 trunks');
+    const trunks = result.data.voiceInTrunks;
+    expect(trunks).toBeDefined();
+    expect(trunks!.length).toBe(2);
+    expect(isIncluded(trunks![0])).toBe(true);
+    expect((trunks![0] as VoiceInTrunk).name).toBe('test custom11');
   });
 
   it('deletes a voice in trunk group', async () => {

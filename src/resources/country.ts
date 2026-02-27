@@ -1,4 +1,5 @@
-import type { ResourceConfig } from './base.js';
+import type { ResourceConfig, ResourceRef } from './base.js';
+import type { Region } from './region.js';
 
 export interface Country {
   id: string;
@@ -6,6 +7,7 @@ export interface Country {
   name: string;
   prefix: string;
   iso: string;
+  regions?: (Region | ResourceRef)[];
 }
 
 export const COUNTRY_RESOURCE: ResourceConfig<Country> = {
