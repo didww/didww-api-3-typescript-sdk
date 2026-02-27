@@ -108,12 +108,15 @@ export class DidwwClient implements HttpClient {
     return opts;
   }
 
-  private headers(): Record<string, string> {
-    return {
+  private headers(path: string): Record<string, string> {
+    const headers: Record<string, string> = {
       Accept: 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
-      'Api-Key': this.apiKey,
     };
+    if (!path.includes('public_keys')) {
+      headers['Api-Key'] = this.apiKey;
+    }
+    return headers;
   }
 
   async get(path: string, params?: QueryParams): Promise<unknown> {
@@ -121,7 +124,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/${path}${qs}`;
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: this.headers(),
+      headers: this.headers(path),
       ...this.fetchOptions(),
     });
     return this.handleResponse(response);
@@ -132,7 +135,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/${path}${qs}`;
     const response = await this._fetch(url, {
       method: 'POST',
-      headers: this.headers(),
+      headers: this.headers(path),
       body: JSON.stringify(body),
       ...this.fetchOptions(),
     });
@@ -144,7 +147,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/${path}${qs}`;
     const response = await this._fetch(url, {
       method: 'PATCH',
-      headers: this.headers(),
+      headers: this.headers(path),
       body: JSON.stringify(body),
       ...this.fetchOptions(),
     });
@@ -155,7 +158,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/${path}`;
     const response = await this._fetch(url, {
       method: 'DELETE',
-      headers: this.headers(),
+      headers: this.headers(path),
       ...this.fetchOptions(),
     });
     if (response.status === 204) return;
