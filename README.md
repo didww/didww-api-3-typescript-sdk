@@ -65,6 +65,25 @@ const client = new DidwwClient({
 | `Environment.PRODUCTION` | `https://api.didww.com/v3`         |
 | `Environment.SANDBOX`    | `https://sandbox-api.didww.com/v3` |
 
+### HTTPS Proxy
+
+You can pass a custom `fetch` function to route requests through an HTTPS proxy.
+
+> **Note:** [undici](https://github.com/nodejs/undici) must be installed separately: `npm install undici`
+
+```typescript
+import { DidwwClient, Environment } from '@didww/sdk';
+import { ProxyAgent } from 'undici';
+
+const proxyAgent = new ProxyAgent('https://proxy.example.com:8080');
+
+const client = new DidwwClient({
+  apiKey: 'your-api-key',
+  environment: Environment.PRODUCTION,
+  fetch: (input, init) => fetch(input, { ...init, dispatcher: proxyAgent } as RequestInit),
+});
+```
+
 ## Resources
 
 ### Read-Only Resources

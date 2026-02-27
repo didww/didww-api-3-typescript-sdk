@@ -33,6 +33,62 @@ describe('DidwwClient', () => {
     const client = new DidwwClient({ apiKey: 'test', timeout: 30_000 });
     expect(client).toBeDefined();
   });
+
+  it('uses custom fetch function when provided', async () => {
+    const mockFetch = async (_input: string | URL | Request, _init?: RequestInit): Promise<Response> => {
+      return new Response(JSON.stringify({ data: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test', fetch: mockFetch });
+    const result = await client.countries().list();
+    expect(result.data).toEqual([]);
+  });
+
+  it('does not send Api-Key header for public_keys endpoint', async () => {
+    let capturedHeaders: HeadersInit | undefined;
+    const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      capturedHeaders = init?.headers;
+      return new Response(JSON.stringify({ data: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
+    await client.publicKeys().list();
+    expect(capturedHeaders).toBeDefined();
+    const headers = new Headers(capturedHeaders);
+    expect(headers.has('Api-Key')).toBe(false);
+  });
+
+  it('sends Api-Key header for non-public_keys endpoints', async () => {
+    let capturedHeaders: HeadersInit | undefined;
+    const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      capturedHeaders = init?.headers;
+      return new Response(JSON.stringify({ data: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
+    await client.countries().list();
+    expect(capturedHeaders).toBeDefined();
+    const headers = new Headers(capturedHeaders);
+    expect(headers.get('Api-Key')).toBe('test-key');
+  });
+
+  it('accepts custom fetch without modifying it', () => {
+    const mockFetch = async (_input: string | URL | Request, _init?: RequestInit): Promise<Response> => {
+      return new Response('{}', { status: 200 });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test', fetch: mockFetch });
+    expect(client).toBeDefined();
+  });
 });
 
 describe('DidwwApiError', () => {
