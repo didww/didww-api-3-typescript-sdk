@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/available_dids/58304301-5216-4f6e-ab17-1a13b99bfb3a?include=nanpa_prefix
+  response:
+    body:
+      string: '{"data":{"id":"58304301-5216-4f6e-ab17-1a13b99bfb3a","type":"available_dids","attributes":{"number":"15162172763"},"relationships":{"did_group":{"links":{"self":"https://sandbox-api.didww.com/v3/available_dids/58304301-5216-4f6e-ab17-1a13b99bfb3a/relationships/did_group","related":"https://sandbox-api.didww.com/v3/available_dids/58304301-5216-4f6e-ab17-1a13b99bfb3a/did_group"}},"nanpa_prefix":{"links":{"self":"https://sandbox-api.didww.com/v3/available_dids/58304301-5216-4f6e-ab17-1a13b99bfb3a/relationships/nanpa_prefix","related":"https://sandbox-api.didww.com/v3/available_dids/58304301-5216-4f6e-ab17-1a13b99bfb3a/nanpa_prefix"},"data":{"type":"nanpa_prefixes","id":"92503e9d-ef25-435c-b5fd-6be5af0c4840"}}}},"included":[{"id":"92503e9d-ef25-435c-b5fd-6be5af0c4840","type":"nanpa_prefixes","attributes":{"npa":"516","nxx":"217"},"relationships":{"country":{"links":{"self":"https://sandbox-api.didww.com/v3/nanpa_prefixes/92503e9d-ef25-435c-b5fd-6be5af0c4840/relationships/country","related":"https://sandbox-api.didww.com/v3/nanpa_prefixes/92503e9d-ef25-435c-b5fd-6be5af0c4840/country"}},"region":{"links":{"self":"https://sandbox-api.didww.com/v3/nanpa_prefixes/92503e9d-ef25-435c-b5fd-6be5af0c4840/relationships/region","related":"https://sandbox-api.didww.com/v3/nanpa_prefixes/92503e9d-ef25-435c-b5fd-6be5af0c4840/region"}}}}],"meta":{"api_version":"2022-05-10"}}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { Pop } from '../../src/resources/pop.js';
 import {
   serializeTrunkConfiguration,
   deserializeTrunkConfiguration,
@@ -23,6 +25,12 @@ describe('VoiceInTrunks', () => {
     const first = result.data[0];
     expect(first.id).toBe('2b4b1fcf-fe6a-4de9-8a58-7df46820ba13');
     expect(first.name).toBe('sample trunk pstn');
+    expect(first.voiceInTrunkGroup).toBeUndefined();
+    expect(first.pop).toBeUndefined();
+    const second = result.data[1];
+    expect(second.pop).toBeDefined();
+    expect(isIncluded(second.pop!)).toBe(true);
+    expect((second.pop as Pop).name).toBe('DE, FRA');
   });
 
   it('lists SIP configuration attributes', async () => {

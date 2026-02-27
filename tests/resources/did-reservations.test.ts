@@ -1,7 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
-import { ref } from '../../src/resources/base.js';
+import { ref, isIncluded } from '../../src/resources/base.js';
+import type { AvailableDid } from '../../src/resources/available-did.js';
 
 describe('DidReservations', () => {
   afterEach(() => cleanupNock());
@@ -12,6 +13,10 @@ describe('DidReservations', () => {
     const result = await client.didReservations().find('fd38d3ff-80cf-4e67-a605-609a2884a5c4');
     expect(result.data.id).toBe('fd38d3ff-80cf-4e67-a605-609a2884a5c4');
     expect(result.data.type).toBe('did_reservations');
+    const ad = result.data.availableDid;
+    expect(ad).toBeDefined();
+    expect(isIncluded(ad!)).toBe(true);
+    expect((ad as AvailableDid).number).toBe('19492033398');
   });
 
   it('creates a DID reservation', async () => {

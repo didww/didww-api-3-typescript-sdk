@@ -1,6 +1,9 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { DidGroup } from '../../src/resources/did-group.js';
+import type { NanpaPrefix } from '../../src/resources/nanpa-prefix.js';
 
 describe('AvailableDids', () => {
   afterEach(() => cleanupNock());
@@ -20,5 +23,23 @@ describe('AvailableDids', () => {
     const result = await client.availableDids().find('0b76223b-9625-412f-b0f3-330551473e7e');
     expect(result.data.id).toBe('0b76223b-9625-412f-b0f3-330551473e7e');
     expect(result.data.number).toBe('16169886810');
+    const dg = result.data.didGroup;
+    expect(dg).toBeDefined();
+    expect(isIncluded(dg!)).toBe(true);
+    expect((dg as DidGroup).areaName).toBe('Grand Rapids');
+  });
+
+  it('finds an available DID with nanpa_prefix', async () => {
+    loadCassette('available_dids/show_with_nanpa_prefix.yaml');
+    const client = createTestClient();
+    const result = await client.availableDids().find('58304301-5216-4f6e-ab17-1a13b99bfb3a', {
+      include: 'nanpa_prefix',
+    });
+    expect(result.data.number).toBe('15162172763');
+    const np = result.data.nanpaPrefix;
+    expect(np).toBeDefined();
+    expect(isIncluded(np!)).toBe(true);
+    expect((np as NanpaPrefix).npa).toBe('516');
+    expect((np as NanpaPrefix).nxx).toBe('217');
   });
 });

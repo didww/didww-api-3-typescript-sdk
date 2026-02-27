@@ -1,10 +1,33 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
-import { ref } from '../../src/resources/base.js';
+import { ref, isIncluded } from '../../src/resources/base.js';
+import type { Identity } from '../../src/resources/identity.js';
+import type { Country } from '../../src/resources/country.js';
 
 describe('Addresses', () => {
   afterEach(() => cleanupNock());
+
+  it('lists addresses', async () => {
+    loadCassette('addresses/list.yaml');
+    const client = createTestClient();
+    const result = await client.addresses().list();
+    expect(result.data.length).toBeGreaterThan(0);
+    const first = result.data[0];
+    expect(first.cityName).toBe('Odessa');
+    const identity = first.identity;
+    expect(identity).toBeDefined();
+    expect(isIncluded(identity!)).toBe(true);
+    expect((identity as Identity).firstName).toBe('John');
+    expect((identity as Identity).lastName).toBe('Doe');
+    const country = first.country;
+    expect(country).toBeDefined();
+    expect(isIncluded(country!)).toBe(true);
+    expect((country as Country).name).toBe('Ukraine');
+    expect(first.proofs).toBeDefined();
+    expect(Array.isArray(first.proofs)).toBe(true);
+    expect(first.proofs!.length).toBe(1);
+  });
 
   it('creates an address', async () => {
     loadCassette('addresses/create.yaml');
@@ -19,6 +42,10 @@ describe('Addresses', () => {
     });
     expect(result.data.id).toBeDefined();
     expect(result.data.type).toBe('addresses');
+    const country = result.data.country;
+    expect(country).toBeDefined();
+    expect(isIncluded(country!)).toBe(true);
+    expect((country as Country).name).toBe('United States');
   });
 
   it('deletes an address', async () => {

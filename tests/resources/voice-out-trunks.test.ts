@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { Did } from '../../src/resources/did.js';
 
 describe('VoiceOutTrunks', () => {
   afterEach(() => cleanupNock());
@@ -31,6 +33,13 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.callbackUrl).toBeNull();
     expect(result.data.username).toBe('dpjgwbbac9');
     expect(result.data.password).toBe('z0hshvbcy7');
+    expect(result.data.dids).toBeDefined();
+    expect(result.data.dids!.length).toBe(2);
+    expect(isIncluded(result.data.dids![0])).toBe(true);
+    const defaultDid = result.data.defaultDid;
+    expect(defaultDid).toBeDefined();
+    expect(isIncluded(defaultDid!)).toBe(true);
+    expect((defaultDid as Did).number).toBe('37061498222');
   });
 
   it('creates a voice out trunk', async () => {

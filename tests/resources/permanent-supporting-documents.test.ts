@@ -1,7 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
-import { ref } from '../../src/resources/base.js';
+import { ref, isIncluded } from '../../src/resources/base.js';
+import type { SupportingDocumentTemplate } from '../../src/resources/supporting-document-template.js';
 
 describe('PermanentSupportingDocuments', () => {
   afterEach(() => cleanupNock());
@@ -15,6 +16,11 @@ describe('PermanentSupportingDocuments', () => {
       files: [ref('encrypted_files', '254b3c2d-c40c-4ff7-93b1-a677aee7fa10')],
     });
     expect(result.data.id).toBe('19510da3-c07e-4fa9-a696-6b9ab89cc172');
+    const tmpl = result.data.template;
+    expect(tmpl).toBeDefined();
+    expect(isIncluded(tmpl!)).toBe(true);
+    expect((tmpl as SupportingDocumentTemplate).name).toBe('Germany Special Registration Form');
+    expect((tmpl as SupportingDocumentTemplate).permanent).toBe(true);
   });
 
   it('deletes a permanent supporting document', async () => {

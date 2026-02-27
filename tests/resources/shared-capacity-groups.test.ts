@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { isIncluded } from '../../src/resources/base.js';
+import type { CapacityPool } from '../../src/resources/capacity-pool.js';
 
 describe('SharedCapacityGroups', () => {
   afterEach(() => cleanupNock());
@@ -19,6 +21,13 @@ describe('SharedCapacityGroups', () => {
     const result = await client.sharedCapacityGroups().find('89f987e2-0862-4bf4-a3f4-cdc89af0d875');
     expect(result.data.id).toBe('89f987e2-0862-4bf4-a3f4-cdc89af0d875');
     expect(result.data.name).toBe('didww');
+    const pool = result.data.capacityPool;
+    expect(pool).toBeDefined();
+    expect(isIncluded(pool!)).toBe(true);
+    expect((pool as CapacityPool).name).toBe('Standard');
+    expect(result.data.dids).toBeDefined();
+    expect(result.data.dids!.length).toBe(18);
+    expect(isIncluded(result.data.dids![0])).toBe(true);
   });
 
   it('updates a shared capacity group', async () => {
