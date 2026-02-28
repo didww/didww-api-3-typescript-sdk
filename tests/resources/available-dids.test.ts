@@ -29,6 +29,19 @@ describe('AvailableDids', () => {
     expect((dg as DidGroup).areaName).toBe('Grand Rapids');
   });
 
+  it('lists available DIDs with nanpa_prefix relationship', async () => {
+    loadCassette('available_dids/list_2.yaml');
+    const client = createTestClient();
+    const result = await client.availableDids().list({ include: 'nanpa_prefix' });
+    expect(result.data.length).toBe(1);
+    expect(result.data[0].number).toBe('18649204444');
+    const np = result.data[0].nanpaPrefix;
+    expect(np).toBeDefined();
+    expect(isIncluded(np!)).toBe(true);
+    expect((np as NanpaPrefix).npa).toBe('864');
+    expect((np as NanpaPrefix).nxx).toBe('920');
+  });
+
   it('finds an available DID with nanpa_prefix', async () => {
     loadCassette('available_dids/show_with_nanpa_prefix.yaml');
     const client = createTestClient();

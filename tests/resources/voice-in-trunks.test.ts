@@ -137,6 +137,21 @@ describe('VoiceInTrunks', () => {
     expect(result.data.configuration.type).toBe('pstn_configurations');
   });
 
+  it('updates a voice in trunk with PSTN config', async () => {
+    loadCassette('voice_in_trunks/update_2.yaml');
+    const client = createTestClient();
+    const result = await client.voiceInTrunks().update({
+      id: '41b94706-325e-4704-a433-d65105758836',
+      name: 'hello, updated test pstn trunk',
+      configuration: pstnConfiguration({ dst: '558540420025' }),
+    });
+    expect(result.data).toBeDefined();
+    expect(result.data.name).toBe('hello, updated test pstn trunk');
+    const config = result.data.configuration as PstnConfiguration;
+    expect(config.type).toBe('pstn_configurations');
+    expect(config.dst).toBe('558540420025');
+  });
+
   it('deletes a voice in trunk', async () => {
     loadCassette('voice_in_trunks/delete.yaml');
     const client = createTestClient();

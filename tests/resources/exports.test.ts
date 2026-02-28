@@ -32,6 +32,18 @@ describe('Exports', () => {
     expect(result.data.status).toBe('Pending');
   });
 
+  it('creates a cdr_out export', async () => {
+    loadCassette('exports/create_1.yaml');
+    const client = createTestClient();
+    const result = await client.exports().create({
+      exportType: 'cdr_out',
+      filters: { year: '2019', month: '01' },
+    });
+    expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
+    expect(result.data.status).toBe('Pending');
+    expect(result.data.exportType).toBe('cdr_out');
+  });
+
   it('downloads an export', async () => {
     loadCassette('exports/download.yaml');
     const client = createTestClient();

@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
-import { isIncluded } from '../../src/resources/base.js';
+import { ref, isIncluded } from '../../src/resources/base.js';
 import type { CapacityPool } from '../../src/resources/capacity-pool.js';
 
 describe('SharedCapacityGroups', () => {
@@ -28,6 +28,21 @@ describe('SharedCapacityGroups', () => {
     expect(result.data.dids).toBeDefined();
     expect(result.data.dids!.length).toBe(18);
     expect(isIncluded(result.data.dids![0])).toBe(true);
+  });
+
+  it('creates a shared capacity group', async () => {
+    loadCassette('shared_capacity_groups/create_6.yaml');
+    const client = createTestClient();
+    const result = await client.sharedCapacityGroups().create({
+      name: 'ts-sdk',
+      sharedChannelsCount: 5,
+      meteredChannelsCount: 0,
+      capacityPool: ref('capacity_pools', 'b7522a31-4bf3-4c23-81e8-e7a14b23663f'),
+    });
+    expect(result.data.id).toBe('3688a9c3-354f-4e16-b458-1d2df9f02547');
+    expect(result.data.name).toBe('ts-sdk');
+    expect(result.data.sharedChannelsCount).toBe(5);
+    expect(result.data.meteredChannelsCount).toBe(0);
   });
 
   it('updates a shared capacity group', async () => {

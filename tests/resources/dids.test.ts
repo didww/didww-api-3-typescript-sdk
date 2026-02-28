@@ -30,6 +30,31 @@ describe('Dids', () => {
     expect(result.data.number).toBe('16091609123456797');
   });
 
+  it('updates a DID', async () => {
+    loadCassette('dids/update_1.yaml');
+    const client = createTestClient();
+    const result = await client.dids().update({
+      id: '9df99644-f1a5-4a3c-99a4-559d758eb96b',
+      description: 'something',
+    });
+    expect(result.data.id).toBe('9df99644-f1a5-4a3c-99a4-559d758eb96b');
+    expect(result.data.description).toBe('something');
+    expect(result.data.blocked).toBe(false);
+    expect(result.data.terminated).toBe(false);
+  });
+
+  it('updates a DID to terminated state', async () => {
+    loadCassette('dids/update_7.yaml');
+    const client = createTestClient();
+    const result = await client.dids().update({
+      id: '9df99644-f1a5-4a3c-99a4-559d758eb96b',
+      terminated: true,
+    });
+    expect(result.data.blocked).toBe(true);
+    expect(result.data.terminated).toBe(true);
+    expect(result.data.billingCyclesCount).toBe(0);
+  });
+
   it('finds a DID with address_verification and did_group', async () => {
     loadCassette('dids/show_with_address_verification_and_did_group.yaml');
     const client = createTestClient();

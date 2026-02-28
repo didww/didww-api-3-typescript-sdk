@@ -35,6 +35,19 @@ describe('VoiceInTrunkGroups', () => {
     expect((trunks![0] as VoiceInTrunk).name).toBe('test custom11');
   });
 
+  it('updates a voice in trunk group', async () => {
+    loadCassette('voice_in_trunk_groups/update.yaml');
+    const client = createTestClient();
+    const result = await client.voiceInTrunkGroups().update({
+      id: 'b2319703-ce6c-480d-bb53-614e7abcfc96',
+      name: 'trunk group sample updated with 2 trunks',
+      capacityLimit: '500',
+    });
+    expect(result.data.id).toBe('b2319703-ce6c-480d-bb53-614e7abcfc96');
+    expect(result.data.name).toBe('trunk group sample updated with 2 trunks');
+    expect(result.data.capacityLimit).toBe(500);
+  });
+
   it('deletes a voice in trunk group', async () => {
     loadCassette('voice_in_trunk_groups/delete.yaml');
     const client = createTestClient();
