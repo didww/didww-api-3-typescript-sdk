@@ -48,6 +48,23 @@ describe('Addresses', () => {
     expect((country as Country).name).toBe('United States');
   });
 
+  it('updates an address', async () => {
+    loadCassette('addresses/update.yaml');
+    const client = createTestClient();
+    const result = await client.addresses().update({
+      id: 'bf69bc70-e1c2-442c-9f30-335ee299b663',
+      cityName: 'Chicago',
+      postalCode: '1234',
+      address: 'Main street',
+      description: 'some address',
+    });
+    expect(result.data.id).toBe('bf69bc70-e1c2-442c-9f30-335ee299b663');
+    expect(result.data.cityName).toBe('Chicago');
+    expect(result.data.postalCode).toBe('1234');
+    expect(result.data.address).toBe('Main street');
+    expect(result.data.description).toBe('some address');
+  });
+
   it('deletes an address', async () => {
     loadCassette('addresses/delete.yaml');
     const client = createTestClient();

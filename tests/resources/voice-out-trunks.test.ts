@@ -57,6 +57,27 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.status).toBe('active');
   });
 
+  it('updates a voice out trunk', async () => {
+    loadCassette('voice_out_trunks/update.yaml');
+    const client = createTestClient();
+    const result = await client.voiceOutTrunks().update({
+      id: '425ce763-a3a9-49b4-af5b-ada1a65c8864',
+      name: 'test',
+      allowedSipIps: ['10.11.12.13/32'],
+      capacityLimit: 123,
+      forceSymmetricRtp: true,
+      rtpPing: true,
+    });
+    expect(result.data.id).toBe('425ce763-a3a9-49b4-af5b-ada1a65c8864');
+    expect(result.data.name).toBe('test');
+    expect(result.data.status).toBe('blocked');
+    expect(result.data.allowedSipIps).toEqual(['10.11.12.13/32']);
+    expect(result.data.capacityLimit).toBe(123);
+    expect(result.data.mediaEncryptionMode).toBe('disabled');
+    expect(result.data.forceSymmetricRtp).toBe(true);
+    expect(result.data.rtpPing).toBe(true);
+  });
+
   it('deletes a voice out trunk', async () => {
     loadCassette('voice_out_trunks/delete.yaml');
     const client = createTestClient();

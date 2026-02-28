@@ -7,6 +7,15 @@ import type { AvailableDid } from '../../src/resources/available-did.js';
 describe('DidReservations', () => {
   afterEach(() => cleanupNock());
 
+  it('lists DID reservations', async () => {
+    loadCassette('did_reservations/list.yaml');
+    const client = createTestClient();
+    const result = await client.didReservations().list();
+    expect(result.data.length).toBeGreaterThan(0);
+    expect(result.data[0].type).toBe('did_reservations');
+    expect(result.data[0].description).toBe('DIDWW');
+  });
+
   it('finds a DID reservation', async () => {
     loadCassette('did_reservations/show.yaml');
     const client = createTestClient();

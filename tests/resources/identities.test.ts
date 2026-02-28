@@ -49,6 +49,36 @@ describe('Identities', () => {
     expect((country as Country).name).toBe('United States');
   });
 
+  it('creates a personal identity', async () => {
+    loadCassette('identities/create_1.yaml');
+    const client = createTestClient();
+    const result = await client.identities().create({
+      firstName: 'John',
+      lastName: 'Doe',
+      identityType: 'Personal',
+      country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),
+    });
+    expect(result.data.id).toBeDefined();
+    expect(result.data.identityType).toBe('Personal');
+    expect(result.data.companyName).toBeNull();
+  });
+
+  it('updates an identity', async () => {
+    loadCassette('identities/update.yaml');
+    const client = createTestClient();
+    const result = await client.identities().update({
+      id: 'e96ae7d1-11d5-42bc-a5c5-211f3c3788ae',
+      firstName: 'Jake',
+      lastName: 'Johnson',
+      companyName: 'Some Company Limited',
+    });
+    expect(result.data.id).toBe('e96ae7d1-11d5-42bc-a5c5-211f3c3788ae');
+    expect(result.data.firstName).toBe('Jake');
+    expect(result.data.lastName).toBe('Johnson');
+    expect(result.data.companyName).toBe('Some Company Limited');
+    expect(result.data.identityType).toBe('Business');
+  });
+
   it('deletes an identity', async () => {
     loadCassette('identities/delete.yaml');
     const client = createTestClient();
