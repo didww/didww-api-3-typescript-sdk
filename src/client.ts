@@ -81,6 +81,7 @@ export interface DidwwClientOptions {
 }
 
 export class DidwwClient implements HttpClient {
+  private static readonly API_VERSION = '2022-05-10';
   private readonly apiKey: string;
   private readonly baseUrl: string;
   private readonly timeout?: number;
@@ -112,6 +113,7 @@ export class DidwwClient implements HttpClient {
     const headers: Record<string, string> = {
       Accept: 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
+      'X-DIDWW-API-Version': DidwwClient.API_VERSION,
     };
     if (!(path === PUBLIC_KEY_RESOURCE.path || path.startsWith(`${PUBLIC_KEY_RESOURCE.path}/`))) {
       headers['Api-Key'] = this.apiKey;
@@ -184,6 +186,7 @@ export class DidwwClient implements HttpClient {
       method: 'POST',
       headers: {
         'Api-Key': this.apiKey,
+        'X-DIDWW-API-Version': DidwwClient.API_VERSION,
       },
       body: formData,
       ...this.fetchOptions(),
