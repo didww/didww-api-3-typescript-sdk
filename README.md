@@ -529,9 +529,12 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/didww/
 
 ## Releasing
 
-1. Update `version` in `package.json`
-2. `npm run build`
-3. `npm publish --access public`
+1. Ensure you are on the `main` branch and have committed all changes.
+2. `npm install && npm ci && npm run typecheck && npm run lint && npm run format:check` ensure all checks pass
+3. `npm version X.Y.Z` (creates git commit and tag)
+4. `npm run build` build package
+5. `npm publish --access public` releases npm package
+6. `git push --follow-tags origin main` pushes git commit and tag to GitHub
 
 ## License
 
