@@ -67,4 +67,5 @@ export const VOICE_OUT_TRUNK_RESOURCE: ResourceConfig<VoiceOutTrunk, VoiceOutTru
     'defaultDid',
     'dids',
   ],
+  relationshipKeys: ['defaultDid', 'dids'],
 };

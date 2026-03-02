@@ -7,6 +7,8 @@ const KITSU_OPTS = {
   pluralTypes: (s: string) => s,
 };
 
+const CLEAN_WRITABLE_SNAPSHOTS = new WeakMap<object, Record<string, unknown>>();
+
 function snakeToCamelKeys(obj: unknown): unknown {
   if (Array.isArray(obj)) return obj.map(snakeToCamelKeys);
   if (obj !== null && typeof obj === 'object') {
@@ -118,11 +120,18 @@ function applyRegistryDeserialize(resource: unknown): unknown {
   }
 
   // Apply deserializeCustom for this resource if registry has one
+  let meta: ResourceConfig | undefined;
   if ('type' in record && typeof record.type === 'string') {
-    const meta = getResourceConfig(record.type);
+    meta = getResourceConfig(record.type);
     if (meta?.deserializeCustom) {
-      return { ...record, ...meta.deserializeCustom(record) };
+      const deserialized = { ...record, ...meta.deserializeCustom(record) };
+      snapshotCleanWritableValues(meta, deserialized);
+      return deserialized;
     }
+  }
+
+  if (meta) {
+    snapshotCleanWritableValues(meta, record);
   }
 
   return record;
@@ -131,7 +140,8 @@ function applyRegistryDeserialize(resource: unknown): unknown {
 export function serializeForCreate<T, TWrite>(meta: ResourceConfig<T, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
-  const snaked = camelToSnakeKeys(toSerialize) as Record<string, unknown>;
+  const withNullRels = wrapNullRelationships(toSerialize as Record<string, unknown>, meta.relationshipKeys as string[]);
+  const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'POST', KITSU_OPTS);
 }
@@ -140,22 +150,130 @@ export function serializeForUpdate<T, TWrite>(
   meta: ResourceConfig<T, TWrite>,
   data: TWrite & { id: string },
 ): SerializedResource {
-  const filtered = filterWritableKeys(data, meta.writableKeys);
+  const dirtyWritableKeys = detectDirtyWritableKeys(meta, data);
+  const filtered = filterWritableKeys(data, meta.writableKeys, dirtyWritableKeys);
   (filtered as Record<string, unknown>).id = data.id;
-  const toSerialize = meta.serializeCustom ? { ...meta.serializeCustom(data, 'PATCH'), id: data.id } : filtered;
-  const snaked = camelToSnakeKeys(toSerialize) as Record<string, unknown>;
+  const toSerialize = meta.serializeCustom
+    ? { ...meta.serializeCustom(filtered as TWrite, 'PATCH'), id: data.id }
+    : filtered;
+  const withNullRels = wrapNullRelationships(toSerialize as Record<string, unknown>, meta.relationshipKeys as string[]);
+  const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 
-function filterWritableKeys<TWrite>(data: TWrite, writableKeys: (keyof TWrite)[]): Record<string, unknown> {
+function filterWritableKeys<TWrite>(
+  data: TWrite,
+  writableKeys: (keyof TWrite)[],
+  allowedKeys?: ReadonlySet<string>,
+): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const key of writableKeys) {
+    if (allowedKeys && !allowedKeys.has(key as string)) continue;
     if (key in (data as Record<string, unknown>)) {
       result[key as string] = (data as Record<string, unknown>)[key as string];
     }
   }
   return result;
+}
+
+function detectDirtyWritableKeys<T, TWrite>(
+  meta: ResourceConfig<T, TWrite>,
+  data: TWrite & { id: string },
+): ReadonlySet<string> {
+  const record = data as Record<string, unknown>;
+  const snapshot = CLEAN_WRITABLE_SNAPSHOTS.get(data as object);
+  const result = new Set<string>();
+
+  for (const key of meta.writableKeys as string[]) {
+    if (!(key in record)) continue;
+    const current = record[key];
+    const original = snapshot?.[key];
+    if (!snapshot || !(key in snapshot) || !deepEqual(current, original)) {
+      result.add(key);
+    }
+  }
+
+  return result;
+}
+
+function snapshotCleanWritableValues<T, TWrite>(
+  meta: ResourceConfig<T, TWrite>,
+  resource: Record<string, unknown>,
+): void {
+  const snapshot: Record<string, unknown> = {};
+  for (const key of meta.writableKeys as string[]) {
+    if (key in resource) {
+      snapshot[key] = cloneValue(resource[key]);
+    }
+  }
+  CLEAN_WRITABLE_SNAPSHOTS.set(resource, snapshot);
+}
+
+function cloneValue(value: unknown, seen: WeakMap<object, unknown> = new WeakMap<object, unknown>()): unknown {
+  if (value === null || typeof value !== 'object') return value;
+
+  if (seen.has(value)) {
+    return seen.get(value);
+  }
+
+  if (Array.isArray(value)) {
+    const cloned: unknown[] = [];
+    seen.set(value, cloned);
+    for (const item of value) {
+      cloned.push(cloneValue(item, seen));
+    }
+    return cloned;
+  }
+
+  const cloned: Record<string, unknown> = {};
+  seen.set(value, cloned);
+  for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+    cloned[k] = cloneValue(v, seen);
+  }
+  return cloned;
+}
+
+function deepEqual(
+  a: unknown,
+  b: unknown,
+  seen: WeakMap<object, WeakSet<object>> = new WeakMap<object, WeakSet<object>>(),
+): boolean {
+  if (Object.is(a, b)) return true;
+  if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') return false;
+
+  const aObj = a as object;
+  const bObj = b as object;
+
+  let compared = seen.get(aObj);
+  if (!compared) {
+    compared = new WeakSet<object>();
+    seen.set(aObj, compared);
+  } else if (compared.has(bObj)) {
+    return true;
+  }
+  compared.add(bObj);
+
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i += 1) {
+      if (!deepEqual(a[i], b[i], seen)) return false;
+    }
+    return true;
+  }
+
+  const aRecord = a as Record<string, unknown>;
+  const bRecord = b as Record<string, unknown>;
+  const aKeys = Object.keys(aRecord);
+  const bKeys = Object.keys(bRecord);
+  if (aKeys.length !== bKeys.length) return false;
+
+  for (const key of aKeys) {
+    if (!(key in bRecord)) return false;
+    if (!deepEqual(aRecord[key], bRecord[key], seen)) return false;
+  }
+
+  return true;
 }
 
 function isResourceRef(value: unknown): value is ResourceRef {
@@ -171,6 +289,21 @@ function isResourceRef(value: unknown): value is ResourceRef {
 
 function isResourceRefArray(value: unknown): value is ResourceRef[] {
   return Array.isArray(value) && value.length > 0 && isResourceRef(value[0]);
+}
+
+/**
+ * Wrap null values for known relationship keys into { data: null } format
+ * so kitsu-core places them under relationships instead of attributes.
+ */
+function wrapNullRelationships(data: Record<string, unknown>, relationshipKeys?: string[]): Record<string, unknown> {
+  if (!relationshipKeys) return data;
+  const result = { ...data };
+  for (const key of relationshipKeys) {
+    if (key in result && result[key] === null) {
+      result[key] = { data: null };
+    }
+  }
+  return result;
 }
 
 /**
