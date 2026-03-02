@@ -529,9 +529,13 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/didww/
 
 ## Releasing
 
-1. Update `version` in `package.json`
-2. `npm run build`
-3. `npm publish --access public`
+1. Make sure you're on the `main` branch
+2. `npm version X.Y.Z` — updates `package.json`, `package-lock.json`, commits, and creates tag `vX.Y.Z`
+3. `git push --follow-tags` — pushes the commit and tag, triggering the release workflow
+
+`npm version` also accepts semver keywords: `patch`, `minor`, `major`.
+
+The release workflow will automatically run CI checks and publish to npm.
 
 ## License
 
