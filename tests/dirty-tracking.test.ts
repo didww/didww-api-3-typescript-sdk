@@ -100,7 +100,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
             awaiting_registration: false,
             terminated: false,
             description: 'original description',
-            capacity_limit: 'shared',
+            capacity_limit: 2,
             channels_included_count: 1,
             dedicated_channels_count: 0,
             billing_cycles_count: 1,
@@ -233,7 +233,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
             awaiting_registration: false,
             terminated: false,
             description: 'test',
-            capacity_limit: 'shared',
+            capacity_limit: 2,
             channels_included_count: 1,
             dedicated_channels_count: 0,
             billing_cycles_count: 1,
@@ -309,7 +309,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
           type: 'voice_in_trunk_groups',
           attributes: {
             name: 'My Group',
-            capacity_limit: 'shared',
+            capacity_limit: 500,
             created_at: '2024-01-01',
           },
         },
@@ -332,7 +332,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
           type: 'voice_in_trunk_groups',
           attributes: {
             name: 'My Group',
-            capacity_limit: 'shared',
+            capacity_limit: 500,
             created_at: '2024-01-01',
           },
         },
@@ -345,7 +345,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       } as VoiceInTrunkGroupWrite & { id: string });
       // Both writable keys are present and treated as dirty
       expect(result.data.attributes.name).toBe('My Group');
-      expect(result.data.attributes.capacity_limit).toBe('shared');
+      expect(result.data.attributes.capacity_limit).toBe(500);
     });
 
     it('deserialized list items have clean state', () => {
@@ -354,12 +354,12 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
           {
             id: 'group-1',
             type: 'voice_in_trunk_groups',
-            attributes: { name: 'Group 1', capacity_limit: 'shared', created_at: '2024-01-01' },
+            attributes: { name: 'Group 1', capacity_limit: 500, created_at: '2024-01-01' },
           },
           {
             id: 'group-2',
             type: 'voice_in_trunk_groups',
-            attributes: { name: 'Group 2', capacity_limit: 'unlimited', created_at: '2024-01-02' },
+            attributes: { name: 'Group 2', capacity_limit: null, created_at: '2024-01-02' },
           },
         ],
       };

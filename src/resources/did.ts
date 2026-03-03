@@ -14,7 +14,7 @@ export interface Did {
   blocked: boolean;
   awaitingRegistration: boolean;
   terminated: boolean;
-  description: string;
+  description: string | null;
   capacityLimit: number | null;
   channelsIncludedCount: number;
   dedicatedChannelsCount: number;

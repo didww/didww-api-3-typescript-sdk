@@ -45,7 +45,7 @@ export interface SerializedResource {
   data: {
     type: string;
     id?: string;
-    attributes: Record<string, unknown>;
+    attributes?: Record<string, unknown>;
     relationships?: Record<string, unknown>;
   };
 }
