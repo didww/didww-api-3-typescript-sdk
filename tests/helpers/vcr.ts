@@ -70,10 +70,18 @@ export function loadCassette(fixturePath: string): nock.Scope {
         scope.get(path).reply(statusCode, responseBody, responseHeaders);
         break;
       case 'post':
-        scope.post(path, requestBody ?? undefined).reply(statusCode, responseBody, responseHeaders);
+        if (requestBody) {
+          scope.post(path, requestBody).reply(statusCode, responseBody, responseHeaders);
+        } else {
+          scope.post(path).reply(statusCode, responseBody, responseHeaders);
+        }
         break;
       case 'patch':
-        scope.patch(path, requestBody ?? undefined).reply(statusCode, responseBody, responseHeaders);
+        if (requestBody) {
+          scope.patch(path, requestBody).reply(statusCode, responseBody, responseHeaders);
+        } else {
+          scope.patch(path).reply(statusCode, responseBody, responseHeaders);
+        }
         break;
       case 'delete':
         scope.delete(path).reply(statusCode, responseBody, responseHeaders);
