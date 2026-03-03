@@ -43,7 +43,7 @@ async function main() {
       id: did.id,
       capacityPool: ref('capacity_pools', pool.id),
       dedicatedChannelsCount: 1,
-      capacityLimit: '5',
+      capacityLimit: 5,
       description: 'Updated via SDK',
     });
     console.log(`DID ${saved.data.id}`);

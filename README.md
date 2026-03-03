@@ -159,7 +159,7 @@ await client.dids().update({
   id: 'did-id',
   capacityPool: ref('capacity_pools', 'pool-id'),
   dedicatedChannelsCount: 1,
-  capacityLimit: '5',
+  capacityLimit: 5,
   description: 'Updated',
 });
 
@@ -388,7 +388,7 @@ When you build an object manually (without fetching first), all provided fields 
 await client.dids().update({
   id: 'did-id',
   description: 'Updated',
-  capacityLimit: '5',
+  capacityLimit: 5,
 });
 ```
 

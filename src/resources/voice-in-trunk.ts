@@ -15,7 +15,7 @@ export interface VoiceInTrunk {
   cliPrefix: string;
   description: string;
   ringingTimeout: number;
-  capacityLimit: string;
+  capacityLimit: number | null;
   configuration: TrunkConfiguration;
   createdAt: string;
   pop?: Pop | ResourceRef;
@@ -30,7 +30,7 @@ export interface VoiceInTrunkWrite {
   cliPrefix?: string;
   description?: string;
   ringingTimeout?: number;
-  capacityLimit?: string;
+  capacityLimit?: number | null;
   configuration?: TrunkConfiguration;
   pop?: ResourceRef;
   voiceInTrunkGroup?: ResourceRef;

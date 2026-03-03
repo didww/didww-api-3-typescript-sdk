@@ -42,7 +42,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       const result = serializeForUpdate(DID_RESOURCE, {
         id: 'did-1',
         description: 'test',
-        capacityLimit: 'shared',
+        capacityLimit: 10,
       });
       const attrKeys = Object.keys(result.data.attributes);
       expect(attrKeys).toEqual(expect.arrayContaining(['description', 'capacity_limit']));
@@ -167,11 +167,11 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       const result = serializeForUpdate(DID_RESOURCE, {
         id: 'did-1',
         description: 'test',
-        capacityLimit: 'shared',
+        capacityLimit: 10,
         terminated: false,
       });
       expect(result.data.attributes.description).toBe('test');
-      expect(result.data.attributes.capacity_limit).toBe('shared');
+      expect(result.data.attributes.capacity_limit).toBe(10);
       expect(result.data.attributes.terminated).toBe(false);
     });
   });
@@ -267,13 +267,13 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
     it('serializeForCreate includes all provided writable keys', () => {
       const result = serializeForCreate(DID_RESOURCE, {
         description: 'test',
-        capacityLimit: 'shared',
+        capacityLimit: 10,
         terminated: false,
         billingCyclesCount: 1,
         dedicatedChannelsCount: 0,
       });
       expect(result.data.attributes.description).toBe('test');
-      expect(result.data.attributes.capacity_limit).toBe('shared');
+      expect(result.data.attributes.capacity_limit).toBe(10);
       expect(result.data.attributes.terminated).toBe(false);
       expect(result.data.attributes.billing_cycles_count).toBe(1);
       expect(result.data.attributes.dedicated_channels_count).toBe(0);

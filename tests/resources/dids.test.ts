@@ -88,7 +88,7 @@ describe('Dids', () => {
       const client = createTestClient();
       const result = await client.dids().update({
         id: DID_ID,
-        capacityLimit: 10 as unknown as string,
+        capacityLimit: 10,
       });
       expect(result.data.id).toBe(DID_ID);
     });

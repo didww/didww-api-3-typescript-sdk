@@ -15,7 +15,7 @@ export interface Did {
   awaitingRegistration: boolean;
   terminated: boolean;
   description: string;
-  capacityLimit: string;
+  capacityLimit: number | null;
   channelsIncludedCount: number;
   dedicatedChannelsCount: number;
   billingCyclesCount: number;
@@ -32,7 +32,7 @@ export interface Did {
 
 export interface DidWrite {
   billingCyclesCount?: number;
-  capacityLimit?: string;
+  capacityLimit?: number | null;
   description?: string | null;
   terminated?: boolean;
   dedicatedChannelsCount?: number;

@@ -5,14 +5,14 @@ export interface VoiceInTrunkGroup {
   id: string;
   type: 'voice_in_trunk_groups';
   name: string;
-  capacityLimit: string;
+  capacityLimit: number | null;
   createdAt: string;
   voiceInTrunks?: (VoiceInTrunk | ResourceRef)[];
 }
 
 export interface VoiceInTrunkGroupWrite {
   name?: string;
-  capacityLimit?: string;
+  capacityLimit?: number | null;
   voiceInTrunks?: ResourceRef[];
 }
 
