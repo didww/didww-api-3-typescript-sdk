@@ -20,4 +20,5 @@ export const VOICE_IN_TRUNK_GROUP_RESOURCE: ResourceConfig<VoiceInTrunkGroup, Vo
   type: 'voice_in_trunk_groups',
   path: 'voice_in_trunk_groups',
   writableKeys: ['name', 'capacityLimit', 'voiceInTrunks'],
+  relationshipKeys: ['voiceInTrunks'],
 };

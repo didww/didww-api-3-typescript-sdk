@@ -24,4 +24,5 @@ export const SHARED_CAPACITY_GROUP_RESOURCE: ResourceConfig<SharedCapacityGroup,
   type: 'shared_capacity_groups',
   path: 'shared_capacity_groups',
   writableKeys: ['name', 'sharedChannelsCount', 'meteredChannelsCount', 'capacityPool'],
+  relationshipKeys: ['capacityPool'],
 };

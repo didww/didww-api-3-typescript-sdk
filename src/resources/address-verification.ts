@@ -29,4 +29,5 @@ export const ADDRESS_VERIFICATION_RESOURCE: ResourceConfig<AddressVerification, 
   type: 'address_verifications',
   path: 'address_verifications',
   writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'address', 'dids'],
+  relationshipKeys: ['address', 'dids'],
 };

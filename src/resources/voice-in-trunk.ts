@@ -52,6 +52,7 @@ export const VOICE_IN_TRUNK_RESOURCE: ResourceConfig<VoiceInTrunk, VoiceInTrunkW
     'pop',
     'voiceInTrunkGroup',
   ],
+  relationshipKeys: ['pop', 'voiceInTrunkGroup'],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
     for (const key of VOICE_IN_TRUNK_RESOURCE.writableKeys) {

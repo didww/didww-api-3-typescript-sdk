@@ -21,4 +21,5 @@ export const REQUIREMENT_VALIDATION_RESOURCE: ResourceConfig<RequirementValidati
   type: 'requirement_validations',
   path: 'requirement_validations',
   writableKeys: ['requirement', 'identity', 'address'],
+  relationshipKeys: ['requirement', 'identity', 'address'],
 };

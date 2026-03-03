@@ -36,4 +36,5 @@ export const ADDRESS_RESOURCE: ResourceConfig<Address, AddressWrite> = {
   type: 'addresses',
   path: 'addresses',
   writableKeys: ['cityName', 'postalCode', 'address', 'description', 'country', 'identity', 'area', 'city'],
+  relationshipKeys: ['country', 'identity', 'area', 'city'],
 };

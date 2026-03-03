@@ -22,4 +22,5 @@ export const PROOF_RESOURCE: ResourceConfig<Proof, ProofWrite> = {
   type: 'proofs',
   path: 'proofs',
   writableKeys: ['proofType', 'entity', 'files'],
+  relationshipKeys: ['proofType', 'entity', 'files'],
 };

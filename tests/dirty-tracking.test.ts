@@ -420,5 +420,14 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       });
       expect(result.data.relationships?.shared_capacity_group).toEqual({ data: null });
     });
+
+    it('VoiceInTrunkGroup: clearing voiceInTrunks with empty array produces proper relationship', () => {
+      const result = serializeForUpdate(VOICE_IN_TRUNK_GROUP_RESOURCE, {
+        id: 'group-1',
+        voiceInTrunks: [],
+      });
+      expect(result.data.relationships?.voice_in_trunks).toEqual({ data: [] });
+      expect(result.data.attributes?.voice_in_trunks).toBeUndefined();
+    });
   });
 });
