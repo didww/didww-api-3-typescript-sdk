@@ -140,7 +140,10 @@ function applyRegistryDeserialize(resource: unknown): unknown {
 export function serializeForCreate<T, TWrite>(meta: ResourceConfig<T, TWrite>, data: TWrite): SerializedResource {
   const filtered = filterWritableKeys(data, meta.writableKeys);
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
-  const withNullRels = wrapNullRelationships(toSerialize as Record<string, unknown>, meta.relationshipKeys as string[]);
+  const withNullRels = wrapRelationshipClears(
+    toSerialize as Record<string, unknown>,
+    meta.relationshipKeys as string[],
+  );
   const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'POST', KITSU_OPTS);
@@ -156,7 +159,10 @@ export function serializeForUpdate<T, TWrite>(
   const toSerialize = meta.serializeCustom
     ? { ...meta.serializeCustom(filtered as TWrite, 'PATCH'), id: data.id }
     : filtered;
-  const withNullRels = wrapNullRelationships(toSerialize as Record<string, unknown>, meta.relationshipKeys as string[]);
+  const withNullRels = wrapRelationshipClears(
+    toSerialize as Record<string, unknown>,
+    meta.relationshipKeys as string[],
+  );
   const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
@@ -177,6 +183,23 @@ function filterWritableKeys<TWrite>(
   return result;
 }
 
+/**
+ * Extract only { id, type } linkage from a relationship value.
+ * For arrays, extract linkage from each element.
+ * For non-relationship values, return as-is.
+ */
+function extractLinkage(value: unknown): unknown {
+  if (value === null || value === undefined) return value;
+  if (Array.isArray(value)) {
+    return value.map((item) => {
+      if (isResourceRef(item)) return { id: item.id, type: item.type };
+      return item;
+    });
+  }
+  if (isResourceRef(value)) return { id: value.id, type: value.type };
+  return value;
+}
+
 function detectDirtyWritableKeys<T, TWrite>(
   meta: ResourceConfig<T, TWrite>,
   data: TWrite & { id: string },
@@ -184,10 +207,11 @@ function detectDirtyWritableKeys<T, TWrite>(
   const record = data as Record<string, unknown>;
   const snapshot = CLEAN_WRITABLE_SNAPSHOTS.get(data as object);
   const result = new Set<string>();
+  const relKeys = new Set<string>((meta.relationshipKeys as string[]) ?? []);
 
   for (const key of meta.writableKeys as string[]) {
     if (!(key in record)) continue;
-    const current = record[key];
+    const current = relKeys.has(key) ? extractLinkage(record[key]) : record[key];
     const original = snapshot?.[key];
     if (!snapshot || !(key in snapshot) || !deepEqual(current, original)) {
       result.add(key);
@@ -202,9 +226,11 @@ function snapshotCleanWritableValues<T, TWrite>(
   resource: Record<string, unknown>,
 ): void {
   const snapshot: Record<string, unknown> = {};
+  const relKeys = new Set<string>((meta.relationshipKeys as string[]) ?? []);
   for (const key of meta.writableKeys as string[]) {
     if (key in resource) {
-      snapshot[key] = cloneValue(resource[key]);
+      const value = relKeys.has(key) ? extractLinkage(resource[key]) : resource[key];
+      snapshot[key] = cloneValue(value);
     }
   }
   CLEAN_WRITABLE_SNAPSHOTS.set(resource, snapshot);
@@ -292,15 +318,21 @@ function isResourceRefArray(value: unknown): value is ResourceRef[] {
 }
 
 /**
- * Wrap null values for known relationship keys into { data: null } format
+ * Wrap null and empty-array values for known relationship keys into JSON:API format
  * so kitsu-core places them under relationships instead of attributes.
+ * - null → { data: null } (clear to-one)
+ * - [] → { data: [] } (clear to-many)
  */
-function wrapNullRelationships(data: Record<string, unknown>, relationshipKeys?: string[]): Record<string, unknown> {
+function wrapRelationshipClears(data: Record<string, unknown>, relationshipKeys?: string[]): Record<string, unknown> {
   if (!relationshipKeys) return data;
   const result = { ...data };
   for (const key of relationshipKeys) {
-    if (key in result && result[key] === null) {
-      result[key] = { data: null };
+    if (key in result) {
+      if (result[key] === null) {
+        result[key] = { data: null };
+      } else if (Array.isArray(result[key]) && (result[key] as unknown[]).length === 0) {
+        result[key] = { data: [] };
+      }
     }
   }
   return result;

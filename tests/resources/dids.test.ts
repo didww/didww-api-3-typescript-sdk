@@ -2,9 +2,13 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
+import { serializeForUpdate } from '../../src/serializer.js';
+import { DID_RESOURCE } from '../../src/resources/did.js';
+import type { DidWrite } from '../../src/resources/did.js';
 import type { Order } from '../../src/resources/order.js';
 import type { AddressVerification } from '../../src/resources/address-verification.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
+import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('Dids', () => {
   afterEach(() => cleanupNock());
@@ -73,5 +77,85 @@ describe('Dids', () => {
     expect(isIncluded(dg!)).toBe(true);
     expect((dg as DidGroup).prefix).toBe('4');
     expect((dg as DidGroup).areaName).toBe('Mobile');
+  });
+
+  describe('Dirty tracking - integration tests', () => {
+    const DID_ID = '9df99644-f1a5-4a3c-99a4-559d758eb96b';
+    const TRUNK_ID = 'a27e7cc1-cbb1-4295-8e63-e8e1cbb57630';
+
+    it('update built single attribute', async () => {
+      loadCassette('dids/update_built_single_attr.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: DID_ID,
+        capacityLimit: 10 as unknown as string,
+      });
+      expect(result.data.id).toBe(DID_ID);
+    });
+
+    it('update clear description', async () => {
+      loadCassette('dids/update_clear_description.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: DID_ID,
+        description: null,
+      });
+      expect(result.data.id).toBe(DID_ID);
+    });
+
+    it('update terminated', async () => {
+      loadCassette('dids/update_terminated.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: DID_ID,
+        terminated: true,
+      });
+      expect(result.data.terminated).toBe(true);
+      expect(result.data.blocked).toBe(true);
+    });
+
+    it('update set voice in trunk', async () => {
+      loadCassette('dids/update_set_voice_in_trunk.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: DID_ID,
+        voiceInTrunk: { id: TRUNK_ID, type: 'voice_in_trunks' },
+      });
+      expect(result.data.id).toBe(DID_ID);
+    });
+
+    it('update from loaded', async () => {
+      loadCassette('dids/update_from_loaded.yaml');
+      const client = createTestClient();
+      const loaded = await client.dids().find(DID_ID);
+      const did = loaded.data;
+      (did as Record<string, unknown>).description = 'patched';
+      const result = await client.dids().update(did as unknown as DidWrite & { id: string });
+      expect(result.data.description).toBe('patched');
+    });
+
+    it('update from loaded set voice in trunk', async () => {
+      loadCassette('dids/update_from_loaded_set_voice_in_trunk.yaml');
+      const client = createTestClient();
+      const loaded = await client.dids().find(DID_ID);
+      const did = loaded.data;
+      (did as Record<string, unknown>).voiceInTrunk = { id: TRUNK_ID, type: 'voice_in_trunks' };
+      const result = await client.dids().update(did as unknown as DidWrite & { id: string });
+      expect(result.data.id).toBe(DID_ID);
+    });
+
+    it('find with included has clean dirty state', async () => {
+      loadCassette('dids/show_with_included_trunk.yaml');
+      const client = createTestClient();
+      const result = await client.dids().find(DID_ID, { include: ['voice_in_trunk'] });
+      const did = result.data;
+      expect(did.voiceInTrunk).toBeDefined();
+      expect(isIncluded(did.voiceInTrunk!)).toBe(true);
+      expect((did.voiceInTrunk as VoiceInTrunk).name).toBe('Test Trunk');
+      // Verify no dirty fields when updating unchanged
+      const serialized = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
+      expect(serialized.data.attributes).toBeUndefined();
+      expect(serialized.data.relationships).toBeUndefined();
+    });
   });
 });

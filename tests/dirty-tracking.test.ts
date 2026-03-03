@@ -64,7 +64,7 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
     it('sends explicit null for attribute set to null', () => {
       const result = serializeForUpdate(DID_RESOURCE, {
         id: 'did-1',
-        description: null as unknown as string,
+        description: null,
       });
       expect(result.data.attributes.description).toBeNull();
     });

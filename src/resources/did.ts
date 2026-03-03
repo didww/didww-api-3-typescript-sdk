@@ -33,7 +33,7 @@ export interface Did {
 export interface DidWrite {
   billingCyclesCount?: number;
   capacityLimit?: string;
-  description?: string;
+  description?: string | null;
   terminated?: boolean;
   dedicatedChannelsCount?: number;
   voiceInTrunk?: ResourceRef | null;
