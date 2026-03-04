@@ -25,4 +25,5 @@ export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE: ResourceConfig<
   type: 'permanent_supporting_documents',
   path: 'permanent_supporting_documents',
   writableKeys: ['identity', 'template', 'files'],
+  relationshipKeys: ['identity', 'template', 'files'],
 };

@@ -14,8 +14,8 @@ export interface Did {
   blocked: boolean;
   awaitingRegistration: boolean;
   terminated: boolean;
-  description: string;
-  capacityLimit: string;
+  description: string | null;
+  capacityLimit: number | null;
   channelsIncludedCount: number;
   dedicatedChannelsCount: number;
   billingCyclesCount: number;
@@ -32,8 +32,8 @@ export interface Did {
 
 export interface DidWrite {
   billingCyclesCount?: number;
-  capacityLimit?: string;
-  description?: string;
+  capacityLimit?: number | null;
+  description?: string | null;
   terminated?: boolean;
   dedicatedChannelsCount?: number;
   voiceInTrunk?: ResourceRef | null;
@@ -56,18 +56,12 @@ export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
     'capacityPool',
     'sharedCapacityGroup',
   ],
+  relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'],
   serializeCustom(data, _method) {
     const result: Record<string, unknown> = {};
-    const RELATIONSHIP_KEYS = ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'];
     for (const key of DID_RESOURCE.writableKeys) {
       if (key in (data as Record<string, unknown>)) {
-        const value = (data as Record<string, unknown>)[key];
-        // Null relationships need { data: null } format for JSON:API
-        if (value === null && RELATIONSHIP_KEYS.includes(key as string)) {
-          result[key as string] = { data: null };
-        } else {
-          result[key as string] = value;
-        }
+        result[key as string] = (data as Record<string, unknown>)[key];
       }
     }
     // Exclusive relationships: setting voiceInTrunk nullifies voiceInTrunkGroup and vice versa
@@ -76,7 +70,7 @@ export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
       (data as Record<string, unknown>).voiceInTrunk !== undefined
     ) {
       if ((data as Record<string, unknown>).voiceInTrunk !== null) {
-        result.voiceInTrunkGroup = { data: null };
+        result.voiceInTrunkGroup = null;
       }
     }
     if (
@@ -84,7 +78,7 @@ export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
       (data as Record<string, unknown>).voiceInTrunkGroup !== undefined
     ) {
       if ((data as Record<string, unknown>).voiceInTrunkGroup !== null) {
-        result.voiceInTrunk = { data: null };
+        result.voiceInTrunk = null;
       }
     }
     return result;

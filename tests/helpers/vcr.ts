@@ -56,15 +56,32 @@ export function loadCassette(fixturePath: string): nock.Scope {
       }
     }
 
+    let requestBody: nock.RequestBodyMatcher | undefined;
+    if (interaction.request.body) {
+      try {
+        requestBody = JSON.parse(interaction.request.body);
+      } catch {
+        requestBody = interaction.request.body;
+      }
+    }
+
     switch (method) {
       case 'get':
         scope.get(path).reply(statusCode, responseBody, responseHeaders);
         break;
       case 'post':
-        scope.post(path).reply(statusCode, responseBody, responseHeaders);
+        if (requestBody) {
+          scope.post(path, requestBody).reply(statusCode, responseBody, responseHeaders);
+        } else {
+          scope.post(path).reply(statusCode, responseBody, responseHeaders);
+        }
         break;
       case 'patch':
-        scope.patch(path).reply(statusCode, responseBody, responseHeaders);
+        if (requestBody) {
+          scope.patch(path, requestBody).reply(statusCode, responseBody, responseHeaders);
+        } else {
+          scope.patch(path).reply(statusCode, responseBody, responseHeaders);
+        }
         break;
       case 'delete':
         scope.delete(path).reply(statusCode, responseBody, responseHeaders);

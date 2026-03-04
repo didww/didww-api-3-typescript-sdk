@@ -159,7 +159,7 @@ await client.dids().update({
   id: 'did-id',
   capacityPool: ref('capacity_pools', 'pool-id'),
   dedicatedChannelsCount: 1,
-  capacityLimit: '5',
+  capacityLimit: 5,
   description: 'Updated',
 });
 
@@ -363,6 +363,57 @@ const result = await client.regions().list({
   sort: '-name',
   page: { number: 1, size: 25 },
 });
+```
+
+## Dirty Tracking (PATCH Optimization)
+
+When you fetch a resource from the API, the SDK snapshots its writable attributes. On update, only changed fields are sent in the PATCH request:
+
+```typescript
+// Load a DID from the API
+const response = await client.dids().find('did-id', { include: 'voice_in_trunk' });
+const did = response.data;
+
+// Modify only what you need
+did.description = 'Updated description';
+
+// PATCH body contains only { description: "Updated description" }
+await client.dids().update(did);
+```
+
+When you build an object manually (without fetching first), all provided fields are sent:
+
+```typescript
+// All provided fields are sent because there is no clean snapshot
+await client.dids().update({
+  id: 'did-id',
+  description: 'Updated',
+  capacityLimit: 5,
+});
+```
+
+Included resources are also tracked — you can modify and update them directly:
+
+```typescript
+const response = await client.dids().find('did-id', { include: 'voice_in_trunk' });
+const trunk = response.data.voiceInTrunk;
+
+// trunk has a clean snapshot — only dirty fields are sent
+trunk.name = 'Renamed trunk';
+await client.voiceInTrunks().update(trunk);
+```
+
+Setting a field to `null` explicitly clears it:
+
+```typescript
+const response = await client.dids().find('did-id', { include: 'voice_in_trunk' });
+const did = response.data;
+
+// Explicitly clear the trunk relationship
+did.voiceInTrunk = null;
+
+// PATCH body contains { voice_in_trunk: { data: null } }
+await client.dids().update(did);
 ```
 
 ## Trunk Configuration Types

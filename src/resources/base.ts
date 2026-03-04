@@ -7,6 +7,7 @@ export interface ResourceConfig<T = Record<string, unknown>, TWrite = Record<str
   type: string;
   path: string;
   writableKeys: (keyof TWrite)[];
+  relationshipKeys?: (keyof TWrite)[];
   serializeCustom?: (data: TWrite, method: 'POST' | 'PATCH') => Record<string, unknown>;
   deserializeCustom?: (data: Record<string, unknown>) => Partial<T>;
 }

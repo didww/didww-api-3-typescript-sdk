@@ -65,4 +65,5 @@ export const IDENTITY_RESOURCE: ResourceConfig<Identity, IdentityWrite> = {
     'contactEmail',
     'country',
   ],
+  relationshipKeys: ['country'],
 };

@@ -19,4 +19,5 @@ export const DID_RESERVATION_RESOURCE: ResourceConfig<DidReservation, DidReserva
   type: 'did_reservations',
   path: 'did_reservations',
   writableKeys: ['description', 'availableDid'],
+  relationshipKeys: ['availableDid'],
 };
