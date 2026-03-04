@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -34,6 +39,41 @@ jobs:
       - run: npm ci
       - run: npm run test:coverage
 
+      - name: Generate badge.json
+        if: matrix.node-version == 22
+        run: |
+          SUMMARY="coverage/coverage-summary.json"
+          if [ ! -f "$SUMMARY" ]; then
+            mkdir -p badge
+            echo '{"schemaVersion":1,"label":"coverage","message":"unknown","color":"lightgrey"}' > badge/badge.json
+            exit 0
+          fi
+          PERCENT=$(node -e "
+            const s = require('./$SUMMARY');
+            const pct = s.total.lines.pct;
+            console.log(typeof pct === 'number' ? pct.toFixed(1) : '0');
+          ")
+          PERCENT_NUM=$(node -e "
+            const s = require('./$SUMMARY');
+            console.log(s.total.lines.pct || 0);
+          ")
+          COLOR=$(node -e "
+            const p = $PERCENT_NUM;
+            if (p >= 90) console.log('brightgreen');
+            else if (p >= 75) console.log('green');
+            else if (p >= 60) console.log('yellow');
+            else console.log('red');
+          ")
+          mkdir -p badge
+          echo "{\"schemaVersion\":1,\"label\":\"coverage\",\"message\":\"${PERCENT}%\",\"color\":\"${COLOR}\"}" > badge/badge.json
+
+      - name: Upload badge artifact
+        if: matrix.node-version == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-badge
+          path: badge
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -44,3 +84,30 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+
+  deploy-coverage:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download coverage badge
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-badge
+          path: coverage
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: coverage
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
