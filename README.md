@@ -377,7 +377,14 @@ const did = response.data;
 // Modify only what you need
 did.description = 'Updated description';
 
-// PATCH body contains only { description: "Updated description" }
+// PATCH request body (JSON:API format):
+// {
+//   "data": {
+//     "id": "did-id",
+//     "type": "dids",
+//     "attributes": { "description": "Updated description" }
+//   }
+// }
 await client.dids().update(did);
 ```
 
@@ -385,6 +392,14 @@ When you build an object manually (without fetching first), all provided fields 
 
 ```typescript
 // All provided fields are sent because there is no clean snapshot
+// PATCH request body (JSON:API format):
+// {
+//   "data": {
+//     "id": "did-id",
+//     "type": "dids",
+//     "attributes": { "description": "Updated", "capacity_limit": 5 }
+//   }
+// }
 await client.dids().update({
   id: 'did-id',
   description: 'Updated',
@@ -400,6 +415,15 @@ const trunk = response.data.voiceInTrunk;
 
 // trunk has a clean snapshot — only dirty fields are sent
 trunk.name = 'Renamed trunk';
+
+// PATCH request body (JSON:API format):
+// {
+//   "data": {
+//     "id": "<trunk-id>",
+//     "type": "voice_in_trunks",
+//     "attributes": { "name": "Renamed trunk" }
+//   }
+// }
 await client.voiceInTrunks().update(trunk);
 ```
 
@@ -412,7 +436,16 @@ const did = response.data;
 // Explicitly clear the trunk relationship
 did.voiceInTrunk = null;
 
-// PATCH body contains { voice_in_trunk: { data: null } }
+// PATCH request body (JSON:API format):
+// {
+//   "data": {
+//     "id": "did-id",
+//     "type": "dids",
+//     "relationships": {
+//       "voice_in_trunk": { "data": null }
+//     }
+//   }
+// }
 await client.dids().update(did);
 ```
 
