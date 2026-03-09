@@ -216,6 +216,20 @@ export class DidwwClient implements HttpClient {
     return Buffer.from(arrayBuffer);
   }
 
+  async downloadAndDecompressExport(url: string): Promise<Buffer> {
+    const { gunzip } = await import('node:zlib');
+    const compressed = await this.downloadExport(url);
+    return await new Promise<Buffer>((resolve, reject) => {
+      gunzip(compressed, (err, result) => {
+        if (err) {
+          reject(new DidwwClientError(`Failed to decompress export: ${err.message}`));
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+
   private async handleResponse(response: Response): Promise<unknown> {
     if (response.status === 204) return null;
     const body = await this.parseBody(response);

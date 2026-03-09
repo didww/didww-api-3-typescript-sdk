@@ -48,7 +48,18 @@ describe('Exports', () => {
     loadCassette('exports/download.yaml');
     const client = createTestClient();
     const buffer = await client.downloadExport(
-      'https://sandbox-api.didww.com/v3/exports/02bf6df4-3af9-416c-96be-16e5b7eeb651.csv',
+      'https://sandbox-api.didww.com/v3/exports/02bf6df4-3af9-416c-96be-16e5b7eeb651.csv.gz',
+    );
+    // Verify gzip magic bytes
+    expect(buffer[0]).toBe(0x1f);
+    expect(buffer[1]).toBe(0x8b);
+  });
+
+  it('downloads and decompresses an export', async () => {
+    loadCassette('exports/download_decompress.yaml');
+    const client = createTestClient();
+    const buffer = await client.downloadAndDecompressExport(
+      'https://sandbox-api.didww.com/v3/exports/02bf6df4-3af9-416c-96be-16e5b7eeb651.csv.gz',
     );
     const content = buffer.toString('utf-8');
     expect(content).toContain('Date/Time Start (UTC)');
