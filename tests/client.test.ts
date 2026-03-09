@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { DidwwClient } from '../src/client.js';
 import { Environment } from '../src/configuration.js';
 import { DidwwApiError, DidwwClientError } from '../src/errors.js';
+import pkg from '../package.json';
 
 describe('DidwwClient', () => {
   it('uses sandbox URL by default', () => {
@@ -63,6 +64,40 @@ describe('DidwwClient', () => {
     const headers = new Headers(capturedHeaders);
     expect(headers.has('Api-Key')).toBe(false);
     expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+  });
+
+  it('sends User-Agent header with SDK version', async () => {
+    let capturedHeaders: HeadersInit | undefined;
+    const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      capturedHeaders = init?.headers;
+      return new Response(JSON.stringify({ data: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
+    await client.countries().list();
+    expect(capturedHeaders).toBeDefined();
+    const headers = new Headers(capturedHeaders);
+    expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
+  });
+
+  it('sends User-Agent header for encrypted file upload', async () => {
+    let capturedHeaders: HeadersInit | undefined;
+    const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      capturedHeaders = init?.headers;
+      return new Response(JSON.stringify({ ids: ['id-1'] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    };
+
+    const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
+    await client.uploadEncryptedFiles('fingerprint-123', [{ data: Buffer.from('example') }]);
+    expect(capturedHeaders).toBeDefined();
+    const headers = new Headers(capturedHeaders);
+    expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
   });
 
   it('sends Api-Key header for non-public_keys endpoints', async () => {
