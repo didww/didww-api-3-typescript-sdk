@@ -1,3 +1,4 @@
+import { createRequire } from 'module';
 import { Environment } from './configuration.js';
 import { DidwwApiError, DidwwClientError } from './errors.js';
 import { buildQueryString, type QueryParams } from './query-params.js';
@@ -70,6 +71,9 @@ import {
   type VoiceOutTrunkRegenerateCredentialWrite,
 } from './resources/voice-out-trunk-regenerate-credential.js';
 
+const require = createRequire(import.meta.url);
+const pkg = require('../package.json') as { version: string };
+
 export type FetchFunction = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
 export interface DidwwClientOptions {
@@ -82,6 +86,7 @@ export interface DidwwClientOptions {
 
 export class DidwwClient implements HttpClient {
   private static readonly API_VERSION = '2022-05-10';
+  private static readonly USER_AGENT = `didww-typescript-sdk/${pkg.version}`;
   private readonly apiKey: string;
   private readonly baseUrl: string;
   private readonly timeout?: number;
@@ -114,6 +119,7 @@ export class DidwwClient implements HttpClient {
       Accept: 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
       'X-DIDWW-API-Version': DidwwClient.API_VERSION,
+      'User-Agent': DidwwClient.USER_AGENT,
     };
     if (!(path === PUBLIC_KEY_RESOURCE.path || path.startsWith(`${PUBLIC_KEY_RESOURCE.path}/`))) {
       headers['Api-Key'] = this.apiKey;
@@ -187,6 +193,7 @@ export class DidwwClient implements HttpClient {
       headers: {
         'Api-Key': this.apiKey,
         'X-DIDWW-API-Version': DidwwClient.API_VERSION,
+        'User-Agent': DidwwClient.USER_AGENT,
       },
       body: formData,
       ...this.fetchOptions(),
