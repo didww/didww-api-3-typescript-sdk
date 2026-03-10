@@ -277,6 +277,7 @@ await client.didReservations().remove(reservation.data.id);
 const scg = await client.sharedCapacityGroups().create({
   name: 'Shared Group',
   sharedChannelsCount: 20,
+  meteredChannelsCount: 5,
   capacityPool: ref('capacity_pools', 'pool-id'),
 });
 ```
