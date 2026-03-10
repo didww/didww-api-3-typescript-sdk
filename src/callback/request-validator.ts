@@ -33,6 +33,9 @@ export class RequestValidator {
   }
 
   private normalizeUrl(url: string): string {
+    if (!/^[a-zA-Z]+:\/\//.test(url)) {
+      url = `http://${url}`;
+    }
     const parsed = new URL(url);
     let port: string;
     if (parsed.port) {
@@ -42,7 +45,13 @@ export class RequestValidator {
     } else {
       port = ':80';
     }
-    const base = `${parsed.protocol}//${parsed.username ? parsed.username + '@' : ''}${parsed.hostname}${port}${parsed.pathname}`;
+    let auth = '';
+    if (parsed.username && parsed.password) {
+      auth = `${parsed.username}:${parsed.password}@`;
+    } else if (parsed.username) {
+      auth = `${parsed.username}@`;
+    }
+    const base = `${parsed.protocol}//${auth}${parsed.hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';
     return `${base}${search}${hash}`;
