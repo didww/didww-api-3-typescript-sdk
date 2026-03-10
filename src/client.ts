@@ -210,10 +210,13 @@ export class DidwwClient implements HttpClient {
   }
 
   async downloadExport(url: string): Promise<Buffer> {
-    const path = new URL(url).pathname.replace(/^\//, '');
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: this.headers(path),
+      headers: {
+        'Api-Key': this.apiKey,
+        'User-Agent': DidwwClient.USER_AGENT,
+        'X-DIDWW-API-Version': DidwwClient.API_VERSION,
+      },
       ...this.fetchOptions(),
     });
     if (!response.ok) {
