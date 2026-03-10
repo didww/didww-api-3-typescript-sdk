@@ -32,6 +32,16 @@ describe('AddressVerifications', () => {
     const result = await client.addressVerifications().find('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.id).toBe('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.status).toBe('Approved');
+    expect(result.data.rejectReasons).toBeNull();
+  });
+
+  it('finds a rejected address verification with reject_reasons string', async () => {
+    loadCassette('address_verifications/show_rejected.yaml');
+    const client = createTestClient();
+    const result = await client.addressVerifications().find('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
+    expect(result.data.id).toBe('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
+    expect(result.data.status).toBe('Rejected');
+    expect(result.data.rejectReasons).toBe('Building/house/apartment number is missing');
   });
 
   it('creates an address verification', async () => {
