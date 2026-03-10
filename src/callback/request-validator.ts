@@ -11,8 +11,8 @@ export class RequestValidator {
     if (!signature) return false;
     const expected = this.computeSignature(url, payload);
     try {
-      const sigBuf = Buffer.from(signature, 'base64');
-      const expBuf = Buffer.from(expected, 'base64');
+      const sigBuf = Buffer.from(signature, 'hex');
+      const expBuf = Buffer.from(expected, 'hex');
       if (sigBuf.length !== expBuf.length) return false;
       return timingSafeEqual(sigBuf, expBuf);
     } catch {
@@ -29,12 +29,19 @@ export class RequestValidator {
     }
     const hmac = createHmac('sha1', this.apiKey);
     hmac.update(data);
-    return hmac.digest('base64');
+    return hmac.digest('hex');
   }
 
   private normalizeUrl(url: string): string {
     const parsed = new URL(url);
-    const port = parsed.port ? `:${parsed.port}` : '';
+    let port: string;
+    if (parsed.port) {
+      port = `:${parsed.port}`;
+    } else if (parsed.protocol === 'https:') {
+      port = ':443';
+    } else {
+      port = ':80';
+    }
     const base = `${parsed.protocol}//${parsed.username ? parsed.username + '@' : ''}${parsed.hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';
