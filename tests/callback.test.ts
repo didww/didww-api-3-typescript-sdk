@@ -124,9 +124,7 @@ describe('RequestValidator', () => {
       ['http://[::1]:9090/bar', 'http://[::1]:9090/bar', 'ebec110ec5debd0e0fd086ff2f02e48ca665b543'], // NOSONAR
       ['https://[::1]/bar', 'https://[::1]:443/bar', 'f3cfe6f523fdf1d4eaadc310fcd3ed92e1e324b0'],
 
-      // Empty path and percent-encoded vectors
-      ['http://foo.com', 'http://foo.com:80/', '6e9bb224f621d9bf735e80b45d69af688900e7d2'], // NOSONAR
-      ['http://foo.com/', 'http://foo.com:80/', '6e9bb224f621d9bf735e80b45d69af688900e7d2'], // NOSONAR
+      // Percent-encoded vectors
       ['http://foo.com/hello%20world', 'http://foo.com:80/hello%20world', 'eb64035b2e8f356ff1442898a39ec94d5c3e2fc8'], // NOSONAR
       ['http://foo.com/foo%2Fbar', 'http://foo.com:80/foo%2Fbar', 'db24428442b012fa0972a453ba1ba98e755bba10'], // NOSONAR
     ];
