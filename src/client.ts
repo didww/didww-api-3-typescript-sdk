@@ -114,13 +114,15 @@ export class DidwwClient implements HttpClient {
     return opts;
   }
 
-  private headers(path: string): Record<string, string> {
+  private headers(path: string, jsonApi: boolean = true): Record<string, string> {
     const headers: Record<string, string> = {
-      Accept: 'application/vnd.api+json',
-      'Content-Type': 'application/vnd.api+json',
       'X-DIDWW-API-Version': DidwwClient.API_VERSION,
       'User-Agent': DidwwClient.USER_AGENT,
     };
+    if (jsonApi) {
+      headers['Accept'] = 'application/vnd.api+json';
+      headers['Content-Type'] = 'application/vnd.api+json';
+    }
     if (!(path === PUBLIC_KEY_RESOURCE.path || path.startsWith(`${PUBLIC_KEY_RESOURCE.path}/`))) {
       headers['Api-Key'] = this.apiKey;
     }
@@ -190,11 +192,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/encrypted_files`;
     const response = await this._fetch(url, {
       method: 'POST',
-      headers: {
-        'Api-Key': this.apiKey,
-        'X-DIDWW-API-Version': DidwwClient.API_VERSION,
-        'User-Agent': DidwwClient.USER_AGENT,
-      },
+      headers: this.headers(ENCRYPTED_FILE_RESOURCE.path, false),
       body: formData,
       ...this.fetchOptions(),
     });
@@ -210,10 +208,9 @@ export class DidwwClient implements HttpClient {
   }
 
   async downloadExport(url: string): Promise<Buffer> {
-    const path = new URL(url).pathname.replace(/^\//, '');
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: this.headers(path),
+      headers: this.headers(EXPORT_RESOURCE.path, false),
       ...this.fetchOptions(),
     });
     if (!response.ok) {
