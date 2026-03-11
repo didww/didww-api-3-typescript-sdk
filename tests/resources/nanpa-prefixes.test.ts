@@ -3,6 +3,7 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette, cleanupNock } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
+import type { Region } from '../../src/resources/region.js';
 
 describe('NanpaPrefixes', () => {
   afterEach(() => cleanupNock());
@@ -27,5 +28,22 @@ describe('NanpaPrefixes', () => {
     expect(isIncluded(country!)).toBe(true);
     expect((country as Country).name).toBe('United States');
     expect((country as Country).iso).toBe('US');
+  });
+
+  it('finds a NANPA prefix with include=region', async () => {
+    loadCassette('nanpa_prefixes/show_with_region.yaml');
+    const client = createTestClient();
+    const result = await client.nanpaPrefixes().find('1e622e21-c740-4d3f-a615-2a7ef4991922', {
+      include: 'region',
+    });
+    expect(result.data.id).toBe('1e622e21-c740-4d3f-a615-2a7ef4991922');
+    expect(result.data.npa).toBe('201');
+    expect(result.data.nxx).toBe('221');
+    const region = result.data.region;
+    expect(region).toBeDefined();
+    expect(isIncluded(region!)).toBe(true);
+    expect((region as Region).id).toBe('346e64c8-18c2-4a12-b1e2-20e090043fca');
+    expect((region as Region).name).toBe('New Jersey');
+    expect((region as Region).iso).toBe('US-NJ');
   });
 });
