@@ -48,7 +48,9 @@ export class RequestValidator {
     } else if (parsed.username) {
       auth = `${parsed.username}@`;
     }
-    const hostname = parsed.hostname.includes(':') ? `[${parsed.hostname}]` : parsed.hostname;
+    const hostname =
+      parsed.hostname.startsWith('[') ? parsed.hostname :
+      parsed.hostname.includes(':') ? `[${parsed.hostname}]` : parsed.hostname;
     const base = `${parsed.protocol}//${auth}${hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';
