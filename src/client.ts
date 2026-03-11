@@ -114,6 +114,14 @@ export class DidwwClient implements HttpClient {
     return opts;
   }
 
+  private binaryRequestHeaders(): Record<string, string> {
+    return {
+      'Api-Key': this.apiKey,
+      'X-DIDWW-API-Version': DidwwClient.API_VERSION,
+      'User-Agent': DidwwClient.USER_AGENT,
+    };
+  }
+
   private headers(path: string): Record<string, string> {
     const headers: Record<string, string> = {
       Accept: 'application/vnd.api+json',
@@ -190,11 +198,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/encrypted_files`;
     const response = await this._fetch(url, {
       method: 'POST',
-      headers: {
-        'Api-Key': this.apiKey,
-        'X-DIDWW-API-Version': DidwwClient.API_VERSION,
-        'User-Agent': DidwwClient.USER_AGENT,
-      },
+      headers: this.binaryRequestHeaders(),
       body: formData,
       ...this.fetchOptions(),
     });
@@ -212,11 +216,7 @@ export class DidwwClient implements HttpClient {
   async downloadExport(url: string): Promise<Buffer> {
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: {
-        'Api-Key': this.apiKey,
-        'User-Agent': DidwwClient.USER_AGENT,
-        'X-DIDWW-API-Version': DidwwClient.API_VERSION,
-      },
+      headers: this.binaryRequestHeaders(),
       ...this.fetchOptions(),
     });
     if (!response.ok) {
