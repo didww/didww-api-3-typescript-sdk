@@ -197,8 +197,7 @@ export class DidwwClient implements HttpClient {
       ...this.fetchOptions(),
     });
     if (!response.ok) {
-      const body = await this.parseBody(response);
-      throw new DidwwApiError(response.status, body);
+      throw new DidwwApiError(response.status, { errors: [{ detail: 'Upload failed' }] });
     }
     const result = (await response.json()) as Record<string, unknown>;
     if (!Array.isArray(result.ids)) {
