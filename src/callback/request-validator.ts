@@ -34,7 +34,7 @@ export class RequestValidator {
 
   private normalizeUrl(url: string): string {
     if (!/^[a-zA-Z]+:\/\//.test(url)) {
-      url = `http://${url}`;
+      url = `http://${url}`; // NOSONAR - http is a valid protocol for callback URLs
     }
     const parsed = new URL(url);
     let port: string;
