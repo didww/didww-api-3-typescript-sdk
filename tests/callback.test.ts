@@ -9,7 +9,14 @@ describe('RequestValidator', () => {
     type: 'orders',
   };
 
-  const validationCases: { name: string; key: string; url: string; payload: Record<string, string>; signature: string; expected: boolean }[] = [
+  const validationCases: {
+    name: string;
+    key: string;
+    url: string;
+    payload: Record<string, string>;
+    signature: string;
+    expected: boolean;
+  }[] = [
     {
       name: 'validates sandbox callback signature',
       key: defaultKey,
