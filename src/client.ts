@@ -192,7 +192,7 @@ export class DidwwClient implements HttpClient {
     const url = `${this.baseUrl}/encrypted_files`;
     const response = await this._fetch(url, {
       method: 'POST',
-      headers: this.headers('encrypted_files', false),
+      headers: this.headers(ENCRYPTED_FILE_RESOURCE.path, false),
       body: formData,
       ...this.fetchOptions(),
     });
@@ -210,7 +210,7 @@ export class DidwwClient implements HttpClient {
   async downloadExport(url: string): Promise<Buffer> {
     const response = await this._fetch(url, {
       method: 'GET',
-      headers: this.headers('exports', false),
+      headers: this.headers(EXPORT_RESOURCE.path, false),
       ...this.fetchOptions(),
     });
     if (!response.ok) {
