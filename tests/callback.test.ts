@@ -71,6 +71,30 @@ describe('RequestValidator', () => {
     });
   });
 
+  it('treats https default port 443 equivalently to explicit :443', () => {
+    const validator = new RequestValidator(defaultKey);
+    const payload = defaultPayload;
+    const sigWithout = validator.computeSignature('https://example.com/callbacks', payload);
+    const sigWith = validator.computeSignature('https://example.com:443/callbacks', payload);
+    expect(sigWithout).toBe(sigWith);
+    expect(validator.validate('https://example.com/callbacks', payload, sigWithout)).toBe(true);
+  });
+
+  it('produces identical signatures regardless of payload key insertion order', () => {
+    const validator = new RequestValidator(defaultKey);
+    const url = 'http://example.com/callbacks'; // NOSONAR
+    const payloadAsc = { id: 'abc', status: 'completed', type: 'orders' };
+    const payloadDesc = { type: 'orders', status: 'completed', id: 'abc' };
+    expect(validator.computeSignature(url, payloadAsc)).toBe(
+      validator.computeSignature(url, payloadDesc),
+    );
+  });
+
+  it('returns false for an invalid URL instead of throwing', () => {
+    const validator = new RequestValidator(defaultKey);
+    expect(validator.validate('not a valid url', defaultPayload, 'abcd1234')).toBe(false);
+  });
+
   describe('URL normalization test vectors', () => {
     const key = defaultKey;
     const payload = {
@@ -101,7 +125,10 @@ describe('RequestValidator', () => {
       it(`normalizes ${inputUrl} to ${expectedUrl}`, () => {
         const validator = new RequestValidator(key);
         const sig = validator.computeSignature(inputUrl, payload);
+        const canonicalSig = validator.computeSignature(expectedUrl, payload);
         expect(sig).toBe(expectedSig);
+        expect(canonicalSig).toBe(expectedSig);
+        expect(sig).toBe(canonicalSig);
         expect(validator.validate(inputUrl, payload, expectedSig)).toBe(true);
       });
     });

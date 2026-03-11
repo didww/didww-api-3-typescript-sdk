@@ -9,8 +9,8 @@ export class RequestValidator {
 
   validate(url: string, payload: Record<string, string>, signature: string): boolean {
     if (!signature) return false;
-    const expected = this.computeSignature(url, payload);
     try {
+      const expected = this.computeSignature(url, payload);
       const sigBuf = Buffer.from(signature, 'hex');
       const expBuf = Buffer.from(expected, 'hex');
       if (sigBuf.length !== expBuf.length) return false;
@@ -34,12 +34,12 @@ export class RequestValidator {
 
   private normalizeUrl(url: string): string {
     const parsed = new URL(url);
-    let port: string;
+    let port = '';
     if (parsed.port) {
       port = `:${parsed.port}`;
     } else if (parsed.protocol === 'https:') {
       port = ':443';
-    } else {
+    } else if (parsed.protocol === 'http:') {
       port = ':80';
     }
     let auth = '';
@@ -48,7 +48,8 @@ export class RequestValidator {
     } else if (parsed.username) {
       auth = `${parsed.username}@`;
     }
-    const base = `${parsed.protocol}//${auth}${parsed.hostname}${port}${parsed.pathname}`;
+    const hostname = parsed.hostname.includes(':') ? `[${parsed.hostname}]` : parsed.hostname;
+    const base = `${parsed.protocol}//${auth}${hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';
     return `${base}${search}${hash}`;
