@@ -42,8 +42,8 @@ interactions:
         \n        },\n        \"data\": {\n          \"type\": \"requirements\",\n\
         \          \"id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\"\n        }\n \
         \     }\n    },\n    \"meta\": {\n      \"needs_registration\": true,\n  \
-        \    \"is_available\": true\n    }\n  },\n  \"included\": [\n    {\n      \"\
-        id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\",\n      \"type\": \"requirements\"\
+        \    \"is_available\": true\n    }\n  },\n  \"included\": [\n    {\n      \
+        \"id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\",\n      \"type\": \"requirements\"\
         ,\n      \"attributes\": {\n        \"identity_type\": \"Any\",\n        \"\
         personal_area_level\": \"City\",\n        \"business_area_level\": \"City\"\
         ,\n        \"address_area_level\": \"City\",\n        \"personal_proof_qty\"\
