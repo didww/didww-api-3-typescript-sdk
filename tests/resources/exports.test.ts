@@ -69,6 +69,13 @@ describe('Exports', () => {
     expect(content).toContain('972397239159652');
   });
 
+  it('rejects download URL that does not start with baseUrl', async () => {
+    const client = new DidwwClient({ apiKey: 'test-key', environment: Environment.SANDBOX });
+    await expect(client.downloadExport('https://evil.example.com/exports/test.csv.gz')).rejects.toThrow(
+      'Export URL must start with the configured base URL',
+    );
+  });
+
   describe('export download headers', () => {
     async function downloadExportAndCaptureHeaders(): Promise<Headers> {
       let capturedHeaders: HeadersInit | undefined;

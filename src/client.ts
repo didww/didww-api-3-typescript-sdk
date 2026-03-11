@@ -214,6 +214,11 @@ export class DidwwClient implements HttpClient {
   }
 
   async downloadExport(url: string): Promise<Buffer> {
+    if (!url.startsWith(this.baseUrl)) {
+      throw new DidwwClientError(
+        `Export URL must start with the configured base URL (${this.baseUrl})`,
+      );
+    }
     const response = await this._fetch(url, {
       method: 'GET',
       headers: this.binaryRequestHeaders(),
