@@ -9,10 +9,10 @@ export class RequestValidator {
 
   validate(url: string, payload: Record<string, string>, signature: string): boolean {
     if (!signature) return false;
-    const expected = this.computeSignature(url, payload);
     try {
-      const sigBuf = Buffer.from(signature, 'base64');
-      const expBuf = Buffer.from(expected, 'base64');
+      const expected = this.computeSignature(url, payload);
+      const sigBuf = Buffer.from(signature, 'hex');
+      const expBuf = Buffer.from(expected, 'hex');
       if (sigBuf.length !== expBuf.length) return false;
       return timingSafeEqual(sigBuf, expBuf);
     } catch {
@@ -29,13 +29,31 @@ export class RequestValidator {
     }
     const hmac = createHmac('sha1', this.apiKey);
     hmac.update(data);
-    return hmac.digest('base64');
+    return hmac.digest('hex');
   }
 
   private normalizeUrl(url: string): string {
     const parsed = new URL(url);
-    const port = parsed.port ? `:${parsed.port}` : '';
-    const base = `${parsed.protocol}//${parsed.username ? parsed.username + '@' : ''}${parsed.hostname}${port}${parsed.pathname}`;
+    let port = '';
+    if (parsed.port) {
+      port = `:${parsed.port}`;
+    } else if (parsed.protocol === 'https:') {
+      port = ':443';
+    } else if (parsed.protocol === 'http:') {
+      port = ':80';
+    }
+    let auth = '';
+    if (parsed.username && parsed.password) {
+      auth = `${parsed.username}:${parsed.password}@`;
+    } else if (parsed.username) {
+      auth = `${parsed.username}@`;
+    }
+    const hostname = parsed.hostname.startsWith('[')
+      ? parsed.hostname
+      : parsed.hostname.includes(':')
+        ? `[${parsed.hostname}]`
+        : parsed.hostname;
+    const base = `${parsed.protocol}//${auth}${hostname}${port}${parsed.pathname}`;
     const search = parsed.search || '';
     const hash = parsed.hash || '';
     return `${base}${search}${hash}`;
