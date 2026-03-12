@@ -1,6 +1,8 @@
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceConfig, ResourceRef } from './resources/base.js';
 import { getResourceConfig } from './registry.js';
+import { filterWritableKeys } from './filter-writable-keys.js';
+export { filterWritableKeys } from './filter-writable-keys.js';
 
 const KITSU_OPTS = {
   camelCaseTypes: (s: string) => s,
@@ -165,20 +167,6 @@ export function serializeForUpdate<T, TWrite>(
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 
-export function filterWritableKeys<TWrite>(
-  data: TWrite,
-  writableKeys: (keyof TWrite)[],
-  allowedKeys?: ReadonlySet<string>,
-): Record<string, unknown> {
-  const result: Record<string, unknown> = {};
-  for (const key of writableKeys) {
-    if (allowedKeys && !allowedKeys.has(key as string)) continue;
-    if (key in (data as Record<string, unknown>)) {
-      result[key as string] = (data as Record<string, unknown>)[key as string];
-    }
-  }
-  return result;
-}
 
 /**
  * Extract only { id, type } linkage from a relationship value.

@@ -1,5 +1,5 @@
 import type { ResourceConfig, ResourceRef } from './base.js';
-import { filterWritableKeys } from '../serializer.js';
+import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { Order } from './order.js';
 import type { DidGroup } from './did-group.js';
 import type { VoiceInTrunk } from './voice-in-trunk.js';

@@ -1,5 +1,5 @@
 import type { ResourceConfig, ResourceRef } from './base.js';
-import { filterWritableKeys } from '../serializer.js';
+import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
 import type { Pop } from './pop.js';

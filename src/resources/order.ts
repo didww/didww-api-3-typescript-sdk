@@ -1,5 +1,5 @@
 import type { ResourceConfig } from './base.js';
-import { filterWritableKeys } from '../serializer.js';
+import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { OrderItem } from '../nested/order-item.js';
 import type { OrderStatus, CallbackMethod } from '../enums.js';
 import { serializeOrderItems, deserializeOrderItems } from '../nested/order-item.js';
