@@ -8,7 +8,6 @@ import type { SupportingDocumentTemplate } from '../../src/resources/supporting-
 import type { ProofType } from '../../src/resources/proof-type.js';
 
 describe('Requirements', () => {
-
   it('lists requirements', async () => {
     loadCassette('requirements/list.yaml');
     const client = createTestClient();

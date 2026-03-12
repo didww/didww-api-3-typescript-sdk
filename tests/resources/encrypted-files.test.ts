@@ -4,7 +4,6 @@ import { loadCassette } from '../helpers/vcr.js';
 import { DidwwClientError } from '../../src/errors.js';
 
 describe('EncryptedFiles', () => {
-
   it('lists encrypted files', async () => {
     loadCassette('encrypted_files/list.yaml');
     const client = createTestClient();

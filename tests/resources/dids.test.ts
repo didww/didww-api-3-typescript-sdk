@@ -11,7 +11,6 @@ import type { DidGroup } from '../../src/resources/did-group.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('Dids', () => {
-
   it('lists DIDs', async () => {
     loadCassette('dids/list.yaml');
     const client = createTestClient();

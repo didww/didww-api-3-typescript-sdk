@@ -6,7 +6,6 @@ import type { DidGroup } from '../../src/resources/did-group.js';
 import type { NanpaPrefix } from '../../src/resources/nanpa-prefix.js';
 
 describe('AvailableDids', () => {
-
   it('lists available DIDs', async () => {
     loadCassette('available_dids/list.yaml');
     const client = createTestClient();

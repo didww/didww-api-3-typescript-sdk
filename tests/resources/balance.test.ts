@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('Balance', () => {
-
   it('finds balance', async () => {
     loadCassette('balance/list.yaml');
     const client = createTestClient();

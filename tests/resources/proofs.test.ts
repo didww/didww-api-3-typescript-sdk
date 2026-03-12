@@ -5,7 +5,6 @@ import { ref, isIncluded } from '../../src/resources/base.js';
 import type { ProofType } from '../../src/resources/proof-type.js';
 
 describe('Proofs', () => {
-
   it('creates a proof', async () => {
     loadCassette('proofs/create.yaml');
     const client = createTestClient();

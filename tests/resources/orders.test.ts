@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('Orders', () => {
-
   it('finds an order', async () => {
     loadCassette('orders/show.yaml');
     const client = createTestClient();

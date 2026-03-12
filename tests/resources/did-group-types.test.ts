@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('DidGroupTypes', () => {
-
   it('lists DID group types', async () => {
     loadCassette('did_group_types/list.yaml');
     const client = createTestClient();

@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('VoiceOutTrunkRegenerateCredentials', () => {
-
   it('creates a regenerate credential', async () => {
     loadCassette('voice_out_trunk_regenerate_credentials/create.yaml');
     const client = createTestClient();

@@ -6,7 +6,6 @@ import type { Did } from '../../src/resources/did.js';
 import type { Address } from '../../src/resources/address.js';
 
 describe('AddressVerifications', () => {
-
   it('lists address verifications', async () => {
     loadCassette('address_verifications/list.yaml');
     const client = createTestClient();

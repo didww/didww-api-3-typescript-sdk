@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('ProofTypes', () => {
-
   it('lists proof types', async () => {
     loadCassette('proof_types/list.yaml');
     const client = createTestClient();

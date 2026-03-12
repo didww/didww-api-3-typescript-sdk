@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('PublicKeys', () => {
-
   it('lists public keys', async () => {
     loadCassette('public_keys/list.yaml');
     const client = createTestClient();

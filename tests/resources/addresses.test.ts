@@ -6,7 +6,6 @@ import type { Identity } from '../../src/resources/identity.js';
 import type { Country } from '../../src/resources/country.js';
 
 describe('Addresses', () => {
-
   it('lists addresses', async () => {
     loadCassette('addresses/list.yaml');
     const client = createTestClient();

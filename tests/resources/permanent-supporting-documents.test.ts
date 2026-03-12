@@ -5,7 +5,6 @@ import { ref, isIncluded } from '../../src/resources/base.js';
 import type { SupportingDocumentTemplate } from '../../src/resources/supporting-document-template.js';
 
 describe('PermanentSupportingDocuments', () => {
-
   it('creates a permanent supporting document', async () => {
     loadCassette('permanent_supporting_documents/create.yaml');
     const client = createTestClient();

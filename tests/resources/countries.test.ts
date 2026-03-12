@@ -5,7 +5,6 @@ import { isIncluded } from '../../src/resources/base.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('Countries', () => {
-
   it('lists countries', async () => {
     loadCassette('countries/list.yaml');
     const client = createTestClient();

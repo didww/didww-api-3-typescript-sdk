@@ -5,7 +5,6 @@ import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 
 describe('VoiceOutTrunks', () => {
-
   it('lists voice out trunks', async () => {
     loadCassette('voice_out_trunks/list.yaml');
     const client = createTestClient();

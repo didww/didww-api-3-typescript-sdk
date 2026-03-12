@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('SupportingDocumentTemplates', () => {
-
   it('lists supporting document templates', async () => {
     loadCassette('supporting_document_templates/list.yaml');
     const client = createTestClient();

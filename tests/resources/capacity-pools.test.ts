@@ -7,7 +7,6 @@ import type { SharedCapacityGroup } from '../../src/resources/shared-capacity-gr
 import type { QtyBasedPricing } from '../../src/resources/qty-based-pricing.js';
 
 describe('CapacityPools', () => {
-
   it('lists capacity pools', async () => {
     loadCassette('capacity_pools/list.yaml');
     const client = createTestClient();

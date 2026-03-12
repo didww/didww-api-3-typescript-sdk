@@ -3,7 +3,6 @@ import { createTestClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 
 describe('Pops', () => {
-
   it('lists pops', async () => {
     loadCassette('pops/list.yaml');
     const client = createTestClient();

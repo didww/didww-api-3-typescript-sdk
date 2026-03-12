@@ -5,7 +5,6 @@ import { ref, isIncluded } from '../../src/resources/base.js';
 import type { AvailableDid } from '../../src/resources/available-did.js';
 
 describe('DidReservations', () => {
-
   it('lists DID reservations', async () => {
     loadCassette('did_reservations/list.yaml');
     const client = createTestClient();

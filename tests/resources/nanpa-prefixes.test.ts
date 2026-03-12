@@ -6,7 +6,6 @@ import type { Country } from '../../src/resources/country.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('NanpaPrefixes', () => {
-
   it('lists NANPA prefixes', async () => {
     loadCassette('nanpa_prefixes/list.yaml');
     const client = createTestClient();

@@ -10,7 +10,7 @@ const KITSU_OPTS = {
 const CLEAN_WRITABLE_SNAPSHOTS = new WeakMap<object, Record<string, unknown>>();
 
 function transformKeys(obj: unknown, fn: (k: string) => string): unknown {
-  if (Array.isArray(obj)) return obj.map(o => transformKeys(o, fn));
+  if (Array.isArray(obj)) return obj.map((o) => transformKeys(o, fn));
   if (obj !== null && typeof obj === 'object') {
     return Object.fromEntries(
       Object.entries(obj as Record<string, unknown>).map(([k, v]) => [fn(k), transformKeys(v, fn)]),
@@ -19,8 +19,12 @@ function transformKeys(obj: unknown, fn: (k: string) => string): unknown {
   return obj;
 }
 
-function snakeToCamelKeys(obj: unknown): unknown { return transformKeys(obj, camel); }
-function camelToSnakeKeys(obj: unknown): unknown { return transformKeys(obj, snake); }
+function snakeToCamelKeys(obj: unknown): unknown {
+  return transformKeys(obj, camel);
+}
+function camelToSnakeKeys(obj: unknown): unknown {
+  return transformKeys(obj, snake);
+}
 
 export interface DeserializedResponse<T> {
   data: T;

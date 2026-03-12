@@ -8,4 +8,6 @@ export interface SupportingDocumentTemplate {
   url: string;
 }
 
-export const SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE = createReadOnlyResource<SupportingDocumentTemplate>('supporting_document_templates');
+export const SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE = createReadOnlyResource<SupportingDocumentTemplate>(
+  'supporting_document_templates',
+);

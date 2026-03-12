@@ -6,7 +6,6 @@ import { Environment } from '../../src/configuration.js';
 import pkg from '../../package.json';
 
 describe('Exports', () => {
-
   it('lists exports', async () => {
     loadCassette('exports/list.yaml');
     const client = createTestClient();

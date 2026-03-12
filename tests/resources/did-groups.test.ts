@@ -9,7 +9,6 @@ import type { StockKeepingUnit } from '../../src/resources/stock-keeping-unit.js
 import type { Requirement } from '../../src/resources/requirement.js';
 
 describe('DidGroups', () => {
-
   it('lists DID groups', async () => {
     loadCassette('did_groups/list.yaml');
     const client = createTestClient();

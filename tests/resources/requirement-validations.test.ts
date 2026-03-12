@@ -5,7 +5,6 @@ import { DidwwApiError } from '../../src/errors.js';
 import { ref } from '../../src/resources/base.js';
 
 describe('RequirementValidations', () => {
-
   it('creates a requirement validation', async () => {
     loadCassette('requirement_validations/create.yaml');
     const client = createTestClient();

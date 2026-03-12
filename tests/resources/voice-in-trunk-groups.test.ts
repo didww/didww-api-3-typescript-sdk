@@ -5,7 +5,6 @@ import { isIncluded } from '../../src/resources/base.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('VoiceInTrunkGroups', () => {
-
   it('lists voice in trunk groups', async () => {
     loadCassette('voice_in_trunk_groups/list.yaml');
     const client = createTestClient();

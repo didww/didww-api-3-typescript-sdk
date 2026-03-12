@@ -13,7 +13,6 @@ import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
 
 describe('VoiceInTrunks', () => {
-
   it('lists voice in trunks', async () => {
     loadCassette('voice_in_trunks/list.yaml');
     const client = createTestClient();
