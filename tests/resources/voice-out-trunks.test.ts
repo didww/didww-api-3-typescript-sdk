@@ -1,22 +1,17 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 
 describe('VoiceOutTrunks', () => {
-  afterEach(() => cleanupNock());
-
   it('lists voice out trunks', async () => {
-    loadCassette('voice_out_trunks/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_out_trunks/list.yaml');
     const result = await client.voiceOutTrunks().list();
     expect(result.data.length).toBeGreaterThan(0);
   });
 
   it('finds a voice out trunk', async () => {
-    loadCassette('voice_out_trunks/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_out_trunks/show.yaml');
     const result = await client.voiceOutTrunks().find('425ce763-a3a9-49b4-af5b-ada1a65c8864');
     expect(result.data.id).toBe('425ce763-a3a9-49b4-af5b-ada1a65c8864');
     expect(result.data.type).toBe('voice_out_trunks');
@@ -43,8 +38,7 @@ describe('VoiceOutTrunks', () => {
   });
 
   it('creates a voice out trunk', async () => {
-    loadCassette('voice_out_trunks/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_out_trunks/create.yaml');
     const result = await client.voiceOutTrunks().create({
       name: 'ts-test',
       allowedSipIps: ['0.0.0.0/0'],
@@ -58,8 +52,7 @@ describe('VoiceOutTrunks', () => {
   });
 
   it('updates a voice out trunk', async () => {
-    loadCassette('voice_out_trunks/update.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_out_trunks/update.yaml');
     const result = await client.voiceOutTrunks().update({
       id: '425ce763-a3a9-49b4-af5b-ada1a65c8864',
       name: 'test',
@@ -79,8 +72,7 @@ describe('VoiceOutTrunks', () => {
   });
 
   it('deletes a voice out trunk', async () => {
-    loadCassette('voice_out_trunks/delete.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_out_trunks/delete.yaml');
     await expect(client.voiceOutTrunks().remove('425ce763-a3a9-49b4-af5b-ada1a65c8864')).resolves.toBeUndefined();
   });
 });

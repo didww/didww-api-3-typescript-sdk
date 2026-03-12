@@ -1,16 +1,12 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { Address } from '../../src/resources/address.js';
 
 describe('Identities', () => {
-  afterEach(() => cleanupNock());
-
   it('lists identities', async () => {
-    loadCassette('identities/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('identities/list.yaml');
     const result = await client.identities().list();
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
@@ -33,8 +29,7 @@ describe('Identities', () => {
   });
 
   it('creates an identity', async () => {
-    loadCassette('identities/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('identities/create.yaml');
     const result = await client.identities().create({
       firstName: 'John',
       lastName: 'Doe',
@@ -50,8 +45,7 @@ describe('Identities', () => {
   });
 
   it('creates a personal identity', async () => {
-    loadCassette('identities/create_1.yaml');
-    const client = createTestClient();
+    const client = setupClient('identities/create_1.yaml');
     const result = await client.identities().create({
       firstName: 'John',
       lastName: 'Doe',
@@ -64,8 +58,7 @@ describe('Identities', () => {
   });
 
   it('updates an identity', async () => {
-    loadCassette('identities/update.yaml');
-    const client = createTestClient();
+    const client = setupClient('identities/update.yaml');
     const result = await client.identities().update({
       id: 'e96ae7d1-11d5-42bc-a5c5-211f3c3788ae',
       firstName: 'Jake',
@@ -80,8 +73,7 @@ describe('Identities', () => {
   });
 
   it('deletes an identity', async () => {
-    loadCassette('identities/delete.yaml');
-    const client = createTestClient();
+    const client = setupClient('identities/delete.yaml');
     await expect(client.identities().remove('e96ae7d1-11d5-42bc-a5c5-211f3c3788ae')).resolves.toBeUndefined();
   });
 });

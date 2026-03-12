@@ -1,13 +1,9 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 
 describe('SupportingDocumentTemplates', () => {
-  afterEach(() => cleanupNock());
-
   it('lists supporting document templates', async () => {
-    loadCassette('supporting_document_templates/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('supporting_document_templates/list.yaml');
     const result = await client.supportingDocumentTemplates().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('supporting_document_templates');

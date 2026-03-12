@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface DidGroupType {
   id: string;
@@ -6,8 +6,4 @@ export interface DidGroupType {
   name: string;
 }
 
-export const DID_GROUP_TYPE_RESOURCE: ResourceConfig<DidGroupType> = {
-  type: 'did_group_types',
-  path: 'did_group_types',
-  writableKeys: [],
-};
+export const DID_GROUP_TYPE_RESOURCE = createReadOnlyResource<DidGroupType>('did_group_types');

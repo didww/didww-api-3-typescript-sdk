@@ -1,15 +1,11 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('VoiceInTrunkGroups', () => {
-  afterEach(() => cleanupNock());
-
   it('lists voice in trunk groups', async () => {
-    loadCassette('voice_in_trunk_groups/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunk_groups/list.yaml');
     const result = await client.voiceInTrunkGroups().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('voice_in_trunk_groups');
@@ -21,8 +17,7 @@ describe('VoiceInTrunkGroups', () => {
   });
 
   it('creates a voice in trunk group', async () => {
-    loadCassette('voice_in_trunk_groups/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunk_groups/create.yaml');
     const result = await client.voiceInTrunkGroups().create({
       name: 'trunk group sample with 2 trunks',
     });
@@ -36,8 +31,7 @@ describe('VoiceInTrunkGroups', () => {
   });
 
   it('updates a voice in trunk group', async () => {
-    loadCassette('voice_in_trunk_groups/update.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunk_groups/update.yaml');
     const result = await client.voiceInTrunkGroups().update({
       id: 'b2319703-ce6c-480d-bb53-614e7abcfc96',
       name: 'trunk group sample updated with 2 trunks',
@@ -49,8 +43,7 @@ describe('VoiceInTrunkGroups', () => {
   });
 
   it('deletes a voice in trunk group', async () => {
-    loadCassette('voice_in_trunk_groups/delete.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunk_groups/delete.yaml');
     await expect(client.voiceInTrunkGroups().remove('b2319703-ce6c-480d-bb53-614e7abcfc96')).resolves.toBeUndefined();
   });
 });

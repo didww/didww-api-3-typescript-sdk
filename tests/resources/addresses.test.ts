@@ -1,16 +1,12 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Identity } from '../../src/resources/identity.js';
 import type { Country } from '../../src/resources/country.js';
 
 describe('Addresses', () => {
-  afterEach(() => cleanupNock());
-
   it('lists addresses', async () => {
-    loadCassette('addresses/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('addresses/list.yaml');
     const result = await client.addresses().list();
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
@@ -30,8 +26,7 @@ describe('Addresses', () => {
   });
 
   it('creates an address', async () => {
-    loadCassette('addresses/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('addresses/create.yaml');
     const result = await client.addresses().create({
       cityName: 'New York',
       postalCode: '10001',
@@ -49,8 +44,7 @@ describe('Addresses', () => {
   });
 
   it('updates an address', async () => {
-    loadCassette('addresses/update.yaml');
-    const client = createTestClient();
+    const client = setupClient('addresses/update.yaml');
     const result = await client.addresses().update({
       id: 'bf69bc70-e1c2-442c-9f30-335ee299b663',
       cityName: 'Chicago',
@@ -66,8 +60,7 @@ describe('Addresses', () => {
   });
 
   it('deletes an address', async () => {
-    loadCassette('addresses/delete.yaml');
-    const client = createTestClient();
+    const client = setupClient('addresses/delete.yaml');
     await expect(client.addresses().remove('bf69bc70-e1c2-442c-9f30-335ee299b663')).resolves.toBeUndefined();
   });
 });

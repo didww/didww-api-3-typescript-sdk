@@ -1,13 +1,9 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 
 describe('Pops', () => {
-  afterEach(() => cleanupNock());
-
   it('lists pops', async () => {
-    loadCassette('pops/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('pops/list.yaml');
     const result = await client.pops().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('pops');

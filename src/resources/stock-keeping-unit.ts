@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface StockKeepingUnit {
   id: string;
@@ -8,8 +8,4 @@ export interface StockKeepingUnit {
   channelsIncludedCount: number;
 }
 
-export const STOCK_KEEPING_UNIT_RESOURCE: ResourceConfig<StockKeepingUnit> = {
-  type: 'stock_keeping_units',
-  path: 'stock_keeping_units',
-  writableKeys: [],
-};
+export const STOCK_KEEPING_UNIT_RESOURCE = createReadOnlyResource<StockKeepingUnit>('stock_keeping_units');

@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface ProofType {
   id: string;
@@ -7,8 +7,4 @@ export interface ProofType {
   entityType: string;
 }
 
-export const PROOF_TYPE_RESOURCE: ResourceConfig<ProofType> = {
-  type: 'proof_types',
-  path: 'proof_types',
-  writableKeys: [],
-};
+export const PROOF_TYPE_RESOURCE = createReadOnlyResource<ProofType>('proof_types');

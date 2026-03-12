@@ -1,6 +1,5 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Pop } from '../../src/resources/pop.js';
 import {
@@ -13,11 +12,8 @@ import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
 
 describe('VoiceInTrunks', () => {
-  afterEach(() => cleanupNock());
-
   it('lists voice in trunks', async () => {
-    loadCassette('voice_in_trunks/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/list.yaml');
     const result = await client.voiceInTrunks().list();
     expect(result.data).toBeDefined();
     expect(Array.isArray(result.data)).toBe(true);
@@ -34,8 +30,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('lists SIP configuration attributes', async () => {
-    loadCassette('voice_in_trunks/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/list.yaml');
     const result = await client.voiceInTrunks().list();
     const sipTrunk = result.data.find((t) => t.configuration?.type === 'sip_configurations');
     expect(sipTrunk).toBeDefined();
@@ -70,8 +65,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('creates a voice in trunk with SIP config and rerouting disconnect codes', async () => {
-    loadCassette('voice_in_trunks/create_10.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/create_10.yaml');
     const result = await client.voiceInTrunks().create({
       name: 'hello, test sip trunk',
       configuration: sipConfiguration({
@@ -99,8 +93,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('updates a voice in trunk with rerouting disconnect codes', async () => {
-    loadCassette('voice_in_trunks/update_11.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/update_11.yaml');
     const result = await client.voiceInTrunks().update({
       id: 'a80006b6-4183-4865-8b99-7ebbd359a762',
       name: 'hello, updated test sip trunk',
@@ -124,8 +117,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('creates a voice in trunk with PSTN config', async () => {
-    loadCassette('voice_in_trunks/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/create.yaml');
     const result = await client.voiceInTrunks().create({
       name: 'hello, test pstn trunk',
       configuration: pstnConfiguration({ dst: '558540420024' }),
@@ -138,8 +130,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('updates a voice in trunk with PSTN config', async () => {
-    loadCassette('voice_in_trunks/update_2.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/update_2.yaml');
     const result = await client.voiceInTrunks().update({
       id: '41b94706-325e-4704-a433-d65105758836',
       name: 'hello, updated test pstn trunk',
@@ -153,8 +144,7 @@ describe('VoiceInTrunks', () => {
   });
 
   it('deletes a voice in trunk', async () => {
-    loadCassette('voice_in_trunks/delete.yaml');
-    const client = createTestClient();
+    const client = setupClient('voice_in_trunks/delete.yaml');
     await expect(client.voiceInTrunks().remove('41b94706-325e-4704-a433-d65105758836')).resolves.toBeUndefined();
   });
 });

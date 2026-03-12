@@ -1,4 +1,5 @@
 import type { ResourceConfig } from './base.js';
+import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { OrderItem } from '../nested/order-item.js';
 import type { OrderStatus, CallbackMethod } from '../enums.js';
 import { serializeOrderItems, deserializeOrderItems } from '../nested/order-item.js';
@@ -29,12 +30,7 @@ export const ORDER_RESOURCE: ResourceConfig<Order, OrderWrite> = {
   path: 'orders',
   writableKeys: ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'],
   serializeCustom(data, _method) {
-    const result: Record<string, unknown> = {};
-    for (const key of ORDER_RESOURCE.writableKeys) {
-      if (key in (data as Record<string, unknown>)) {
-        result[key as string] = (data as Record<string, unknown>)[key];
-      }
-    }
+    const result = filterWritableKeys(data, ORDER_RESOURCE.writableKeys);
     if (result.items && Array.isArray(result.items)) {
       result.items = serializeOrderItems(result.items as OrderItem[]);
     }

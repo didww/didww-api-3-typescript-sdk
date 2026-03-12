@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface QtyBasedPricing {
   id: string;
@@ -8,8 +8,4 @@ export interface QtyBasedPricing {
   monthlyPrice: string;
 }
 
-export const QTY_BASED_PRICING_RESOURCE: ResourceConfig<QtyBasedPricing> = {
-  type: 'qty_based_pricings',
-  path: 'qty_based_pricings',
-  writableKeys: [],
-};
+export const QTY_BASED_PRICING_RESOURCE = createReadOnlyResource<QtyBasedPricing>('qty_based_pricings');

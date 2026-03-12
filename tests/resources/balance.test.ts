@@ -1,13 +1,9 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 
 describe('Balance', () => {
-  afterEach(() => cleanupNock());
-
   it('finds balance', async () => {
-    loadCassette('balance/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('balance/list.yaml');
     const result = await client.balance().find();
     expect(result.data).toBeDefined();
     expect(result.data.id).toBe('4c39e0bf-683b-4697-9322-5abaf4011883');

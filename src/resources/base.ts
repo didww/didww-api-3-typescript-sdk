@@ -12,6 +12,10 @@ export interface ResourceConfig<T = Record<string, unknown>, TWrite = Record<str
   deserializeCustom?: (data: Record<string, unknown>) => Partial<T>;
 }
 
+export function createReadOnlyResource<T>(type: string, path: string = type): ResourceConfig<T> {
+  return { type, path, writableKeys: [] };
+}
+
 export function ref(type: string, id: string): ResourceRef {
   return { id, type };
 }

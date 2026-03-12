@@ -1,4 +1,5 @@
 import type { ResourceConfig, ResourceRef } from './base.js';
+import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { Order } from './order.js';
 import type { DidGroup } from './did-group.js';
 import type { VoiceInTrunk } from './voice-in-trunk.js';
@@ -58,12 +59,7 @@ export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
   ],
   relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'],
   serializeCustom(data, _method) {
-    const result: Record<string, unknown> = {};
-    for (const key of DID_RESOURCE.writableKeys) {
-      if (key in (data as Record<string, unknown>)) {
-        result[key as string] = (data as Record<string, unknown>)[key];
-      }
-    }
+    const result = filterWritableKeys(data, DID_RESOURCE.writableKeys);
     // Exclusive relationships: setting voiceInTrunk nullifies voiceInTrunkGroup and vice versa
     if (
       'voiceInTrunk' in (data as Record<string, unknown>) &&

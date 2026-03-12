@@ -1,13 +1,9 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 
 describe('Orders', () => {
-  afterEach(() => cleanupNock());
-
   it('finds an order', async () => {
-    loadCassette('orders/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/show.yaml');
     const result = await client.orders().find('9df11dac-9d83-448c-8866-19c998be33db');
     expect(result.data.id).toBe('9df11dac-9d83-448c-8866-19c998be33db');
     expect(result.data.status).toBe('Completed');
@@ -18,8 +14,7 @@ describe('Orders', () => {
   });
 
   it('creates an order', async () => {
-    loadCassette('orders/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create.yaml');
     const result = await client.orders().create({
       allowBackOrdering: true,
       items: [
@@ -34,8 +29,7 @@ describe('Orders', () => {
   });
 
   it('creates an order with billing_cycles_count', async () => {
-    loadCassette('orders/create_5.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create_5.yaml');
     const result = await client.orders().create({
       allowBackOrdering: true,
       items: [
@@ -48,8 +42,7 @@ describe('Orders', () => {
   });
 
   it('creates an order with available_did', async () => {
-    loadCassette('orders/create_3.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create_3.yaml');
     const result = await client.orders().create({
       items: [
         {
@@ -65,8 +58,7 @@ describe('Orders', () => {
   });
 
   it('creates an order with reservation', async () => {
-    loadCassette('orders/create_1.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create_1.yaml');
     const result = await client.orders().create({
       items: [
         {
@@ -82,8 +74,7 @@ describe('Orders', () => {
   });
 
   it('creates a capacity order', async () => {
-    loadCassette('orders/create_2.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create_2.yaml');
     const result = await client.orders().create({
       items: [{ type: 'capacity_order_items', capacityPoolId: 'b7522a31-4bf3-4c23-81e8-e7a14b23663f', qty: 1 }],
     });
@@ -94,8 +85,7 @@ describe('Orders', () => {
   });
 
   it('creates an order with nanpa_prefix', async () => {
-    loadCassette('orders/create_6.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders/create_6.yaml');
     const result = await client.orders().create({
       allowBackOrdering: true,
       items: [
@@ -113,8 +103,7 @@ describe('Orders', () => {
   });
 
   it('creates an order with callback', async () => {
-    loadCassette('orders_with_callback/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('orders_with_callback/create.yaml');
     const result = await client.orders().create({
       allowBackOrdering: true,
       callbackUrl: 'https://example.com/callback',

@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface PublicKey {
   id: string;
@@ -6,8 +6,4 @@ export interface PublicKey {
   key: string;
 }
 
-export const PUBLIC_KEY_RESOURCE: ResourceConfig<PublicKey> = {
-  type: 'public_keys',
-  path: 'public_keys',
-  writableKeys: [],
-};
+export const PUBLIC_KEY_RESOURCE = createReadOnlyResource<PublicKey>('public_keys');

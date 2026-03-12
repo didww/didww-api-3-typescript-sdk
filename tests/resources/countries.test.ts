@@ -1,15 +1,11 @@
-import { describe, it, expect, afterEach } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { describe, it, expect } from 'vitest';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('Countries', () => {
-  afterEach(() => cleanupNock());
-
   it('lists countries', async () => {
-    loadCassette('countries/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('countries/list.yaml');
     const result = await client.countries().list();
     expect(result.data).toBeDefined();
     expect(Array.isArray(result.data)).toBe(true);
@@ -21,8 +17,7 @@ describe('Countries', () => {
   });
 
   it('finds a country', async () => {
-    loadCassette('countries/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('countries/show.yaml');
     const result = await client.countries().find('7eda11bb-0e66-4146-98e7-57a5281f56c8');
     expect(result.data).toBeDefined();
     expect(result.data.id).toBe('7eda11bb-0e66-4146-98e7-57a5281f56c8');
@@ -33,8 +28,7 @@ describe('Countries', () => {
   });
 
   it('finds a country with regions', async () => {
-    loadCassette('countries/show_with_regions.yaml');
-    const client = createTestClient();
+    const client = setupClient('countries/show_with_regions.yaml');
     const result = await client.countries().find('661d8448-8897-4765-acda-00cc1740148d', {
       include: 'regions',
     });
