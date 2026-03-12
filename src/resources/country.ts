@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { createReadOnlyResource, type ResourceRef } from './base.js';
 import type { Region } from './region.js';
 
 export interface Country {
@@ -10,8 +10,4 @@ export interface Country {
   regions?: (Region | ResourceRef)[];
 }
 
-export const COUNTRY_RESOURCE: ResourceConfig<Country> = {
-  type: 'countries',
-  path: 'countries',
-  writableKeys: [],
-};
+export const COUNTRY_RESOURCE = createReadOnlyResource<Country>('countries');

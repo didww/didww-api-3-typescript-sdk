@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface Balance {
   id: string;
@@ -8,8 +8,4 @@ export interface Balance {
   credit: string;
 }
 
-export const BALANCE_RESOURCE: ResourceConfig<Balance> = {
-  type: 'balances',
-  path: 'balance',
-  writableKeys: [],
-};
+export const BALANCE_RESOURCE = createReadOnlyResource<Balance>('balances', 'balance');

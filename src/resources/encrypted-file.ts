@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface EncryptedFile {
   id: string;
@@ -8,8 +8,4 @@ export interface EncryptedFile {
   createdAt: string;
 }
 
-export const ENCRYPTED_FILE_RESOURCE: ResourceConfig<EncryptedFile> = {
-  type: 'encrypted_files',
-  path: 'encrypted_files',
-  writableKeys: [],
-};
+export const ENCRYPTED_FILE_RESOURCE = createReadOnlyResource<EncryptedFile>('encrypted_files');

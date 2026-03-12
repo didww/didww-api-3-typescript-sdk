@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { createReadOnlyResource, type ResourceRef } from './base.js';
 import type { IdentityType, AreaLevel } from '../enums.js';
 import type { Country } from './country.js';
 import type { DidGroupType } from './did-group-type.js';
@@ -30,8 +30,4 @@ export interface Requirement {
   addressProofTypes?: (ProofType | ResourceRef)[];
 }
 
-export const REQUIREMENT_RESOURCE: ResourceConfig<Requirement> = {
-  type: 'requirements',
-  path: 'requirements',
-  writableKeys: [],
-};
+export const REQUIREMENT_RESOURCE = createReadOnlyResource<Requirement>('requirements');

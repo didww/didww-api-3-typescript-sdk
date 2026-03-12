@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { createReadOnlyResource, type ResourceRef } from './base.js';
 import type { Feature } from '../enums.js';
 import type { Country } from './country.js';
 import type { Region } from './region.js';
@@ -23,8 +23,4 @@ export interface DidGroup {
   requirement?: Requirement | ResourceRef;
 }
 
-export const DID_GROUP_RESOURCE: ResourceConfig<DidGroup> = {
-  type: 'did_groups',
-  path: 'did_groups',
-  writableKeys: [],
-};
+export const DID_GROUP_RESOURCE = createReadOnlyResource<DidGroup>('did_groups');

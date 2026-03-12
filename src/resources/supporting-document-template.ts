@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { createReadOnlyResource } from './base.js';
 
 export interface SupportingDocumentTemplate {
   id: string;
@@ -8,8 +8,4 @@ export interface SupportingDocumentTemplate {
   url: string;
 }
 
-export const SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE: ResourceConfig<SupportingDocumentTemplate> = {
-  type: 'supporting_document_templates',
-  path: 'supporting_document_templates',
-  writableKeys: [],
-};
+export const SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE = createReadOnlyResource<SupportingDocumentTemplate>('supporting_document_templates');
