@@ -1,9 +1,8 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 
 describe('Orders', () => {
-  afterEach(() => cleanupNock());
 
   it('finds an order', async () => {
     loadCassette('orders/show.yaml');

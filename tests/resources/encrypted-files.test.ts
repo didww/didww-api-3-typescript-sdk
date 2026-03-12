@@ -1,10 +1,9 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { DidwwClientError } from '../../src/errors.js';
 
 describe('EncryptedFiles', () => {
-  afterEach(() => cleanupNock());
 
   it('lists encrypted files', async () => {
     loadCassette('encrypted_files/list.yaml');

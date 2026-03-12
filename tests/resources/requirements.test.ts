@@ -1,6 +1,6 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { DidGroupType } from '../../src/resources/did-group-type.js';
@@ -8,7 +8,6 @@ import type { SupportingDocumentTemplate } from '../../src/resources/supporting-
 import type { ProofType } from '../../src/resources/proof-type.js';
 
 describe('Requirements', () => {
-  afterEach(() => cleanupNock());
 
   it('lists requirements', async () => {
     loadCassette('requirements/list.yaml');

@@ -1,11 +1,10 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { SupportingDocumentTemplate } from '../../src/resources/supporting-document-template.js';
 
 describe('PermanentSupportingDocuments', () => {
-  afterEach(() => cleanupNock());
 
   it('creates a permanent supporting document', async () => {
     loadCassette('permanent_supporting_documents/create.yaml');

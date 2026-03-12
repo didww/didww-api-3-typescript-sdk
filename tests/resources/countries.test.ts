@@ -1,11 +1,10 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('Countries', () => {
-  afterEach(() => cleanupNock());
 
   it('lists countries', async () => {
     loadCassette('countries/list.yaml');

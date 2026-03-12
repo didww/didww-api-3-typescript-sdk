@@ -1,11 +1,10 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 
 describe('VoiceOutTrunks', () => {
-  afterEach(() => cleanupNock());
 
   it('lists voice out trunks', async () => {
     loadCassette('voice_out_trunks/list.yaml');

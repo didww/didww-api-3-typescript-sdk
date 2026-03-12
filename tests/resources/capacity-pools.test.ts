@@ -1,13 +1,12 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { SharedCapacityGroup } from '../../src/resources/shared-capacity-group.js';
 import type { QtyBasedPricing } from '../../src/resources/qty-based-pricing.js';
 
 describe('CapacityPools', () => {
-  afterEach(() => cleanupNock());
 
   it('lists capacity pools', async () => {
     loadCassette('capacity_pools/list.yaml');

@@ -1,12 +1,11 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 import type { Address } from '../../src/resources/address.js';
 
 describe('AddressVerifications', () => {
-  afterEach(() => cleanupNock());
 
   it('lists address verifications', async () => {
     loadCassette('address_verifications/list.yaml');

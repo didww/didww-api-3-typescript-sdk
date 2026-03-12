@@ -1,9 +1,8 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 
 describe('DidGroupTypes', () => {
-  afterEach(() => cleanupNock());
 
   it('lists DID group types', async () => {
     loadCassette('did_group_types/list.yaml');

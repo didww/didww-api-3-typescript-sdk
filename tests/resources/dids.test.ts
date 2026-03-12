@@ -1,6 +1,6 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import { serializeForUpdate } from '../../src/serializer.js';
 import { DID_RESOURCE } from '../../src/resources/did.js';
@@ -11,7 +11,6 @@ import type { DidGroup } from '../../src/resources/did-group.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('Dids', () => {
-  afterEach(() => cleanupNock());
 
   it('lists DIDs', async () => {
     loadCassette('dids/list.yaml');

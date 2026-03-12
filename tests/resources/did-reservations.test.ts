@@ -1,11 +1,10 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { AvailableDid } from '../../src/resources/available-did.js';
 
 describe('DidReservations', () => {
-  afterEach(() => cleanupNock());
 
   it('lists DID reservations', async () => {
     loadCassette('did_reservations/list.yaml');

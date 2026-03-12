@@ -1,12 +1,11 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
 import type { NanpaPrefix } from '../../src/resources/nanpa-prefix.js';
 
 describe('AvailableDids', () => {
-  afterEach(() => cleanupNock());
 
   it('lists available DIDs', async () => {
     loadCassette('available_dids/list.yaml');

@@ -1,6 +1,6 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createTestClient } from '../helpers/client.js';
-import { loadCassette, cleanupNock } from '../helpers/vcr.js';
+import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Pop } from '../../src/resources/pop.js';
 import {
@@ -13,7 +13,6 @@ import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
 
 describe('VoiceInTrunks', () => {
-  afterEach(() => cleanupNock());
 
   it('lists voice in trunks', async () => {
     loadCassette('voice_in_trunks/list.yaml');
