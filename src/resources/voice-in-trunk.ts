@@ -1,4 +1,5 @@
 import type { ResourceConfig, ResourceRef } from './base.js';
+import { filterWritableKeys } from '../serializer.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
 import type { Pop } from './pop.js';
@@ -54,12 +55,7 @@ export const VOICE_IN_TRUNK_RESOURCE: ResourceConfig<VoiceInTrunk, VoiceInTrunkW
   ],
   relationshipKeys: ['pop', 'voiceInTrunkGroup'],
   serializeCustom(data, _method) {
-    const result: Record<string, unknown> = {};
-    for (const key of VOICE_IN_TRUNK_RESOURCE.writableKeys) {
-      if (key in (data as Record<string, unknown>)) {
-        result[key as string] = (data as Record<string, unknown>)[key];
-      }
-    }
+    const result = filterWritableKeys(data, VOICE_IN_TRUNK_RESOURCE.writableKeys);
     if (result.configuration) {
       result.configuration = serializeTrunkConfiguration(result.configuration as TrunkConfiguration);
     }
