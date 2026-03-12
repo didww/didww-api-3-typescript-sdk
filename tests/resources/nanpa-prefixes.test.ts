@@ -1,22 +1,19 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('NanpaPrefixes', () => {
   it('lists NANPA prefixes', async () => {
-    loadCassette('nanpa_prefixes/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('nanpa_prefixes/list.yaml');
     const result = await client.nanpaPrefixes().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('nanpa_prefixes');
   });
 
   it('finds a NANPA prefix', async () => {
-    loadCassette('nanpa_prefixes/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('nanpa_prefixes/show.yaml');
     const result = await client.nanpaPrefixes().find('6c16d51d-d376-4395-91c4-012321317e48');
     expect(result.data.id).toBe('6c16d51d-d376-4395-91c4-012321317e48');
     expect(result.data.npa).toBe('864');
@@ -29,8 +26,7 @@ describe('NanpaPrefixes', () => {
   });
 
   it('finds a NANPA prefix with include=region', async () => {
-    loadCassette('nanpa_prefixes/show_with_region.yaml');
-    const client = createTestClient();
+    const client = setupClient('nanpa_prefixes/show_with_region.yaml');
     const result = await client.nanpaPrefixes().find('1e622e21-c740-4d3f-a615-2a7ef4991922', {
       include: 'region',
     });

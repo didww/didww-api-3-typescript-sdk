@@ -1,11 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 
 describe('Pops', () => {
   it('lists pops', async () => {
-    loadCassette('pops/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('pops/list.yaml');
     const result = await client.pops().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('pops');

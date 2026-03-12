@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
+import { createTestClient, setupClient } from '../helpers/client.js';
 import { loadCassette } from '../helpers/vcr.js';
 import { isIncluded } from '../../src/resources/base.js';
 import { serializeForUpdate } from '../../src/serializer.js';
@@ -12,8 +12,7 @@ import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
 
 describe('Dids', () => {
   it('lists DIDs', async () => {
-    loadCassette('dids/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('dids/list.yaml');
     const result = await client.dids().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('dids');
@@ -25,16 +24,14 @@ describe('Dids', () => {
   });
 
   it('finds a DID', async () => {
-    loadCassette('dids/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('dids/show.yaml');
     const result = await client.dids().find('9df99644-f1a5-4a3c-99a4-559d758eb96b');
     expect(result.data.id).toBe('9df99644-f1a5-4a3c-99a4-559d758eb96b');
     expect(result.data.number).toBe('16091609123456797');
   });
 
   it('updates a DID', async () => {
-    loadCassette('dids/update_1.yaml');
-    const client = createTestClient();
+    const client = setupClient('dids/update_1.yaml');
     const result = await client.dids().update({
       id: '9df99644-f1a5-4a3c-99a4-559d758eb96b',
       description: 'something',
@@ -46,8 +43,7 @@ describe('Dids', () => {
   });
 
   it('updates a DID to terminated state', async () => {
-    loadCassette('dids/update_7.yaml');
-    const client = createTestClient();
+    const client = setupClient('dids/update_7.yaml');
     const result = await client.dids().update({
       id: '9df99644-f1a5-4a3c-99a4-559d758eb96b',
       terminated: true,
@@ -58,8 +54,7 @@ describe('Dids', () => {
   });
 
   it('finds a DID with address_verification and did_group', async () => {
-    loadCassette('dids/show_with_address_verification_and_did_group.yaml');
-    const client = createTestClient();
+    const client = setupClient('dids/show_with_address_verification_and_did_group.yaml');
     const result = await client.dids().find('21d0b02c-b556-4d3e-acbf-504b78295dbe', {
       include: ['address_verification', 'did_group'],
     });

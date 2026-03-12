@@ -1,14 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
 import type { NanpaPrefix } from '../../src/resources/nanpa-prefix.js';
 
 describe('AvailableDids', () => {
   it('lists available DIDs', async () => {
-    loadCassette('available_dids/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('available_dids/list.yaml');
     const result = await client.availableDids().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('available_dids');
@@ -16,8 +14,7 @@ describe('AvailableDids', () => {
   });
 
   it('finds an available DID', async () => {
-    loadCassette('available_dids/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('available_dids/show.yaml');
     const result = await client.availableDids().find('0b76223b-9625-412f-b0f3-330551473e7e');
     expect(result.data.id).toBe('0b76223b-9625-412f-b0f3-330551473e7e');
     expect(result.data.number).toBe('16169886810');
@@ -28,8 +25,7 @@ describe('AvailableDids', () => {
   });
 
   it('lists available DIDs with nanpa_prefix relationship', async () => {
-    loadCassette('available_dids/list_2.yaml');
-    const client = createTestClient();
+    const client = setupClient('available_dids/list_2.yaml');
     const result = await client.availableDids().list({ include: 'nanpa_prefix' });
     expect(result.data.length).toBe(1);
     expect(result.data[0].number).toBe('18649204444');
@@ -41,8 +37,7 @@ describe('AvailableDids', () => {
   });
 
   it('finds an available DID with nanpa_prefix', async () => {
-    loadCassette('available_dids/show_with_nanpa_prefix.yaml');
-    const client = createTestClient();
+    const client = setupClient('available_dids/show_with_nanpa_prefix.yaml');
     const result = await client.availableDids().find('58304301-5216-4f6e-ab17-1a13b99bfb3a', {
       include: 'nanpa_prefix',
     });

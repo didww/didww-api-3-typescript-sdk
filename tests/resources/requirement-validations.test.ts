@@ -1,13 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 import { DidwwApiError } from '../../src/errors.js';
 import { ref } from '../../src/resources/base.js';
 
 describe('RequirementValidations', () => {
   it('creates a requirement validation', async () => {
-    loadCassette('requirement_validations/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('requirement_validations/create.yaml');
     const result = await client.requirementValidations().create({
       address: ref('addresses', 'd3414687-40f4-4346-a267-c2c65117d28c'),
       requirement: ref('requirements', 'aea92b24-a044-4864-9740-89d3e15b65c7'),
@@ -16,8 +14,7 @@ describe('RequirementValidations', () => {
   });
 
   it('handles validation failure with 422', async () => {
-    loadCassette('requirement_validations/create_1.yaml');
-    const client = createTestClient();
+    const client = setupClient('requirement_validations/create_1.yaml');
     try {
       await client.requirementValidations().create({
         identity: ref('identities', '5e9df058-50d2-4e34-b0d4-d1746b86f41a'),

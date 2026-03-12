@@ -1,14 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 import type { Address } from '../../src/resources/address.js';
 
 describe('AddressVerifications', () => {
   it('lists address verifications', async () => {
-    loadCassette('address_verifications/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('address_verifications/list.yaml');
     const result = await client.addressVerifications().list();
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
@@ -25,8 +23,7 @@ describe('AddressVerifications', () => {
   });
 
   it('finds an address verification', async () => {
-    loadCassette('address_verifications/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('address_verifications/show.yaml');
     const result = await client.addressVerifications().find('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.id).toBe('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.status).toBe('Approved');
@@ -34,8 +31,7 @@ describe('AddressVerifications', () => {
   });
 
   it('finds a rejected address verification with reject_reasons string', async () => {
-    loadCassette('address_verifications/show_rejected.yaml');
-    const client = createTestClient();
+    const client = setupClient('address_verifications/show_rejected.yaml');
     const result = await client.addressVerifications().find('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
     expect(result.data.id).toBe('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
     expect(result.data.status).toBe('Rejected');
@@ -43,8 +39,7 @@ describe('AddressVerifications', () => {
   });
 
   it('creates an address verification', async () => {
-    loadCassette('address_verifications/create.yaml');
-    const client = createTestClient();
+    const client = setupClient('address_verifications/create.yaml');
     const result = await client.addressVerifications().create({
       serviceDescription: 'Test service',
       address: ref('addresses', 'bf69bc70-e1c2-442c-9f30-335ee299b663'),

@@ -1,14 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { createTestClient } from '../helpers/client.js';
-import { loadCassette } from '../helpers/vcr.js';
+import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { Region } from '../../src/resources/region.js';
 
 describe('Cities', () => {
   it('lists cities', async () => {
-    loadCassette('cities/list.yaml');
-    const client = createTestClient();
+    const client = setupClient('cities/list.yaml');
     const result = await client.cities().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('cities');
@@ -16,8 +14,7 @@ describe('Cities', () => {
   });
 
   it('finds a city', async () => {
-    loadCassette('cities/show.yaml');
-    const client = createTestClient();
+    const client = setupClient('cities/show.yaml');
     const result = await client.cities().find('368bf92f-c36e-473f-96fc-d53ed1b4028b');
     expect(result.data.id).toBe('368bf92f-c36e-473f-96fc-d53ed1b4028b');
     expect(result.data.name).toBe('New York');
