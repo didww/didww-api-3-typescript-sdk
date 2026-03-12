@@ -9,25 +9,18 @@ const KITSU_OPTS = {
 
 const CLEAN_WRITABLE_SNAPSHOTS = new WeakMap<object, Record<string, unknown>>();
 
-function snakeToCamelKeys(obj: unknown): unknown {
-  if (Array.isArray(obj)) return obj.map(snakeToCamelKeys);
+function transformKeys(obj: unknown, fn: (k: string) => string): unknown {
+  if (Array.isArray(obj)) return obj.map(o => transformKeys(o, fn));
   if (obj !== null && typeof obj === 'object') {
     return Object.fromEntries(
-      Object.entries(obj as Record<string, unknown>).map(([k, v]) => [camel(k), snakeToCamelKeys(v)]),
+      Object.entries(obj as Record<string, unknown>).map(([k, v]) => [fn(k), transformKeys(v, fn)]),
     );
   }
   return obj;
 }
 
-function camelToSnakeKeys(obj: unknown): unknown {
-  if (Array.isArray(obj)) return obj.map(camelToSnakeKeys);
-  if (obj !== null && typeof obj === 'object') {
-    return Object.fromEntries(
-      Object.entries(obj as Record<string, unknown>).map(([k, v]) => [snake(k), camelToSnakeKeys(v)]),
-    );
-  }
-  return obj;
-}
+function snakeToCamelKeys(obj: unknown): unknown { return transformKeys(obj, camel); }
+function camelToSnakeKeys(obj: unknown): unknown { return transformKeys(obj, snake); }
 
 export interface DeserializedResponse<T> {
   data: T;
@@ -168,7 +161,7 @@ export function serializeForUpdate<T, TWrite>(
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 
-function filterWritableKeys<TWrite>(
+export function filterWritableKeys<TWrite>(
   data: TWrite,
   writableKeys: (keyof TWrite)[],
   allowedKeys?: ReadonlySet<string>,
