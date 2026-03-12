@@ -167,7 +167,6 @@ export function serializeForUpdate<T, TWrite>(
   return serialise(meta.type, prepared, 'PATCH', KITSU_OPTS);
 }
 
-
 /**
  * Extract only { id, type } linkage from a relationship value.
  * For arrays, extract linkage from each element.
