@@ -62,6 +62,19 @@ describe('RequestValidator', () => {
       signature: 'fbdb1d1b18aa6c08324b7d64b71fb76370690e1d',
       expected: false,
     },
+    {
+      // https://doc.didww.com/api3/2022-05-10/callbacks-details.html#algorithm-implementation-details
+      name: 'documentation example',
+      key: 'szrdgh6547umt7tht7xbqhj6g9gdbyp7',
+      url: 'https://mycompany.com/didww_callbacks?opaque=123',
+      payload: {
+        id: 'bf2cee72-6caa-4ae2-917e-bea01945691e',
+        status: 'completed',
+        type: 'orders',
+      },
+      signature: '30f66e9d72eb5e193051fd02952f70d8e934b4ff',
+      expected: true,
+    },
   ];
 
   validationCases.forEach(({ name, key, url, payload, signature, expected }) => {
