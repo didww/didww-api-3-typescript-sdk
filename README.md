@@ -478,7 +478,7 @@ All date and datetime fields are returned as ISO 8601 strings. JavaScript's `Dat
 
 - **Datetime fields** — ISO 8601 strings e.g. `"2024-01-15T10:00:00.000Z"`:
   - `Did.createdAt`, `Did.expiresAt`
-  - `EncryptedFile.createdAt`, `EncryptedFile.expireAt`
+  - `EncryptedFile.expireAt` (no `createdAt` on this resource)
   - `DidReservation.createdAt`, `DidReservation.expireAt`
   - `Proof.createdAt`, `Proof.expiresAt`
   - `Order.createdAt`, `Identity.createdAt`, `Address.createdAt`, `VoiceInTrunk.createdAt`, `VoiceInTrunkGroup.createdAt`, `VoiceOutTrunk.createdAt`, `SharedCapacityGroup.createdAt`, `Export.createdAt`, `AddressVerification.createdAt`, `PermanentSupportingDocument.createdAt`
