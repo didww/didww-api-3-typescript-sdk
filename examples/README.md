@@ -36,6 +36,7 @@ DIDWW_API_KEY=your_api_key npx tsx examples/balance.ts
 | [`trunks.ts`](trunks.ts) | Creates a PSTN trunk, lists all trunks, updates and deletes. |
 | [`shared-capacity-groups.ts`](shared-capacity-groups.ts) | Creates and deletes a shared capacity group. |
 | [`orders-sku.ts`](orders-sku.ts) | Creates a DID order by SKU resolved from DID groups. |
+| [`orders-nanpa.ts`](orders-nanpa.ts) | Orders a DID number by NPA/NXX prefix. |
 | [`orders-available-dids.ts`](orders-available-dids.ts) | Orders a specific available DID. |
 | [`orders-reservation-dids.ts`](orders-reservation-dids.ts) | Reserves a DID and then orders it. |
 | [`orders-capacity.ts`](orders-capacity.ts) | Orders additional capacity from a capacity pool. |
