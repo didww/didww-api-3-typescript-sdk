@@ -472,6 +472,22 @@ await client.dids().update(did);
 | Reservation DID | `reservationDidOrderItem({ skuId, didReservationId })` |
 | Capacity        | `capacityOrderItem({ capacityPoolId, qty })`           |
 
+## Date and Datetime Fields
+
+All date and datetime fields are returned as ISO 8601 strings. JavaScript's `Date` object has known pitfalls (mutable, timezone handling, 0-indexed months), so the SDK intentionally keeps these as `string` and lets you parse them with the library of your choice.
+
+- **Datetime fields** (`createdAt`, `expiresAt`, `expireAt`) — ISO 8601 strings, e.g. `"2024-01-15T10:00:00.000Z"`
+- **Date-only fields** (`birthDate`, `renewDate`, `billedFrom`, `billedTo`) — date strings, e.g. `"1990-05-20"`
+
+```typescript
+const did = await client.dids().find('uuid');
+console.log(did.createdAt);  // "2024-01-15T10:00:00.000Z"
+
+// Parse with your preferred library:
+import { parseISO } from 'date-fns';
+const date = parseISO(did.createdAt);
+```
+
 ## Enums
 
 Type-safe enums are provided for all API constant fields:
