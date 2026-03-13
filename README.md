@@ -476,12 +476,19 @@ await client.dids().update(did);
 
 All date and datetime fields are returned as ISO 8601 strings. JavaScript's `Date` object has known pitfalls (mutable, timezone handling, 0-indexed months), so the SDK intentionally keeps these as `string` and lets you parse them with the library of your choice.
 
-- **Datetime fields** (`createdAt`, `expiresAt`, `expireAt`) — ISO 8601 strings, e.g. `"2024-01-15T10:00:00.000Z"`
-- **Date-only fields** (`birthDate`, `renewDate`, `billedFrom`, `billedTo`) — date strings, e.g. `"1990-05-20"`
+- **Datetime fields** — ISO 8601 strings e.g. `"2024-01-15T10:00:00.000Z"`:
+  - `Did.createdAt`, `Did.expiresAt`
+  - `EncryptedFile.createdAt`, `EncryptedFile.expireAt`
+  - `DidReservation.createdAt`, `DidReservation.expireAt`
+  - `Proof.createdAt`, `Proof.expiresAt`
+  - `Order.createdAt`, `Identity.createdAt`, `Address.createdAt`, `VoiceInTrunk.createdAt`, `VoiceInTrunkGroup.createdAt`, `VoiceOutTrunk.createdAt`, `SharedCapacityGroup.createdAt`, `Export.createdAt`, `AddressVerification.createdAt`, `PermanentSupportingDocument.createdAt`
+- **Date-only fields** — date strings e.g. `"1990-05-20"`:
+  - `Identity.birthDate`, `CapacityPool.renewDate`, `DidOrderItem.billedFrom`, `DidOrderItem.billedTo`
 
 ```typescript
 const did = await client.dids().find('uuid');
-console.log(did.createdAt);  // "2024-01-15T10:00:00.000Z"
+console.log(did.createdAt);   // "2024-01-15T10:00:00.000Z"
+console.log(did.expiresAt);   // null or "2025-01-15T10:00:00.000Z"
 
 // Parse with your preferred library:
 import { parseISO } from 'date-fns';
