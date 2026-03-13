@@ -5,7 +5,6 @@ export interface EncryptedFile {
   type: 'encrypted_files';
   description: string;
   expireAt: string;
-  createdAt: string;
 }
 
 export const ENCRYPTED_FILE_RESOURCE = createReadOnlyResource<EncryptedFile>('encrypted_files');
