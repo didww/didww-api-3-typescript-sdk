@@ -477,7 +477,7 @@ await client.dids().update(did);
 All date and datetime fields are returned as ISO 8601 strings. JavaScript's `Date` object has known pitfalls (mutable, timezone handling, 0-indexed months), so the SDK intentionally keeps these as `string` and lets you parse them with the library of your choice.
 
 - **Datetime fields** — ISO 8601 strings e.g. `"2024-01-15T10:00:00.000Z"`:
-  - All `createdAt` fields — present on most resources (`EncryptedFile` has no `createdAt`)
+  - All `createdAt` fields — present on most resources
   - Expiry fields: `Did.expiresAt`, `DidReservation.expireAt`, `Proof.expiresAt`, `EncryptedFile.expireAt`
 - **Date-only fields** — date strings e.g. `"1990-05-20"`:
   - `Identity.birthDate`, `CapacityPool.renewDate`, `DidOrderItem.billedFrom`, `DidOrderItem.billedTo`
