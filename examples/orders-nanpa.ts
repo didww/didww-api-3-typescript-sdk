@@ -54,7 +54,9 @@ async function main() {
     ],
   });
 
-  console.log(`Order ${order.data.id} amount=${order.data.amount} status=${order.data.status} ref=${order.data.reference}`);
+  console.log(
+    `Order ${order.data.id} amount=${order.data.amount} status=${order.data.status} ref=${order.data.reference}`,
+  );
 }
 
 main().catch(console.error);
