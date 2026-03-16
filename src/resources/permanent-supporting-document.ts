@@ -18,12 +18,10 @@ export interface PermanentSupportingDocumentWrite {
   files?: ResourceRef[];
 }
 
-export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE: ResourceConfig<
-  PermanentSupportingDocument,
-  PermanentSupportingDocumentWrite
-> = {
+export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE = {
   type: 'permanent_supporting_documents',
   path: 'permanent_supporting_documents',
   writableKeys: ['identity', 'template', 'files'],
   relationshipKeys: ['identity', 'template', 'files'],
-};
+  operations: ['list', 'find', 'create', 'remove'],
+} as const satisfies ResourceConfig<PermanentSupportingDocument, PermanentSupportingDocumentWrite>;

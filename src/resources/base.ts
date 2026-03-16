@@ -3,17 +3,27 @@ export interface ResourceRef {
   type: string;
 }
 
+export type Operation = 'list' | 'find' | 'create' | 'update' | 'remove';
+
 export interface ResourceConfig<T = Record<string, unknown>, TWrite = Record<string, unknown>> {
-  type: string;
-  path: string;
-  writableKeys: (keyof TWrite)[];
-  relationshipKeys?: (keyof TWrite)[];
-  serializeCustom?: (data: TWrite, method: 'POST' | 'PATCH') => Record<string, unknown>;
-  deserializeCustom?: (data: Record<string, unknown>) => Partial<T>;
+  readonly type: string;
+  readonly path: string;
+  readonly writableKeys: readonly (keyof TWrite)[];
+  readonly relationshipKeys?: readonly (keyof TWrite)[];
+  readonly serializeCustom?: (data: TWrite, method: 'POST' | 'PATCH') => Record<string, unknown>;
+  readonly deserializeCustom?: (data: Record<string, unknown>) => Partial<T>;
+  readonly operations: readonly Operation[];
+  readonly singleton?: boolean;
 }
 
-export function createReadOnlyResource<T>(type: string, path: string = type): ResourceConfig<T> {
-  return { type, path, writableKeys: [] };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyResourceConfig = ResourceConfig<any, any>;
+
+export function createReadOnlyResource<T>(
+  type: string,
+  path: string = type,
+): ResourceConfig<T, Record<string, unknown>> & { readonly operations: readonly ['list', 'find'] } {
+  return { type, path, writableKeys: [], operations: ['list', 'find'] as const };
 }
 
 export function ref(type: string, id: string): ResourceRef {

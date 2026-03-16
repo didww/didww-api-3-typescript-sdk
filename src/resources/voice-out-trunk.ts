@@ -46,7 +46,7 @@ export interface VoiceOutTrunkWrite {
   dids?: ResourceRef[];
 }
 
-export const VOICE_OUT_TRUNK_RESOURCE: ResourceConfig<VoiceOutTrunk, VoiceOutTrunkWrite> = {
+export const VOICE_OUT_TRUNK_RESOURCE = {
   type: 'voice_out_trunks',
   path: 'voice_out_trunks',
   writableKeys: [
@@ -68,4 +68,5 @@ export const VOICE_OUT_TRUNK_RESOURCE: ResourceConfig<VoiceOutTrunk, VoiceOutTru
     'dids',
   ],
   relationshipKeys: ['defaultDid', 'dids'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<VoiceOutTrunk, VoiceOutTrunkWrite>;

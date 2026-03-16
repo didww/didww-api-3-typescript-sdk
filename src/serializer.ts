@@ -1,5 +1,5 @@
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
-import type { ResourceConfig, ResourceRef } from './resources/base.js';
+import type { ResourceConfig, ResourceRef, AnyResourceConfig } from './resources/base.js';
 import { getResourceConfig } from './registry.js';
 import { filterWritableKeys } from './filter-writable-keys.js';
 export { filterWritableKeys } from './filter-writable-keys.js';
@@ -119,7 +119,7 @@ function applyRegistryDeserialize(resource: unknown): unknown {
   }
 
   // Apply deserializeCustom for this resource if registry has one
-  let meta: ResourceConfig | undefined;
+  let meta: AnyResourceConfig | undefined;
   if ('type' in record && typeof record.type === 'string') {
     meta = getResourceConfig(record.type);
     if (meta?.deserializeCustom) {
@@ -141,7 +141,7 @@ export function serializeForCreate<T, TWrite>(meta: ResourceConfig<T, TWrite>, d
   const toSerialize = meta.serializeCustom ? meta.serializeCustom(data, 'POST') : filtered;
   const withNullRels = wrapRelationshipClears(
     toSerialize as Record<string, unknown>,
-    meta.relationshipKeys as string[],
+    meta.relationshipKeys as readonly string[] | undefined,
   );
   const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
@@ -160,7 +160,7 @@ export function serializeForUpdate<T, TWrite>(
     : filtered;
   const withNullRels = wrapRelationshipClears(
     toSerialize as Record<string, unknown>,
-    meta.relationshipKeys as string[],
+    meta.relationshipKeys as readonly string[] | undefined,
   );
   const snaked = camelToSnakeKeys(withNullRels) as Record<string, unknown>;
   const prepared = wrapRelationships(snaked);
@@ -184,11 +184,11 @@ function extractLinkage(value: unknown): unknown {
   return value;
 }
 
-function detectDirtyWritableKeys<T, TWrite>(
-  meta: ResourceConfig<T, TWrite>,
-  data: TWrite & { id: string },
+function detectDirtyWritableKeys(
+  meta: AnyResourceConfig,
+  data: Record<string, unknown> & { id: string },
 ): ReadonlySet<string> {
-  const record = data as Record<string, unknown>;
+  const record = data;
   const snapshot = CLEAN_WRITABLE_SNAPSHOTS.get(data as object);
   const result = new Set<string>();
   const relKeys = new Set<string>((meta.relationshipKeys as string[]) ?? []);
@@ -205,8 +205,8 @@ function detectDirtyWritableKeys<T, TWrite>(
   return result;
 }
 
-function snapshotCleanWritableValues<T, TWrite>(
-  meta: ResourceConfig<T, TWrite>,
+function snapshotCleanWritableValues(
+  meta: AnyResourceConfig,
   resource: Record<string, unknown>,
 ): void {
   const snapshot: Record<string, unknown> = {};
@@ -307,7 +307,7 @@ function isResourceRefArray(value: unknown): value is ResourceRef[] {
  * - null → { data: null } (clear to-one)
  * - [] → { data: [] } (clear to-many)
  */
-function wrapRelationshipClears(data: Record<string, unknown>, relationshipKeys?: string[]): Record<string, unknown> {
+function wrapRelationshipClears(data: Record<string, unknown>, relationshipKeys?: readonly string[]): Record<string, unknown> {
   if (!relationshipKeys) return data;
   const result = { ...data };
   for (const key of relationshipKeys) {

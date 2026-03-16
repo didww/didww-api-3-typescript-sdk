@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { AvailableDid } from '../../src/resources/available-did.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('DidReservations', () => {
+  describeOperationEnforcement({
+    clientMethod: 'didReservations',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'did_reservations',
+  });
   it('lists DID reservations', async () => {
     const client = setupClient('did_reservations/list.yaml');
     const result = await client.didReservations().list();

@@ -43,23 +43,26 @@ export interface DidWrite {
   sharedCapacityGroup?: ResourceRef | null;
 }
 
-export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
+const WRITABLE_KEYS = [
+  'billingCyclesCount',
+  'capacityLimit',
+  'description',
+  'terminated',
+  'dedicatedChannelsCount',
+  'voiceInTrunk',
+  'voiceInTrunkGroup',
+  'capacityPool',
+  'sharedCapacityGroup',
+] as const satisfies readonly (keyof DidWrite)[];
+
+export const DID_RESOURCE = {
   type: 'dids',
   path: 'dids',
-  writableKeys: [
-    'billingCyclesCount',
-    'capacityLimit',
-    'description',
-    'terminated',
-    'dedicatedChannelsCount',
-    'voiceInTrunk',
-    'voiceInTrunkGroup',
-    'capacityPool',
-    'sharedCapacityGroup',
-  ],
+  writableKeys: WRITABLE_KEYS,
   relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'],
-  serializeCustom(data, _method) {
-    const result = filterWritableKeys(data, DID_RESOURCE.writableKeys);
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+  serializeCustom(data: DidWrite, _method: 'POST' | 'PATCH') {
+    const result = filterWritableKeys(data, WRITABLE_KEYS);
     // Exclusive relationships: setting voiceInTrunk nullifies voiceInTrunkGroup and vice versa
     if (
       'voiceInTrunk' in (data as Record<string, unknown>) &&
@@ -79,4 +82,4 @@ export const DID_RESOURCE: ResourceConfig<Did, DidWrite> = {
     }
     return result;
   },
-};
+} as const satisfies ResourceConfig<Did, DidWrite>;

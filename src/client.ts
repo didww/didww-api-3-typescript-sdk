@@ -3,10 +3,7 @@ import { Environment } from './configuration.js';
 import { DidwwApiError, DidwwClientError } from './errors.js';
 import { buildQueryString, type QueryParams } from './query-params.js';
 import type { HttpClient } from './repositories/read-only-repository.js';
-import { ReadOnlyRepository } from './repositories/read-only-repository.js';
-import { Repository } from './repositories/repository.js';
-import { SingletonRepository } from './repositories/singleton-repository.js';
-import { CreateOnlyRepository } from './repositories/create-only-repository.js';
+import { createRepository } from './repositories/base-repository.js';
 
 import { COUNTRY_RESOURCE, type Country } from './resources/country.js';
 import { REGION_RESOURCE, type Region } from './resources/region.js';
@@ -254,111 +251,109 @@ export class DidwwClient implements HttpClient {
 
   // Read-only repositories
   countries() {
-    return new ReadOnlyRepository<Country>(this, COUNTRY_RESOURCE);
+    return createRepository<Country>(this, COUNTRY_RESOURCE);
   }
   regions() {
-    return new ReadOnlyRepository<Region>(this, REGION_RESOURCE);
+    return createRepository<Region>(this, REGION_RESOURCE);
   }
   cities() {
-    return new ReadOnlyRepository<City>(this, CITY_RESOURCE);
+    return createRepository<City>(this, CITY_RESOURCE);
   }
   areas() {
-    return new ReadOnlyRepository<Area>(this, AREA_RESOURCE);
+    return createRepository<Area>(this, AREA_RESOURCE);
   }
   pops() {
-    return new ReadOnlyRepository<Pop>(this, POP_RESOURCE);
+    return createRepository<Pop>(this, POP_RESOURCE);
   }
   didGroupTypes() {
-    return new ReadOnlyRepository<DidGroupType>(this, DID_GROUP_TYPE_RESOURCE);
+    return createRepository<DidGroupType>(this, DID_GROUP_TYPE_RESOURCE);
   }
   didGroups() {
-    return new ReadOnlyRepository<DidGroup>(this, DID_GROUP_RESOURCE);
+    return createRepository<DidGroup>(this, DID_GROUP_RESOURCE);
   }
   availableDids() {
-    return new ReadOnlyRepository<AvailableDid>(this, AVAILABLE_DID_RESOURCE);
+    return createRepository<AvailableDid>(this, AVAILABLE_DID_RESOURCE);
   }
   nanpaPrefixes() {
-    return new ReadOnlyRepository<NanpaPrefix>(this, NANPA_PREFIX_RESOURCE);
+    return createRepository<NanpaPrefix>(this, NANPA_PREFIX_RESOURCE);
   }
   proofTypes() {
-    return new ReadOnlyRepository<ProofType>(this, PROOF_TYPE_RESOURCE);
+    return createRepository<ProofType>(this, PROOF_TYPE_RESOURCE);
   }
   publicKeys() {
-    return new ReadOnlyRepository<PublicKey>(this, PUBLIC_KEY_RESOURCE);
+    return createRepository<PublicKey>(this, PUBLIC_KEY_RESOURCE);
   }
   requirements() {
-    return new ReadOnlyRepository<Requirement>(this, REQUIREMENT_RESOURCE);
+    return createRepository<Requirement>(this, REQUIREMENT_RESOURCE);
   }
   supportingDocumentTemplates() {
-    return new ReadOnlyRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
-  }
-  // stockKeepingUnits and qtyBasedPricings have no standalone endpoints.
-  // Access them via include on didGroups and capacityPools respectively.
-  capacityPools() {
-    return new Repository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_RESOURCE);
+    return createRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
   }
 
   // Singleton
   balance() {
-    return new SingletonRepository<Balance>(this, BALANCE_RESOURCE);
+    return createRepository<Balance>(this, BALANCE_RESOURCE);
   }
 
   // Full CRUD repositories
+
+  // stockKeepingUnits and qtyBasedPricings have no standalone endpoints.
+  // Access them via include on didGroups and capacityPools respectively.
+  capacityPools() {
+    return createRepository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_RESOURCE);
+  }
   voiceInTrunks() {
-    return new Repository<VoiceInTrunk, VoiceInTrunkWrite>(this, VOICE_IN_TRUNK_RESOURCE);
+    return createRepository<VoiceInTrunk, VoiceInTrunkWrite>(this, VOICE_IN_TRUNK_RESOURCE);
   }
   voiceInTrunkGroups() {
-    return new Repository<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>(this, VOICE_IN_TRUNK_GROUP_RESOURCE);
+    return createRepository<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>(this, VOICE_IN_TRUNK_GROUP_RESOURCE);
   }
   voiceOutTrunks() {
-    return new Repository<VoiceOutTrunk, VoiceOutTrunkWrite>(this, VOICE_OUT_TRUNK_RESOURCE);
+    return createRepository<VoiceOutTrunk, VoiceOutTrunkWrite>(this, VOICE_OUT_TRUNK_RESOURCE);
   }
   sharedCapacityGroups() {
-    return new Repository<SharedCapacityGroup, SharedCapacityGroupWrite>(this, SHARED_CAPACITY_GROUP_RESOURCE);
+    return createRepository<SharedCapacityGroup, SharedCapacityGroupWrite>(this, SHARED_CAPACITY_GROUP_RESOURCE);
   }
   dids() {
-    return new Repository<Did, DidWrite>(this, DID_RESOURCE);
+    return createRepository<Did, DidWrite>(this, DID_RESOURCE);
   }
   orders() {
-    return new Repository<Order, OrderWrite>(this, ORDER_RESOURCE);
+    return createRepository<Order, OrderWrite>(this, ORDER_RESOURCE);
   }
   exports() {
-    return new Repository<Export, ExportWrite>(this, EXPORT_RESOURCE);
+    return createRepository<Export, ExportWrite>(this, EXPORT_RESOURCE);
   }
   didReservations() {
-    return new Repository<DidReservation, DidReservationWrite>(this, DID_RESERVATION_RESOURCE);
+    return createRepository<DidReservation, DidReservationWrite>(this, DID_RESERVATION_RESOURCE);
   }
   addresses() {
-    return new Repository<Address, AddressWrite>(this, ADDRESS_RESOURCE);
+    return createRepository<Address, AddressWrite>(this, ADDRESS_RESOURCE);
   }
   identities() {
-    return new Repository<Identity, IdentityWrite>(this, IDENTITY_RESOURCE);
+    return createRepository<Identity, IdentityWrite>(this, IDENTITY_RESOURCE);
   }
   encryptedFiles() {
-    return new Repository<EncryptedFile>(this, ENCRYPTED_FILE_RESOURCE);
+    return createRepository<EncryptedFile>(this, ENCRYPTED_FILE_RESOURCE);
   }
 
   // Create-only repositories
   addressVerifications() {
-    return new CreateOnlyRepository<AddressVerification, AddressVerificationWrite>(this, ADDRESS_VERIFICATION_RESOURCE);
+    return createRepository<AddressVerification, AddressVerificationWrite>(this, ADDRESS_VERIFICATION_RESOURCE);
   }
   permanentSupportingDocuments() {
-    return new CreateOnlyRepository<PermanentSupportingDocument, PermanentSupportingDocumentWrite>(
+    return createRepository<PermanentSupportingDocument, PermanentSupportingDocumentWrite>(
       this,
       PERMANENT_SUPPORTING_DOCUMENT_RESOURCE,
     );
   }
   proofs() {
-    return new CreateOnlyRepository<Proof, ProofWrite>(this, PROOF_RESOURCE);
+    return createRepository<Proof, ProofWrite>(this, PROOF_RESOURCE);
   }
   requirementValidations() {
-    return new CreateOnlyRepository<RequirementValidation, RequirementValidationWrite>(
-      this,
-      REQUIREMENT_VALIDATION_RESOURCE,
-    );
+    return createRepository<RequirementValidation, RequirementValidationWrite>(this, REQUIREMENT_VALIDATION_RESOURCE);
   }
   voiceOutTrunkRegenerateCredentials() {
-    return new CreateOnlyRepository<VoiceOutTrunkRegenerateCredential, VoiceOutTrunkRegenerateCredentialWrite>(
+    return createRepository<VoiceOutTrunkRegenerateCredential, VoiceOutTrunkRegenerateCredentialWrite>(
       this,
       VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE,
     );

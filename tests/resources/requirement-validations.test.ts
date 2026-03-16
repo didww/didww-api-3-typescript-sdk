@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { DidwwApiError } from '../../src/errors.js';
 import { ref } from '../../src/resources/base.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('RequirementValidations', () => {
+  describeOperationEnforcement({
+    clientMethod: 'requirementValidations',
+    allowedOperations: ['list', 'find', 'create', 'remove'],
+    resourceType: 'requirement_validations',
+  });
   it('creates a requirement validation', async () => {
     const client = setupClient('requirement_validations/create.yaml');
     const result = await client.requirementValidations().create({

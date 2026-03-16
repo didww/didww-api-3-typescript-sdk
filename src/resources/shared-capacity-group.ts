@@ -20,9 +20,10 @@ export interface SharedCapacityGroupWrite {
   capacityPool?: ResourceRef;
 }
 
-export const SHARED_CAPACITY_GROUP_RESOURCE: ResourceConfig<SharedCapacityGroup, SharedCapacityGroupWrite> = {
+export const SHARED_CAPACITY_GROUP_RESOURCE = {
   type: 'shared_capacity_groups',
   path: 'shared_capacity_groups',
   writableKeys: ['name', 'sharedChannelsCount', 'meteredChannelsCount', 'capacityPool'],
   relationshipKeys: ['capacityPool'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<SharedCapacityGroup, SharedCapacityGroupWrite>;

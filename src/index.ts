@@ -6,7 +6,7 @@ export { type QueryParams } from './query-params.js';
 export type { HttpClient } from './repositories/read-only-repository.js';
 
 // Base
-export { ref, isIncluded, type ResourceRef, type ResourceConfig } from './resources/base.js';
+export { ref, isIncluded, type ResourceRef, type ResourceConfig, type AnyResourceConfig, type Operation } from './resources/base.js';
 
 // Enums
 export * from './enums.js';
@@ -65,6 +65,10 @@ export {
 } from './nested/order-item.js';
 
 // Repository types
+export { BaseRepository, createRepository } from './repositories/base-repository.js';
+export type { RepositoryFor, HasList, HasFind, HasSingletonFind, HasCreate, HasUpdate, HasRemove } from './repositories/base-repository.js';
+
+// Repository types (legacy — preserved for backward compatibility)
 export type { ApiResponse, ListResponse } from './repositories/types.js';
 export { ReadOnlyRepository } from './repositories/read-only-repository.js';
 export { Repository } from './repositories/repository.js';

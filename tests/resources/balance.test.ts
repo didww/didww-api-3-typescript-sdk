@@ -1,7 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Balance', () => {
+  describeOperationEnforcement({
+    clientMethod: 'balance',
+    allowedOperations: ['find'],
+    resourceType: 'balances',
+    singleton: true,
+  });
   it('finds balance', async () => {
     const client = setupClient('balance/list.yaml');
     const result = await client.balance().find();

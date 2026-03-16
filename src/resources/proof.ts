@@ -18,9 +18,10 @@ export interface ProofWrite {
   files?: ResourceRef[];
 }
 
-export const PROOF_RESOURCE: ResourceConfig<Proof, ProofWrite> = {
+export const PROOF_RESOURCE = {
   type: 'proofs',
   path: 'proofs',
   writableKeys: ['proofType', 'entity', 'files'],
   relationshipKeys: ['proofType', 'entity', 'files'],
-};
+  operations: ['list', 'find', 'create', 'remove'],
+} as const satisfies ResourceConfig<Proof, ProofWrite>;

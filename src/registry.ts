@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './resources/base.js';
+import type { AnyResourceConfig } from './resources/base.js';
 
 import { COUNTRY_RESOURCE } from './resources/country.js';
 import { REGION_RESOURCE } from './resources/region.js';
@@ -34,7 +34,7 @@ import { PROOF_RESOURCE } from './resources/proof.js';
 import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
 
-const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceConfig>([
+const REGISTRY: ReadonlyMap<string, AnyResourceConfig> = new Map<string, AnyResourceConfig>([
   [COUNTRY_RESOURCE.type, COUNTRY_RESOURCE],
   [REGION_RESOURCE.type, REGION_RESOURCE],
   [CITY_RESOURCE.type, CITY_RESOURCE],
@@ -70,6 +70,6 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE.type, VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE],
 ]);
 
-export function getResourceConfig(type: string): ResourceConfig | undefined {
+export function getResourceConfig(type: string): AnyResourceConfig | undefined {
   return REGISTRY.get(type);
 }

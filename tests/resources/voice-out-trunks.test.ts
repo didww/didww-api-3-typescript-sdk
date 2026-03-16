@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceOutTrunks', () => {
+  describeOperationEnforcement({
+    clientMethod: 'voiceOutTrunks',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'voice_out_trunks',
+  });
   it('lists voice out trunks', async () => {
     const client = setupClient('voice_out_trunks/list.yaml');
     const result = await client.voiceOutTrunks().list();

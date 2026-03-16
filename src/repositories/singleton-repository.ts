@@ -1,18 +1,9 @@
-import type { ResourceConfig } from '../resources/base.js';
-import type { QueryParams } from '../query-params.js';
-import type { ApiResponse } from './types.js';
+import type { AnyResourceConfig } from '../resources/base.js';
 import type { HttpClient } from './read-only-repository.js';
-import { deserialize } from '../serializer.js';
+import { BaseRepository } from './base-repository.js';
 
-export class SingletonRepository<T> {
-  constructor(
-    private readonly client: HttpClient,
-    private readonly meta: ResourceConfig<T>,
-  ) {}
-
-  async find(params?: QueryParams): Promise<ApiResponse<T>> {
-    const body = await this.client.get(this.meta.path, params);
-    const result = deserialize<T>(body);
-    return { data: result.data as T, meta: result.meta, links: result.links };
+export class SingletonRepository<T> extends BaseRepository<T> {
+  constructor(client: HttpClient, meta: AnyResourceConfig) {
+    super(client, { ...meta, operations: ['find'] as const, singleton: true as const });
   }
 }

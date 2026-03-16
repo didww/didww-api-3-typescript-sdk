@@ -3,8 +3,14 @@ import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Identity } from '../../src/resources/identity.js';
 import type { Country } from '../../src/resources/country.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Addresses', () => {
+  describeOperationEnforcement({
+    clientMethod: 'addresses',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'addresses',
+  });
   it('lists addresses', async () => {
     const client = setupClient('addresses/list.yaml');
     const result = await client.addresses().list();

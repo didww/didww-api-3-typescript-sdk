@@ -24,8 +24,9 @@ export interface CapacityPoolWrite {
   totalChannelsCount?: number;
 }
 
-export const CAPACITY_POOL_RESOURCE: ResourceConfig<CapacityPool, CapacityPoolWrite> = {
+export const CAPACITY_POOL_RESOURCE = {
   type: 'capacity_pools',
   path: 'capacity_pools',
   writableKeys: ['totalChannelsCount'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<CapacityPool, CapacityPoolWrite>;

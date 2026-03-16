@@ -10,8 +10,14 @@ import {
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceInTrunks', () => {
+  describeOperationEnforcement({
+    clientMethod: 'voiceInTrunks',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'voice_in_trunks',
+  });
   it('lists voice in trunks', async () => {
     const client = setupClient('voice_in_trunks/list.yaml');
     const result = await client.voiceInTrunks().list();

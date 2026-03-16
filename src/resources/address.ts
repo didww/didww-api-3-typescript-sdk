@@ -32,9 +32,10 @@ export interface AddressWrite {
   city?: ResourceRef;
 }
 
-export const ADDRESS_RESOURCE: ResourceConfig<Address, AddressWrite> = {
+export const ADDRESS_RESOURCE = {
   type: 'addresses',
   path: 'addresses',
   writableKeys: ['cityName', 'postalCode', 'address', 'description', 'country', 'identity', 'area', 'city'],
   relationshipKeys: ['country', 'identity', 'area', 'city'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<Address, AddressWrite>;

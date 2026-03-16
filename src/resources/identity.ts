@@ -46,7 +46,7 @@ export interface IdentityWrite {
   country?: ResourceRef;
 }
 
-export const IDENTITY_RESOURCE: ResourceConfig<Identity, IdentityWrite> = {
+export const IDENTITY_RESOURCE = {
   type: 'identities',
   path: 'identities',
   writableKeys: [
@@ -66,4 +66,5 @@ export const IDENTITY_RESOURCE: ResourceConfig<Identity, IdentityWrite> = {
     'country',
   ],
   relationshipKeys: ['country'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<Identity, IdentityWrite>;

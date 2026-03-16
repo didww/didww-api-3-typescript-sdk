@@ -20,8 +20,9 @@ export interface ExportWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-export const EXPORT_RESOURCE: ResourceConfig<Export, ExportWrite> = {
+export const EXPORT_RESOURCE = {
   type: 'exports',
   path: 'exports',
   writableKeys: ['exportType', 'filters', 'callbackUrl', 'callbackMethod'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<Export, ExportWrite>;

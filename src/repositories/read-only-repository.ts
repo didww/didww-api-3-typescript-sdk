@@ -1,7 +1,6 @@
-import type { ResourceConfig } from '../resources/base.js';
+import type { AnyResourceConfig } from '../resources/base.js';
 import type { QueryParams } from '../query-params.js';
-import type { ApiResponse, ListResponse } from './types.js';
-import { deserialize } from '../serializer.js';
+import { BaseRepository } from './base-repository.js';
 
 export interface HttpClient {
   get(path: string, params?: QueryParams): Promise<unknown>;
@@ -10,30 +9,8 @@ export interface HttpClient {
   delete(path: string): Promise<void>;
 }
 
-export class ReadOnlyRepository<T, TWrite = Record<string, unknown>> {
-  constructor(
-    protected readonly client: HttpClient,
-    protected readonly meta: ResourceConfig<T, TWrite>,
-  ) {}
-
-  async list(params?: QueryParams): Promise<ListResponse<T>> {
-    const body = await this.client.get(this.meta.path, params);
-    return this.deserializeList(body);
-  }
-
-  async find(id: string, params?: QueryParams): Promise<ApiResponse<T>> {
-    const body = await this.client.get(`${this.meta.path}/${id}`, params);
-    return this.deserializeSingle(body);
-  }
-
-  protected deserializeSingle(body: unknown): ApiResponse<T> {
-    const result = deserialize<T>(body);
-    return { data: result.data as T, meta: result.meta, links: result.links };
-  }
-
-  protected deserializeList(body: unknown): ListResponse<T> {
-    const result = deserialize<T>(body);
-    const data = Array.isArray(result.data) ? result.data : [result.data];
-    return { data, meta: result.meta, links: result.links };
+export class ReadOnlyRepository<T, TWrite = Record<string, unknown>> extends BaseRepository<T, TWrite> {
+  constructor(client: HttpClient, meta: AnyResourceConfig) {
+    super(client, { ...meta, operations: ['list', 'find'] as const });
   }
 }

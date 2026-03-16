@@ -5,8 +5,14 @@ import type { Country } from '../../src/resources/country.js';
 import type { DidGroupType } from '../../src/resources/did-group-type.js';
 import type { SupportingDocumentTemplate } from '../../src/resources/supporting-document-template.js';
 import type { ProofType } from '../../src/resources/proof-type.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Requirements', () => {
+  describeOperationEnforcement({
+    clientMethod: 'requirements',
+    allowedOperations: ['list', 'find'],
+    resourceType: 'requirements',
+  });
   it('lists requirements', async () => {
     const client = setupClient('requirements/list.yaml');
     const result = await client.requirements().list();

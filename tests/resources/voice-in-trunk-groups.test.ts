@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceInTrunkGroups', () => {
+  describeOperationEnforcement({
+    clientMethod: 'voiceInTrunkGroups',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'voice_in_trunk_groups',
+  });
   it('lists voice in trunk groups', async () => {
     const client = setupClient('voice_in_trunk_groups/list.yaml');
     const result = await client.voiceInTrunkGroups().list();

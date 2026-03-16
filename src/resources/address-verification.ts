@@ -25,9 +25,10 @@ export interface AddressVerificationWrite {
   dids?: ResourceRef[];
 }
 
-export const ADDRESS_VERIFICATION_RESOURCE: ResourceConfig<AddressVerification, AddressVerificationWrite> = {
+export const ADDRESS_VERIFICATION_RESOURCE = {
   type: 'address_verifications',
   path: 'address_verifications',
   writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'address', 'dids'],
   relationshipKeys: ['address', 'dids'],
-};
+  operations: ['list', 'find', 'create', 'remove'],
+} as const satisfies ResourceConfig<AddressVerification, AddressVerificationWrite>;

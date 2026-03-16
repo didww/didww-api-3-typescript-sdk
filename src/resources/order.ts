@@ -25,22 +25,25 @@ export interface OrderWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-export const ORDER_RESOURCE: ResourceConfig<Order, OrderWrite> = {
+const WRITABLE_KEYS = ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'] as const satisfies readonly (keyof OrderWrite)[];
+
+export const ORDER_RESOURCE = {
   type: 'orders',
   path: 'orders',
-  writableKeys: ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'],
-  serializeCustom(data, _method) {
-    const result = filterWritableKeys(data, ORDER_RESOURCE.writableKeys);
+  writableKeys: WRITABLE_KEYS,
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+  serializeCustom(data: OrderWrite, _method: 'POST' | 'PATCH') {
+    const result = filterWritableKeys(data, WRITABLE_KEYS);
     if (result.items && Array.isArray(result.items)) {
       result.items = serializeOrderItems(result.items as OrderItem[]);
     }
     return result;
   },
-  deserializeCustom(data) {
-    const items = (data as Record<string, unknown>).items;
+  deserializeCustom(data: Record<string, unknown>) {
+    const items = data.items;
     if (Array.isArray(items)) {
       return { items: deserializeOrderItems(items) } as Partial<Order>;
     }
     return {};
   },
-};
+} as const satisfies ResourceConfig<Order, OrderWrite>;

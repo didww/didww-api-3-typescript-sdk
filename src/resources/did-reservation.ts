@@ -15,9 +15,10 @@ export interface DidReservationWrite {
   availableDid?: ResourceRef;
 }
 
-export const DID_RESERVATION_RESOURCE: ResourceConfig<DidReservation, DidReservationWrite> = {
+export const DID_RESERVATION_RESOURCE = {
   type: 'did_reservations',
   path: 'did_reservations',
   writableKeys: ['description', 'availableDid'],
   relationshipKeys: ['availableDid'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+} as const satisfies ResourceConfig<DidReservation, DidReservationWrite>;
