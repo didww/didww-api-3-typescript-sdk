@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { Order } from './order.js';
 import type { DidGroup } from './did-group.js';
@@ -55,7 +55,7 @@ const WRITABLE_KEYS = [
   'sharedCapacityGroup',
 ] as const satisfies readonly (keyof DidWrite)[];
 
-export const DID_RESOURCE = {
+export const DID_RESOURCE = defineResource<Did, DidWrite>()({
   type: 'dids',
   path: 'dids',
   writableKeys: WRITABLE_KEYS,
@@ -82,4 +82,4 @@ export const DID_RESOURCE = {
     }
     return result;
   },
-} as const satisfies ResourceConfig<Did, DidWrite>;
+});

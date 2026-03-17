@@ -2,71 +2,39 @@ import { createRequire } from 'module';
 import { Environment } from './configuration.js';
 import { DidwwApiError, DidwwClientError } from './errors.js';
 import { buildQueryString, type QueryParams } from './query-params.js';
-import type { HttpClient } from './repositories/read-only-repository.js';
-import { createRepository } from './repositories/base-repository.js';
+import { type HttpClient, createRepository } from './repositories/repository.js';
 
-import { COUNTRY_RESOURCE, type Country } from './resources/country.js';
-import { REGION_RESOURCE, type Region } from './resources/region.js';
-import { CITY_RESOURCE, type City } from './resources/city.js';
-import { AREA_RESOURCE, type Area } from './resources/area.js';
-import { POP_RESOURCE, type Pop } from './resources/pop.js';
-import { BALANCE_RESOURCE, type Balance } from './resources/balance.js';
-import { DID_GROUP_TYPE_RESOURCE, type DidGroupType } from './resources/did-group-type.js';
-import { DID_GROUP_RESOURCE, type DidGroup } from './resources/did-group.js';
-import { AVAILABLE_DID_RESOURCE, type AvailableDid } from './resources/available-did.js';
-import { NANPA_PREFIX_RESOURCE, type NanpaPrefix } from './resources/nanpa-prefix.js';
-import { PROOF_TYPE_RESOURCE, type ProofType } from './resources/proof-type.js';
-import { PUBLIC_KEY_RESOURCE, type PublicKey } from './resources/public-key.js';
-import { REQUIREMENT_RESOURCE, type Requirement } from './resources/requirement.js';
-import {
-  SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE,
-  type SupportingDocumentTemplate,
-} from './resources/supporting-document-template.js';
-import { CAPACITY_POOL_RESOURCE, type CapacityPool, type CapacityPoolWrite } from './resources/capacity-pool.js';
-import { VOICE_IN_TRUNK_RESOURCE, type VoiceInTrunk, type VoiceInTrunkWrite } from './resources/voice-in-trunk.js';
-import {
-  VOICE_IN_TRUNK_GROUP_RESOURCE,
-  type VoiceInTrunkGroup,
-  type VoiceInTrunkGroupWrite,
-} from './resources/voice-in-trunk-group.js';
-import { VOICE_OUT_TRUNK_RESOURCE, type VoiceOutTrunk, type VoiceOutTrunkWrite } from './resources/voice-out-trunk.js';
-import {
-  SHARED_CAPACITY_GROUP_RESOURCE,
-  type SharedCapacityGroup,
-  type SharedCapacityGroupWrite,
-} from './resources/shared-capacity-group.js';
-import { DID_RESOURCE, type Did, type DidWrite } from './resources/did.js';
-import { ORDER_RESOURCE, type Order, type OrderWrite } from './resources/order.js';
-import { EXPORT_RESOURCE, type Export, type ExportWrite } from './resources/export.js';
-import {
-  DID_RESERVATION_RESOURCE,
-  type DidReservation,
-  type DidReservationWrite,
-} from './resources/did-reservation.js';
-import { ADDRESS_RESOURCE, type Address, type AddressWrite } from './resources/address.js';
-import { IDENTITY_RESOURCE, type Identity, type IdentityWrite } from './resources/identity.js';
-import { ENCRYPTED_FILE_RESOURCE, type EncryptedFile } from './resources/encrypted-file.js';
-import {
-  ADDRESS_VERIFICATION_RESOURCE,
-  type AddressVerification,
-  type AddressVerificationWrite,
-} from './resources/address-verification.js';
-import {
-  PERMANENT_SUPPORTING_DOCUMENT_RESOURCE,
-  type PermanentSupportingDocument,
-  type PermanentSupportingDocumentWrite,
-} from './resources/permanent-supporting-document.js';
-import { PROOF_RESOURCE, type Proof, type ProofWrite } from './resources/proof.js';
-import {
-  REQUIREMENT_VALIDATION_RESOURCE,
-  type RequirementValidation,
-  type RequirementValidationWrite,
-} from './resources/requirement-validation.js';
-import {
-  VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE,
-  type VoiceOutTrunkRegenerateCredential,
-  type VoiceOutTrunkRegenerateCredentialWrite,
-} from './resources/voice-out-trunk-regenerate-credential.js';
+import { COUNTRY_RESOURCE } from './resources/country.js';
+import { REGION_RESOURCE } from './resources/region.js';
+import { CITY_RESOURCE } from './resources/city.js';
+import { AREA_RESOURCE } from './resources/area.js';
+import { POP_RESOURCE } from './resources/pop.js';
+import { BALANCE_RESOURCE } from './resources/balance.js';
+import { DID_GROUP_TYPE_RESOURCE } from './resources/did-group-type.js';
+import { DID_GROUP_RESOURCE } from './resources/did-group.js';
+import { AVAILABLE_DID_RESOURCE } from './resources/available-did.js';
+import { NANPA_PREFIX_RESOURCE } from './resources/nanpa-prefix.js';
+import { PROOF_TYPE_RESOURCE } from './resources/proof-type.js';
+import { PUBLIC_KEY_RESOURCE } from './resources/public-key.js';
+import { REQUIREMENT_RESOURCE } from './resources/requirement.js';
+import { SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE } from './resources/supporting-document-template.js';
+import { CAPACITY_POOL_RESOURCE } from './resources/capacity-pool.js';
+import { VOICE_IN_TRUNK_RESOURCE } from './resources/voice-in-trunk.js';
+import { VOICE_IN_TRUNK_GROUP_RESOURCE } from './resources/voice-in-trunk-group.js';
+import { VOICE_OUT_TRUNK_RESOURCE } from './resources/voice-out-trunk.js';
+import { SHARED_CAPACITY_GROUP_RESOURCE } from './resources/shared-capacity-group.js';
+import { DID_RESOURCE } from './resources/did.js';
+import { ORDER_RESOURCE } from './resources/order.js';
+import { EXPORT_RESOURCE } from './resources/export.js';
+import { DID_RESERVATION_RESOURCE } from './resources/did-reservation.js';
+import { ADDRESS_RESOURCE } from './resources/address.js';
+import { IDENTITY_RESOURCE } from './resources/identity.js';
+import { ENCRYPTED_FILE_RESOURCE } from './resources/encrypted-file.js';
+import { ADDRESS_VERIFICATION_RESOURCE } from './resources/address-verification.js';
+import { PERMANENT_SUPPORTING_DOCUMENT_RESOURCE } from './resources/permanent-supporting-document.js';
+import { PROOF_RESOURCE } from './resources/proof.js';
+import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
+import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json') as { version: string };
@@ -251,48 +219,48 @@ export class DidwwClient implements HttpClient {
 
   // Read-only repositories
   countries() {
-    return createRepository<Country>(this, COUNTRY_RESOURCE);
+    return createRepository(this, COUNTRY_RESOURCE);
   }
   regions() {
-    return createRepository<Region>(this, REGION_RESOURCE);
+    return createRepository(this, REGION_RESOURCE);
   }
   cities() {
-    return createRepository<City>(this, CITY_RESOURCE);
+    return createRepository(this, CITY_RESOURCE);
   }
   areas() {
-    return createRepository<Area>(this, AREA_RESOURCE);
+    return createRepository(this, AREA_RESOURCE);
   }
   pops() {
-    return createRepository<Pop>(this, POP_RESOURCE);
+    return createRepository(this, POP_RESOURCE);
   }
   didGroupTypes() {
-    return createRepository<DidGroupType>(this, DID_GROUP_TYPE_RESOURCE);
+    return createRepository(this, DID_GROUP_TYPE_RESOURCE);
   }
   didGroups() {
-    return createRepository<DidGroup>(this, DID_GROUP_RESOURCE);
+    return createRepository(this, DID_GROUP_RESOURCE);
   }
   availableDids() {
-    return createRepository<AvailableDid>(this, AVAILABLE_DID_RESOURCE);
+    return createRepository(this, AVAILABLE_DID_RESOURCE);
   }
   nanpaPrefixes() {
-    return createRepository<NanpaPrefix>(this, NANPA_PREFIX_RESOURCE);
+    return createRepository(this, NANPA_PREFIX_RESOURCE);
   }
   proofTypes() {
-    return createRepository<ProofType>(this, PROOF_TYPE_RESOURCE);
+    return createRepository(this, PROOF_TYPE_RESOURCE);
   }
   publicKeys() {
-    return createRepository<PublicKey>(this, PUBLIC_KEY_RESOURCE);
+    return createRepository(this, PUBLIC_KEY_RESOURCE);
   }
   requirements() {
-    return createRepository<Requirement>(this, REQUIREMENT_RESOURCE);
+    return createRepository(this, REQUIREMENT_RESOURCE);
   }
   supportingDocumentTemplates() {
-    return createRepository<SupportingDocumentTemplate>(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
+    return createRepository(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
   }
 
   // Singleton
   balance() {
-    return createRepository<Balance>(this, BALANCE_RESOURCE);
+    return createRepository(this, BALANCE_RESOURCE);
   }
 
   // Full CRUD repositories
@@ -300,62 +268,56 @@ export class DidwwClient implements HttpClient {
   // stockKeepingUnits and qtyBasedPricings have no standalone endpoints.
   // Access them via include on didGroups and capacityPools respectively.
   capacityPools() {
-    return createRepository<CapacityPool, CapacityPoolWrite>(this, CAPACITY_POOL_RESOURCE);
+    return createRepository(this, CAPACITY_POOL_RESOURCE);
   }
   voiceInTrunks() {
-    return createRepository<VoiceInTrunk, VoiceInTrunkWrite>(this, VOICE_IN_TRUNK_RESOURCE);
+    return createRepository(this, VOICE_IN_TRUNK_RESOURCE);
   }
   voiceInTrunkGroups() {
-    return createRepository<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>(this, VOICE_IN_TRUNK_GROUP_RESOURCE);
+    return createRepository(this, VOICE_IN_TRUNK_GROUP_RESOURCE);
   }
   voiceOutTrunks() {
-    return createRepository<VoiceOutTrunk, VoiceOutTrunkWrite>(this, VOICE_OUT_TRUNK_RESOURCE);
+    return createRepository(this, VOICE_OUT_TRUNK_RESOURCE);
   }
   sharedCapacityGroups() {
-    return createRepository<SharedCapacityGroup, SharedCapacityGroupWrite>(this, SHARED_CAPACITY_GROUP_RESOURCE);
+    return createRepository(this, SHARED_CAPACITY_GROUP_RESOURCE);
   }
   dids() {
-    return createRepository<Did, DidWrite>(this, DID_RESOURCE);
+    return createRepository(this, DID_RESOURCE);
   }
   orders() {
-    return createRepository<Order, OrderWrite>(this, ORDER_RESOURCE);
+    return createRepository(this, ORDER_RESOURCE);
   }
   exports() {
-    return createRepository<Export, ExportWrite>(this, EXPORT_RESOURCE);
+    return createRepository(this, EXPORT_RESOURCE);
   }
   didReservations() {
-    return createRepository<DidReservation, DidReservationWrite>(this, DID_RESERVATION_RESOURCE);
+    return createRepository(this, DID_RESERVATION_RESOURCE);
   }
   addresses() {
-    return createRepository<Address, AddressWrite>(this, ADDRESS_RESOURCE);
+    return createRepository(this, ADDRESS_RESOURCE);
   }
   identities() {
-    return createRepository<Identity, IdentityWrite>(this, IDENTITY_RESOURCE);
+    return createRepository(this, IDENTITY_RESOURCE);
   }
   encryptedFiles() {
-    return createRepository<EncryptedFile>(this, ENCRYPTED_FILE_RESOURCE);
+    return createRepository(this, ENCRYPTED_FILE_RESOURCE);
   }
 
   // Create-only repositories
   addressVerifications() {
-    return createRepository<AddressVerification, AddressVerificationWrite>(this, ADDRESS_VERIFICATION_RESOURCE);
+    return createRepository(this, ADDRESS_VERIFICATION_RESOURCE);
   }
   permanentSupportingDocuments() {
-    return createRepository<PermanentSupportingDocument, PermanentSupportingDocumentWrite>(
-      this,
-      PERMANENT_SUPPORTING_DOCUMENT_RESOURCE,
-    );
+    return createRepository(this, PERMANENT_SUPPORTING_DOCUMENT_RESOURCE);
   }
   proofs() {
-    return createRepository<Proof, ProofWrite>(this, PROOF_RESOURCE);
+    return createRepository(this, PROOF_RESOURCE);
   }
   requirementValidations() {
-    return createRepository<RequirementValidation, RequirementValidationWrite>(this, REQUIREMENT_VALIDATION_RESOURCE);
+    return createRepository(this, REQUIREMENT_VALIDATION_RESOURCE);
   }
   voiceOutTrunkRegenerateCredentials() {
-    return createRepository<VoiceOutTrunkRegenerateCredential, VoiceOutTrunkRegenerateCredentialWrite>(
-      this,
-      VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE,
-    );
+    return createRepository(this, VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE);
   }
 }

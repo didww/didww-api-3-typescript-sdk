@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { Requirement } from './requirement.js';
 import type { Identity } from './identity.js';
 import type { Address } from './address.js';
@@ -17,10 +17,10 @@ export interface RequirementValidationWrite {
   address?: ResourceRef;
 }
 
-export const REQUIREMENT_VALIDATION_RESOURCE = {
+export const REQUIREMENT_VALIDATION_RESOURCE = defineResource<RequirementValidation, RequirementValidationWrite>()({
   type: 'requirement_validations',
   path: 'requirement_validations',
   writableKeys: ['requirement', 'identity', 'address'],
   relationshipKeys: ['requirement', 'identity', 'address'],
   operations: ['list', 'find', 'create', 'remove'],
-} as const satisfies ResourceConfig<RequirementValidation, RequirementValidationWrite>;
+});

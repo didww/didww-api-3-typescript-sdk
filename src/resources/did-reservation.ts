@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { AvailableDid } from './available-did.js';
 
 export interface DidReservation {
@@ -15,10 +15,10 @@ export interface DidReservationWrite {
   availableDid?: ResourceRef;
 }
 
-export const DID_RESERVATION_RESOURCE = {
+export const DID_RESERVATION_RESOURCE = defineResource<DidReservation, DidReservationWrite>()({
   type: 'did_reservations',
   path: 'did_reservations',
   writableKeys: ['description', 'availableDid'],
   relationshipKeys: ['availableDid'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
-} as const satisfies ResourceConfig<DidReservation, DidReservationWrite>;
+});

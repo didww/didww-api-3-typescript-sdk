@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { Country } from './country.js';
 import type { Identity } from './identity.js';
 import type { Proof } from './proof.js';
@@ -32,10 +32,10 @@ export interface AddressWrite {
   city?: ResourceRef;
 }
 
-export const ADDRESS_RESOURCE = {
+export const ADDRESS_RESOURCE = defineResource<Address, AddressWrite>()({
   type: 'addresses',
   path: 'addresses',
   writableKeys: ['cityName', 'postalCode', 'address', 'description', 'country', 'identity', 'area', 'city'],
   relationshipKeys: ['country', 'identity', 'area', 'city'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
-} as const satisfies ResourceConfig<Address, AddressWrite>;
+});

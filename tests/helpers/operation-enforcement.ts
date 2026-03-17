@@ -68,14 +68,13 @@ function createStubClient(): DidwwClient {
 export function describeOperationEnforcement(options: OperationEnforcementOptions): void {
   const { clientMethod, allowedOperations, resourceType, singleton = false } = options;
   const disallowedOperations = ALL_OPERATIONS.filter((op) => !allowedOperations.includes(op));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function getRepo(): any {
+    const client = createStubClient();
+    return (client[clientMethod] as () => unknown)();
+  }
 
   describe('operation enforcement', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    function getRepo(): any {
-      const client = createStubClient();
-      return (client[clientMethod] as () => unknown)();
-    }
-
     for (const op of allowedOperations) {
       it(`allows ${op}()`, async () => {
         const repo = getRepo();

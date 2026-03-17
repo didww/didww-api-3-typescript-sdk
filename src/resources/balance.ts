@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { defineResource } from './base.js';
 
 export interface Balance {
   id: string;
@@ -8,10 +8,10 @@ export interface Balance {
   credit: string;
 }
 
-export const BALANCE_RESOURCE = {
+export const BALANCE_RESOURCE = defineResource<Balance>()({
   type: 'balances',
   path: 'balance',
   writableKeys: [],
   operations: ['find'],
   singleton: true,
-} as const satisfies ResourceConfig<Balance>;
+});

@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
@@ -51,13 +51,13 @@ const WRITABLE_KEYS = [
   'voiceInTrunkGroup',
 ] as const satisfies readonly (keyof VoiceInTrunkWrite)[];
 
-export const VOICE_IN_TRUNK_RESOURCE = {
+export const VOICE_IN_TRUNK_RESOURCE = defineResource<VoiceInTrunk, VoiceInTrunkWrite>()({
   type: 'voice_in_trunks',
   path: 'voice_in_trunks',
   writableKeys: WRITABLE_KEYS,
   operations: ['list', 'find', 'create', 'update', 'remove'],
   relationshipKeys: ['pop', 'voiceInTrunkGroup'],
-  serializeCustom(data: VoiceInTrunkWrite, _method: 'POST' | 'PATCH') {
+  serializeCustom(data) {
     const result = filterWritableKeys(data, WRITABLE_KEYS);
     if (result.configuration) {
       result.configuration = serializeTrunkConfiguration(result.configuration as TrunkConfiguration);
@@ -73,4 +73,4 @@ export const VOICE_IN_TRUNK_RESOURCE = {
     }
     return {};
   },
-} as const satisfies ResourceConfig<VoiceInTrunk, VoiceInTrunkWrite>;
+});

@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { VoiceInTrunk } from './voice-in-trunk.js';
 
 export interface VoiceInTrunkGroup {
@@ -16,10 +16,10 @@ export interface VoiceInTrunkGroupWrite {
   voiceInTrunks?: ResourceRef[];
 }
 
-export const VOICE_IN_TRUNK_GROUP_RESOURCE = {
+export const VOICE_IN_TRUNK_GROUP_RESOURCE = defineResource<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>()({
   type: 'voice_in_trunk_groups',
   path: 'voice_in_trunk_groups',
   writableKeys: ['name', 'capacityLimit', 'voiceInTrunks'],
   relationshipKeys: ['voiceInTrunks'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
-} as const satisfies ResourceConfig<VoiceInTrunkGroup, VoiceInTrunkGroupWrite>;
+});

@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { defineResource } from './base.js';
 
 export interface EncryptedFile {
   id: string;
@@ -7,9 +7,9 @@ export interface EncryptedFile {
   expireAt: string;
 }
 
-export const ENCRYPTED_FILE_RESOURCE = {
+export const ENCRYPTED_FILE_RESOURCE = defineResource<EncryptedFile>()({
   type: 'encrypted_files',
   path: 'encrypted_files',
   writableKeys: [],
   operations: ['list', 'find', 'remove'],
-} as const satisfies ResourceConfig<EncryptedFile>;
+});

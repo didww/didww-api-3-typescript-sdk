@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { defineResource } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { OrderItem } from '../nested/order-item.js';
 import type { OrderStatus, CallbackMethod } from '../enums.js';
@@ -25,14 +25,19 @@ export interface OrderWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-const WRITABLE_KEYS = ['allowBackOrdering', 'items', 'callbackUrl', 'callbackMethod'] as const satisfies readonly (keyof OrderWrite)[];
+const WRITABLE_KEYS = [
+  'allowBackOrdering',
+  'items',
+  'callbackUrl',
+  'callbackMethod',
+] as const satisfies readonly (keyof OrderWrite)[];
 
-export const ORDER_RESOURCE = {
+export const ORDER_RESOURCE = defineResource<Order, OrderWrite>()({
   type: 'orders',
   path: 'orders',
   writableKeys: WRITABLE_KEYS,
   operations: ['list', 'find', 'create', 'update', 'remove'],
-  serializeCustom(data: OrderWrite, _method: 'POST' | 'PATCH') {
+  serializeCustom(data) {
     const result = filterWritableKeys(data, WRITABLE_KEYS);
     if (result.items && Array.isArray(result.items)) {
       result.items = serializeOrderItems(result.items as OrderItem[]);
@@ -46,4 +51,4 @@ export const ORDER_RESOURCE = {
     }
     return {};
   },
-} as const satisfies ResourceConfig<Order, OrderWrite>;
+});

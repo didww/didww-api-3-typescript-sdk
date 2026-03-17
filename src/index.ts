@@ -3,10 +3,9 @@ export { DidwwClient, type DidwwClientOptions, type FetchFunction } from './clie
 export { Environment } from './configuration.js';
 export { DidwwApiError, DidwwClientError, type JsonApiError } from './errors.js';
 export { type QueryParams } from './query-params.js';
-export type { HttpClient } from './repositories/read-only-repository.js';
 
 // Base
-export { ref, isIncluded, type ResourceRef, type ResourceConfig, type AnyResourceConfig, type Operation } from './resources/base.js';
+export { ref, isIncluded, type ResourceRef, type ResourceConfig, type Operation } from './resources/base.js';
 
 // Enums
 export * from './enums.js';
@@ -65,15 +64,18 @@ export {
 } from './nested/order-item.js';
 
 // Repository types
-export { BaseRepository, createRepository } from './repositories/base-repository.js';
-export type { RepositoryFor, HasList, HasFind, HasSingletonFind, HasCreate, HasUpdate, HasRemove } from './repositories/base-repository.js';
-
-// Repository types (legacy — preserved for backward compatibility)
-export type { ApiResponse, ListResponse } from './repositories/types.js';
-export { ReadOnlyRepository } from './repositories/read-only-repository.js';
-export { Repository } from './repositories/repository.js';
-export { SingletonRepository } from './repositories/singleton-repository.js';
-export { CreateOnlyRepository } from './repositories/create-only-repository.js';
+export { type HttpClient, Repository, createRepository } from './repositories/repository.js';
+export type {
+  ApiResponse,
+  ListResponse,
+  RepositoryFor,
+  HasList,
+  HasFind,
+  HasSingletonFind,
+  HasCreate,
+  HasUpdate,
+  HasRemove,
+} from './repositories/types.js';
 
 // Encryption
 export { Encrypt, encryptWithKeys, calculateFingerprint } from './encrypt.js';

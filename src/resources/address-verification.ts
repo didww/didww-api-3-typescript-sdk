@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { AddressVerificationStatus, CallbackMethod } from '../enums.js';
 import type { Address } from './address.js';
 import type { Did } from './did.js';
@@ -25,10 +25,10 @@ export interface AddressVerificationWrite {
   dids?: ResourceRef[];
 }
 
-export const ADDRESS_VERIFICATION_RESOURCE = {
+export const ADDRESS_VERIFICATION_RESOURCE = defineResource<AddressVerification, AddressVerificationWrite>()({
   type: 'address_verifications',
   path: 'address_verifications',
   writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'address', 'dids'],
   relationshipKeys: ['address', 'dids'],
   operations: ['list', 'find', 'create', 'remove'],
-} as const satisfies ResourceConfig<AddressVerification, AddressVerificationWrite>;
+});

@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { Identity } from './identity.js';
 import type { SupportingDocumentTemplate } from './supporting-document-template.js';
 import type { EncryptedFile } from './encrypted-file.js';
@@ -18,10 +18,13 @@ export interface PermanentSupportingDocumentWrite {
   files?: ResourceRef[];
 }
 
-export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE = {
+export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE = defineResource<
+  PermanentSupportingDocument,
+  PermanentSupportingDocumentWrite
+>()({
   type: 'permanent_supporting_documents',
   path: 'permanent_supporting_documents',
   writableKeys: ['identity', 'template', 'files'],
   relationshipKeys: ['identity', 'template', 'files'],
   operations: ['list', 'find', 'create', 'remove'],
-} as const satisfies ResourceConfig<PermanentSupportingDocument, PermanentSupportingDocumentWrite>;
+});

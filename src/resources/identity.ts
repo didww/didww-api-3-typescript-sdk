@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { IdentityType } from '../enums.js';
 import type { Country } from './country.js';
 import type { Proof } from './proof.js';
@@ -46,7 +46,7 @@ export interface IdentityWrite {
   country?: ResourceRef;
 }
 
-export const IDENTITY_RESOURCE = {
+export const IDENTITY_RESOURCE = defineResource<Identity, IdentityWrite>()({
   type: 'identities',
   path: 'identities',
   writableKeys: [
@@ -67,4 +67,4 @@ export const IDENTITY_RESOURCE = {
   ],
   relationshipKeys: ['country'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
-} as const satisfies ResourceConfig<Identity, IdentityWrite>;
+});
