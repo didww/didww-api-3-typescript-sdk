@@ -11,6 +11,22 @@ export interface HttpClient {
   delete(path: string): Promise<void>;
 }
 
+/**
+ * Generic repository that exposes **all** CRUD methods regardless of the
+ * resource configuration.  Operations that are not listed in
+ * {@link ResourceConfig.operations} are guarded at **runtime** and will throw
+ * a {@link DidwwClientError}.
+ *
+ * For **compile-time** safety, prefer obtaining repositories through
+ * {@link DidwwClient} accessor methods (e.g. `client.dids()`) or the
+ * {@link createRepository} factory, both of which return a narrowed
+ * {@link RepositoryFor} type that only exposes the methods permitted by the
+ * resource's operation list and singleton flag.
+ *
+ * Direct instantiation (`new Repository(client, meta)`) is useful for
+ * testing or advanced scenarios but does **not** restrict the method surface
+ * at the type level.
+ */
 export class Repository<T, TWrite = Record<string, unknown>> {
   constructor(
     protected readonly client: HttpClient,

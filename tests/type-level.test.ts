@@ -1,6 +1,7 @@
 /**
  * Type-level tests to verify that operation constraints are properly enforced.
- * Uses @ts-expect-error to assert that disallowed methods produce compile errors.
+ * Uses vitest's expectTypeOf() to assert that disallowed methods are absent
+ * from the narrowed repository types returned by DidwwClient and createRepository.
  */
 import { describe, it, expectTypeOf } from 'vitest';
 import { DidwwClient, Environment } from '../src/index.js';

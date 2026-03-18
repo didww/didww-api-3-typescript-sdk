@@ -5,7 +5,7 @@ import { Environment } from '../../src/configuration.js';
 
 const ALL_OPERATIONS: Operation[] = ['list', 'find', 'create', 'update', 'remove'];
 
-export interface OperationEnforcementOptions {
+interface OperationEnforcementOptions {
   /** The client method name, e.g. 'countries', 'voiceOutTrunks' */
   clientMethod: keyof DidwwClient;
   /** The operations that should be allowed for this resource */

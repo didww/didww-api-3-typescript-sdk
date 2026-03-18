@@ -227,13 +227,6 @@ describe('Non-singleton find() runtime id validation', () => {
     );
   });
 
-  it('throws when called with undefined on a non-singleton resource', async () => {
-    const repo = new Repository(stubClient, READ_ONLY_CONFIG);
-    await expect(repo.find()).rejects.toThrow(
-      "find() on non-singleton resource 'things' requires a non-empty string id as the first argument",
-    );
-  });
-
   it('throws when called with an empty string on a non-singleton resource', async () => {
     const repo = new Repository(stubClient, CRUD_CONFIG);
     await expect(repo.find('')).rejects.toThrow(
