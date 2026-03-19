@@ -52,6 +52,11 @@ export class Repository<T, TWrite = Record<string, unknown>> {
   async find(idOrParams?: string | QueryParams, params?: QueryParams): Promise<ApiResponse<T>> {
     this.assertOperation('find');
     if (this.meta.singleton) {
+      if (typeof idOrParams === 'string') {
+        throw new DidwwClientError(
+          `find() on singleton resource '${this.meta.type}' does not accept a string id argument`,
+        );
+      }
       const body = await this.client.get(this.meta.path, idOrParams as QueryParams);
       return this.deserializeSingle(body);
     }

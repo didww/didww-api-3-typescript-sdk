@@ -245,6 +245,13 @@ describe('Non-singleton find() runtime id validation', () => {
     const repo = new Repository(stubClient, SINGLETON_CONFIG);
     await expect(repo.find()).resolves.toBeDefined();
   });
+
+  it('throws when called with a string id on a singleton resource', async () => {
+    const repo = new Repository(stubClient, SINGLETON_CONFIG);
+    await expect(repo.find('some-id')).rejects.toThrow(
+      "find() on singleton resource 'settings' does not accept a string id argument",
+    );
+  });
 });
 
 // ── createRepository factory type inference ──────────────────────────────────
