@@ -4,8 +4,14 @@ import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { SharedCapacityGroup } from '../../src/resources/shared-capacity-group.js';
 import type { QtyBasedPricing } from '../../src/resources/qty-based-pricing.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('CapacityPools', () => {
+  describeOperationEnforcement({
+    clientMethod: 'capacityPools',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'capacity_pools',
+  });
   it('lists capacity pools', async () => {
     const client = setupClient('capacity_pools/list.yaml');
     const result = await client.capacityPools().list();

@@ -1,7 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Orders', () => {
+  describeOperationEnforcement({
+    clientMethod: 'orders',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'orders',
+  });
   it('finds an order', async () => {
     const client = setupClient('orders/show.yaml');
     const result = await client.orders().find('9df11dac-9d83-448c-8866-19c998be33db');

@@ -9,8 +9,14 @@ import type { Order } from '../../src/resources/order.js';
 import type { AddressVerification } from '../../src/resources/address-verification.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Dids', () => {
+  describeOperationEnforcement({
+    clientMethod: 'dids',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'dids',
+  });
   it('lists DIDs', async () => {
     const client = setupClient('dids/list.yaml');
     const result = await client.dids().list();

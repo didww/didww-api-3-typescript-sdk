@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { ProofType } from '../../src/resources/proof-type.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Proofs', () => {
+  describeOperationEnforcement({
+    clientMethod: 'proofs',
+    allowedOperations: ['list', 'find', 'create', 'remove'],
+    resourceType: 'proofs',
+  });
   it('creates a proof', async () => {
     const client = setupClient('proofs/create.yaml');
     const result = await client.proofs().create({

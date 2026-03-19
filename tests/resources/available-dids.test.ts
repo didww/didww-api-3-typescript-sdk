@@ -3,8 +3,14 @@ import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
 import type { NanpaPrefix } from '../../src/resources/nanpa-prefix.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('AvailableDids', () => {
+  describeOperationEnforcement({
+    clientMethod: 'availableDids',
+    allowedOperations: ['list', 'find'],
+    resourceType: 'available_dids',
+  });
   it('lists available DIDs', async () => {
     const client = setupClient('available_dids/list.yaml');
     const result = await client.availableDids().list();

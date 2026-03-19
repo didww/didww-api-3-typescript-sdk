@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { CapacityPool } from './capacity-pool.js';
 import type { Did } from './did.js';
 
@@ -20,9 +20,10 @@ export interface SharedCapacityGroupWrite {
   capacityPool?: ResourceRef;
 }
 
-export const SHARED_CAPACITY_GROUP_RESOURCE: ResourceConfig<SharedCapacityGroup, SharedCapacityGroupWrite> = {
+export const SHARED_CAPACITY_GROUP_RESOURCE = defineResource<SharedCapacityGroup, SharedCapacityGroupWrite>()({
   type: 'shared_capacity_groups',
   path: 'shared_capacity_groups',
   writableKeys: ['name', 'sharedChannelsCount', 'meteredChannelsCount', 'capacityPool'],
   relationshipKeys: ['capacityPool'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+});

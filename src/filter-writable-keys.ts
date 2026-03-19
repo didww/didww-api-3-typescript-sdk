@@ -1,6 +1,6 @@
 export function filterWritableKeys<TWrite>(
   data: TWrite,
-  writableKeys: (keyof TWrite)[],
+  writableKeys: readonly (keyof TWrite)[],
   allowedKeys?: ReadonlySet<string>,
 ): Record<string, unknown> {
   const result: Record<string, unknown> = {};

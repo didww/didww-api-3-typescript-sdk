@@ -6,8 +6,14 @@ import type { City } from '../../src/resources/city.js';
 import type { DidGroupType } from '../../src/resources/did-group-type.js';
 import type { StockKeepingUnit } from '../../src/resources/stock-keeping-unit.js';
 import type { Requirement } from '../../src/resources/requirement.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('DidGroups', () => {
+  describeOperationEnforcement({
+    clientMethod: 'didGroups',
+    allowedOperations: ['list', 'find'],
+    resourceType: 'did_groups',
+  });
   it('lists DID groups', async () => {
     const client = setupClient('did_groups/list.yaml');
     const result = await client.didGroups().list();

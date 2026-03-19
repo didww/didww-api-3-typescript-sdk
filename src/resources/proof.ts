@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { ProofType } from './proof-type.js';
 import type { EncryptedFile } from './encrypted-file.js';
 
@@ -18,9 +18,10 @@ export interface ProofWrite {
   files?: ResourceRef[];
 }
 
-export const PROOF_RESOURCE: ResourceConfig<Proof, ProofWrite> = {
+export const PROOF_RESOURCE = defineResource<Proof, ProofWrite>()({
   type: 'proofs',
   path: 'proofs',
   writableKeys: ['proofType', 'entity', 'files'],
   relationshipKeys: ['proofType', 'entity', 'files'],
-};
+  operations: ['list', 'find', 'create', 'remove'],
+});

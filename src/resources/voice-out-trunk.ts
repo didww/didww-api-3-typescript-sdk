@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import type { OnCliMismatchAction, VoiceOutTrunkStatus, MediaEncryptionMode, DefaultDstAction } from '../enums.js';
 import type { Did } from './did.js';
 
@@ -46,7 +46,7 @@ export interface VoiceOutTrunkWrite {
   dids?: ResourceRef[];
 }
 
-export const VOICE_OUT_TRUNK_RESOURCE: ResourceConfig<VoiceOutTrunk, VoiceOutTrunkWrite> = {
+export const VOICE_OUT_TRUNK_RESOURCE = defineResource<VoiceOutTrunk, VoiceOutTrunkWrite>()({
   type: 'voice_out_trunks',
   path: 'voice_out_trunks',
   writableKeys: [
@@ -68,4 +68,5 @@ export const VOICE_OUT_TRUNK_RESOURCE: ResourceConfig<VoiceOutTrunk, VoiceOutTru
     'dids',
   ],
   relationshipKeys: ['defaultDid', 'dids'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+});

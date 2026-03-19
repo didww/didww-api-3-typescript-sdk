@@ -3,8 +3,14 @@ import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
 import type { Address } from '../../src/resources/address.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('AddressVerifications', () => {
+  describeOperationEnforcement({
+    clientMethod: 'addressVerifications',
+    allowedOperations: ['list', 'find', 'create', 'remove'],
+    resourceType: 'address_verifications',
+  });
   it('lists address verifications', async () => {
     const client = setupClient('address_verifications/list.yaml');
     const result = await client.addressVerifications().list();

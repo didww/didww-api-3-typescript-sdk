@@ -3,8 +3,14 @@ import { setupClient } from '../helpers/client.js';
 import { DidwwClient } from '../../src/client.js';
 import { Environment } from '../../src/configuration.js';
 import pkg from '../../package.json';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Exports', () => {
+  describeOperationEnforcement({
+    clientMethod: 'exports',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'exports',
+  });
   it('lists exports', async () => {
     const client = setupClient('exports/list.yaml');
     const result = await client.exports().list();

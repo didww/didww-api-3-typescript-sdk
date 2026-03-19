@@ -1,4 +1,4 @@
-import type { ResourceConfig } from './base.js';
+import { defineResource } from './base.js';
 import type { ExportType, ExportStatus, CallbackMethod } from '../enums.js';
 
 export interface Export {
@@ -20,8 +20,9 @@ export interface ExportWrite {
   callbackMethod?: CallbackMethod | null;
 }
 
-export const EXPORT_RESOURCE: ResourceConfig<Export, ExportWrite> = {
+export const EXPORT_RESOURCE = defineResource<Export, ExportWrite>()({
   type: 'exports',
   path: 'exports',
   writableKeys: ['exportType', 'filters', 'callbackUrl', 'callbackMethod'],
-};
+  operations: ['list', 'find', 'create', 'update', 'remove'],
+});

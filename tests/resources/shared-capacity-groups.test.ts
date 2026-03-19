@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { CapacityPool } from '../../src/resources/capacity-pool.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('SharedCapacityGroups', () => {
+  describeOperationEnforcement({
+    clientMethod: 'sharedCapacityGroups',
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
+    resourceType: 'shared_capacity_groups',
+  });
   it('lists shared capacity groups', async () => {
     const client = setupClient('shared_capacity_groups/list.yaml');
     const result = await client.sharedCapacityGroups().list();

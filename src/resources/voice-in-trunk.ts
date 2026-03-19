@@ -1,4 +1,4 @@
-import type { ResourceConfig, ResourceRef } from './base.js';
+import { defineResource, type ResourceRef } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
 import type { CliFormat } from '../enums.js';
@@ -37,32 +37,35 @@ export interface VoiceInTrunkWrite {
   voiceInTrunkGroup?: ResourceRef;
 }
 
-export const VOICE_IN_TRUNK_RESOURCE: ResourceConfig<VoiceInTrunk, VoiceInTrunkWrite> = {
+const WRITABLE_KEYS = [
+  'name',
+  'priority',
+  'weight',
+  'cliFormat',
+  'cliPrefix',
+  'description',
+  'ringingTimeout',
+  'capacityLimit',
+  'configuration',
+  'pop',
+  'voiceInTrunkGroup',
+] as const satisfies readonly (keyof VoiceInTrunkWrite)[];
+
+export const VOICE_IN_TRUNK_RESOURCE = defineResource<VoiceInTrunk, VoiceInTrunkWrite>()({
   type: 'voice_in_trunks',
   path: 'voice_in_trunks',
-  writableKeys: [
-    'name',
-    'priority',
-    'weight',
-    'cliFormat',
-    'cliPrefix',
-    'description',
-    'ringingTimeout',
-    'capacityLimit',
-    'configuration',
-    'pop',
-    'voiceInTrunkGroup',
-  ],
+  writableKeys: WRITABLE_KEYS,
+  operations: ['list', 'find', 'create', 'update', 'remove'],
   relationshipKeys: ['pop', 'voiceInTrunkGroup'],
-  serializeCustom(data, _method) {
-    const result = filterWritableKeys(data, VOICE_IN_TRUNK_RESOURCE.writableKeys);
+  serializeCustom(data) {
+    const result = filterWritableKeys(data, WRITABLE_KEYS);
     if (result.configuration) {
       result.configuration = serializeTrunkConfiguration(result.configuration as TrunkConfiguration);
     }
     return result;
   },
-  deserializeCustom(data) {
-    const config = (data as Record<string, unknown>).configuration;
+  deserializeCustom(data: Record<string, unknown>) {
+    const config = data.configuration;
     if (config && typeof config === 'object' && 'type' in config && 'attributes' in config) {
       return {
         configuration: deserializeTrunkConfiguration(config as Record<string, unknown>),
@@ -70,4 +73,4 @@ export const VOICE_IN_TRUNK_RESOURCE: ResourceConfig<VoiceInTrunk, VoiceInTrunkW
     }
     return {};
   },
-};
+});

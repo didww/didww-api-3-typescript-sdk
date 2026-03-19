@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
 import type { SupportingDocumentTemplate } from '../../src/resources/supporting-document-template.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('PermanentSupportingDocuments', () => {
+  describeOperationEnforcement({
+    clientMethod: 'permanentSupportingDocuments',
+    allowedOperations: ['list', 'find', 'create', 'remove'],
+    resourceType: 'permanent_supporting_documents',
+  });
   it('creates a permanent supporting document', async () => {
     const client = setupClient('permanent_supporting_documents/create.yaml');
     const result = await client.permanentSupportingDocuments().create({

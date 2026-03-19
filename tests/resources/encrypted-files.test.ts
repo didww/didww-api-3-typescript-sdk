@@ -1,8 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { DidwwClientError } from '../../src/errors.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('EncryptedFiles', () => {
+  describeOperationEnforcement({
+    clientMethod: 'encryptedFiles',
+    allowedOperations: ['list', 'find', 'remove'],
+    resourceType: 'encrypted_files',
+  });
   it('lists encrypted files', async () => {
     const client = setupClient('encrypted_files/list.yaml');
     const result = await client.encryptedFiles().list();

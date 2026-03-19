@@ -2,8 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Areas', () => {
+  describeOperationEnforcement({
+    clientMethod: 'areas',
+    allowedOperations: ['list', 'find'],
+    resourceType: 'areas',
+  });
   it('lists areas', async () => {
     const client = setupClient('areas/list.yaml');
     const result = await client.areas().list();

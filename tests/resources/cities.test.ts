@@ -3,8 +3,14 @@ import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Country } from '../../src/resources/country.js';
 import type { Region } from '../../src/resources/region.js';
+import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Cities', () => {
+  describeOperationEnforcement({
+    clientMethod: 'cities',
+    allowedOperations: ['list', 'find'],
+    resourceType: 'cities',
+  });
   it('lists cities', async () => {
     const client = setupClient('cities/list.yaml');
     const result = await client.cities().list();
