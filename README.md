@@ -647,6 +647,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/didww/
 5. `npm publish --access public` releases npm package
 6. `git push --follow-tags origin main` pushes git commit and tag to GitHub
 
+**Note**: if `npm publish` fails with error like 404 `'@didww/sdk@2.0.0' is not in this registry.` you need to refresh credentials via `npm login`.
+
 ## License
 
 MIT
