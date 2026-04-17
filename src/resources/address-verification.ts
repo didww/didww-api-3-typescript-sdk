@@ -23,6 +23,7 @@ export interface AddressVerificationWrite {
   serviceDescription?: string;
   callbackUrl?: string | null;
   callbackMethod?: CallbackMethod | null;
+  externalReferenceId?: string | null;
   address?: ResourceRef;
   dids?: ResourceRef[];
 }
@@ -30,7 +31,7 @@ export interface AddressVerificationWrite {
 export const ADDRESS_VERIFICATION_RESOURCE = defineResource<AddressVerification, AddressVerificationWrite>()({
   type: 'address_verifications',
   path: 'address_verifications',
-  writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'address', 'dids'],
+  writableKeys: ['serviceDescription', 'callbackUrl', 'callbackMethod', 'externalReferenceId', 'address', 'dids'],
   relationshipKeys: ['address', 'dids'],
-  operations: ['list', 'find', 'create', 'remove'],
+  operations: ['list', 'find', 'create', 'update', 'remove'],
 });

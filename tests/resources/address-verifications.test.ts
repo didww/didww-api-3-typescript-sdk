@@ -8,7 +8,7 @@ import { describeOperationEnforcement } from '../helpers/operation-enforcement.j
 describe('AddressVerifications', () => {
   describeOperationEnforcement({
     clientMethod: 'addressVerifications',
-    allowedOperations: ['list', 'find', 'create', 'remove'],
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
     resourceType: 'address_verifications',
   });
   it('lists address verifications', async () => {
@@ -44,6 +44,16 @@ describe('AddressVerifications', () => {
     expect(result.data.rejectReasons).toEqual(['Building/house/apartment number is missing']);
     expect(result.data.rejectComment).toBe('Please re-submit with a more recent utility bill.');
     expect(result.data.externalReferenceId).toBe('crm-verif-0001');
+  });
+
+  it('updates external_reference_id on an address verification', async () => {
+    const client = setupClient('address_verifications/update.yaml');
+    const result = await client.addressVerifications().update({
+      id: '429e6d4e-2ee9-4953-aa98-0b3ac07f0f96',
+      externalReferenceId: 'updated-ref-42',
+    });
+    expect(result.data.id).toBe('429e6d4e-2ee9-4953-aa98-0b3ac07f0f96');
+    expect(result.data.externalReferenceId).toBe('updated-ref-42');
   });
 
   it('creates an address verification', async () => {
