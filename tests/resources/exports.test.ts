@@ -36,6 +36,16 @@ describe('Exports', () => {
     expect(result.data.status).toBe('Pending');
   });
 
+  it('updates external_reference_id on an export', async () => {
+    const client = setupClient('exports/update.yaml');
+    const result = await client.exports().update({
+      id: 'da15f006-5da4-45ca-b0df-735baeadf423',
+      externalReferenceId: 'updated-exp-ref',
+    });
+    expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
+    expect(result.data.externalReferenceId).toBe('updated-exp-ref');
+  });
+
   it('creates a cdr_out export', async () => {
     const client = setupClient('exports/create_1.yaml');
     const result = await client.exports().create({
