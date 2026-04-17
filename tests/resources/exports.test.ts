@@ -30,7 +30,7 @@ describe('Exports', () => {
     const client = setupClient('exports/create.yaml');
     const result = await client.exports().create({
       exportType: 'cdr_in',
-      filters: { did_number: '1234556789', from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
+      filters: { didNumber: '1234556789', from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
     expect(result.data.status).toBe('Pending');
