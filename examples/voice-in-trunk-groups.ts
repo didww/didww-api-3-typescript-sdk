@@ -24,15 +24,17 @@ async function main() {
   });
   console.log(`Created trunk B: ${trunk2.data.id}`);
 
-  // Create a trunk group with both trunks assigned
+  // Create a trunk group with both trunks assigned (2026-04-16 external_reference_id for customer tagging)
   const group = await client.voiceInTrunkGroups().create({
     name: `Primary Failover Group ${suffix}`,
     capacityLimit: 10,
     voiceInTrunks: [ref('voice_in_trunks', trunk1.data.id), ref('voice_in_trunks', trunk2.data.id)],
+    externalReferenceId: `ts-tg-${suffix}`,
   });
   console.log(`\nCreated trunk group: ${group.data.id}`);
   console.log(`  name: ${group.data.name}`);
   console.log(`  capacityLimit: ${group.data.capacityLimit}`);
+  console.log(`  externalReferenceId: ${group.data.externalReferenceId}`);
 
   // List trunk groups with included trunks
   const groups = await client.voiceInTrunkGroups().list({
