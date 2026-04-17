@@ -31,6 +31,16 @@ describe('EmergencyVerifications', () => {
     expect(result.data.externalReferenceId).toBe('ref-xyz-999');
   });
 
+  it('updates external_reference_id on an emergency verification', async () => {
+    const client = setupClient('emergency_verifications/update.yaml');
+    const result = await client.emergencyVerifications().update({
+      id: 'ev-001',
+      externalReferenceId: 'updated-ev-ref',
+    });
+    expect(result.data.id).toBe('ev-001');
+    expect(result.data.externalReferenceId).toBe('updated-ev-ref');
+  });
+
   it('creates an emergency verification', async () => {
     const client = setupClient('emergency_verifications/create.yaml');
     const result = await client.emergencyVerifications().create({
