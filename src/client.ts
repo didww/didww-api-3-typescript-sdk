@@ -50,7 +50,7 @@ export interface DidwwClientOptions {
 }
 
 export class DidwwClient implements HttpClient {
-  private static readonly API_VERSION = '2022-05-10';
+  private static readonly API_VERSION = '2026-04-16';
   private static readonly USER_AGENT = `didww-typescript-sdk/${pkg.version}`;
   private readonly apiKey: string;
   private readonly baseUrl: string;
