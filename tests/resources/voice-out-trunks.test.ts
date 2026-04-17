@@ -2,7 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
-import type { CredentialsAndIpAuthenticationMethod, AuthenticationMethod } from '../../src/nested/authentication-method.js';
+import type {
+  CredentialsAndIpAuthenticationMethod,
+  AuthenticationMethod,
+} from '../../src/nested/authentication-method.js';
 import type { OnCliMismatchAction } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 

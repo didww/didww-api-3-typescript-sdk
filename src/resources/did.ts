@@ -68,7 +68,13 @@ export const DID_RESOURCE = defineResource<Did, DidWrite>()({
   type: 'dids',
   path: 'dids',
   writableKeys: WRITABLE_KEYS,
-  relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup', 'emergencyCallingService'],
+  relationshipKeys: [
+    'voiceInTrunk',
+    'voiceInTrunkGroup',
+    'capacityPool',
+    'sharedCapacityGroup',
+    'emergencyCallingService',
+  ],
   operations: ['list', 'find', 'create', 'update', 'remove'],
   serializeCustom(data: DidWrite, _method: 'POST' | 'PATCH') {
     const result = filterWritableKeys(data, WRITABLE_KEYS);

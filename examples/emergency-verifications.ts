@@ -27,9 +27,7 @@ function printVerification(ev: EmergencyVerification) {
   if (ev.address) console.log(`  Address: ${ev.address.id}`);
   if (ev.emergencyCallingService) console.log(`  Emergency Calling Service: ${ev.emergencyCallingService.id}`);
   if (ev.dids && ev.dids.length > 0) {
-    const numbers = ev.dids
-      .filter((d): d is Did => isIncluded(d))
-      .map(d => d.number);
+    const numbers = ev.dids.filter((d): d is Did => isIncluded(d)).map((d) => d.number);
     console.log(`  DIDs: ${numbers.join(', ')}`);
   }
   if (ev.status === 'rejected') {

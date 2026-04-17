@@ -2,10 +2,7 @@ import { defineResource, type ResourceRef } from './base.js';
 import type { OnCliMismatchAction, VoiceOutTrunkStatus, MediaEncryptionMode, DefaultDstAction } from '../enums.js';
 import type { Did } from './did.js';
 import type { AuthenticationMethod } from '../nested/authentication-method.js';
-import {
-  serializeAuthenticationMethod,
-  deserializeAuthenticationMethod,
-} from '../nested/authentication-method.js';
+import { serializeAuthenticationMethod, deserializeAuthenticationMethod } from '../nested/authentication-method.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 
 export interface VoiceOutTrunk {

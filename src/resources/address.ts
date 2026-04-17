@@ -37,7 +37,17 @@ export interface AddressWrite {
 export const ADDRESS_RESOURCE = defineResource<Address, AddressWrite>()({
   type: 'addresses',
   path: 'addresses',
-  writableKeys: ['cityName', 'postalCode', 'address', 'description', 'externalReferenceId', 'country', 'identity', 'area', 'city'],
+  writableKeys: [
+    'cityName',
+    'postalCode',
+    'address',
+    'description',
+    'externalReferenceId',
+    'country',
+    'identity',
+    'area',
+    'city',
+  ],
   relationshipKeys: ['country', 'identity', 'area', 'city'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
 });

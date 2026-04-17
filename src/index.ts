@@ -66,7 +66,13 @@ export type {
 export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './nested/trunk-configuration.js';
 export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
 
-export type { OrderItem, DidOrderItem, CapacityOrderItem, EmergencyOrderItem, GenericOrderItem } from './nested/order-item.js';
+export type {
+  OrderItem,
+  DidOrderItem,
+  CapacityOrderItem,
+  EmergencyOrderItem,
+  GenericOrderItem,
+} from './nested/order-item.js';
 
 export type {
   AuthenticationMethod,

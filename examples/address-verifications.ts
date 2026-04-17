@@ -27,9 +27,7 @@ function printVerification(av: AddressVerification) {
   if (av.serviceDescription) console.log(`  Service description: ${av.serviceDescription}`);
   if (av.address) console.log(`  Address: ${av.address.id}`);
   if (av.dids && av.dids.length > 0) {
-    const numbers = av.dids
-      .filter((d): d is Did => isIncluded(d))
-      .map(d => d.number);
+    const numbers = av.dids.filter((d): d is Did => isIncluded(d)).map((d) => d.number);
     console.log(`  DIDs: ${numbers.join(', ')}`);
   }
   if (av.status === 'rejected') {

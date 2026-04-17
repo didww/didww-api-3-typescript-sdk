@@ -22,7 +22,7 @@ const client = new DidwwClient({
 async function main() {
   console.log('=== All Orders (filtering for Emergency) ===');
   const orders = await client.orders().list();
-  const emergencyOrders = orders.data.filter(o => o.description === 'Emergency');
+  const emergencyOrders = orders.data.filter((o) => o.description === 'Emergency');
   console.log(`Found ${emergencyOrders.length} emergency orders out of ${orders.data.length} total`);
 
   for (const order of emergencyOrders.slice(0, 5)) {

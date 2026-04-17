@@ -67,7 +67,7 @@ async function main() {
     exportType: ExportType.CDR_IN,
     filters: {
       from: `${fmtDate(yesterday)} 00:00:00`, // inclusive (time_start >= this)
-      to: `${fmtDate(today)} 00:00:00`,        // exclusive (time_start < this)
+      to: `${fmtDate(today)} 00:00:00`, // exclusive (time_start < this)
     },
     externalReferenceId: `ts-cdr-in-${suffix}`,
   });

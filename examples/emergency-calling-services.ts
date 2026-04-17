@@ -40,9 +40,7 @@ async function main() {
     if (svc.canceledAt) console.log(`  Canceled: ${svc.canceledAt}`);
     if (svc.renewDate) console.log(`  Renews: ${svc.renewDate}`);
     if (svc.dids && svc.dids.length > 0) {
-      const numbers = svc.dids
-        .filter((d): d is Did => isIncluded(d))
-        .map(d => d.number);
+      const numbers = svc.dids.filter((d): d is Did => isIncluded(d)).map((d) => d.number);
       console.log(`  Attached DIDs: ${numbers.join(', ')}`);
     }
   }

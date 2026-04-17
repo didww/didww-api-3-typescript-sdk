@@ -84,16 +84,12 @@ export interface SerializedAuthenticationMethod {
   attributes: Record<string, unknown>;
 }
 
-export function serializeAuthenticationMethod(
-  method: AuthenticationMethod,
-): SerializedAuthenticationMethod {
+export function serializeAuthenticationMethod(method: AuthenticationMethod): SerializedAuthenticationMethod {
   const { type, ...attributes } = method;
   return { type, attributes };
 }
 
-export function deserializeAuthenticationMethod(
-  data: Record<string, unknown>,
-): AuthenticationMethod {
+export function deserializeAuthenticationMethod(data: Record<string, unknown>): AuthenticationMethod {
   if (!data || typeof data !== 'object') return data as unknown as AuthenticationMethod;
   const type = data.type as string;
   const attributes = (data.attributes as Record<string, unknown>) || {};

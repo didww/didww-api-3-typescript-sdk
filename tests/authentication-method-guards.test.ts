@@ -8,10 +8,7 @@ import {
   credentialsAndIpAuthenticationMethod,
   twilioAuthenticationMethod,
 } from '../src/nested/authentication-method.js';
-import type {
-  AuthenticationMethod,
-  GenericAuthenticationMethod,
-} from '../src/nested/authentication-method.js';
+import type { AuthenticationMethod, GenericAuthenticationMethod } from '../src/nested/authentication-method.js';
 
 describe('AuthenticationMethod type guards', () => {
   const ipOnly = ipOnlyAuthenticationMethod({ allowedSipIps: ['10.0.0.1/32'], techPrefix: '' });
