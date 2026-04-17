@@ -3,23 +3,26 @@ import type { Requirement } from './requirement.js';
 import type { Identity } from './identity.js';
 import type { Address } from './address.js';
 
-export interface RequirementValidation {
+export interface AddressRequirementValidation {
   id: string;
-  type: 'requirement_validations';
+  type: 'address_requirement_validations';
   requirement?: Requirement | ResourceRef;
   identity?: Identity | ResourceRef;
   address?: Address | ResourceRef;
 }
 
-export interface RequirementValidationWrite {
+export interface AddressRequirementValidationWrite {
   requirement?: ResourceRef;
   identity?: ResourceRef;
   address?: ResourceRef;
 }
 
-export const REQUIREMENT_VALIDATION_RESOURCE = defineResource<RequirementValidation, RequirementValidationWrite>()({
-  type: 'requirement_validations',
-  path: 'requirement_validations',
+export const ADDRESS_REQUIREMENT_VALIDATION_RESOURCE = defineResource<
+  AddressRequirementValidation,
+  AddressRequirementValidationWrite
+>()({
+  type: 'address_requirement_validations',
+  path: 'address_requirement_validations',
   writableKeys: ['requirement', 'identity', 'address'],
   relationshipKeys: ['requirement', 'identity', 'address'],
   operations: ['list', 'find', 'create', 'remove'],

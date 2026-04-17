@@ -4,15 +4,15 @@ import { DidwwApiError } from '../../src/errors.js';
 import { ref } from '../../src/resources/base.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
-describe('RequirementValidations', () => {
+describe('AddressRequirementValidations', () => {
   describeOperationEnforcement({
-    clientMethod: 'requirementValidations',
+    clientMethod: 'addressRequirementValidations',
     allowedOperations: ['list', 'find', 'create', 'remove'],
-    resourceType: 'requirement_validations',
+    resourceType: 'address_requirement_validations',
   });
-  it('creates a requirement validation', async () => {
-    const client = setupClient('requirement_validations/create.yaml');
-    const result = await client.requirementValidations().create({
+  it('creates an address requirement validation', async () => {
+    const client = setupClient('address_requirement_validations/create.yaml');
+    const result = await client.addressRequirementValidations().create({
       address: ref('addresses', 'd3414687-40f4-4346-a267-c2c65117d28c'),
       requirement: ref('requirements', 'aea92b24-a044-4864-9740-89d3e15b65c7'),
     });
@@ -20,9 +20,9 @@ describe('RequirementValidations', () => {
   });
 
   it('handles validation failure with 422', async () => {
-    const client = setupClient('requirement_validations/create_1.yaml');
+    const client = setupClient('address_requirement_validations/create_1.yaml');
     try {
-      await client.requirementValidations().create({
+      await client.addressRequirementValidations().create({
         identity: ref('identities', '5e9df058-50d2-4e34-b0d4-d1746b86f41a'),
         address: ref('addresses', 'd3414687-40f4-4346-a267-c2c65117d28c'),
         requirement: ref('requirements', '2efc3427-8ba6-4d50-875d-f2de4a068de8'),

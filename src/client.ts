@@ -33,7 +33,7 @@ import { ENCRYPTED_FILE_RESOURCE } from './resources/encrypted-file.js';
 import { ADDRESS_VERIFICATION_RESOURCE } from './resources/address-verification.js';
 import { PERMANENT_SUPPORTING_DOCUMENT_RESOURCE } from './resources/permanent-supporting-document.js';
 import { PROOF_RESOURCE } from './resources/proof.js';
-import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
+import { ADDRESS_REQUIREMENT_VALIDATION_RESOURCE } from './resources/address-requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
 
 const require = createRequire(import.meta.url);
@@ -314,8 +314,8 @@ export class DidwwClient implements HttpClient {
   proofs() {
     return createRepository(this, PROOF_RESOURCE);
   }
-  requirementValidations() {
-    return createRepository(this, REQUIREMENT_VALIDATION_RESOURCE);
+  addressRequirementValidations() {
+    return createRepository(this, ADDRESS_REQUIREMENT_VALIDATION_RESOURCE);
   }
   voiceOutTrunkRegenerateCredentials() {
     return createRepository(this, VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE);

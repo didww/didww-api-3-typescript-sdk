@@ -45,7 +45,10 @@ export type {
   PermanentSupportingDocumentWrite,
 } from './resources/permanent-supporting-document.js';
 export type { Proof, ProofWrite } from './resources/proof.js';
-export type { RequirementValidation, RequirementValidationWrite } from './resources/requirement-validation.js';
+export type {
+  AddressRequirementValidation,
+  AddressRequirementValidationWrite,
+} from './resources/address-requirement-validation.js';
 export type {
   VoiceOutTrunkRegenerateCredential,
   VoiceOutTrunkRegenerateCredentialWrite,
