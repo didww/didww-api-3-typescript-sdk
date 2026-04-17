@@ -41,6 +41,10 @@ export type { Identity, IdentityWrite } from './resources/identity.js';
 export type { EncryptedFile } from './resources/encrypted-file.js';
 export type { DidHistory } from './resources/did-history.js';
 export type { EmergencyRequirement } from './resources/emergency-requirement.js';
+export type {
+  EmergencyRequirementValidation,
+  EmergencyRequirementValidationWrite,
+} from './resources/emergency-requirement-validation.js';
 export type { AddressVerification, AddressVerificationWrite } from './resources/address-verification.js';
 export type {
   PermanentSupportingDocument,
