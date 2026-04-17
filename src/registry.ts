@@ -36,6 +36,7 @@ import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voic
 import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
 import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
 import { EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE } from './resources/emergency-requirement-validation.js';
+import { EMERGENCY_CALLING_SERVICE_RESOURCE } from './resources/emergency-calling-service.js';
 
 const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceConfig>([
   [COUNTRY_RESOURCE.type, COUNTRY_RESOURCE],
@@ -74,6 +75,7 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [DID_HISTORY_RESOURCE.type, DID_HISTORY_RESOURCE],
   [EMERGENCY_REQUIREMENT_RESOURCE.type, EMERGENCY_REQUIREMENT_RESOURCE],
   [EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE.type, EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE],
+  [EMERGENCY_CALLING_SERVICE_RESOURCE.type, EMERGENCY_CALLING_SERVICE_RESOURCE],
 ]);
 
 export function getResourceConfig(type: string): ResourceConfig | undefined {
