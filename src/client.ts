@@ -143,17 +143,15 @@ export class DidwwClient implements HttpClient {
     }
   }
 
-  async uploadEncryptedFiles(
+  async uploadEncryptedFile(
     fingerprint: string,
-    files: Array<{ data: Buffer; description?: string; filename?: string }>,
-  ): Promise<string[]> {
+    file: { data: Buffer; description?: string; filename?: string },
+  ): Promise<string> {
     const formData = new FormData();
     formData.append('encrypted_files[encryption_fingerprint]', fingerprint);
-    for (const file of files) {
-      formData.append('encrypted_files[items][][description]', file.description || '');
-      const blob = new Blob([file.data], { type: 'application/octet-stream' });
-      formData.append('encrypted_files[items][][file]', blob, file.filename || 'file.enc');
-    }
+    formData.append('encrypted_files[description]', file.description || '');
+    const blob = new Blob([file.data], { type: 'application/octet-stream' });
+    formData.append('encrypted_files[file]', blob, file.filename || 'file.enc');
     const url = `${this.baseUrl}/encrypted_files`;
     const response = await this._fetch(url, {
       method: 'POST',
@@ -165,10 +163,11 @@ export class DidwwClient implements HttpClient {
       throw new DidwwApiError(response.status, { errors: [{ detail: 'Upload failed' }] });
     }
     const result = (await response.json()) as Record<string, unknown>;
-    if (!Array.isArray(result.ids)) {
+    const data = result.data as Record<string, unknown> | undefined;
+    if (!data || typeof data.id !== 'string') {
       throw new DidwwClientError('Unexpected encrypted_files upload response');
     }
-    return result.ids as string[];
+    return data.id;
   }
 
   async downloadExport(url: string): Promise<Buffer> {

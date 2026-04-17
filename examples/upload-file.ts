@@ -32,10 +32,12 @@ async function main() {
   console.log(`Encrypted data size: ${encrypted.length} bytes`);
 
   // Upload
-  const ids = await client.uploadEncryptedFiles(fingerprint, [
-    { data: encrypted, description: 'Sample PDF document', filename: 'sample.pdf.enc' },
-  ]);
-  console.log('Uploaded file IDs:', ids);
+  const id = await client.uploadEncryptedFile(fingerprint, {
+    data: encrypted,
+    description: 'Sample PDF document',
+    filename: 'sample.pdf.enc',
+  });
+  console.log('Uploaded file ID:', id);
 
   // Verify the uploaded file
   const files = await client.encryptedFiles().list();
