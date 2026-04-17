@@ -32,6 +32,7 @@ export interface VoiceOutTrunk {
   authenticationMethod: AuthenticationMethod;
   defaultDid?: Did | ResourceRef;
   dids?: (Did | ResourceRef)[];
+  emergencyDids?: (Did | ResourceRef)[];
 }
 
 export interface VoiceOutTrunkWrite {
@@ -54,6 +55,7 @@ export interface VoiceOutTrunkWrite {
   authenticationMethod?: AuthenticationMethod;
   defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
+  emergencyDids?: ResourceRef[];
 }
 
 const WRITABLE_KEYS = [
@@ -76,13 +78,14 @@ const WRITABLE_KEYS = [
   'authenticationMethod',
   'defaultDid',
   'dids',
+  'emergencyDids',
 ] as const satisfies readonly (keyof VoiceOutTrunkWrite)[];
 
 export const VOICE_OUT_TRUNK_RESOURCE = defineResource<VoiceOutTrunk, VoiceOutTrunkWrite>()({
   type: 'voice_out_trunks',
   path: 'voice_out_trunks',
   writableKeys: WRITABLE_KEYS,
-  relationshipKeys: ['defaultDid', 'dids'],
+  relationshipKeys: ['defaultDid', 'dids', 'emergencyDids'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
   serializeCustom(data: VoiceOutTrunkWrite, _method: 'POST' | 'PATCH') {
     const result = filterWritableKeys(data, WRITABLE_KEYS);
