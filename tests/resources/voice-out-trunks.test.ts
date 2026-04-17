@@ -33,6 +33,7 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.thresholdReached).toBe(false);
     expect(result.data.thresholdAmount).toBe('200.0');
     expect(result.data.callbackUrl).toBeNull();
+    expect(result.data.emergencyEnableAll).toBe(false);
     // Polymorphic authentication_method
     const authMethod = result.data.authenticationMethod;
     expect(authMethod).toBeDefined();

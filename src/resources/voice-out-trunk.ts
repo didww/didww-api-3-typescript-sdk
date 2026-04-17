@@ -27,6 +27,7 @@ export interface VoiceOutTrunk {
   thresholdReached: boolean;
   createdAt: string;
   externalReferenceId: string | null;
+  emergencyEnableAll: boolean;
   authenticationMethod: AuthenticationMethod;
   defaultDid?: Did | ResourceRef;
   dids?: (Did | ResourceRef)[];
@@ -47,6 +48,7 @@ export interface VoiceOutTrunkWrite {
   rtpPing?: boolean;
   callbackUrl?: string | null;
   externalReferenceId?: string | null;
+  emergencyEnableAll?: boolean;
   authenticationMethod?: AuthenticationMethod;
   defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
@@ -67,6 +69,7 @@ const WRITABLE_KEYS = [
   'rtpPing',
   'callbackUrl',
   'externalReferenceId',
+  'emergencyEnableAll',
   'authenticationMethod',
   'defaultDid',
   'dids',
