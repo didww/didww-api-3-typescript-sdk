@@ -144,6 +144,16 @@ describe('Dids', () => {
       expect(result.data.id).toBe(DID_ID);
     });
 
+    it('unassigns emergency_calling_service from Did', async () => {
+      loadCassette('dids/update_unassign_ecs.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: '44957076-778a-4802-b60c-d22db0cda284',
+        emergencyCallingService: null,
+      });
+      expect(result.data.id).toBe('44957076-778a-4802-b60c-d22db0cda284');
+    });
+
     it('find with included has clean dirty state', async () => {
       loadCassette('dids/show_with_included_trunk.yaml');
       const client = createTestClient();
