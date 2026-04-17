@@ -10,7 +10,7 @@ export interface AddressVerification {
   callbackUrl: string | null;
   callbackMethod: CallbackMethod | null;
   status: AddressVerificationStatus;
-  rejectReasons: string | null;
+  rejectReasons: string[] | null;
   reference: string;
   createdAt: string;
   address?: Address | ResourceRef;
