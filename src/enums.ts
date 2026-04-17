@@ -58,6 +58,15 @@ export enum VoiceOutTrunkStatus {
   BLOCKED = 'blocked',
 }
 
+export enum EmergencyCallingServiceStatus {
+  ACTIVE = 'active',
+  CANCELED = 'canceled',
+  CHANGES_REQUIRED = 'changes required',
+  IN_PROCESS = 'in process',
+  NEW = 'new',
+  PENDING_UPDATE = 'pending update',
+}
+
 export enum CliFormat {
   RAW = 'raw',
   E164 = 'e164',

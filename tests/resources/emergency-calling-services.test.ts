@@ -5,6 +5,7 @@ import type { Address } from '../../src/resources/address.js';
 import type { EmergencyRequirement } from '../../src/resources/emergency-requirement.js';
 import type { EmergencyVerification } from '../../src/resources/emergency-verification.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
+import { EmergencyCallingServiceStatus } from '../../src/enums.js';
 
 describe('EmergencyCallingServices', () => {
   describeOperationEnforcement({
@@ -19,7 +20,7 @@ describe('EmergencyCallingServices', () => {
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('emergency_calling_services');
     expect(result.data[0].name).toBe('Emergency US');
-    expect(result.data[0].status).toBe('active');
+    expect(result.data[0].status).toBe(EmergencyCallingServiceStatus.ACTIVE);
     expect(result.data[0].reference).toBe('ECS-123456');
     expect(result.data[0].createdAt).toBe('2026-03-15T08:00:00.000Z');
   });
@@ -30,7 +31,7 @@ describe('EmergencyCallingServices', () => {
     expect(result.data.id).toBe('ecs-001');
     expect(result.data.type).toBe('emergency_calling_services');
     expect(result.data.name).toBe('Emergency US');
-    expect(result.data.status).toBe('active');
+    expect(result.data.status).toBe(EmergencyCallingServiceStatus.ACTIVE);
     expect(result.data.renewDate).toBe('2026-05-01T00:00:00.000Z');
   });
 

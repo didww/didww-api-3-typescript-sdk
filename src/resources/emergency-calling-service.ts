@@ -1,4 +1,5 @@
 import { defineResource, type ResourceRef } from './base.js';
+import type { EmergencyCallingServiceStatus } from '../enums.js';
 import type { Country } from './country.js';
 import type { DidGroupType } from './did-group-type.js';
 import type { Order } from './order.js';
@@ -14,8 +15,8 @@ export interface EmergencyCallingService {
   name: string;
   /** DIDWW-assigned human-readable reference (e.g. "ECS-0042"). */
   reference: string;
-  /** Current service status: "pending setup", "pending update", "active", "canceled". */
-  status: string;
+  /** Current service status. */
+  status: EmergencyCallingServiceStatus;
   /** When the service was activated; null while pending. */
   activatedAt: string | null;
   /** When the service was canceled; null while active/pending. */
