@@ -16,7 +16,7 @@ describe('AddressVerifications', () => {
     const result = await client.addressVerifications().list();
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
-    expect(first.status).toBe('Pending');
+    expect(first.status).toBe('pending');
     expect(first.dids).toBeDefined();
     expect(Array.isArray(first.dids)).toBe(true);
     expect(first.dids!.length).toBe(1);
@@ -32,7 +32,7 @@ describe('AddressVerifications', () => {
     const client = setupClient('address_verifications/show.yaml');
     const result = await client.addressVerifications().find('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.id).toBe('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
-    expect(result.data.status).toBe('Approved');
+    expect(result.data.status).toBe('approved');
     expect(result.data.rejectReasons).toBeNull();
   });
 
@@ -40,7 +40,7 @@ describe('AddressVerifications', () => {
     const client = setupClient('address_verifications/show_rejected.yaml');
     const result = await client.addressVerifications().find('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
     expect(result.data.id).toBe('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
-    expect(result.data.status).toBe('Rejected');
+    expect(result.data.status).toBe('rejected');
     expect(result.data.rejectReasons).toEqual(['Building/house/apartment number is missing']);
     expect(result.data.rejectComment).toBe('Please re-submit with a more recent utility bill.');
     expect(result.data.externalReferenceId).toBe('crm-verif-0001');
@@ -64,7 +64,7 @@ describe('AddressVerifications', () => {
       dids: [ref('dids', '9df99644-f1a5-4a3c-99a4-559d758eb96b')],
     });
     expect(result.data.id).toBeDefined();
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     const addr = result.data.address;
     expect(addr).toBeDefined();
     expect(isIncluded(addr!)).toBe(true);

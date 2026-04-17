@@ -46,7 +46,7 @@ describe('EmergencyVerifications', () => {
     const client = setupClient('emergency_verifications/create.yaml');
     const result = await client.emergencyVerifications().create({
       callbackUrl: 'https://example.com/emergency/hook',
-      callbackMethod: 'POST',
+      callbackMethod: 'post',
       externalReferenceId: 'ref-abc-123',
       emergencyCallingService: ref('emergency_calling_services', 'ecs-001'),
       address: ref('addresses', 'addr-001'),

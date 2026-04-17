@@ -14,7 +14,7 @@ describe('EmergencyRequirements', () => {
     const result = await client.emergencyRequirements().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('emergency_requirements');
-    expect(result.data[0].identityType).toBe('Personal');
+    expect(result.data[0].identityType).toBe('personal');
     expect(result.data[0].addressMandatoryFields).toBeInstanceOf(Array);
     expect(result.data[0].personalMandatoryFields).toBeInstanceOf(Array);
     expect(result.data[0].businessMandatoryFields).toBeInstanceOf(Array);

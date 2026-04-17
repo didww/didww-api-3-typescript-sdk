@@ -39,7 +39,7 @@ describe('Identities', () => {
     const result = await client.identities().create({
       firstName: 'John',
       lastName: 'Doe',
-      identityType: 'Business',
+      identityType: 'business',
       country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),
     });
     expect(result.data.id).toBeDefined();
@@ -55,11 +55,11 @@ describe('Identities', () => {
     const result = await client.identities().create({
       firstName: 'John',
       lastName: 'Doe',
-      identityType: 'Personal',
+      identityType: 'personal',
       country: ref('countries', '7eda11bb-0e66-4146-98e7-57a5281f56c8'),
     });
     expect(result.data.id).toBeDefined();
-    expect(result.data.identityType).toBe('Personal');
+    expect(result.data.identityType).toBe('personal');
     expect(result.data.companyName).toBeNull();
   });
 
@@ -75,7 +75,7 @@ describe('Identities', () => {
     expect(result.data.firstName).toBe('Jake');
     expect(result.data.lastName).toBe('Johnson');
     expect(result.data.companyName).toBe('Some Company Limited');
-    expect(result.data.identityType).toBe('Business');
+    expect(result.data.identityType).toBe('business');
   });
 
   it('deletes an identity', async () => {

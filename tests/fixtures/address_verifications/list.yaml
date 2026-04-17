@@ -15,7 +15,7 @@ interactions:
       string: "{\n  \"data\": [\n    {\n      \"id\": \"aaf2180a-3f2b-4427-888f-3d00f872014e\"\
         ,\n      \"type\": \"address_verifications\",\n      \"attributes\": {\n \
         \       \"service_description\": null,\n        \"callback_url\": \"http://example.com\"\
-        ,\n        \"callback_method\": \"GET\",\n        \"status\": \"Pending\"\
+        ,\n        \"callback_method\": \"get\",\n        \"status\": \"pending\"\
         ,\n        \"reject_reasons\": null,\n        \"created_at\": \"2021-04-01T14:29:11.790Z\"\
         \n      },\n      \"relationships\": {\n        \"dids\": {\n          \"\
         links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/address_verifications/aaf2180a-3f2b-4427-888f-3d00f872014e/relationships/dids\"\

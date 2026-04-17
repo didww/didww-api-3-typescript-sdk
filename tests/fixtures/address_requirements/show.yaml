@@ -14,8 +14,8 @@ interactions:
     body:
       string: "{\n  \"data\": {\n    \"id\": \"25d12afe-1ec6-4fe3-9621-b250dd1fb959\"\
         ,\n    \"type\": \"address_requirements\",\n    \"attributes\": {\n      \"identity_type\"\
-        : \"Any\",\n      \"personal_area_level\": \"WorldWide\",\n      \"business_area_level\"\
-        : \"WorldWide\",\n      \"address_area_level\": \"WorldWide\",\n      \"personal_proof_qty\"\
+        : \"Any\",\n      \"personal_area_level\": \"world_wide\",\n      \"business_area_level\"\
+        : \"world_wide\",\n      \"address_area_level\": \"world_wide\",\n      \"personal_proof_qty\"\
         : 1,\n      \"business_proof_qty\": 1,\n      \"address_proof_qty\": 1,\n\
         \      \"personal_mandatory_fields\": [\n        \"Birth Date\",\n       \
         \ \"Country\",\n        \"Personal Tax ID\"\n      ],\n      \"business_mandatory_fields\"\

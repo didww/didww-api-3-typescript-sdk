@@ -70,7 +70,7 @@ describe('Dids', () => {
     const av = result.data.addressVerification;
     expect(av).toBeDefined();
     expect(isIncluded(av!)).toBe(true);
-    expect((av as AddressVerification).status).toBe('Approved');
+    expect((av as AddressVerification).status).toBe('approved');
     expect((av as AddressVerification).reference).toBe('AHB-291174');
     const dg = result.data.didGroup;
     expect(dg).toBeDefined();

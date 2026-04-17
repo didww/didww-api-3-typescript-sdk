@@ -38,7 +38,7 @@ describe('Serialization - excludes read-only fields', () => {
       allowBackOrdering: true,
       items: [],
       amount: '100.00', // read-only
-      status: 'Completed', // read-only
+      status: 'completed', // read-only
       reference: 'REF', // read-only
     };
     const result = serializeForCreate(ORDER_RESOURCE, data);
@@ -53,7 +53,7 @@ describe('Serialization - excludes read-only fields', () => {
     const data = {
       exportType: 'cdr_in',
       filters: {},
-      status: 'Completed', // read-only
+      status: 'completed', // read-only
       url: 'http://...', // read-only
       createdAt: '2024', // read-only
     };
@@ -97,7 +97,7 @@ describe('Serialization - excludes read-only fields', () => {
   it('AddressVerification excludes read-only fields', () => {
     const data = {
       serviceDescription: 'test',
-      status: 'Pending', // read-only
+      status: 'pending', // read-only
       rejectReasons: [], // read-only
       reference: 'REF', // read-only
     };

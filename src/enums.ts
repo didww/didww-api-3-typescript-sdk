@@ -1,14 +1,14 @@
 // String enums
 
 export enum CallbackMethod {
-  POST = 'POST',
-  GET = 'GET',
+  POST = 'post',
+  GET = 'get',
 }
 
 export enum AddressVerificationStatus {
-  PENDING = 'Pending',
-  APPROVED = 'Approved',
-  REJECTED = 'Rejected',
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
 }
 
 export enum ExportType {
@@ -17,21 +17,21 @@ export enum ExportType {
 }
 
 export enum ExportStatus {
-  PENDING = 'Pending',
-  PROCESSING = 'Processing',
-  COMPLETED = 'Completed',
+  PENDING = 'pending',
+  PROCESSING = 'processing',
+  COMPLETED = 'completed',
 }
 
 export enum IdentityType {
-  PERSONAL = 'Personal',
-  BUSINESS = 'Business',
-  ANY = 'Any',
+  PERSONAL = 'personal',
+  BUSINESS = 'business',
+  ANY = 'any',
 }
 
 export enum OrderStatus {
-  PENDING = 'Pending',
-  CANCELED = 'Canceled',
-  COMPLETED = 'Completed',
+  PENDING = 'pending',
+  CANCELED = 'canceled',
+  COMPLETED = 'completed',
 }
 
 export enum OnCliMismatchAction {
@@ -67,10 +67,10 @@ export enum EmergencyVerificationStatus {
 export enum EmergencyCallingServiceStatus {
   ACTIVE = 'active',
   CANCELED = 'canceled',
-  CHANGES_REQUIRED = 'changes required',
-  IN_PROCESS = 'in process',
+  CHANGES_REQUIRED = 'changes_required',
+  IN_PROCESS = 'in_process',
   NEW = 'new',
-  PENDING_UPDATE = 'pending update',
+  PENDING_UPDATE = 'pending_update',
 }
 
 export enum CliFormat {
@@ -80,10 +80,10 @@ export enum CliFormat {
 }
 
 export enum AreaLevel {
-  WORLDWIDE = 'WorldWide',
-  COUNTRY = 'Country',
-  AREA = 'Area',
-  CITY = 'City',
+  WORLDWIDE = 'world_wide',
+  COUNTRY = 'country',
+  AREA = 'area',
+  CITY = 'city',
 }
 
 export enum Feature {

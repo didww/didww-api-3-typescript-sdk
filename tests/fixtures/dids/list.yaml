@@ -67,7 +67,7 @@ interactions:
         "shared_capacity_group": {"links": {"self": "https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/relationships/shared_capacity_group",
         "related": "https://sandbox-api.didww.com/v3/dids/a79c8633-60d6-4640-9a72-680d59cb44ee/shared_capacity_group"}}}}],
         "included": [{"id": "11b3fba2-96e2-452e-bed8-5124ed351af3", "type": "orders",
-        "attributes": {"amount": "0.37", "status": "Completed", "created_at": "2018-12-27T09:59:54.892Z",
+        "attributes": {"amount": "0.37", "status": "completed", "created_at": "2018-12-27T09:59:54.892Z",
         "description": "DID", "reference": "TZO-560180", "items": [{"type": "did_order_items",
         "attributes": {"qty": 1, "nrc": "0.0", "mrc": "0.19", "prorated_mrc": false,
         "billed_from": "2018-12-27", "billed_to": "2019-01-26", "setup_price": "0.0",

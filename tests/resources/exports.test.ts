@@ -22,7 +22,7 @@ describe('Exports', () => {
     const client = setupClient('exports/show.yaml');
     const result = await client.exports().find('da15f006-5da4-45ca-b0df-735baeadf423');
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Completed');
+    expect(result.data.status).toBe('completed');
     expect(result.data.exportType).toBe('cdr_in');
   });
 
@@ -33,7 +33,7 @@ describe('Exports', () => {
       filters: { didNumber: '1234556789', from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
   });
 
   it('updates external_reference_id on an export', async () => {
@@ -53,7 +53,7 @@ describe('Exports', () => {
       filters: { from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.exportType).toBe('cdr_out');
   });
 

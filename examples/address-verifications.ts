@@ -38,7 +38,7 @@ async function main() {
         .map(d => (d as Did).number);
       console.log(`  DIDs: ${numbers.join(', ')}`);
     }
-    if (av.status === 'Rejected') {
+    if (av.status === 'rejected') {
       if (av.rejectReasons?.length) console.log(`  Reject reasons: ${av.rejectReasons.join(', ')}`);
       if (av.rejectComment) console.log(`  Reject comment: ${av.rejectComment}`);
     }
@@ -47,7 +47,7 @@ async function main() {
   // Filter: only rejected verifications
   console.log('\n=== Rejected verifications ===');
   const rejected = await client.addressVerifications().list({
-    filter: { status: 'Rejected' },
+    filter: { status: 'rejected' },
   });
   console.log(`Found ${rejected.data.length} rejected verifications`);
   for (const av of rejected.data.slice(0, 3)) {

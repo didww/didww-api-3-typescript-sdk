@@ -14,8 +14,8 @@ interactions:
     body:
       string: "{\n  \"data\": [\n    {\n      \"id\": \"b6c80acb-3952-4d53-9e62-fe2348c0636b\"\
         ,\n      \"type\": \"address_requirements\",\n      \"attributes\": {\n        \"\
-        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
-        \        \"business_area_level\": \"WorldWide\",\n        \"address_area_level\"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"country\",\n\
+        \        \"business_area_level\": \"world_wide\",\n        \"address_area_level\"\
         : \"Area\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
         : 2,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
         : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
@@ -50,8 +50,8 @@ interactions:
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/b6c80acb-3952-4d53-9e62-fe2348c0636b/address_proof_types\"\
         \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"51b293af-a496-4bf2-9c68-5221b3b0dc1e\"\
         ,\n      \"type\": \"address_requirements\",\n      \"attributes\": {\n        \"\
-        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
-        \        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"country\",\n\
+        \        \"business_area_level\": \"country\",\n        \"address_area_level\"\
         : \"Country\",\n        \"personal_proof_qty\": 2,\n        \"business_proof_qty\"\
         : 1,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
         : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
@@ -86,9 +86,9 @@ interactions:
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/51b293af-a496-4bf2-9c68-5221b3b0dc1e/address_proof_types\"\
         \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"f7c2a9a4-a40e-4f22-98ff-0f53c86052ac\"\
         ,\n      \"type\": \"address_requirements\",\n      \"attributes\": {\n        \"\
-        identity_type\": \"Any\",\n        \"personal_area_level\": \"WorldWide\"\
-        ,\n        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
-        : \"WorldWide\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"world_wide\"\
+        ,\n        \"business_area_level\": \"country\",\n        \"address_area_level\"\
+        : \"world_wide\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
         : 1,\n        \"address_proof_qty\": 1,\n        \"personal_mandatory_fields\"\
         : null,\n        \"business_mandatory_fields\": [\n          \"Country\"\n\
         \        ],\n        \"service_description_required\": false,\n        \"\
@@ -122,8 +122,8 @@ interactions:
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/f7c2a9a4-a40e-4f22-98ff-0f53c86052ac/address_proof_types\"\
         \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"edb71cff-d5e8-44ff-ba36-6f758066c175\"\
         ,\n      \"type\": \"address_requirements\",\n      \"attributes\": {\n        \"\
-        identity_type\": \"Any\",\n        \"personal_area_level\": \"Country\",\n\
-        \        \"business_area_level\": \"Country\",\n        \"address_area_level\"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"country\",\n\
+        \        \"business_area_level\": \"country\",\n        \"address_area_level\"\
         : \"Country\",\n        \"personal_proof_qty\": 1,\n        \"business_proof_qty\"\
         : 1,\n        \"address_proof_qty\": 0,\n        \"personal_mandatory_fields\"\
         : [\n          \"Country\"\n        ],\n        \"business_mandatory_fields\"\
@@ -158,9 +158,9 @@ interactions:
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/edb71cff-d5e8-44ff-ba36-6f758066c175/address_proof_types\"\
         \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"90b72a1a-1ebd-4771-b818-f7123f8ff7ec\"\
         ,\n      \"type\": \"address_requirements\",\n      \"attributes\": {\n        \"\
-        identity_type\": \"Any\",\n        \"personal_area_level\": \"WorldWide\"\
-        ,\n        \"business_area_level\": \"WorldWide\",\n        \"address_area_level\"\
-        : \"WorldWide\",\n        \"personal_proof_qty\": 0,\n        \"business_proof_qty\"\
+        identity_type\": \"Any\",\n        \"personal_area_level\": \"world_wide\"\
+        ,\n        \"business_area_level\": \"world_wide\",\n        \"address_area_level\"\
+        : \"world_wide\",\n        \"personal_proof_qty\": 0,\n        \"business_proof_qty\"\
         : 0,\n        \"address_proof_qty\": 0,\n        \"personal_mandatory_fields\"\
         : null,\n        \"business_mandatory_fields\": null,\n        \"service_description_required\"\
         : false,\n        \"restriction_message\": \"restriction_message\"\n     \
