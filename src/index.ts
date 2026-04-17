@@ -34,7 +34,7 @@ export type { VoiceOutTrunk, VoiceOutTrunkWrite } from './resources/voice-out-tr
 export type { SharedCapacityGroup, SharedCapacityGroupWrite } from './resources/shared-capacity-group.js';
 export type { Did, DidWrite } from './resources/did.js';
 export type { Order, OrderWrite } from './resources/order.js';
-export type { Export, ExportWrite } from './resources/export.js';
+export type { Export, ExportWrite, ExportFilters } from './resources/export.js';
 export type { DidReservation, DidReservationWrite } from './resources/did-reservation.js';
 export type { Address, AddressWrite } from './resources/address.js';
 export type { Identity, IdentityWrite } from './resources/identity.js';
