@@ -11,8 +11,10 @@ export interface AddressVerification {
   callbackMethod: CallbackMethod | null;
   status: AddressVerificationStatus;
   rejectReasons: string[] | null;
+  rejectComment: string | null;
   reference: string;
   createdAt: string;
+  externalReferenceId: string | null;
   address?: Address | ResourceRef;
   dids?: (Did | ResourceRef)[];
 }

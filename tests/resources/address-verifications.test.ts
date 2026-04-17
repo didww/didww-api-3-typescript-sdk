@@ -42,6 +42,8 @@ describe('AddressVerifications', () => {
     expect(result.data.id).toBe('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
     expect(result.data.status).toBe('Rejected');
     expect(result.data.rejectReasons).toEqual(['Building/house/apartment number is missing']);
+    expect(result.data.rejectComment).toBe('Please re-submit with a more recent utility bill.');
+    expect(result.data.externalReferenceId).toBe('crm-verif-0001');
   });
 
   it('creates an address verification', async () => {
