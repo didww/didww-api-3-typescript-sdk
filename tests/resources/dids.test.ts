@@ -27,6 +27,7 @@ describe('Dids', () => {
     expect(first.order).toBeDefined();
     expect(isIncluded(first.order!)).toBe(true);
     expect((first.order as Order).reference).toBe('TZO-560180');
+    expect(first.emergencyEnabled).toBe(false);
   });
 
   it('finds a DID', async () => {

@@ -22,6 +22,7 @@ export interface Did {
   billingCyclesCount: number;
   createdAt: string;
   expiresAt: string | null;
+  emergencyEnabled: boolean;
   order?: Order | ResourceRef;
   didGroup?: DidGroup | ResourceRef;
   voiceInTrunk?: VoiceInTrunk | ResourceRef | null;
