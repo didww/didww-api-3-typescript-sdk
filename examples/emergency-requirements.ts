@@ -9,8 +9,6 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-requirements.ts
  */
 import { DidwwClient, Environment } from '../src/index.js';
-import type { Country } from '../src/resources/country.js';
-import type { DidGroupType } from '../src/resources/did-group-type.js';
 import { isIncluded } from '../src/resources/base.js';
 
 const client = new DidwwClient({
@@ -28,10 +26,10 @@ async function main() {
   for (const req of requirements.data.slice(0, 5)) {
     console.log(`\nRequirement: ${req.id}`);
     if (req.country && isIncluded(req.country)) {
-      console.log(`  Country: ${(req.country as Country).name}`);
+      console.log(`  Country: ${req.country.name}`);
     }
     if (req.didGroupType && isIncluded(req.didGroupType)) {
-      console.log(`  DID Group Type: ${(req.didGroupType as DidGroupType).name}`);
+      console.log(`  DID Group Type: ${req.didGroupType.name}`);
     }
     console.log(`  Identity type required: ${req.identityType}`);
     console.log(`  Address area level: ${req.addressAreaLevel}`);
@@ -46,7 +44,8 @@ async function main() {
   const firstReq = requirements.data[0];
   if (firstReq?.country) {
     const countryId = firstReq.country.id;
-    const countryName = isIncluded(firstReq.country) ? (firstReq.country as Country).name : countryId;
+    const countryRef = firstReq.country;
+    const countryName = isIncluded(countryRef) ? countryRef.name : countryId;
     console.log(`\n=== Requirements for country ${countryName} ===`);
     const perCountry = await client.emergencyRequirements().list({
       filter: { 'country.id': countryId },
@@ -55,4 +54,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();

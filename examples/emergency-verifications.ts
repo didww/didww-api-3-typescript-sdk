@@ -10,6 +10,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-verifications.ts
  */
 import { DidwwClient, Environment } from '../src/index.js';
+import type { EmergencyVerification } from '../src/resources/emergency-verification.js';
 import type { Did } from '../src/resources/did.js';
 import { isIncluded } from '../src/resources/base.js';
 
@@ -17,6 +18,25 @@ const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
   environment: Environment.SANDBOX,
 });
+
+function printVerification(ev: EmergencyVerification) {
+  console.log(`\nVerification: ${ev.id}`);
+  console.log(`  Reference: ${ev.reference}`);
+  console.log(`  Status: ${ev.status}`);
+  if (ev.externalReferenceId) console.log(`  External Reference: ${ev.externalReferenceId}`);
+  if (ev.address) console.log(`  Address: ${ev.address.id}`);
+  if (ev.emergencyCallingService) console.log(`  Emergency Calling Service: ${ev.emergencyCallingService.id}`);
+  if (ev.dids && ev.dids.length > 0) {
+    const numbers = ev.dids
+      .filter((d): d is Did => isIncluded(d))
+      .map(d => d.number);
+    console.log(`  DIDs: ${numbers.join(', ')}`);
+  }
+  if (ev.status === 'rejected') {
+    if (ev.rejectReasons?.length) console.log(`  Reject reasons: ${ev.rejectReasons.join(', ')}`);
+    if (ev.rejectComment) console.log(`  Reject comment: ${ev.rejectComment}`);
+  }
+}
 
 async function main() {
   // List existing verifications
@@ -27,22 +47,7 @@ async function main() {
   console.log(`Found ${verifications.data.length} emergency verifications`);
 
   for (const ev of verifications.data.slice(0, 5)) {
-    console.log(`\nVerification: ${ev.id}`);
-    console.log(`  Reference: ${ev.reference}`);
-    console.log(`  Status: ${ev.status}`);
-    if (ev.externalReferenceId) console.log(`  External Reference: ${ev.externalReferenceId}`);
-    if (ev.address) console.log(`  Address: ${ev.address.id}`);
-    if (ev.emergencyCallingService) console.log(`  Emergency Calling Service: ${ev.emergencyCallingService.id}`);
-    if (ev.dids && ev.dids.length > 0) {
-      const numbers = ev.dids
-        .filter(d => isIncluded(d))
-        .map(d => (d as Did).number);
-      console.log(`  DIDs: ${numbers.join(', ')}`);
-    }
-    if (ev.status === 'rejected') {
-      if (ev.rejectReasons?.length) console.log(`  Reject reasons: ${ev.rejectReasons.join(', ')}`);
-      if (ev.rejectComment) console.log(`  Reject comment: ${ev.rejectComment}`);
-    }
+    printVerification(ev);
   }
 
   // Filter by status
@@ -64,4 +69,4 @@ async function main() {
   // console.log(`Created verification ${verification.data.id} (status: ${verification.data.status})`);
 }
 
-main().catch(console.error);
+await main();

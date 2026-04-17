@@ -10,6 +10,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/address-verifications.ts
  */
 import { DidwwClient, Environment } from '../src/index.js';
+import type { AddressVerification } from '../src/resources/address-verification.js';
 import type { Did } from '../src/resources/did.js';
 import { isIncluded } from '../src/resources/base.js';
 
@@ -17,6 +18,25 @@ const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
   environment: Environment.SANDBOX,
 });
+
+function printVerification(av: AddressVerification) {
+  console.log(`\nVerification: ${av.id}`);
+  console.log(`  Reference: ${av.reference}`);
+  console.log(`  Status: ${av.status}`);
+  if (av.externalReferenceId) console.log(`  External Reference: ${av.externalReferenceId}`);
+  if (av.serviceDescription) console.log(`  Service description: ${av.serviceDescription}`);
+  if (av.address) console.log(`  Address: ${av.address.id}`);
+  if (av.dids && av.dids.length > 0) {
+    const numbers = av.dids
+      .filter((d): d is Did => isIncluded(d))
+      .map(d => d.number);
+    console.log(`  DIDs: ${numbers.join(', ')}`);
+  }
+  if (av.status === 'rejected') {
+    if (av.rejectReasons?.length) console.log(`  Reject reasons: ${av.rejectReasons.join(', ')}`);
+    if (av.rejectComment) console.log(`  Reject comment: ${av.rejectComment}`);
+  }
+}
 
 async function main() {
   console.log('=== Address Verifications ===');
@@ -26,22 +46,7 @@ async function main() {
   console.log(`Found ${verifications.data.length} address verifications`);
 
   for (const av of verifications.data.slice(0, 5)) {
-    console.log(`\nVerification: ${av.id}`);
-    console.log(`  Reference: ${av.reference}`);
-    console.log(`  Status: ${av.status}`);
-    if (av.externalReferenceId) console.log(`  External Reference: ${av.externalReferenceId}`);
-    if (av.serviceDescription) console.log(`  Service description: ${av.serviceDescription}`);
-    if (av.address) console.log(`  Address: ${av.address.id}`);
-    if (av.dids && av.dids.length > 0) {
-      const numbers = av.dids
-        .filter(d => isIncluded(d))
-        .map(d => (d as Did).number);
-      console.log(`  DIDs: ${numbers.join(', ')}`);
-    }
-    if (av.status === 'rejected') {
-      if (av.rejectReasons?.length) console.log(`  Reject reasons: ${av.rejectReasons.join(', ')}`);
-      if (av.rejectComment) console.log(`  Reject comment: ${av.rejectComment}`);
-    }
+    printVerification(av);
   }
 
   // Filter: only rejected verifications
@@ -55,4 +60,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();

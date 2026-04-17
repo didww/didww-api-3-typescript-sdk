@@ -12,12 +12,39 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/exports.ts
  */
 import { DidwwClient, Environment, ExportType } from '../src/index.js';
+import type { Export } from '../src/resources/export.js';
 import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
   environment: Environment.SANDBOX,
 });
+
+function printExport(exp: Export) {
+  console.log(`Export: ${exp.id}`);
+  console.log(`  Type: ${exp.exportType}`);
+  console.log(`  Status: ${exp.status}`);
+  console.log(`  Created: ${exp.createdAt}`);
+  if (exp.url) console.log(`  URL: ${exp.url}`);
+  if (exp.callbackUrl) console.log(`  Callback URL: ${exp.callbackUrl}`);
+  if (exp.externalReferenceId) console.log(`  External Reference: ${exp.externalReferenceId}`);
+  console.log('');
+}
+
+function printExportDetails(exp: Export) {
+  console.log(`Export: ${exp.id}`);
+  console.log(`  Type: ${exp.exportType}`);
+  console.log(`  Status: ${exp.status}`);
+  console.log(`  Created: ${exp.createdAt}`);
+  if (exp.externalReferenceId) {
+    console.log(`  External Reference: ${exp.externalReferenceId}`);
+  }
+  if (exp.filters) {
+    console.log('  Filters:');
+    if (exp.filters.from) console.log(`    From (inclusive): ${exp.filters.from}`);
+    if (exp.filters.to) console.log(`    To (exclusive):   ${exp.filters.to}`);
+  }
+}
 
 async function main() {
   // List existing exports
@@ -26,14 +53,7 @@ async function main() {
   console.log(`Found ${exports.data.length} exports`);
 
   for (const exp of exports.data.slice(0, 5)) {
-    console.log(`Export: ${exp.id}`);
-    console.log(`  Type: ${exp.exportType}`);
-    console.log(`  Status: ${exp.status}`);
-    console.log(`  Created: ${exp.createdAt}`);
-    if (exp.url) console.log(`  URL: ${exp.url}`);
-    if (exp.callbackUrl) console.log(`  Callback URL: ${exp.callbackUrl}`);
-    if (exp.externalReferenceId) console.log(`  External Reference: ${exp.externalReferenceId}`);
-    console.log('');
+    printExport(exp);
   }
 
   // Create a CDR-In export for yesterday (from is inclusive, to is exclusive)
@@ -59,19 +79,8 @@ async function main() {
   if (exports.data.length > 0) {
     console.log('\n=== Specific Export Details ===');
     const specific = await client.exports().find(exports.data[0].id);
-    console.log(`Export: ${specific.data.id}`);
-    console.log(`  Type: ${specific.data.exportType}`);
-    console.log(`  Status: ${specific.data.status}`);
-    console.log(`  Created: ${specific.data.createdAt}`);
-    if (specific.data.externalReferenceId) {
-      console.log(`  External Reference: ${specific.data.externalReferenceId}`);
-    }
-    if (specific.data.filters) {
-      console.log('  Filters:');
-      if (specific.data.filters.from) console.log(`    From (inclusive): ${specific.data.filters.from}`);
-      if (specific.data.filters.to) console.log(`    To (exclusive):   ${specific.data.filters.to}`);
-    }
+    printExportDetails(specific.data);
   }
 }
 
-main().catch(console.error);
+await main();

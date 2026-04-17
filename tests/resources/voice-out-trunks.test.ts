@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Did } from '../../src/resources/did.js';
-import type { CredentialsAndIpAuthenticationMethod } from '../../src/nested/authentication-method.js';
+import type { CredentialsAndIpAuthenticationMethod, AuthenticationMethod } from '../../src/nested/authentication-method.js';
+import type { OnCliMismatchAction } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceOutTrunks', () => {
@@ -56,7 +57,7 @@ describe('VoiceOutTrunks', () => {
     const client = setupClient('voice_out_trunks/create.yaml');
     const result = await client.voiceOutTrunks().create({
       name: 'ts-test',
-      onCliMismatchAction: 1 as unknown as import('../../src/enums.js').OnCliMismatchAction,
+      onCliMismatchAction: 1 as unknown as OnCliMismatchAction,
       authenticationMethod: {
         type: 'ip_only',
         allowedSipIps: ['203.0.113.0/24'],
@@ -98,7 +99,7 @@ describe('VoiceOutTrunks', () => {
         type: 'credentials_and_ip',
         allowedSipIps: ['192.0.2.10/32'],
         techPrefix: '99',
-      } as import('../../src/nested/authentication-method.js').AuthenticationMethod,
+      } as AuthenticationMethod,
     });
     expect(result.data.id).toBe('425ce763-a3a9-49b4-af5b-ada1a65c8864');
     const authMethod = result.data.authenticationMethod;

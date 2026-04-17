@@ -12,9 +12,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/orders-emergency.ts
  */
 import { DidwwClient, Environment, OrderItemType } from '../src/index.js';
-import type { EmergencyOrderItem } from '../src/nested/order-item.js';
 import { isIncluded } from '../src/resources/base.js';
-import type { Order } from '../src/resources/order.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -37,15 +35,14 @@ async function main() {
 
     order.items.forEach((item, i) => {
       if (item.type === OrderItemType.EMERGENCY) {
-        const ei = item as EmergencyOrderItem;
         console.log(`  Item #${i + 1} (emergency_order_items):`);
-        console.log(`    Qty: ${ei.qty}`);
-        console.log(`    Emergency Calling Service ID: ${ei.emergencyCallingServiceId}`);
-        console.log(`    NRC: ${ei.nrc}`);
-        console.log(`    MRC: ${ei.mrc}`);
-        console.log(`    Prorated MRC: ${ei.proratedMrc}`);
-        console.log(`    Billed From: ${ei.billedFrom}`);
-        console.log(`    Billed To:   ${ei.billedTo}`);
+        console.log(`    Qty: ${item.qty}`);
+        console.log(`    Emergency Calling Service ID: ${item.emergencyCallingServiceId}`);
+        console.log(`    NRC: ${item.nrc}`);
+        console.log(`    MRC: ${item.mrc}`);
+        console.log(`    Prorated MRC: ${item.proratedMrc}`);
+        console.log(`    Billed From: ${item.billedFrom}`);
+        console.log(`    Billed To:   ${item.billedTo}`);
       }
     });
   }
@@ -59,8 +56,7 @@ async function main() {
   if (svc) {
     console.log(`ECS ${svc.id} (${svc.name})`);
     if (svc.order && isIncluded(svc.order)) {
-      const order = svc.order as Order;
-      console.log(`  -> Order ${order.id} -- status: ${order.status}, amount: ${order.amount}`);
+      console.log(`  -> Order ${svc.order.id} -- status: ${svc.order.status}, amount: ${svc.order.amount}`);
     } else {
       console.log('  -> No order linked yet');
     }
@@ -69,4 +65,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();

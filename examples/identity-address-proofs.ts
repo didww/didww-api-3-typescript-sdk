@@ -1,5 +1,4 @@
 import { DidwwClient, Environment, IdentityType, ref, isIncluded } from '../src/index.js';
-import type { Country } from '../src/resources/country.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -20,10 +19,10 @@ async function main() {
     console.log(`  Phone: ${ident.phoneNumber}`);
     console.log(`  Type: ${ident.identityType}`);
     if (ident.country && isIncluded(ident.country)) {
-      console.log(`  Country: ${(ident.country as Country).name}`);
+      console.log(`  Country: ${ident.country.name}`);
     }
     if (ident.birthCountry && isIncluded(ident.birthCountry)) {
-      console.log(`  Birth Country: ${(ident.birthCountry as Country).name}`); // 2026-04-16
+      console.log(`  Birth Country: ${ident.birthCountry.name}`); // 2026-04-16
     }
     console.log(`  Birth Date: ${ident.birthDate}`);
     console.log(`  Verified: ${ident.verified}`);

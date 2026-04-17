@@ -54,4 +54,4 @@ async function main() {
   console.log(`Found ${recent.data.length} events in the last 7 days`);
 }
 
-main().catch(console.error);
+await main();

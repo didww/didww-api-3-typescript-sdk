@@ -10,8 +10,6 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-calling-services.ts
  */
 import { DidwwClient, Environment } from '../src/index.js';
-import type { Country } from '../src/resources/country.js';
-import type { DidGroupType } from '../src/resources/did-group-type.js';
 import type { Did } from '../src/resources/did.js';
 import { isIncluded } from '../src/resources/base.js';
 
@@ -33,18 +31,18 @@ async function main() {
     console.log(`  Reference: ${svc.reference}`);
     console.log(`  Status: ${svc.status}`);
     if (svc.country && isIncluded(svc.country)) {
-      console.log(`  Country: ${(svc.country as Country).name}`);
+      console.log(`  Country: ${svc.country.name}`);
     }
     if (svc.didGroupType && isIncluded(svc.didGroupType)) {
-      console.log(`  DID Group Type: ${(svc.didGroupType as DidGroupType).name}`);
+      console.log(`  DID Group Type: ${svc.didGroupType.name}`);
     }
     console.log(`  Activated: ${svc.activatedAt}`);
     if (svc.canceledAt) console.log(`  Canceled: ${svc.canceledAt}`);
     if (svc.renewDate) console.log(`  Renews: ${svc.renewDate}`);
     if (svc.dids && svc.dids.length > 0) {
       const numbers = svc.dids
-        .filter(d => isIncluded(d))
-        .map(d => (d as Did).number);
+        .filter((d): d is Did => isIncluded(d))
+        .map(d => d.number);
       console.log(`  Attached DIDs: ${numbers.join(', ')}`);
     }
   }
@@ -66,4 +64,4 @@ async function main() {
   // }
 }
 
-main().catch(console.error);
+await main();
