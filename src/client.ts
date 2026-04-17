@@ -36,6 +36,7 @@ import { PROOF_RESOURCE } from './resources/proof.js';
 import { ADDRESS_REQUIREMENT_VALIDATION_RESOURCE } from './resources/address-requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
 import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
+import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json') as { version: string };
@@ -322,5 +323,8 @@ export class DidwwClient implements HttpClient {
   }
   didHistory() {
     return createRepository(this, DID_HISTORY_RESOURCE);
+  }
+  emergencyRequirements() {
+    return createRepository(this, EMERGENCY_REQUIREMENT_RESOURCE);
   }
 }
