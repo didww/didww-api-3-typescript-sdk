@@ -15,6 +15,7 @@ describe('Exports', () => {
     const client = setupClient('exports/list.yaml');
     const result = await client.exports().list();
     expect(result.data.length).toBeGreaterThan(0);
+    expect(result.data[0].externalReferenceId).toBe('exp-ref-001');
   });
 
   it('finds an export', async () => {
