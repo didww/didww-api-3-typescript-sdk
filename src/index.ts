@@ -105,5 +105,29 @@ export type {
 // Encryption
 export { Encrypt, encryptWithKeys, calculateFingerprint } from './encrypt.js';
 
+// Status helpers
+export {
+  isActive,
+  isBlocked,
+  isExportPending,
+  isExportProcessing,
+  isExportCompleted,
+  isEcsActive,
+  isEcsCanceled,
+  isEcsChangesRequired,
+  isEcsInProcess,
+  isEcsNew,
+  isEcsPendingUpdate,
+  isAddressVerificationPending,
+  isAddressVerificationApproved,
+  isAddressVerificationRejected,
+  isEmergencyVerificationPending,
+  isEmergencyVerificationApproved,
+  isEmergencyVerificationRejected,
+  isOrderPending,
+  isOrderCompleted,
+  isOrderCanceled,
+} from './status-helpers.js';
+
 // Callback
 export { RequestValidator } from './callback/request-validator.js';
