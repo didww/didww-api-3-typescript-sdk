@@ -17,6 +17,7 @@ describe('Orders', () => {
     expect(result.data.description).toBe('Payment processing fee');
     expect(result.data.reference).toBe('SPT-474057');
     expect(result.data.items.length).toBeGreaterThan(0);
+    expect(result.data.externalReferenceId).toBe('ord-ref-001');
   });
 
   it('creates an order', async () => {
