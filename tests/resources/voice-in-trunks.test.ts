@@ -33,6 +33,7 @@ describe('VoiceInTrunks', () => {
     expect(second.pop).toBeDefined();
     expect(isIncluded(second.pop!)).toBe(true);
     expect((second.pop as Pop).name).toBe('DE, FRA');
+    expect(first.externalReferenceId).toBe('vit-ref-001');
   });
 
   it('lists SIP configuration attributes', async () => {
