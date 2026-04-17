@@ -9,7 +9,7 @@ export interface AddressVerification {
   serviceDescription: string;
   callbackUrl: string | null;
   callbackMethod: CallbackMethod | null;
-  status: AddressVerificationStatus;
+  status: AddressVerificationStatus | (string & {});
   rejectReasons: string[] | null;
   rejectComment: string | null;
   reference: string;

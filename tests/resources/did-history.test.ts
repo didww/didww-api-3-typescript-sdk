@@ -35,7 +35,7 @@ describe('DidHistory', () => {
     expect(result.data.action).toBe('billing_cycles_count_changed');
     expect(result.data.didNumber).toBe('442038680521');
     expect(result.data.meta).toBeDefined();
-    expect(result.data.meta!.from).toBe('2');
-    expect(result.data.meta!.to).toBe('1');
+    expect(result.data.meta!.from).toBe(1);
+    expect(result.data.meta!.to).toBe(12);
   });
 });

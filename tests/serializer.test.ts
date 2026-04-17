@@ -3,6 +3,10 @@ import { deserialize, serializeForCreate, serializeForUpdate } from '../src/seri
 import { isIncluded } from '../src/resources/base.js';
 import type { Region } from '../src/resources/region.js';
 import type { Country } from '../src/resources/country.js';
+import type { Export } from '../src/resources/export.js';
+import type { VoiceOutTrunk } from '../src/resources/voice-out-trunk.js';
+import type { EmergencyCallingService } from '../src/resources/emergency-calling-service.js';
+import { isExportCompleted, isActive, isEcsActive } from '../src/status-helpers.js';
 
 describe('Serializer', () => {
   describe('deserialize', () => {
@@ -155,6 +159,89 @@ describe('Serializer', () => {
       expect(jsonData.type).toBe('voice_in_trunk_groups');
       expect(jsonData.attributes.name).toBe('Updated');
     });
+  });
+});
+
+describe('unknown enum values (forward-compat)', () => {
+  it('deserializes a resource with an unknown status value without throwing', () => {
+    const body = {
+      data: {
+        id: '1',
+        type: 'exports',
+        attributes: {
+          status: 'some_future_status',
+          export_type: 'cdr_in',
+          url: null,
+          callback_url: null,
+          callback_method: null,
+          created_at: '2026-04-01T00:00:00.000Z',
+          external_reference_id: null,
+        },
+      },
+    };
+    const result = deserialize<Export>(body);
+    const data = result.data as Export;
+    expect(data.status).toBe('some_future_status');
+    expect(isExportCompleted(data)).toBe(false);
+  });
+
+  it('deserializes a VoiceOutTrunk with an unknown status value', () => {
+    const body = {
+      data: {
+        id: '2',
+        type: 'voice_out_trunks',
+        attributes: {
+          name: 'Test',
+          status: 'suspended',
+          on_cli_mismatch_action: 'reject_call',
+          allowed_rtp_ips: [],
+          allow_any_did_as_cli: false,
+          capacity_limit: 10,
+          threshold_amount: '0.0',
+          media_encryption_mode: 'disabled',
+          default_dst_action: 'allow_all',
+          dst_prefixes: [],
+          force_symmetric_rtp: false,
+          rtp_ping: false,
+          callback_url: null,
+          threshold_reached: false,
+          created_at: '2026-04-01T00:00:00.000Z',
+          external_reference_id: null,
+          emergency_enable_all: false,
+          rtp_timeout: null,
+          authentication_method: {
+            type: 'credential_authentications',
+            attributes: { login: 'user', password: 'pass' },
+          },
+        },
+      },
+    };
+    const result = deserialize<VoiceOutTrunk>(body);
+    const data = result.data as VoiceOutTrunk;
+    expect(data.status).toBe('suspended');
+    expect(isActive(data)).toBe(false);
+  });
+
+  it('deserializes an EmergencyCallingService with an unknown status value', () => {
+    const body = {
+      data: {
+        id: '3',
+        type: 'emergency_calling_services',
+        attributes: {
+          name: 'Test ECS',
+          reference: 'ECS-0001',
+          status: 'under_review',
+          activated_at: null,
+          canceled_at: null,
+          created_at: '2026-04-01T00:00:00.000Z',
+          renew_date: null,
+        },
+      },
+    };
+    const result = deserialize<EmergencyCallingService>(body);
+    const data = result.data as EmergencyCallingService;
+    expect(data.status).toBe('under_review');
+    expect(isEcsActive(data)).toBe(false);
   });
 });
 

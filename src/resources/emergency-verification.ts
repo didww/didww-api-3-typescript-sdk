@@ -9,7 +9,7 @@ export interface EmergencyVerification {
   /** DIDWW-assigned human-readable reference (e.g. "EVR-123456"). */
   reference: string;
   /** Current verification status. */
-  status: EmergencyVerificationStatus;
+  status: EmergencyVerificationStatus | (string & {});
   /** Array of rejection reason strings; null when not rejected. */
   rejectReasons: string[] | null;
   /** Free-form comment accompanying a rejection; null when not rejected. */

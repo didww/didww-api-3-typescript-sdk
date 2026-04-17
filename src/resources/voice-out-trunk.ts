@@ -12,7 +12,7 @@ export interface VoiceOutTrunk {
   onCliMismatchAction: OnCliMismatchAction;
   allowedRtpIps: string[];
   allowAnyDidAsCli: boolean;
-  status: VoiceOutTrunkStatus;
+  status: VoiceOutTrunkStatus | (string & {});
   capacityLimit: number;
   thresholdAmount: string;
   mediaEncryptionMode: MediaEncryptionMode;

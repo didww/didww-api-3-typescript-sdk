@@ -16,7 +16,7 @@ export interface EmergencyCallingService {
   /** DIDWW-assigned human-readable reference (e.g. "ECS-0042"). */
   reference: string;
   /** Current service status. */
-  status: EmergencyCallingServiceStatus;
+  status: EmergencyCallingServiceStatus | (string & {});
   /** When the service was activated; null while pending. */
   activatedAt: string | null;
   /** When the service was canceled; null while active/pending. */

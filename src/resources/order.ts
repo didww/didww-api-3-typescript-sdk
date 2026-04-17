@@ -8,7 +8,7 @@ export interface Order {
   id: string;
   type: 'orders';
   amount: string;
-  status: OrderStatus;
+  status: OrderStatus | (string & {});
   description: string;
   reference: string;
   createdAt: string;

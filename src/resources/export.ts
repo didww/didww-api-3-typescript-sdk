@@ -19,7 +19,7 @@ export interface Export {
   url: string | null;
   callbackUrl: string | null;
   callbackMethod: CallbackMethod | null;
-  status: ExportStatus;
+  status: ExportStatus | (string & {});
   filters: ExportFilters;
   createdAt: string;
   externalReferenceId: string | null;
