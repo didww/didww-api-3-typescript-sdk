@@ -4,7 +4,7 @@ export interface EncryptedFile {
   id: string;
   type: 'encrypted_files';
   description: string;
-  expireAt: string;
+  expiresAt: string;
 }
 
 export const ENCRYPTED_FILE_RESOURCE = defineResource<EncryptedFile>()({

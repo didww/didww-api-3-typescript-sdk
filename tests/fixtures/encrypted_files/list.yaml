@@ -14,7 +14,7 @@ interactions:
     body:
       string: "{\n  \"data\": [\n    {\n      \"id\": \"7f2fbdca-8008-44ce-bcb6-3537ea5efaac\"\
         ,\n      \"type\": \"encrypted_files\",\n      \"attributes\": {\n       \
-        \ \"description\": \"file.enc\",\n        \"expire_at\": \"2021-04-02T13:42:51.612Z\"\
+        \ \"description\": \"file.enc\",\n        \"expires_at\": \"2021-04-02T13:42:51.612Z\"\
         \n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 1,\n    \"api_version\"\
         : \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/encrypted_files?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/encrypted_files?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
