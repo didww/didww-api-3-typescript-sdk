@@ -39,6 +39,7 @@ import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
 import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
 import { EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE } from './resources/emergency-requirement-validation.js';
 import { EMERGENCY_CALLING_SERVICE_RESOURCE } from './resources/emergency-calling-service.js';
+import { EMERGENCY_VERIFICATION_RESOURCE } from './resources/emergency-verification.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json') as { version: string };
@@ -334,5 +335,8 @@ export class DidwwClient implements HttpClient {
   }
   emergencyCallingServices() {
     return createRepository(this, EMERGENCY_CALLING_SERVICE_RESOURCE);
+  }
+  emergencyVerifications() {
+    return createRepository(this, EMERGENCY_VERIFICATION_RESOURCE);
   }
 }

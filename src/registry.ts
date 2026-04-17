@@ -37,6 +37,7 @@ import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
 import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
 import { EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE } from './resources/emergency-requirement-validation.js';
 import { EMERGENCY_CALLING_SERVICE_RESOURCE } from './resources/emergency-calling-service.js';
+import { EMERGENCY_VERIFICATION_RESOURCE } from './resources/emergency-verification.js';
 
 const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceConfig>([
   [COUNTRY_RESOURCE.type, COUNTRY_RESOURCE],
@@ -76,6 +77,7 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [EMERGENCY_REQUIREMENT_RESOURCE.type, EMERGENCY_REQUIREMENT_RESOURCE],
   [EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE.type, EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE],
   [EMERGENCY_CALLING_SERVICE_RESOURCE.type, EMERGENCY_CALLING_SERVICE_RESOURCE],
+  [EMERGENCY_VERIFICATION_RESOURCE.type, EMERGENCY_VERIFICATION_RESOURCE],
 ]);
 
 export function getResourceConfig(type: string): ResourceConfig | undefined {

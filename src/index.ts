@@ -46,6 +46,7 @@ export type {
   EmergencyRequirementValidationWrite,
 } from './resources/emergency-requirement-validation.js';
 export type { EmergencyCallingService } from './resources/emergency-calling-service.js';
+export type { EmergencyVerification, EmergencyVerificationWrite } from './resources/emergency-verification.js';
 export type { AddressVerification, AddressVerificationWrite } from './resources/address-verification.js';
 export type {
   PermanentSupportingDocument,
