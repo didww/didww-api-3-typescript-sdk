@@ -23,6 +23,7 @@ describe('PermanentSupportingDocuments', () => {
     expect(isIncluded(tmpl!)).toBe(true);
     expect((tmpl as SupportingDocumentTemplate).name).toBe('Germany Special Registration Form');
     expect((tmpl as SupportingDocumentTemplate).permanent).toBe(true);
+    expect(result.data.externalReferenceId).toBe('psd-ref-001');
   });
 
   it('deletes a permanent supporting document', async () => {

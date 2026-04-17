@@ -7,12 +7,14 @@ export interface PermanentSupportingDocument {
   id: string;
   type: 'permanent_supporting_documents';
   createdAt: string;
+  externalReferenceId: string | null;
   identity?: Identity | ResourceRef;
   template?: SupportingDocumentTemplate | ResourceRef;
   files?: (EncryptedFile | ResourceRef)[];
 }
 
 export interface PermanentSupportingDocumentWrite {
+  externalReferenceId?: string | null;
   identity?: ResourceRef;
   template?: ResourceRef;
   files?: ResourceRef[];
@@ -24,7 +26,7 @@ export const PERMANENT_SUPPORTING_DOCUMENT_RESOURCE = defineResource<
 >()({
   type: 'permanent_supporting_documents',
   path: 'permanent_supporting_documents',
-  writableKeys: ['identity', 'template', 'files'],
+  writableKeys: ['externalReferenceId', 'identity', 'template', 'files'],
   relationshipKeys: ['identity', 'template', 'files'],
   operations: ['list', 'find', 'create', 'remove'],
 });
