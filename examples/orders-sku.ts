@@ -1,4 +1,5 @@
 import { DidwwClient, Environment, didOrderItem } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -36,7 +37,8 @@ async function main() {
     return;
   }
 
-  // Create an order
+  // Create an order (2026-04-16 external_reference_id -- customer-supplied tag, max 100 chars)
+  const suffix = crypto.randomBytes(4).toString('hex');
   const order = await client.orders().create({
     allowBackOrdering: true,
     items: [
@@ -45,12 +47,14 @@ async function main() {
         qty: 1,
       }),
     ],
+    externalReferenceId: `ts-order-${suffix}`,
   });
 
   console.log(`\nOrder created: ${order.data.id}`);
   console.log(`Status: ${order.data.status}`);
   console.log(`Amount: $${order.data.amount}`);
   console.log(`Reference: ${order.data.reference}`);
+  console.log(`External Reference: ${order.data.externalReferenceId}`);
 }
 
 main().catch(console.error);
