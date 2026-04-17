@@ -26,6 +26,7 @@ export interface VoiceOutTrunk {
   callbackUrl: string | null;
   thresholdReached: boolean;
   createdAt: string;
+  externalReferenceId: string | null;
   authenticationMethod: AuthenticationMethod;
   defaultDid?: Did | ResourceRef;
   dids?: (Did | ResourceRef)[];
@@ -45,6 +46,7 @@ export interface VoiceOutTrunkWrite {
   forceSymmetricRtp?: boolean;
   rtpPing?: boolean;
   callbackUrl?: string | null;
+  externalReferenceId?: string | null;
   authenticationMethod?: AuthenticationMethod;
   defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
@@ -64,6 +66,7 @@ const WRITABLE_KEYS = [
   'forceSymmetricRtp',
   'rtpPing',
   'callbackUrl',
+  'externalReferenceId',
   'authenticationMethod',
   'defaultDid',
   'dids',

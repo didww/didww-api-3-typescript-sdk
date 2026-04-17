@@ -15,6 +15,7 @@ describe('VoiceOutTrunks', () => {
     const client = setupClient('voice_out_trunks/list.yaml');
     const result = await client.voiceOutTrunks().list();
     expect(result.data.length).toBeGreaterThan(0);
+    expect(result.data[0].externalReferenceId).toBe('vot-ref-001');
   });
 
   it('finds a voice out trunk', async () => {
