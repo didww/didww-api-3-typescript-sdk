@@ -59,6 +59,19 @@ export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './
 export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
 
 export type { OrderItem, DidOrderItem, CapacityOrderItem, GenericOrderItem } from './nested/order-item.js';
+
+export type {
+  AuthenticationMethod,
+  IpOnlyAuthenticationMethod,
+  CredentialsAndIpAuthenticationMethod,
+  TwilioAuthenticationMethod,
+  GenericAuthenticationMethod,
+} from './nested/authentication-method.js';
+export {
+  ipOnlyAuthenticationMethod,
+  credentialsAndIpAuthenticationMethod,
+  twilioAuthenticationMethod,
+} from './nested/authentication-method.js';
 export {
   didOrderItem,
   availableDidOrderItem,
