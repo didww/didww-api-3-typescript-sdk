@@ -1,5 +1,5 @@
 import { defineResource, type ResourceRef } from './base.js';
-import type { CallbackMethod } from '../enums.js';
+import type { CallbackMethod, EmergencyVerificationStatus } from '../enums.js';
 import type { Address } from './address.js';
 import type { Did } from './did.js';
 
@@ -8,8 +8,8 @@ export interface EmergencyVerification {
   type: 'emergency_verifications';
   /** DIDWW-assigned human-readable reference (e.g. "EVR-123456"). */
   reference: string;
-  /** Current verification status: "pending", "approved", or "rejected". */
-  status: string;
+  /** Current verification status. */
+  status: EmergencyVerificationStatus;
   /** Array of rejection reason strings; null when not rejected. */
   rejectReasons: string[] | null;
   /** Free-form comment accompanying a rejection; null when not rejected. */

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref } from '../../src/resources/base.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
+import { EmergencyVerificationStatus } from '../../src/enums.js';
 
 describe('EmergencyVerifications', () => {
   describeOperationEnforcement({
@@ -16,7 +17,7 @@ describe('EmergencyVerifications', () => {
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('emergency_verifications');
     expect(result.data[0].reference).toBe('EVR-123456');
-    expect(result.data[0].status).toBe('pending');
+    expect(result.data[0].status).toBe(EmergencyVerificationStatus.PENDING);
   });
 
   it('finds an emergency verification', async () => {
@@ -24,7 +25,7 @@ describe('EmergencyVerifications', () => {
     const result = await client.emergencyVerifications().find('ev-001');
     expect(result.data.id).toBe('ev-001');
     expect(result.data.type).toBe('emergency_verifications');
-    expect(result.data.status).toBe('rejected');
+    expect(result.data.status).toBe(EmergencyVerificationStatus.REJECTED);
     expect(result.data.rejectReasons).toBeInstanceOf(Array);
     expect(result.data.rejectReasons!.length).toBe(2);
     expect(result.data.rejectComment).toBe('Please re-submit with updated documentation.');
@@ -52,7 +53,7 @@ describe('EmergencyVerifications', () => {
       dids: [ref('dids', 'did-001')],
     });
     expect(result.data.id).toBe('ev-new-001');
-    expect(result.data.status).toBe('pending');
+    expect(result.data.status).toBe(EmergencyVerificationStatus.PENDING);
     expect(result.data.callbackUrl).toBe('https://example.com/emergency/hook');
     expect(result.data.externalReferenceId).toBe('ref-abc-123');
   });

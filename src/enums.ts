@@ -58,6 +58,12 @@ export enum VoiceOutTrunkStatus {
   BLOCKED = 'blocked',
 }
 
+export enum EmergencyVerificationStatus {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
+}
+
 export enum EmergencyCallingServiceStatus {
   ACTIVE = 'active',
   CANCELED = 'canceled',
