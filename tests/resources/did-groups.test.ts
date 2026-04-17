@@ -46,18 +46,18 @@ describe('DidGroups', () => {
     expect((result.data.stockKeepingUnits![0] as StockKeepingUnit).setupPrice).toBe('0.4');
   });
 
-  it('finds a DID group with include=requirement', async () => {
+  it('finds a DID group with include=address_requirement', async () => {
     const client = setupClient('did_groups/show_with_requirement.yaml');
     const result = await client.didGroups().find('2187c36d-28fb-436f-8861-5a0f5b5a3ee1', {
-      include: 'requirement',
+      include: 'address_requirement',
     });
     expect(result.data.id).toBe('2187c36d-28fb-436f-8861-5a0f5b5a3ee1');
     expect(result.data.prefix).toBe('241');
     expect(result.data.areaName).toBe('Aachen');
-    const requirement = result.data.requirement;
-    expect(requirement).toBeDefined();
-    expect(isIncluded(requirement!)).toBe(true);
-    expect((requirement as AddressRequirement).id).toBe('8da1e0b2-047c-4baf-9c57-57143f09b9ce');
-    expect((requirement as AddressRequirement).identityType).toBe('Any');
+    const addressRequirement = result.data.addressRequirement;
+    expect(addressRequirement).toBeDefined();
+    expect(isIncluded(addressRequirement!)).toBe(true);
+    expect((addressRequirement as AddressRequirement).id).toBe('8da1e0b2-047c-4baf-9c57-57143f09b9ce');
+    expect((addressRequirement as AddressRequirement).identityType).toBe('Any');
   });
 });

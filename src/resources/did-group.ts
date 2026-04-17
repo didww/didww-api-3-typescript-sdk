@@ -20,7 +20,7 @@ export interface DidGroup {
   city?: City | ResourceRef;
   didGroupType?: DidGroupType | ResourceRef;
   stockKeepingUnits?: (StockKeepingUnit | ResourceRef)[];
-  requirement?: AddressRequirement | ResourceRef;
+  addressRequirement?: AddressRequirement | ResourceRef;
 }
 
 export const DID_GROUP_RESOURCE = createReadOnlyResource<DidGroup>('did_groups');

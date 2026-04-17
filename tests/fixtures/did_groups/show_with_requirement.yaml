@@ -9,7 +9,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
     method: GET
-    uri: https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1?include=requirement
+    uri: https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1?include=address_requirement
   response:
     body:
       string: "{\n  \"data\": {\n    \"id\": \"2187c36d-28fb-436f-8861-5a0f5b5a3ee1\"\
@@ -36,14 +36,14 @@ interactions:
         \n        },\n        \"data\": null\n      },\n      \"stock_keeping_units\"\
         : {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/stock_keeping_units\"\
         ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/stock_keeping_units\"\
-        \n        }\n      },\n      \"requirement\": {\n        \"links\": {\n  \
-        \        \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/requirement\"\
-        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/requirement\"\
-        \n        },\n        \"data\": {\n          \"type\": \"requirements\",\n\
+        \n        }\n      },\n      \"address_requirement\": {\n        \"links\": {\n  \
+        \        \"self\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/relationships/address_requirement\"\
+        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_groups/2187c36d-28fb-436f-8861-5a0f5b5a3ee1/address_requirement\"\
+        \n        },\n        \"data\": {\n          \"type\": \"address_requirements\",\n\
         \          \"id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\"\n        }\n \
         \     }\n    },\n    \"meta\": {\n      \"needs_registration\": true,\n  \
         \    \"is_available\": true\n    }\n  },\n  \"included\": [\n    {\n      \
-        \"id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\",\n      \"type\": \"requirements\"\
+        \"id\": \"8da1e0b2-047c-4baf-9c57-57143f09b9ce\",\n      \"type\": \"address_requirements\"\
         ,\n      \"attributes\": {\n        \"identity_type\": \"Any\",\n        \"\
         personal_area_level\": \"City\",\n        \"business_area_level\": \"City\"\
         ,\n        \"address_area_level\": \"City\",\n        \"personal_proof_qty\"\

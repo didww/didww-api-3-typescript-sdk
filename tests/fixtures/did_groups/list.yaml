@@ -32,9 +32,9 @@ interactions:
         \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
         links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/stock_keeping_units\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/stock_keeping_units\"\
-        \n          }\n        },\n        \"requirement\": {\n          \"links\"\
-        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/requirement\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/requirement\"\
+        \n          }\n        },\n        \"address_requirement\": {\n          \"links\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/address_requirement\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/address_requirement\"\
         \n          }\n        }\n      },\n      \"meta\": {\n        \"available_dids_enabled\"\
         : false,\n        \"needs_registration\": false,\n        \"is_available\"\
         : true,\n        \"total_count\": 1\n      }\n    }\n  ],\n  \"meta\": {\n\
