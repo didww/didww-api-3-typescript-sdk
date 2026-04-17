@@ -27,4 +27,15 @@ describe('DidHistory', () => {
     expect(result.data.action).toBe('assigned');
     expect(result.data.method).toBe('api3');
   });
+
+  it('exposes meta from/to for billing_cycles_count_changed action', async () => {
+    const client = setupClient('did_history/show_billing_cycles.yaml');
+    const result = await client.didHistory().find('b1c2d3e4-f5a6-7890-bcde-f12345678901');
+    expect(result.data.id).toBe('b1c2d3e4-f5a6-7890-bcde-f12345678901');
+    expect(result.data.action).toBe('billing_cycles_count_changed');
+    expect(result.data.didNumber).toBe('442038680521');
+    expect(result.data.meta).toBeDefined();
+    expect(result.data.meta!.from).toBe('2');
+    expect(result.data.meta!.to).toBe('1');
+  });
 });

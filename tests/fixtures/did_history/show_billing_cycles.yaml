@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/did_history/b1c2d3e4-f5a6-7890-bcde-f12345678901
+  response:
+    body:
+      string: '{"data":{"id":"b1c2d3e4-f5a6-7890-bcde-f12345678901","type":"did_history","attributes":{"did_number":"442038680521","action":"billing_cycles_count_changed","method":"system","created_at":"2026-04-15T09:00:00.000Z"},"meta":{"from":"2","to":"1"}}}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 200
+      message: OK
+version: 1
