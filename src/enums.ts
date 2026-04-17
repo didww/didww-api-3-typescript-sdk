@@ -198,4 +198,5 @@ export enum ConfigurationType {
 export enum OrderItemType {
   DID = 'did_order_items',
   CAPACITY = 'capacity_order_items',
+  EMERGENCY = 'emergency_order_items',
 }

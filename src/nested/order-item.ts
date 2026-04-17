@@ -22,6 +22,17 @@ export interface CapacityOrderItem {
   mrc?: string;
 }
 
+export interface EmergencyOrderItem {
+  type: 'emergency_order_items';
+  qty: number;
+  emergencyCallingServiceId: string;
+  nrc?: string;
+  mrc?: string;
+  proratedMrc?: boolean;
+  billedFrom?: string;
+  billedTo?: string;
+}
+
 export interface GenericOrderItem {
   type: 'generic_order_items';
   qty?: number;
@@ -32,7 +43,7 @@ export interface GenericOrderItem {
   billedTo?: string;
 }
 
-export type OrderItem = DidOrderItem | CapacityOrderItem | GenericOrderItem;
+export type OrderItem = DidOrderItem | CapacityOrderItem | EmergencyOrderItem | GenericOrderItem;
 
 export function didOrderItem(attrs: Omit<DidOrderItem, 'type'>): DidOrderItem {
   return { type: 'did_order_items', ...attrs };
@@ -48,6 +59,10 @@ export function reservationDidOrderItem(attrs: { skuId: string; didReservationId
 
 export function capacityOrderItem(attrs: Omit<CapacityOrderItem, 'type'>): CapacityOrderItem {
   return { type: 'capacity_order_items', ...attrs };
+}
+
+export function emergencyOrderItem(attrs: Omit<EmergencyOrderItem, 'type'>): EmergencyOrderItem {
+  return { type: 'emergency_order_items', ...attrs };
 }
 
 export function serializeOrderItems(items: OrderItem[]): Record<string, unknown>[] {
