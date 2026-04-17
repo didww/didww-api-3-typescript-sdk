@@ -9,6 +9,7 @@ import type { SharedCapacityGroup } from './shared-capacity-group.js';
 import type { AddressVerification } from './address-verification.js';
 import type { EmergencyCallingService } from './emergency-calling-service.js';
 import type { EmergencyVerification } from './emergency-verification.js';
+import type { Identity } from './identity.js';
 
 export interface Did {
   id: string;
@@ -34,6 +35,7 @@ export interface Did {
   addressVerification?: AddressVerification | ResourceRef;
   emergencyCallingService?: EmergencyCallingService | ResourceRef | null;
   emergencyVerification?: EmergencyVerification | ResourceRef | null;
+  identity?: Identity | ResourceRef | null;
 }
 
 export interface DidWrite {
