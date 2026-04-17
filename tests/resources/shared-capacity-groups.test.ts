@@ -15,6 +15,7 @@ describe('SharedCapacityGroups', () => {
     const result = await client.sharedCapacityGroups().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('shared_capacity_groups');
+    expect(result.data[0].externalReferenceId).toBe('scg-ref-001');
   });
 
   it('finds a shared capacity group', async () => {
