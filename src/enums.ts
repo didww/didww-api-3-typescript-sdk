@@ -179,6 +179,13 @@ export enum Codec {
   L16 = 19,
 }
 
+export enum DiversionRelayPolicy {
+  NONE = 'none',
+  AS_IS = 'as_is',
+  SIP = 'sip',
+  TEL = 'tel',
+}
+
 export enum ConfigurationType {
   SIP = 'sip_configurations',
   PSTN = 'pstn_configurations',
