@@ -27,6 +27,9 @@ async function main() {
   console.log(`  name: ${created.data.name}`);
   console.log(`  metered: ${created.data.meteredChannelsCount}`);
   console.log(`  shared: ${created.data.sharedChannelsCount}`);
+  if (created.data.externalReferenceId) {
+    console.log(`  externalReferenceId: ${created.data.externalReferenceId}`);
+  }
 
   // Clean up
   await client.sharedCapacityGroups().remove(created.data.id);
