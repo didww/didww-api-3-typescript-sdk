@@ -19,6 +19,7 @@ describe('DidGroups', () => {
     const result = await client.didGroups().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('did_groups');
+    expect(result.data[0].serviceRestrictions).toBeNull();
   });
 
   it('finds a DID group', async () => {

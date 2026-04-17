@@ -15,6 +15,7 @@ export interface DidGroup {
   isMetered: boolean;
   areaName: string;
   allowAdditionalChannels: boolean;
+  serviceRestrictions: string | null;
   country?: Country | ResourceRef;
   region?: Region | ResourceRef;
   city?: City | ResourceRef;
