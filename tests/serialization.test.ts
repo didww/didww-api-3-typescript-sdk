@@ -149,7 +149,7 @@ describe('Serialization - excludes read-only fields', () => {
   it('VoiceOutTrunk excludes read-only fields', () => {
     const data = {
       name: 'test out trunk',
-      allowedSipIps: ['127.0.0.1'],
+      allowedSipIps: ['203.0.113.1'],
       username: 'readonly', // read-only
       password: 'readonly', // read-only
       thresholdReached: true, // read-only

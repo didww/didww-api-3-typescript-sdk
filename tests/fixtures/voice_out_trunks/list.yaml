@@ -19,7 +19,7 @@ interactions:
         "threshold_amount": "200.0", "media_encryption_mode": "srtp_sdes", "default_dst_action":
         "reject_all", "dst_prefixes": ["370"], "force_symmetric_rtp": true, "rtp_ping":
         true, "callback_url": null, "authentication_method": {"type": "credentials_and_ip",
-        "attributes": {"allowed_sip_ips": ["10.11.12.13/32"], "tech_prefix": "", "username":
+        "attributes": {"allowed_sip_ips": ["203.0.113.1/32"], "tech_prefix": "", "username":
         "dpjgwbbac9", "password": "z0hshvbcy7"}}, "external_reference_id": "vot-ref-001"},
         "relationships": {"default_did": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/default_did",
         "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/default_did"}},
@@ -32,7 +32,7 @@ interactions:
         "threshold_reached": false, "threshold_amount": null, "media_encryption_mode":
         "disabled", "default_dst_action": "allow_all", "dst_prefixes": [], "force_symmetric_rtp":
         false, "rtp_ping": false, "callback_url": null, "authentication_method": {"type":
-        "credentials_and_ip", "attributes": {"allowed_sip_ips": ["0.0.0.0/0"], "tech_prefix":
+        "credentials_and_ip", "attributes": {"allowed_sip_ips": ["203.0.113.0/24"], "tech_prefix":
         "", "username": "50fb4hugfv", "password": "evhwkcfjm5"}}, "external_reference_id":
         "vot-ref-001"}, "relationships": {"default_did": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/relationships/default_did",
         "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/default_did"}},

@@ -82,7 +82,7 @@ describe('Serializer', () => {
               name: 'My Trunk',
               configuration: {
                 type: 'sip_configurations',
-                attributes: { username: 'user1', host: '10.0.0.1' },
+                attributes: { username: 'user1', host: '203.0.113.1' },
               },
             },
           },
@@ -97,7 +97,7 @@ describe('Serializer', () => {
       const config = trunk.configuration as Record<string, unknown>;
       expect(config.type).toBe('sip_configurations');
       expect(config.username).toBe('user1');
-      expect(config.host).toBe('10.0.0.1');
+      expect(config.host).toBe('203.0.113.1');
     });
   });
 

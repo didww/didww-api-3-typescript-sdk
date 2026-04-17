@@ -31,7 +31,7 @@ interactions:
         e164\",\n        \"cli_prefix\": \"+\",\n        \"description\": \"\",\n\
         \        \"ringing_timeout\": null,\n        \"configuration\": {\n      \
         \    \"type\": \"sip_configurations\",\n          \"attributes\": {\n    \
-        \        \"username\": \"{CALL_DID}\",\n            \"host\": \"127.0.0.1\"\
+        \        \"username\": \"{CALL_DID}\",\n            \"host\": \"203.0.113.1\"\
         ,\n            \"port\": null,\n            \"codec_ids\": [\n           \
         \   9,\n              8,\n              6\n            ],\n            \"\
         rx_dtmf_format_id\": 1,\n            \"tx_dtmf_format_id\": 1,\n         \

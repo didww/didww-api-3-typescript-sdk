@@ -11,9 +11,9 @@ import {
 import type { AuthenticationMethod, GenericAuthenticationMethod } from '../src/nested/authentication-method.js';
 
 describe('AuthenticationMethod type guards', () => {
-  const ipOnly = ipOnlyAuthenticationMethod({ allowedSipIps: ['10.0.0.1/32'], techPrefix: '' });
+  const ipOnly = ipOnlyAuthenticationMethod({ allowedSipIps: ['203.0.113.1/32'], techPrefix: '' });
   const credAndIp = credentialsAndIpAuthenticationMethod({
-    allowedSipIps: ['10.0.0.1/32'],
+    allowedSipIps: ['203.0.113.1/32'],
     techPrefix: '',
     username: 'user',
     password: 'pass',
@@ -53,7 +53,7 @@ describe('AuthenticationMethod type guards', () => {
     const method: AuthenticationMethod = ipOnly;
     if (isIpOnly(method)) {
       // TypeScript narrows to IpOnlyAuthenticationMethod
-      expect(method.allowedSipIps).toEqual(['10.0.0.1/32']);
+      expect(method.allowedSipIps).toEqual(['203.0.113.1/32']);
       expect(method.techPrefix).toBe('');
     }
 

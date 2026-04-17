@@ -44,7 +44,7 @@ describe('VoiceOutTrunks', () => {
     expect(authMethod).toBeDefined();
     expect(authMethod.type).toBe('credentials_and_ip');
     const credAuth = authMethod as CredentialsAndIpAuthenticationMethod;
-    expect(credAuth.allowedSipIps).toEqual(['10.11.12.13/32']);
+    expect(credAuth.allowedSipIps).toEqual(['203.0.113.1/32']);
     expect(credAuth.username).toBe('dpjgwbbac9');
     expect(credAuth.password).toBe('z0hshvbcy7');
     expect(result.data.dids).toBeDefined();

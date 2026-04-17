@@ -43,7 +43,7 @@ describe('VoiceInTrunks', () => {
     expect(sipTrunk).toBeDefined();
     const config = sipTrunk!.configuration as SipConfiguration;
     expect(config.username).toBe('username');
-    expect(config.host).toBe('216.58.215.78');
+    expect(config.host).toBe('203.0.113.78');
     expect(config.port).toBe(8060);
     expect(config.codecIds).toEqual([9, 10, 8]);
     expect(config.transportProtocolId).toBe(1);
@@ -77,7 +77,7 @@ describe('VoiceInTrunks', () => {
       name: 'hello, test sip trunk',
       configuration: sipConfiguration({
         username: 'username',
-        host: '216.58.215.110',
+        host: '203.0.113.110',
         port: 5060,
         codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
         reroutingDisconnectCodeIds: [
@@ -106,7 +106,7 @@ describe('VoiceInTrunks', () => {
       name: 'hello, updated test sip trunk',
       configuration: sipConfiguration({
         username: 'new-username',
-        host: '216.58.215.110',
+        host: '203.0.113.110',
         port: 5060,
         codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
         reroutingDisconnectCodeIds: [
