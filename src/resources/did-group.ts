@@ -5,7 +5,7 @@ import type { Region } from './region.js';
 import type { City } from './city.js';
 import type { DidGroupType } from './did-group-type.js';
 import type { StockKeepingUnit } from './stock-keeping-unit.js';
-import type { Requirement } from './requirement.js';
+import type { AddressRequirement } from './address-requirement.js';
 
 export interface DidGroup {
   id: string;
@@ -20,7 +20,7 @@ export interface DidGroup {
   city?: City | ResourceRef;
   didGroupType?: DidGroupType | ResourceRef;
   stockKeepingUnits?: (StockKeepingUnit | ResourceRef)[];
-  requirement?: Requirement | ResourceRef;
+  requirement?: AddressRequirement | ResourceRef;
 }
 
 export const DID_GROUP_RESOURCE = createReadOnlyResource<DidGroup>('did_groups');

@@ -23,7 +23,7 @@ export type { AvailableDid } from './resources/available-did.js';
 export type { NanpaPrefix } from './resources/nanpa-prefix.js';
 export type { ProofType } from './resources/proof-type.js';
 export type { PublicKey } from './resources/public-key.js';
-export type { Requirement } from './resources/requirement.js';
+export type { AddressRequirement } from './resources/address-requirement.js';
 export type { SupportingDocumentTemplate } from './resources/supporting-document-template.js';
 export type { StockKeepingUnit } from './resources/stock-keeping-unit.js';
 export type { QtyBasedPricing } from './resources/qty-based-pricing.js';

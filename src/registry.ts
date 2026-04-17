@@ -12,7 +12,7 @@ import { AVAILABLE_DID_RESOURCE } from './resources/available-did.js';
 import { NANPA_PREFIX_RESOURCE } from './resources/nanpa-prefix.js';
 import { PROOF_TYPE_RESOURCE } from './resources/proof-type.js';
 import { PUBLIC_KEY_RESOURCE } from './resources/public-key.js';
-import { REQUIREMENT_RESOURCE } from './resources/requirement.js';
+import { ADDRESS_REQUIREMENT_RESOURCE } from './resources/address-requirement.js';
 import { SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE } from './resources/supporting-document-template.js';
 import { STOCK_KEEPING_UNIT_RESOURCE } from './resources/stock-keeping-unit.js';
 import { QTY_BASED_PRICING_RESOURCE } from './resources/qty-based-pricing.js';
@@ -47,7 +47,7 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [NANPA_PREFIX_RESOURCE.type, NANPA_PREFIX_RESOURCE],
   [PROOF_TYPE_RESOURCE.type, PROOF_TYPE_RESOURCE],
   [PUBLIC_KEY_RESOURCE.type, PUBLIC_KEY_RESOURCE],
-  [REQUIREMENT_RESOURCE.type, REQUIREMENT_RESOURCE],
+  [ADDRESS_REQUIREMENT_RESOURCE.type, ADDRESS_REQUIREMENT_RESOURCE],
   [SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE.type, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE],
   [STOCK_KEEPING_UNIT_RESOURCE.type, STOCK_KEEPING_UNIT_RESOURCE],
   [QTY_BASED_PRICING_RESOURCE.type, QTY_BASED_PRICING_RESOURCE],

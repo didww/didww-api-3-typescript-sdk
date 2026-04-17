@@ -16,7 +16,7 @@ import { AVAILABLE_DID_RESOURCE } from './resources/available-did.js';
 import { NANPA_PREFIX_RESOURCE } from './resources/nanpa-prefix.js';
 import { PROOF_TYPE_RESOURCE } from './resources/proof-type.js';
 import { PUBLIC_KEY_RESOURCE } from './resources/public-key.js';
-import { REQUIREMENT_RESOURCE } from './resources/requirement.js';
+import { ADDRESS_REQUIREMENT_RESOURCE } from './resources/address-requirement.js';
 import { SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE } from './resources/supporting-document-template.js';
 import { CAPACITY_POOL_RESOURCE } from './resources/capacity-pool.js';
 import { VOICE_IN_TRUNK_RESOURCE } from './resources/voice-in-trunk.js';
@@ -251,8 +251,8 @@ export class DidwwClient implements HttpClient {
   publicKeys() {
     return createRepository(this, PUBLIC_KEY_RESOURCE);
   }
-  requirements() {
-    return createRepository(this, REQUIREMENT_RESOURCE);
+  addressRequirements() {
+    return createRepository(this, ADDRESS_REQUIREMENT_RESOURCE);
   }
   supportingDocumentTemplates() {
     return createRepository(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);

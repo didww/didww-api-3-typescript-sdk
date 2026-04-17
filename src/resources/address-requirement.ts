@@ -5,9 +5,9 @@ import type { DidGroupType } from './did-group-type.js';
 import type { SupportingDocumentTemplate } from './supporting-document-template.js';
 import type { ProofType } from './proof-type.js';
 
-export interface Requirement {
+export interface AddressRequirement {
   id: string;
-  type: 'requirements';
+  type: 'address_requirements';
   identityType: IdentityType;
   personalAreaLevel: AreaLevel;
   businessAreaLevel: AreaLevel;
@@ -30,4 +30,4 @@ export interface Requirement {
   addressProofTypes?: (ProofType | ResourceRef)[];
 }
 
-export const REQUIREMENT_RESOURCE = createReadOnlyResource<Requirement>('requirements');
+export const ADDRESS_REQUIREMENT_RESOURCE = createReadOnlyResource<AddressRequirement>('address_requirements');

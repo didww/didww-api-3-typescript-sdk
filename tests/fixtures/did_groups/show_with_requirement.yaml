@@ -52,11 +52,11 @@ interactions:
         \      \"last_name\"\n        ],\n        \"business_mandatory_fields\": [],\n\
         \        \"service_description_required\": false,\n        \"restriction_message\"\
         : null\n      },\n      \"relationships\": {\n        \"country\": {\n   \
-        \       \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/relationships/country\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/country\"\
+        \       \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/address_requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/relationships/country\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/country\"\
         \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
-        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/relationships/did_group_type\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/did_group_type\"\
+        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/address_requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/relationships/did_group_type\"\
+        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/8da1e0b2-047c-4baf-9c57-57143f09b9ce/did_group_type\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
         : \"2022-05-09\"\n  }\n}"
     headers:

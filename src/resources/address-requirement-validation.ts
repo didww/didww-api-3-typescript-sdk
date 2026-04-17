@@ -1,12 +1,12 @@
 import { defineResource, type ResourceRef } from './base.js';
-import type { Requirement } from './requirement.js';
+import type { AddressRequirement } from './address-requirement.js';
 import type { Identity } from './identity.js';
 import type { Address } from './address.js';
 
 export interface AddressRequirementValidation {
   id: string;
   type: 'address_requirement_validations';
-  requirement?: Requirement | ResourceRef;
+  requirement?: AddressRequirement | ResourceRef;
   identity?: Identity | ResourceRef;
   address?: Address | ResourceRef;
 }
