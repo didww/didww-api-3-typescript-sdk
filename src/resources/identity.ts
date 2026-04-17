@@ -24,6 +24,7 @@ export interface Identity {
   createdAt: string;
   verified: boolean;
   country?: Country | ResourceRef;
+  birthCountry?: Country | ResourceRef;
   proofs?: (Proof | ResourceRef)[];
   addresses?: (Address | ResourceRef)[];
   permanentDocuments?: (PermanentSupportingDocument | ResourceRef)[];
@@ -44,6 +45,7 @@ export interface IdentityWrite {
   externalReferenceId?: string;
   contactEmail?: string;
   country?: ResourceRef;
+  birthCountry?: ResourceRef;
 }
 
 export const IDENTITY_RESOURCE = defineResource<Identity, IdentityWrite>()({
@@ -64,7 +66,8 @@ export const IDENTITY_RESOURCE = defineResource<Identity, IdentityWrite>()({
     'externalReferenceId',
     'contactEmail',
     'country',
+    'birthCountry',
   ],
-  relationshipKeys: ['country'],
+  relationshipKeys: ['country', 'birthCountry'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
 });
