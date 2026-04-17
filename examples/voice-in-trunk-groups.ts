@@ -3,6 +3,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/voice-in-trunk-groups.ts
  */
 import { DidwwClient, Environment, ref, pstnConfiguration, isIncluded } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -11,7 +12,7 @@ const client = new DidwwClient({
 
 async function main() {
   // Create two trunks to assign to the group
-  const suffix = Math.random().toString(36).substring(2, 8);
+  const suffix = crypto.randomBytes(4).toString('hex');
   const trunk1 = await client.voiceInTrunks().create({
     name: `Group Trunk A ${suffix}`,
     configuration: pstnConfiguration({ dst: '15551000001' }),
