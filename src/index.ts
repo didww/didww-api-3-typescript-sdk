@@ -39,6 +39,7 @@ export type { DidReservation, DidReservationWrite } from './resources/did-reserv
 export type { Address, AddressWrite } from './resources/address.js';
 export type { Identity, IdentityWrite } from './resources/identity.js';
 export type { EncryptedFile } from './resources/encrypted-file.js';
+export type { DidHistory } from './resources/did-history.js';
 export type { AddressVerification, AddressVerificationWrite } from './resources/address-verification.js';
 export type {
   PermanentSupportingDocument,
