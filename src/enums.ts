@@ -76,6 +76,10 @@ export enum Feature {
   VOICE_OUT = 'voice_out',
   T38 = 't38',
   SMS_IN = 'sms_in',
+  P2P = 'p2p',
+  A2P = 'a2p',
+  EMERGENCY = 'emergency',
+  CNAM_OUT = 'cnam_out',
 }
 
 export enum StirShakenMode {
