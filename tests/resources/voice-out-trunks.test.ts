@@ -105,6 +105,20 @@ describe('VoiceOutTrunks', () => {
     expect(authMethod.type).toBe('credentials_and_ip');
   });
 
+  it('updates emergency_enable_all and emergency_dids on a voice out trunk', async () => {
+    const client = setupClient('voice_out_trunks/update_emergency.yaml');
+    const result = await client.voiceOutTrunks().update({
+      id: '425ce763-a3a9-49b4-af5b-ada1a65c8864',
+      emergencyEnableAll: true,
+      emergencyDids: [
+        { id: 'did-aaa', type: 'dids' },
+        { id: 'did-bbb', type: 'dids' },
+      ],
+    });
+    expect(result.data.id).toBe('425ce763-a3a9-49b4-af5b-ada1a65c8864');
+    expect(result.data.emergencyEnableAll).toBe(true);
+  });
+
   it('deletes a voice out trunk', async () => {
     const client = setupClient('voice_out_trunks/delete.yaml');
     await expect(client.voiceOutTrunks().remove('425ce763-a3a9-49b4-af5b-ada1a65c8864')).resolves.toBeUndefined();
