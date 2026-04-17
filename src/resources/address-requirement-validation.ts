@@ -6,13 +6,13 @@ import type { Address } from './address.js';
 export interface AddressRequirementValidation {
   id: string;
   type: 'address_requirement_validations';
-  requirement?: AddressRequirement | ResourceRef;
+  addressRequirement?: AddressRequirement | ResourceRef;
   identity?: Identity | ResourceRef;
   address?: Address | ResourceRef;
 }
 
 export interface AddressRequirementValidationWrite {
-  requirement?: ResourceRef;
+  addressRequirement?: ResourceRef;
   identity?: ResourceRef;
   address?: ResourceRef;
 }
@@ -23,7 +23,7 @@ export const ADDRESS_REQUIREMENT_VALIDATION_RESOURCE = defineResource<
 >()({
   type: 'address_requirement_validations',
   path: 'address_requirement_validations',
-  writableKeys: ['requirement', 'identity', 'address'],
-  relationshipKeys: ['requirement', 'identity', 'address'],
+  writableKeys: ['addressRequirement', 'identity', 'address'],
+  relationshipKeys: ['addressRequirement', 'identity', 'address'],
   operations: ['list', 'find', 'create', 'remove'],
 });
