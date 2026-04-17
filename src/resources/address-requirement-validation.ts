@@ -25,5 +25,5 @@ export const ADDRESS_REQUIREMENT_VALIDATION_RESOURCE = defineResource<
   path: 'address_requirement_validations',
   writableKeys: ['addressRequirement', 'identity', 'address'],
   relationshipKeys: ['addressRequirement', 'identity', 'address'],
-  operations: ['list', 'find', 'create', 'remove'],
+  operations: ['create'],
 });

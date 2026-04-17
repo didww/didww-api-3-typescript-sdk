@@ -7,7 +7,7 @@ import { describeOperationEnforcement } from '../helpers/operation-enforcement.j
 describe('AddressRequirementValidations', () => {
   describeOperationEnforcement({
     clientMethod: 'addressRequirementValidations',
-    allowedOperations: ['list', 'find', 'create', 'remove'],
+    allowedOperations: ['create'],
     resourceType: 'address_requirement_validations',
   });
   it('creates an address requirement validation', async () => {
