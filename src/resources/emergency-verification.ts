@@ -1,4 +1,5 @@
 import { defineResource, type ResourceRef } from './base.js';
+import type { CallbackMethod } from '../enums.js';
 import type { Address } from './address.js';
 import type { Did } from './did.js';
 
@@ -16,7 +17,7 @@ export interface EmergencyVerification {
   /** URL to receive status-change webhooks (POST or GET). */
   callbackUrl: string | null;
   /** HTTP method for the callback: "POST" or "GET". */
-  callbackMethod: string | null;
+  callbackMethod: CallbackMethod | null;
   /** Customer-supplied reference tag (max 100 chars). */
   externalReferenceId: string | null;
   createdAt: string;
@@ -27,7 +28,7 @@ export interface EmergencyVerification {
 
 export interface EmergencyVerificationWrite {
   callbackUrl?: string | null;
-  callbackMethod?: string | null;
+  callbackMethod?: CallbackMethod | null;
   externalReferenceId?: string | null;
   address?: ResourceRef;
   emergencyCallingService?: ResourceRef;
