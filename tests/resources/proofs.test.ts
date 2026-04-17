@@ -21,6 +21,7 @@ describe('Proofs', () => {
     expect(pt).toBeDefined();
     expect(isIncluded(pt!)).toBe(true);
     expect((pt as ProofType).name).toBe('Drivers License');
+    expect(result.data.externalReferenceId).toBe('proof-ref-001');
   });
 
   it('deletes a proof', async () => {

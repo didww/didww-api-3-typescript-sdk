@@ -12,22 +12,17 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/proofs
   response:
     body:
-      string: "{\n  \"data\": {\n    \"id\": \"ed46925b-a830-482d-917d-015858cf7ab9\"\
-        ,\n    \"type\": \"proofs\",\n    \"attributes\": {\n      \"created_at\"\
-        : \"2021-04-01T15:03:49.672Z\",\n      \"expires_at\": null\n    },\n    \"\
-        relationships\": {\n      \"proof_type\": {\n        \"links\": {\n      \
-        \    \"self\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/proof_type\"\
-        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/proof_type\"\
-        \n        },\n        \"data\": {\n          \"type\": \"proof_types\",\n\
-        \          \"id\": \"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1\"\n        }\n \
-        \     },\n      \"entity\": {\n        \"links\": {\n          \"self\": \"\
-        https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/entity\"\
-        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/entity\"\
-        \n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\"\
-        : \"19cd7b22-559b-41d4-99c9-7ad7ad63d5d1\",\n      \"type\": \"proof_types\"\
-        ,\n      \"attributes\": {\n        \"name\": \"Drivers License\",\n     \
-        \   \"entity_type\": \"Personal\"\n      }\n    }\n  ],\n  \"meta\": {\n \
-        \   \"api_version\": \"2021-04-19\"\n  }\n}"
+      string: '{"data": {"id": "ed46925b-a830-482d-917d-015858cf7ab9", "type": "proofs",
+        "attributes": {"created_at": "2021-04-01T15:03:49.672Z", "expires_at": null,
+        "external_reference_id": "proof-ref-001"}, "relationships": {"proof_type":
+        {"links": {"self": "https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/proof_type",
+        "related": "https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/proof_type"},
+        "data": {"type": "proof_types", "id": "19cd7b22-559b-41d4-99c9-7ad7ad63d5d1"}},
+        "entity": {"links": {"self": "https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/relationships/entity",
+        "related": "https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/entity"}}}},
+        "included": [{"id": "19cd7b22-559b-41d4-99c9-7ad7ad63d5d1", "type": "proof_types",
+        "attributes": {"name": "Drivers License", "entity_type": "Personal"}}], "meta":
+        {"api_version": "2021-04-19"}}'
     headers:
       Content-Type:
       - application/vnd.api+json
