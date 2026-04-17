@@ -21,8 +21,8 @@ interactions:
         true, "callback_url": null, "authentication_method": {"type": "credentials_and_ip",
         "attributes": {"allowed_sip_ips": ["10.11.12.13/32"], "tech_prefix": "", "username":
         "dpjgwbbac9", "password": "z0hshvbcy7"}}, "external_reference_id": "vot-ref-001",
-        "emergency_enable_all": false}, "relationships": {"default_did": {"links":
-        {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/default_did",
+        "emergency_enable_all": false, "rtp_timeout": 30}, "relationships": {"default_did":
+        {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/default_did",
         "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/default_did"},
         "data": {"type": "dids", "id": "7de7f718-4042-4d74-9fe9-863fa1777520"}}, "dids":
         {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/dids",

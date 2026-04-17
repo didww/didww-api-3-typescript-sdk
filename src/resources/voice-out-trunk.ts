@@ -28,6 +28,7 @@ export interface VoiceOutTrunk {
   createdAt: string;
   externalReferenceId: string | null;
   emergencyEnableAll: boolean;
+  rtpTimeout: number | null;
   authenticationMethod: AuthenticationMethod;
   defaultDid?: Did | ResourceRef;
   dids?: (Did | ResourceRef)[];
@@ -49,6 +50,7 @@ export interface VoiceOutTrunkWrite {
   callbackUrl?: string | null;
   externalReferenceId?: string | null;
   emergencyEnableAll?: boolean;
+  rtpTimeout?: number | null;
   authenticationMethod?: AuthenticationMethod;
   defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
@@ -70,6 +72,7 @@ const WRITABLE_KEYS = [
   'callbackUrl',
   'externalReferenceId',
   'emergencyEnableAll',
+  'rtpTimeout',
   'authenticationMethod',
   'defaultDid',
   'dids',

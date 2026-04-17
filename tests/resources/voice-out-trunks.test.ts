@@ -34,6 +34,7 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.thresholdAmount).toBe('200.0');
     expect(result.data.callbackUrl).toBeNull();
     expect(result.data.emergencyEnableAll).toBe(false);
+    expect(result.data.rtpTimeout).toBe(30);
     // Polymorphic authentication_method
     const authMethod = result.data.authenticationMethod;
     expect(authMethod).toBeDefined();
