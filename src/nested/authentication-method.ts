@@ -62,6 +62,23 @@ export function twilioAuthenticationMethod(
   return { type: 'twilio', ...attrs };
 }
 
+// Type guard functions for AuthenticationMethod narrowing
+export function isIpOnly(m: AuthenticationMethod): m is IpOnlyAuthenticationMethod {
+  return m.type === 'ip_only';
+}
+
+export function isCredentialsAndIp(m: AuthenticationMethod): m is CredentialsAndIpAuthenticationMethod {
+  return m.type === 'credentials_and_ip';
+}
+
+export function isTwilio(m: AuthenticationMethod): m is TwilioAuthenticationMethod {
+  return m.type === 'twilio';
+}
+
+export function isGenericAuth(m: AuthenticationMethod): m is GenericAuthenticationMethod {
+  return m.type !== 'ip_only' && m.type !== 'credentials_and_ip' && m.type !== 'twilio';
+}
+
 export interface SerializedAuthenticationMethod {
   type: string;
   attributes: Record<string, unknown>;

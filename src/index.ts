@@ -79,6 +79,10 @@ export {
   ipOnlyAuthenticationMethod,
   credentialsAndIpAuthenticationMethod,
   twilioAuthenticationMethod,
+  isIpOnly,
+  isCredentialsAndIp,
+  isTwilio,
+  isGenericAuth,
 } from './nested/authentication-method.js';
 export {
   didOrderItem,
