@@ -5,12 +5,19 @@ import type { Did } from './did.js';
 export interface EmergencyVerification {
   id: string;
   type: 'emergency_verifications';
+  /** DIDWW-assigned human-readable reference (e.g. "EVR-123456"). */
   reference: string;
+  /** Current verification status: "pending", "approved", or "rejected". */
   status: string;
+  /** Array of rejection reason strings; null when not rejected. */
   rejectReasons: string[] | null;
+  /** Free-form comment accompanying a rejection; null when not rejected. */
   rejectComment: string | null;
+  /** URL to receive status-change webhooks (POST or GET). */
   callbackUrl: string | null;
+  /** HTTP method for the callback: "POST" or "GET". */
   callbackMethod: string | null;
+  /** Customer-supplied reference tag (max 100 chars). */
   externalReferenceId: string | null;
   createdAt: string;
   address?: Address | ResourceRef;

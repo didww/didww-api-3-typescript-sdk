@@ -10,12 +10,18 @@ import type { Did } from './did.js';
 export interface EmergencyCallingService {
   id: string;
   type: 'emergency_calling_services';
+  /** Service display name. */
   name: string;
+  /** DIDWW-assigned human-readable reference (e.g. "ECS-0042"). */
   reference: string;
+  /** Current service status: "pending setup", "pending update", "active", "canceled". */
   status: string;
+  /** When the service was activated; null while pending. */
   activatedAt: string | null;
+  /** When the service was canceled; null while active/pending. */
   canceledAt: string | null;
   createdAt: string;
+  /** Next renewal date; null if not yet activated or already canceled. */
   renewDate: string | null;
   country?: Country | ResourceRef;
   didGroupType?: DidGroupType | ResourceRef;
