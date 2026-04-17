@@ -16,7 +16,11 @@ This SDK uses [kitsu-core](https://github.com/wopian/kitsu/tree/master/packages/
 
 Read more https://doc.didww.com/api
 
-This SDK sends the `X-DIDWW-API-Version: 2022-05-10` header with every request.
+This SDK sends the `X-DIDWW-API-Version: 2026-04-16` header with every request.
+
+NPM Versions **3.X.X** are intended to use with DIDWW API 3 version [2026-04-16](https://doc.didww.com/api3/2026-04-16/index.html).
+
+NPM Versions **2.X.X** and branch [release-2](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-2) are intended to use with DIDWW API 3 version [2022-05-10](https://doc.didww.com/api3/2022-05-10/index.html).
 
 ## Installation
 
@@ -134,7 +138,7 @@ client.didGroupTypes();
 client.nanpaPrefixes();
 client.proofTypes();
 client.publicKeys();
-client.requirements();
+client.addressRequirements();
 client.supportingDocumentTemplates();
 
 // Stock keeping units and qty-based pricings are include-only resources:
@@ -223,11 +227,14 @@ const group = await client.voiceInTrunkGroups().create({
 > **Note:** Voice Out Trunks and some `OnCliMismatchAction` values (`REPLACE_CLI`, `RANDOMIZE_CLI`) require additional account configuration. Contact DIDWW support to enable these features.
 
 ```typescript
-import { DefaultDstAction, OnCliMismatchAction } from '@didww/sdk';
+import { DefaultDstAction, OnCliMismatchAction, ipOnlyAuthenticationMethod } from '@didww/sdk';
 
 const voTrunk = await client.voiceOutTrunks().create({
   name: 'My Outbound Trunk',
-  allowedSipIps: ['0.0.0.0/0'],
+  authenticationMethod: ipOnlyAuthenticationMethod({
+    allowedSipIps: ['203.0.113.0/24'],
+    techPrefix: '',
+  }),
   defaultDstAction: DefaultDstAction.ALLOW_ALL,
   onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
 });
@@ -315,7 +322,10 @@ import { ExportType } from '@didww/sdk';
 
 const exp = await client.exports().create({
   exportType: ExportType.CDR_IN,
-  filters: { year: 2025, month: 1 },
+  filters: {
+    from: '2026-04-15 00:00:00', // inclusive (time_start >= from)
+    to: '2026-04-16 00:00:00',   // exclusive (time_start < to)
+  },
 });
 
 // Download when completed
@@ -471,6 +481,7 @@ await client.dids().update(did);
 | Available DID   | `availableDidOrderItem({ skuId, availableDidId })`     |
 | Reservation DID | `reservationDidOrderItem({ skuId, didReservationId })` |
 | Capacity        | `capacityOrderItem({ capacityPoolId, qty })`           |
+| Emergency       | `emergencyOrderItem({ emergencyCallingServiceId, qty })` |
 
 ## Date and Datetime Fields
 
@@ -511,7 +522,7 @@ import {
   VoiceOutTrunkStatus, // ACTIVE, BLOCKED
   CliFormat, // RAW, E164, LOCAL
   AreaLevel, // WORLDWIDE, COUNTRY, AREA, CITY
-  Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT
+  Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT, P2P, A2P, EMERGENCY, CNAM_OUT
   StirShakenMode, // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
   // Integer enums
   TransportProtocol, // UDP=1, TCP=2, TLS=3
@@ -611,7 +622,7 @@ try {
 | AvailableDid                      | `client.availableDids()`                      | list, find                         |
 | ProofType                         | `client.proofTypes()`                         | list, find                         |
 | PublicKey                         | `client.publicKeys()`                         | list, find                         |
-| Requirement                       | `client.requirements()`                       | list, find                         |
+| AddressRequirement                | `client.addressRequirements()`                | list, find                         |
 | SupportingDocumentTemplate        | `client.supportingDocumentTemplates()`        | list, find                         |
 | StockKeepingUnit                  | include on `didGroups()`                      | include only                       |
 | QtyBasedPricing                   | include on `capacityPools()`                  | include only                       |
@@ -627,12 +638,17 @@ try {
 | Order                             | `client.orders()`                             | list, find, create, update, delete |
 | Export                            | `client.exports()`                            | list, find, create, update, delete |
 | Address                           | `client.addresses()`                          | list, find, create, update, delete |
-| AddressVerification               | `client.addressVerifications()`               | list, find, create, delete         |
+| AddressVerification               | `client.addressVerifications()`               | list, find, create, update, delete |
 | Identity                          | `client.identities()`                         | list, find, create, update, delete |
 | EncryptedFile                     | `client.encryptedFiles()`                     | list, find, delete                 |
 | PermanentSupportingDocument       | `client.permanentSupportingDocuments()`       | create, delete                     |
 | Proof                             | `client.proofs()`                             | create, delete                     |
-| RequirementValidation             | `client.requirementValidations()`             | create                             |
+| AddressRequirementValidation      | `client.addressRequirementValidations()`      | create                             |
+| DidHistory                        | `client.didHistory()`                         | list, find                         |
+| EmergencyRequirement              | `client.emergencyRequirements()`              | list, find                         |
+| EmergencyRequirementValidation    | `client.emergencyRequirementValidations()`    | create                             |
+| EmergencyCallingService           | `client.emergencyCallingServices()`           | list, find, delete                 |
+| EmergencyVerification             | `client.emergencyVerifications()`             | list, find, create, update         |
 
 ## Contributing
 
