@@ -86,7 +86,7 @@ describe('Exports', () => {
       const headers = await downloadExportAndCaptureHeaders();
       expect(headers.get('Api-Key')).toBe('test-key');
       expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
-      expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+      expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
     });
 
     it('does not send Content-Type or Accept headers', async () => {

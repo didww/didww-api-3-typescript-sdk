@@ -63,7 +63,7 @@ describe('DidwwClient', () => {
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.has('Api-Key')).toBe(false);
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('sends User-Agent header with SDK version', async () => {
@@ -115,7 +115,7 @@ describe('DidwwClient', () => {
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.get('Api-Key')).toBe('test-key');
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('sends Api-Key and API version headers for encrypted file upload', async () => {
@@ -135,7 +135,7 @@ describe('DidwwClient', () => {
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.get('Api-Key')).toBe('test-key');
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('accepts custom fetch without modifying it', () => {
