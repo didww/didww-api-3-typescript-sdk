@@ -7,6 +7,7 @@ import type { VoiceInTrunkGroup } from './voice-in-trunk-group.js';
 import type { CapacityPool } from './capacity-pool.js';
 import type { SharedCapacityGroup } from './shared-capacity-group.js';
 import type { AddressVerification } from './address-verification.js';
+import type { EmergencyCallingService } from './emergency-calling-service.js';
 
 export interface Did {
   id: string;
@@ -30,6 +31,7 @@ export interface Did {
   capacityPool?: CapacityPool | ResourceRef;
   sharedCapacityGroup?: SharedCapacityGroup | ResourceRef | null;
   addressVerification?: AddressVerification | ResourceRef;
+  emergencyCallingService?: EmergencyCallingService | ResourceRef | null;
 }
 
 export interface DidWrite {
@@ -42,6 +44,7 @@ export interface DidWrite {
   voiceInTrunkGroup?: ResourceRef | null;
   capacityPool?: ResourceRef | null;
   sharedCapacityGroup?: ResourceRef | null;
+  emergencyCallingService?: ResourceRef | null;
 }
 
 const WRITABLE_KEYS = [
@@ -54,13 +57,14 @@ const WRITABLE_KEYS = [
   'voiceInTrunkGroup',
   'capacityPool',
   'sharedCapacityGroup',
+  'emergencyCallingService',
 ] as const satisfies readonly (keyof DidWrite)[];
 
 export const DID_RESOURCE = defineResource<Did, DidWrite>()({
   type: 'dids',
   path: 'dids',
   writableKeys: WRITABLE_KEYS,
-  relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup'],
+  relationshipKeys: ['voiceInTrunk', 'voiceInTrunkGroup', 'capacityPool', 'sharedCapacityGroup', 'emergencyCallingService'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
   serializeCustom(data: DidWrite, _method: 'POST' | 'PATCH') {
     const result = filterWritableKeys(data, WRITABLE_KEYS);
