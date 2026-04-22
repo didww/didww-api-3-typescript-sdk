@@ -32,7 +32,7 @@ describe('EmergencyCallingServices', () => {
     expect(result.data.type).toBe('emergency_calling_services');
     expect(result.data.name).toBe('Emergency US');
     expect(result.data.status).toBe(EmergencyCallingServiceStatus.ACTIVE);
-    expect(result.data.renewDate).toBe('2026-05-01T00:00:00.000Z');
+    expect(result.data.renewDate).toBe('2026-05-01');
   });
 
   it('finds an emergency calling service with included address', async () => {

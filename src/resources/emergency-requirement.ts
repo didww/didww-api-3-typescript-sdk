@@ -12,7 +12,7 @@ export interface EmergencyRequirement {
   addressMandatoryFields: string[];
   personalMandatoryFields: string[];
   businessMandatoryFields: string[];
-  estimateSetupTime: number;
+  estimateSetupTime: string;
   requirementRestrictionMessage: string | null;
   country?: Country | ResourceRef;
   didGroupType?: DidGroupType | ResourceRef;

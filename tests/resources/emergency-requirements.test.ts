@@ -25,7 +25,7 @@ describe('EmergencyRequirements', () => {
     const result = await client.emergencyRequirements().find('er-001');
     expect(result.data.id).toBe('er-001');
     expect(result.data.type).toBe('emergency_requirements');
-    expect(result.data.estimateSetupTime).toBe(5);
+    expect(result.data.estimateSetupTime).toBe('7-14 days');
     expect(result.data.requirementRestrictionMessage).toBeNull();
   });
 });

@@ -6,16 +6,16 @@ import { createReadOnlyResource } from './base.js';
  */
 export interface DidHistoryBillingCyclesMeta {
   /** Previous billing_cycles_count value. */
-  from: number;
+  from: string;
   /** New billing_cycles_count value. */
-  to: number;
+  to: string;
 }
 
 /**
  * DID History record representing a single ownership event.
  *
  * When `action` is `'billing_cycles_count_changed'`, the response includes
- * JSON:API `meta` with `from` and `to` integers representing the previous
+ * JSON:API `meta` with `from` and `to` strings representing the previous
  * and new billing_cycles_count values. These meta fields are absent for
  * every other action.
  */
@@ -32,7 +32,7 @@ export interface DidHistory {
   createdAt: string;
   /**
    * Resource-level meta. Present only when `action` is
-   * `'billing_cycles_count_changed'`; contains `from` and `to` integers
+   * `'billing_cycles_count_changed'`; contains `from` and `to` strings
    * representing the previous and new billing_cycles_count values.
    */
   meta?: DidHistoryBillingCyclesMeta;
