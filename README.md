@@ -528,7 +528,7 @@ import {
   ExportStatus, // PENDING, PROCESSING, COMPLETED
   IdentityType, // PERSONAL, BUSINESS, ANY
   OrderStatus, // PENDING, CANCELED, COMPLETED
-  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI*
+  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI* (requires account config)
   MediaEncryptionMode, // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
   DefaultDstAction, // ALLOW_ALL, REJECT_ALL
   VoiceOutTrunkStatus, // ACTIVE, BLOCKED
@@ -536,6 +536,9 @@ import {
   AreaLevel, // WORLDWIDE, COUNTRY, AREA, CITY
   Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT, P2P, A2P, EMERGENCY, CNAM_OUT
   StirShakenMode, // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
+  EmergencyCallingServiceStatus, // ACTIVE, CANCELED, CHANGES_REQUIRED, IN_PROCESS, NEW, PENDING_UPDATE
+  EmergencyVerificationStatus, // PENDING, APPROVED, REJECTED
+  DiversionRelayPolicy, // NONE, AS_IS, SIP, TEL
   // Integer enums
   TransportProtocol, // UDP=1, TCP=2, TLS=3
   RxDtmfFormat, // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
