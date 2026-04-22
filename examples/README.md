@@ -61,6 +61,7 @@ DIDWW_API_KEY=your_api_key npx tsx examples/balance.ts
 | [`emergency-calling-services.ts`](emergency-calling-services.ts) | Lists and cancels customer emergency calling services. |
 | [`emergency-verifications.ts`](emergency-verifications.ts) | Lists and creates emergency verifications. |
 | [`emergency-requirement-validations.ts`](emergency-requirement-validations.ts) | Pre-validates an emergency order triple (requirement + address + identity). |
+| [`emergency-scenario.ts`](emergency-scenario.ts) | End-to-end: find DID → check requirements → validate → create verification → get service. |
 | [`orders-emergency.ts`](orders-emergency.ts) | Inspects server-created Emergency orders and `emergency_order_items`. |
 
 ## Upload file example
