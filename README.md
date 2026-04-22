@@ -332,6 +332,49 @@ const exp = await client.exports().create({
 const data = await client.downloadExport(exp.data.url);
 ```
 
+### Address Verifications
+
+```typescript
+// List address verifications
+const verifications = await client.addressVerifications().list();
+
+// Create address verification
+const verification = await client.addressVerifications().create({
+  callbackUrl: 'https://example.com/callback',
+  callbackMethod: CallbackMethod.POST,
+  address: ref('addresses', 'address-id'),
+  dids: [ref('dids', 'did-id')],
+});
+```
+
+### Emergency Services (2026-04-16)
+
+```typescript
+// List emergency requirements
+const emergReqs = await client.emergencyRequirements().list();
+
+// Create emergency verification
+const emergVerification = await client.emergencyVerifications().create({
+  callbackUrl: 'https://example.com/callback',
+  callbackMethod: CallbackMethod.POST,
+  address: ref('addresses', 'address-id'),
+  dids: [ref('dids', 'did-id')],
+});
+
+// List emergency calling services
+const emergServices = await client.emergencyCallingServices().list();
+```
+
+### DID History (2026-04-16)
+
+```typescript
+// List DID history
+const history = await client.didHistory().list();
+for (const entry of history.data) {
+  console.log(entry.action, entry.createdAt);
+}
+```
+
 ## Included Resources
 
 Use the `include` parameter to sideload related resources. Included relationships are resolved directly on the parent object:
