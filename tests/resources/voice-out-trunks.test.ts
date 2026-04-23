@@ -56,6 +56,22 @@ describe('VoiceOutTrunks', () => {
     expect((defaultDid as Did).number).toBe('37061498222');
   });
 
+  it('finds a voice out trunk with ip_only authentication_method', async () => {
+    const client = setupClient('voice_out_trunks/show_ip_only.yaml');
+    const result = await client.voiceOutTrunks().find('23fd58f9-9094-406c-bfd9-f4d25bda13c6');
+    expect(result.data.id).toBe('23fd58f9-9094-406c-bfd9-f4d25bda13c6');
+    expect(result.data.name).toBe('SDK Test credentials_and_ip');
+    expect(result.data.status).toBe('active');
+    // Polymorphic authentication_method must be ip_only
+    const authMethod = result.data.authenticationMethod;
+    expect(authMethod).toBeDefined();
+    expect(authMethod.type).toBe('ip_only');
+    expect((authMethod as any).allowedSipIps).toEqual(['203.0.113.1/32']);
+    // Must NOT have username or password (ip_only, not credentials_and_ip)
+    expect((authMethod as any).username).toBeUndefined();
+    expect((authMethod as any).password).toBeUndefined();
+  });
+
   it('creates a voice out trunk with ip_only authentication_method', async () => {
     const client = setupClient('voice_out_trunks/create.yaml');
     const result = await client.voiceOutTrunks().create({
