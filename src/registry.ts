@@ -12,7 +12,7 @@ import { AVAILABLE_DID_RESOURCE } from './resources/available-did.js';
 import { NANPA_PREFIX_RESOURCE } from './resources/nanpa-prefix.js';
 import { PROOF_TYPE_RESOURCE } from './resources/proof-type.js';
 import { PUBLIC_KEY_RESOURCE } from './resources/public-key.js';
-import { REQUIREMENT_RESOURCE } from './resources/requirement.js';
+import { ADDRESS_REQUIREMENT_RESOURCE } from './resources/address-requirement.js';
 import { SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE } from './resources/supporting-document-template.js';
 import { STOCK_KEEPING_UNIT_RESOURCE } from './resources/stock-keeping-unit.js';
 import { QTY_BASED_PRICING_RESOURCE } from './resources/qty-based-pricing.js';
@@ -31,8 +31,13 @@ import { ENCRYPTED_FILE_RESOURCE } from './resources/encrypted-file.js';
 import { ADDRESS_VERIFICATION_RESOURCE } from './resources/address-verification.js';
 import { PERMANENT_SUPPORTING_DOCUMENT_RESOURCE } from './resources/permanent-supporting-document.js';
 import { PROOF_RESOURCE } from './resources/proof.js';
-import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
+import { ADDRESS_REQUIREMENT_VALIDATION_RESOURCE } from './resources/address-requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
+import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
+import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
+import { EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE } from './resources/emergency-requirement-validation.js';
+import { EMERGENCY_CALLING_SERVICE_RESOURCE } from './resources/emergency-calling-service.js';
+import { EMERGENCY_VERIFICATION_RESOURCE } from './resources/emergency-verification.js';
 
 const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceConfig>([
   [COUNTRY_RESOURCE.type, COUNTRY_RESOURCE],
@@ -47,7 +52,7 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [NANPA_PREFIX_RESOURCE.type, NANPA_PREFIX_RESOURCE],
   [PROOF_TYPE_RESOURCE.type, PROOF_TYPE_RESOURCE],
   [PUBLIC_KEY_RESOURCE.type, PUBLIC_KEY_RESOURCE],
-  [REQUIREMENT_RESOURCE.type, REQUIREMENT_RESOURCE],
+  [ADDRESS_REQUIREMENT_RESOURCE.type, ADDRESS_REQUIREMENT_RESOURCE],
   [SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE.type, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE],
   [STOCK_KEEPING_UNIT_RESOURCE.type, STOCK_KEEPING_UNIT_RESOURCE],
   [QTY_BASED_PRICING_RESOURCE.type, QTY_BASED_PRICING_RESOURCE],
@@ -66,8 +71,13 @@ const REGISTRY: ReadonlyMap<string, ResourceConfig> = new Map<string, ResourceCo
   [ADDRESS_VERIFICATION_RESOURCE.type, ADDRESS_VERIFICATION_RESOURCE],
   [PERMANENT_SUPPORTING_DOCUMENT_RESOURCE.type, PERMANENT_SUPPORTING_DOCUMENT_RESOURCE],
   [PROOF_RESOURCE.type, PROOF_RESOURCE],
-  [REQUIREMENT_VALIDATION_RESOURCE.type, REQUIREMENT_VALIDATION_RESOURCE],
+  [ADDRESS_REQUIREMENT_VALIDATION_RESOURCE.type, ADDRESS_REQUIREMENT_VALIDATION_RESOURCE],
   [VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE.type, VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE],
+  [DID_HISTORY_RESOURCE.type, DID_HISTORY_RESOURCE],
+  [EMERGENCY_REQUIREMENT_RESOURCE.type, EMERGENCY_REQUIREMENT_RESOURCE],
+  [EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE.type, EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE],
+  [EMERGENCY_CALLING_SERVICE_RESOURCE.type, EMERGENCY_CALLING_SERVICE_RESOURCE],
+  [EMERGENCY_VERIFICATION_RESOURCE.type, EMERGENCY_VERIFICATION_RESOURCE],
 ]);
 
 export function getResourceConfig(type: string): ResourceConfig | undefined {

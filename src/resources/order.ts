@@ -8,13 +8,14 @@ export interface Order {
   id: string;
   type: 'orders';
   amount: string;
-  status: OrderStatus;
+  status: OrderStatus | (string & {});
   description: string;
   reference: string;
   createdAt: string;
   allowBackOrdering: boolean;
   callbackUrl: string | null;
   callbackMethod: CallbackMethod | null;
+  externalReferenceId: string | null;
   items: OrderItem[];
 }
 
@@ -23,6 +24,7 @@ export interface OrderWrite {
   items?: OrderItem[];
   callbackUrl?: string | null;
   callbackMethod?: CallbackMethod | null;
+  externalReferenceId?: string | null;
 }
 
 const WRITABLE_KEYS = [
@@ -30,6 +32,7 @@ const WRITABLE_KEYS = [
   'items',
   'callbackUrl',
   'callbackMethod',
+  'externalReferenceId',
 ] as const satisfies readonly (keyof OrderWrite)[];
 
 export const ORDER_RESOURCE = defineResource<Order, OrderWrite>()({

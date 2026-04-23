@@ -23,7 +23,9 @@ import {
   calculateFingerprint,
   encryptWithKeys,
   RequestValidator,
+  ipOnlyAuthenticationMethod,
 } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const API_KEY = process.env.DIDWW_API_KEY!;
 const client = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX });
@@ -324,8 +326,11 @@ console.log('\n== Voice Out Trunks ==');
 
 await test('Create voice out trunk', async () => {
   const voTrunk = await client.voiceOutTrunks().create({
-    name: `Test Outbound Trunk ${Math.random().toString(36).substring(2, 8)}`,
-    allowedSipIps: ['0.0.0.0/0'],
+    name: `Test Outbound Trunk ${crypto.randomBytes(4).toString('hex')}`,
+    authenticationMethod: ipOnlyAuthenticationMethod({
+      allowedSipIps: ['203.0.113.0/24'],
+      techPrefix: '',
+    }),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
   });
@@ -416,7 +421,7 @@ console.log('\n== Shared Capacity Groups ==');
 await test('Create shared capacity group', async () => {
   const pools = await client.capacityPools().list({ page: { size: 1 } });
   if (pools.data.length > 0) {
-    const suffix = Math.random().toString(36).substring(2, 8);
+    const suffix = crypto.randomBytes(4).toString('hex');
     const scg = await client.sharedCapacityGroups().create({
       name: `Test Shared Group ${suffix}`,
       sharedChannelsCount: 1,

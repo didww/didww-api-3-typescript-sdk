@@ -19,7 +19,7 @@ interactions:
         ,\n      \"company_name\": \"Test Company Limited\",\n      \"company_reg_number\"\
         : \"543221\",\n      \"vat_id\": \"GB1234\",\n      \"description\": \"test\
         \ identity\",\n      \"personal_tax_id\": \"987654321\",\n      \"identity_type\"\
-        : \"Business\",\n      \"created_at\": \"2021-04-01T14:56:34.637Z\",\n   \
+        : \"business\",\n      \"created_at\": \"2021-04-01T14:56:34.637Z\",\n   \
         \   \"external_reference_id\": \"111\",\n      \"verified\": false\n    },\n\
         \    \"relationships\": {\n      \"country\": {\n        \"links\": {\n  \
         \        \"self\": \"https://sandbox-api.didww.com/v3/identities/e96ae7d1-11d5-42bc-a5c5-211f3c3788ae/relationships/country\"\

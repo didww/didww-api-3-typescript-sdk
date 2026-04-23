@@ -20,6 +20,7 @@ describe('VoiceInTrunkGroups', () => {
     expect(trunks!.length).toBe(2);
     expect(isIncluded(trunks![0])).toBe(true);
     expect((trunks![0] as VoiceInTrunk).name).toBe('URI 33141081249');
+    expect(result.data[0].externalReferenceId).toBe('vitg-ref-001');
   });
 
   it('creates a voice in trunk group', async () => {

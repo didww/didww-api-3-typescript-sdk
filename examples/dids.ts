@@ -6,10 +6,11 @@ const client = new DidwwClient({
 });
 
 async function main() {
-  // Get last ordered DID
+  // Get last ordered DID (include 2026-04-16 emergency relationships)
   const dids = await client.dids().list({
     sort: '-created_at',
     page: { number: 1, size: 1 },
+    include: ['identity', 'emergency_calling_service', 'emergency_verification'],
   });
   if (dids.data.length === 0) {
     console.log('No DIDs found. Run an order example first.');
@@ -17,6 +18,10 @@ async function main() {
   }
   const did = dids.data[0];
   console.log(`DID: ${did.number} (${did.id})`);
+  console.log(`  Emergency enabled: ${did.emergencyEnabled}`);
+  if (did.emergencyCallingService) console.log(`  Emergency Calling Service: ${did.emergencyCallingService.id}`);
+  if (did.emergencyVerification) console.log(`  Emergency Verification:    ${did.emergencyVerification.id}`);
+  if (did.identity) console.log(`  Identity: ${did.identity.id}`);
 
   // Get last SIP trunk
   const trunks = await client.voiceInTrunks().list({

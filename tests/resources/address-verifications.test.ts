@@ -8,7 +8,7 @@ import { describeOperationEnforcement } from '../helpers/operation-enforcement.j
 describe('AddressVerifications', () => {
   describeOperationEnforcement({
     clientMethod: 'addressVerifications',
-    allowedOperations: ['list', 'find', 'create', 'remove'],
+    allowedOperations: ['list', 'find', 'create', 'update', 'remove'],
     resourceType: 'address_verifications',
   });
   it('lists address verifications', async () => {
@@ -16,7 +16,7 @@ describe('AddressVerifications', () => {
     const result = await client.addressVerifications().list();
     expect(result.data.length).toBeGreaterThan(0);
     const first = result.data[0];
-    expect(first.status).toBe('Pending');
+    expect(first.status).toBe('pending');
     expect(first.dids).toBeDefined();
     expect(Array.isArray(first.dids)).toBe(true);
     expect(first.dids!.length).toBe(1);
@@ -32,16 +32,28 @@ describe('AddressVerifications', () => {
     const client = setupClient('address_verifications/show.yaml');
     const result = await client.addressVerifications().find('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
     expect(result.data.id).toBe('c8e004b0-87ec-4987-b4fb-ee89db099f0e');
-    expect(result.data.status).toBe('Approved');
+    expect(result.data.status).toBe('approved');
     expect(result.data.rejectReasons).toBeNull();
   });
 
-  it('finds a rejected address verification with reject_reasons string', async () => {
+  it('finds a rejected address verification with reject_reasons array', async () => {
     const client = setupClient('address_verifications/show_rejected.yaml');
     const result = await client.addressVerifications().find('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
     expect(result.data.id).toBe('4bba99df-d9cc-48ab-a28a-9ff442bfd056');
-    expect(result.data.status).toBe('Rejected');
-    expect(result.data.rejectReasons).toBe('Building/house/apartment number is missing');
+    expect(result.data.status).toBe('rejected');
+    expect(result.data.rejectReasons).toEqual(['Building/house/apartment number is missing']);
+    expect(result.data.rejectComment).toBe('Please re-submit with a more recent utility bill.');
+    expect(result.data.externalReferenceId).toBe('crm-verif-0001');
+  });
+
+  it('updates external_reference_id on an address verification', async () => {
+    const client = setupClient('address_verifications/update.yaml');
+    const result = await client.addressVerifications().update({
+      id: '429e6d4e-2ee9-4953-aa98-0b3ac07f0f96',
+      externalReferenceId: 'updated-ref-42',
+    });
+    expect(result.data.id).toBe('429e6d4e-2ee9-4953-aa98-0b3ac07f0f96');
+    expect(result.data.externalReferenceId).toBe('updated-ref-42');
   });
 
   it('creates an address verification', async () => {
@@ -52,7 +64,7 @@ describe('AddressVerifications', () => {
       dids: [ref('dids', '9df99644-f1a5-4a3c-99a4-559d758eb96b')],
     });
     expect(result.data.id).toBeDefined();
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     const addr = result.data.address;
     expect(addr).toBeDefined();
     expect(isIncluded(addr!)).toBe(true);

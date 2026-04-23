@@ -1,5 +1,6 @@
 import type {
   Codec,
+  DiversionRelayPolicy,
   TransportProtocol,
   RxDtmfFormat,
   TxDtmfFormat,
@@ -40,6 +41,7 @@ export interface SipConfiguration {
   mediaEncryptionMode?: MediaEncryptionMode;
   stirShakenMode?: StirShakenMode;
   allowedRtpIps?: string[];
+  diversionRelayPolicy?: DiversionRelayPolicy;
 }
 
 export interface PstnConfiguration {

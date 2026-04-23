@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: '{"data":{"type":"exports","attributes":{"export_type":"cdr_in","filters":{"did_number":"1234556789","year":"2019","month":"01"}}}}'
+    body: '{"data":{"type":"exports","attributes":{"export_type":"cdr_in","filters":{"did_number":"1234556789","from":"2019-01-01 00:00:00","to":"2019-01-31 23:59:59"}}}}'
     headers:
       Accept:
       - application/vnd.api+json
@@ -14,7 +14,7 @@ interactions:
     body:
       string: "{\n  \"data\": {\n    \"id\": \"da15f006-5da4-45ca-b0df-735baeadf423\"\
         ,\n    \"type\": \"exports\",\n    \"attributes\": {\n      \"status\": \"\
-        Pending\",\n      \"created_at\": \"2019-01-02T10:23:00.897Z\",\n      \"\
+        pending\",\n      \"created_at\": \"2019-01-02T10:23:00.897Z\",\n      \"\
         url\": null,\n      \"callback_url\": null,\n      \"callback_method\": null,\n\
         \      \"export_type\": \"cdr_in\"\n    }\n  }\n}"
     headers:

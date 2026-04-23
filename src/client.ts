@@ -16,7 +16,7 @@ import { AVAILABLE_DID_RESOURCE } from './resources/available-did.js';
 import { NANPA_PREFIX_RESOURCE } from './resources/nanpa-prefix.js';
 import { PROOF_TYPE_RESOURCE } from './resources/proof-type.js';
 import { PUBLIC_KEY_RESOURCE } from './resources/public-key.js';
-import { REQUIREMENT_RESOURCE } from './resources/requirement.js';
+import { ADDRESS_REQUIREMENT_RESOURCE } from './resources/address-requirement.js';
 import { SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE } from './resources/supporting-document-template.js';
 import { CAPACITY_POOL_RESOURCE } from './resources/capacity-pool.js';
 import { VOICE_IN_TRUNK_RESOURCE } from './resources/voice-in-trunk.js';
@@ -33,8 +33,13 @@ import { ENCRYPTED_FILE_RESOURCE } from './resources/encrypted-file.js';
 import { ADDRESS_VERIFICATION_RESOURCE } from './resources/address-verification.js';
 import { PERMANENT_SUPPORTING_DOCUMENT_RESOURCE } from './resources/permanent-supporting-document.js';
 import { PROOF_RESOURCE } from './resources/proof.js';
-import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
+import { ADDRESS_REQUIREMENT_VALIDATION_RESOURCE } from './resources/address-requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
+import { DID_HISTORY_RESOURCE } from './resources/did-history.js';
+import { EMERGENCY_REQUIREMENT_RESOURCE } from './resources/emergency-requirement.js';
+import { EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE } from './resources/emergency-requirement-validation.js';
+import { EMERGENCY_CALLING_SERVICE_RESOURCE } from './resources/emergency-calling-service.js';
+import { EMERGENCY_VERIFICATION_RESOURCE } from './resources/emergency-verification.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json') as { version: string };
@@ -50,7 +55,7 @@ export interface DidwwClientOptions {
 }
 
 export class DidwwClient implements HttpClient {
-  private static readonly API_VERSION = '2022-05-10';
+  private static readonly API_VERSION = '2026-04-16';
   private static readonly USER_AGENT = `didww-typescript-sdk/${pkg.version}`;
   private readonly apiKey: string;
   private readonly baseUrl: string;
@@ -143,17 +148,15 @@ export class DidwwClient implements HttpClient {
     }
   }
 
-  async uploadEncryptedFiles(
+  async uploadEncryptedFile(
     fingerprint: string,
-    files: Array<{ data: Buffer; description?: string; filename?: string }>,
-  ): Promise<string[]> {
+    file: { data: Buffer; description?: string; filename?: string },
+  ): Promise<string> {
     const formData = new FormData();
     formData.append('encrypted_files[encryption_fingerprint]', fingerprint);
-    for (const file of files) {
-      formData.append('encrypted_files[items][][description]', file.description || '');
-      const blob = new Blob([file.data], { type: 'application/octet-stream' });
-      formData.append('encrypted_files[items][][file]', blob, file.filename || 'file.enc');
-    }
+    formData.append('encrypted_files[description]', file.description || '');
+    const blob = new Blob([file.data], { type: 'application/octet-stream' });
+    formData.append('encrypted_files[file]', blob, file.filename || 'file.enc');
     const url = `${this.baseUrl}/encrypted_files`;
     const response = await this._fetch(url, {
       method: 'POST',
@@ -165,10 +168,11 @@ export class DidwwClient implements HttpClient {
       throw new DidwwApiError(response.status, { errors: [{ detail: 'Upload failed' }] });
     }
     const result = (await response.json()) as Record<string, unknown>;
-    if (!Array.isArray(result.ids)) {
+    const data = result.data as Record<string, unknown> | undefined;
+    if (!data || typeof data.id !== 'string') {
       throw new DidwwClientError('Unexpected encrypted_files upload response');
     }
-    return result.ids as string[];
+    return data.id;
   }
 
   async downloadExport(url: string): Promise<Buffer> {
@@ -251,8 +255,8 @@ export class DidwwClient implements HttpClient {
   publicKeys() {
     return createRepository(this, PUBLIC_KEY_RESOURCE);
   }
-  requirements() {
-    return createRepository(this, REQUIREMENT_RESOURCE);
+  addressRequirements() {
+    return createRepository(this, ADDRESS_REQUIREMENT_RESOURCE);
   }
   supportingDocumentTemplates() {
     return createRepository(this, SUPPORTING_DOCUMENT_TEMPLATE_RESOURCE);
@@ -314,10 +318,25 @@ export class DidwwClient implements HttpClient {
   proofs() {
     return createRepository(this, PROOF_RESOURCE);
   }
-  requirementValidations() {
-    return createRepository(this, REQUIREMENT_VALIDATION_RESOURCE);
+  addressRequirementValidations() {
+    return createRepository(this, ADDRESS_REQUIREMENT_VALIDATION_RESOURCE);
   }
   voiceOutTrunkRegenerateCredentials() {
     return createRepository(this, VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE);
+  }
+  didHistory() {
+    return createRepository(this, DID_HISTORY_RESOURCE);
+  }
+  emergencyRequirements() {
+    return createRepository(this, EMERGENCY_REQUIREMENT_RESOURCE);
+  }
+  emergencyRequirementValidations() {
+    return createRepository(this, EMERGENCY_REQUIREMENT_VALIDATION_RESOURCE);
+  }
+  emergencyCallingServices() {
+    return createRepository(this, EMERGENCY_CALLING_SERVICE_RESOURCE);
+  }
+  emergencyVerifications() {
+    return createRepository(this, EMERGENCY_VERIFICATION_RESOURCE);
   }
 }

@@ -14,7 +14,7 @@ interactions:
     body:
       string: "{\n  \"data\": {\n    \"id\": \"68a46dd5-d405-4283-b7a5-62503267e9f8\"\
         ,\n    \"type\": \"orders\",\n    \"attributes\": {\n      \"amount\": \"\
-        44.35\",\n      \"status\": \"Completed\",\n      \"created_at\": \"2018-12-28T14:08:38.304Z\"\
+        44.35\",\n      \"status\": \"completed\",\n      \"created_at\": \"2018-12-28T14:08:38.304Z\"\
         ,\n      \"description\": \"Capacity\",\n      \"reference\": \"RUG-725648\"\
         ,\n      \"items\": [\n        {\n          \"type\": \"capacity_order_items\"\
         ,\n          \"attributes\": {\n            \"qty\": 1,\n            \"nrc\"\

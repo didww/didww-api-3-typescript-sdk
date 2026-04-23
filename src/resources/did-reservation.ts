@@ -5,7 +5,7 @@ export interface DidReservation {
   id: string;
   type: 'did_reservations';
   description: string;
-  expireAt: string;
+  expiresAt: string;
   createdAt: string;
   availableDid?: AvailableDid | ResourceRef;
 }

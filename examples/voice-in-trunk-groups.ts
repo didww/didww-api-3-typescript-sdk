@@ -3,6 +3,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/voice-in-trunk-groups.ts
  */
 import { DidwwClient, Environment, ref, pstnConfiguration, isIncluded } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -11,7 +12,7 @@ const client = new DidwwClient({
 
 async function main() {
   // Create two trunks to assign to the group
-  const suffix = Math.random().toString(36).substring(2, 8);
+  const suffix = crypto.randomBytes(4).toString('hex');
   const trunk1 = await client.voiceInTrunks().create({
     name: `Group Trunk A ${suffix}`,
     configuration: pstnConfiguration({ dst: '15551000001' }),
@@ -24,15 +25,17 @@ async function main() {
   });
   console.log(`Created trunk B: ${trunk2.data.id}`);
 
-  // Create a trunk group with both trunks assigned
+  // Create a trunk group with both trunks assigned (2026-04-16 external_reference_id for customer tagging)
   const group = await client.voiceInTrunkGroups().create({
     name: `Primary Failover Group ${suffix}`,
     capacityLimit: 10,
     voiceInTrunks: [ref('voice_in_trunks', trunk1.data.id), ref('voice_in_trunks', trunk2.data.id)],
+    externalReferenceId: `ts-tg-${suffix}`,
   });
   console.log(`\nCreated trunk group: ${group.data.id}`);
   console.log(`  name: ${group.data.name}`);
   console.log(`  capacityLimit: ${group.data.capacityLimit}`);
+  console.log(`  externalReferenceId: ${group.data.externalReferenceId}`);
 
   // List trunk groups with included trunks
   const groups = await client.voiceInTrunkGroups().list({

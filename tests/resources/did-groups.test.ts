@@ -5,7 +5,7 @@ import type { Country } from '../../src/resources/country.js';
 import type { City } from '../../src/resources/city.js';
 import type { DidGroupType } from '../../src/resources/did-group-type.js';
 import type { StockKeepingUnit } from '../../src/resources/stock-keeping-unit.js';
-import type { Requirement } from '../../src/resources/requirement.js';
+import type { AddressRequirement } from '../../src/resources/address-requirement.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('DidGroups', () => {
@@ -19,6 +19,7 @@ describe('DidGroups', () => {
     const result = await client.didGroups().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('did_groups');
+    expect(result.data[0].serviceRestrictions).toBeNull();
   });
 
   it('finds a DID group', async () => {
@@ -46,18 +47,18 @@ describe('DidGroups', () => {
     expect((result.data.stockKeepingUnits![0] as StockKeepingUnit).setupPrice).toBe('0.4');
   });
 
-  it('finds a DID group with include=requirement', async () => {
+  it('finds a DID group with include=address_requirement', async () => {
     const client = setupClient('did_groups/show_with_requirement.yaml');
     const result = await client.didGroups().find('2187c36d-28fb-436f-8861-5a0f5b5a3ee1', {
-      include: 'requirement',
+      include: 'address_requirement',
     });
     expect(result.data.id).toBe('2187c36d-28fb-436f-8861-5a0f5b5a3ee1');
     expect(result.data.prefix).toBe('241');
     expect(result.data.areaName).toBe('Aachen');
-    const requirement = result.data.requirement;
-    expect(requirement).toBeDefined();
-    expect(isIncluded(requirement!)).toBe(true);
-    expect((requirement as Requirement).id).toBe('8da1e0b2-047c-4baf-9c57-57143f09b9ce');
-    expect((requirement as Requirement).identityType).toBe('Any');
+    const addressRequirement = result.data.addressRequirement;
+    expect(addressRequirement).toBeDefined();
+    expect(isIncluded(addressRequirement!)).toBe(true);
+    expect((addressRequirement as AddressRequirement).id).toBe('8da1e0b2-047c-4baf-9c57-57143f09b9ce');
+    expect((addressRequirement as AddressRequirement).identityType).toBe('Any');
   });
 });

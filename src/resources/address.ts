@@ -14,6 +14,7 @@ export interface Address {
   description: string;
   createdAt: string;
   verified: boolean;
+  externalReferenceId: string | null;
   country?: Country | ResourceRef;
   identity?: Identity | ResourceRef;
   proofs?: (Proof | ResourceRef)[];
@@ -26,6 +27,7 @@ export interface AddressWrite {
   postalCode?: string;
   address?: string;
   description?: string;
+  externalReferenceId?: string | null;
   country?: ResourceRef;
   identity?: ResourceRef;
   area?: ResourceRef;
@@ -35,7 +37,17 @@ export interface AddressWrite {
 export const ADDRESS_RESOURCE = defineResource<Address, AddressWrite>()({
   type: 'addresses',
   path: 'addresses',
-  writableKeys: ['cityName', 'postalCode', 'address', 'description', 'country', 'identity', 'area', 'city'],
+  writableKeys: [
+    'cityName',
+    'postalCode',
+    'address',
+    'description',
+    'externalReferenceId',
+    'country',
+    'identity',
+    'area',
+    'city',
+  ],
   relationshipKeys: ['country', 'identity', 'area', 'city'],
   operations: ['list', 'find', 'create', 'update', 'remove'],
 });

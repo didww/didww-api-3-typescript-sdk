@@ -9,7 +9,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
     method: POST
-    uri: https://sandbox-api.didww.com/v3/requirement_validations
+    uri: https://sandbox-api.didww.com/v3/address_requirement_validations
   response:
     body:
       string: "{\n  \"errors\": [\n    {\n      \"title\": \"Identity Place of Birth\

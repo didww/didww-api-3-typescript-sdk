@@ -27,6 +27,7 @@ describe('Dids', () => {
     expect(first.order).toBeDefined();
     expect(isIncluded(first.order!)).toBe(true);
     expect((first.order as Order).reference).toBe('TZO-560180');
+    expect(first.emergencyEnabled).toBe(false);
   });
 
   it('finds a DID', async () => {
@@ -69,7 +70,7 @@ describe('Dids', () => {
     const av = result.data.addressVerification;
     expect(av).toBeDefined();
     expect(isIncluded(av!)).toBe(true);
-    expect((av as AddressVerification).status).toBe('Approved');
+    expect((av as AddressVerification).status).toBe('approved');
     expect((av as AddressVerification).reference).toBe('AHB-291174');
     const dg = result.data.didGroup;
     expect(dg).toBeDefined();
@@ -141,6 +142,16 @@ describe('Dids', () => {
       (did as Record<string, unknown>).voiceInTrunk = { id: TRUNK_ID, type: 'voice_in_trunks' };
       const result = await client.dids().update(did as unknown as DidWrite & { id: string });
       expect(result.data.id).toBe(DID_ID);
+    });
+
+    it('unassigns emergency_calling_service from Did', async () => {
+      loadCassette('dids/update_unassign_ecs.yaml');
+      const client = createTestClient();
+      const result = await client.dids().update({
+        id: '44957076-778a-4802-b60c-d22db0cda284',
+        emergencyCallingService: null,
+      });
+      expect(result.data.id).toBe('44957076-778a-4802-b60c-d22db0cda284');
     });
 
     it('find with included has clean dirty state', async () => {

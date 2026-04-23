@@ -7,12 +7,14 @@ export interface Proof {
   type: 'proofs';
   createdAt: string;
   expiresAt: string | null;
+  externalReferenceId: string | null;
   proofType?: ProofType | ResourceRef;
   entity?: ResourceRef;
   files?: (EncryptedFile | ResourceRef)[];
 }
 
 export interface ProofWrite {
+  externalReferenceId?: string | null;
   proofType?: ResourceRef;
   entity?: ResourceRef;
   files?: ResourceRef[];
@@ -21,7 +23,7 @@ export interface ProofWrite {
 export const PROOF_RESOURCE = defineResource<Proof, ProofWrite>()({
   type: 'proofs',
   path: 'proofs',
-  writableKeys: ['proofType', 'entity', 'files'],
+  writableKeys: ['externalReferenceId', 'proofType', 'entity', 'files'],
   relationshipKeys: ['proofType', 'entity', 'files'],
   operations: ['list', 'find', 'create', 'remove'],
 });

@@ -63,7 +63,7 @@ describe('DidwwClient', () => {
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.has('Api-Key')).toBe(false);
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('sends User-Agent header with SDK version', async () => {
@@ -87,14 +87,14 @@ describe('DidwwClient', () => {
     let capturedHeaders: HeadersInit | undefined;
     const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
       capturedHeaders = init?.headers;
-      return new Response(JSON.stringify({ ids: ['id-1'] }), {
+      return new Response(JSON.stringify({ data: { id: 'id-1', type: 'encrypted_files' } }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });
     };
 
     const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
-    await client.uploadEncryptedFiles('fingerprint-123', [{ data: Buffer.from('example') }]);
+    await client.uploadEncryptedFile('fingerprint-123', { data: Buffer.from('example') });
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
@@ -115,27 +115,27 @@ describe('DidwwClient', () => {
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.get('Api-Key')).toBe('test-key');
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('sends Api-Key and API version headers for encrypted file upload', async () => {
     let capturedHeaders: HeadersInit | undefined;
     const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
       capturedHeaders = init?.headers;
-      return new Response(JSON.stringify({ ids: ['id-1'] }), {
+      return new Response(JSON.stringify({ data: { id: 'id-1', type: 'encrypted_files' } }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });
     };
 
     const client = new DidwwClient({ apiKey: 'test-key', fetch: mockFetch });
-    const ids = await client.uploadEncryptedFiles('fingerprint-123', [{ data: Buffer.from('example') }]);
+    const id = await client.uploadEncryptedFile('fingerprint-123', { data: Buffer.from('example') });
 
-    expect(ids).toEqual(['id-1']);
+    expect(id).toBe('id-1');
     expect(capturedHeaders).toBeDefined();
     const headers = new Headers(capturedHeaders);
     expect(headers.get('Api-Key')).toBe('test-key');
-    expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+    expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
   });
 
   it('accepts custom fetch without modifying it', () => {

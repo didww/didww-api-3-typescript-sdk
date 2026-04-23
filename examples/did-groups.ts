@@ -16,7 +16,10 @@ async function main() {
   for (const group of didGroups.data) {
     const country = isIncluded<Country>(group.country) ? group.country : undefined;
     const skus = (group.stockKeepingUnits || []).filter((s): s is StockKeepingUnit => isIncluded(s));
-    console.log(`  ${group.prefix} - ${group.areaName} (${country?.name ?? 'unknown'}, ${skus.length} SKUs)`);
+    console.log(`\n  ${group.prefix} - ${group.areaName} (${country?.name ?? 'unknown'}, ${skus.length} SKUs)`);
+    console.log(`    Features: ${group.features.join(', ')}`); // 2026-04-16 adds p2p / a2p / emergency / cnam_out
+    console.log(`    Allow additional channels: ${group.allowAdditionalChannels}`);
+    if (group.serviceRestrictions) console.log(`    Service restrictions: ${group.serviceRestrictions}`); // 2026-04-16
   }
 }
 

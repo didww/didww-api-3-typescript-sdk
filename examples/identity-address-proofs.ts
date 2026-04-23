@@ -1,4 +1,4 @@
-import { DidwwClient, Environment, IdentityType, ref } from '../src/index.js';
+import { DidwwClient, Environment, IdentityType, ref, isIncluded } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -6,6 +6,29 @@ const client = new DidwwClient({
 });
 
 async function main() {
+  // List identities (include country + birth_country, 2026-04-16 adds birth_country)
+  console.log('=== Identities ===');
+  const identities = await client.identities().list({
+    include: ['country', 'birth_country'],
+  });
+  console.log(`Found ${identities.data.length} identities`);
+
+  for (const ident of identities.data.slice(0, 10)) {
+    console.log(`\nIdentity: ${ident.id}`);
+    console.log(`  Name: ${ident.firstName} ${ident.lastName}`);
+    console.log(`  Phone: ${ident.phoneNumber}`);
+    console.log(`  Type: ${ident.identityType}`);
+    if (ident.country && isIncluded(ident.country)) {
+      console.log(`  Country: ${ident.country.name}`);
+    }
+    if (ident.birthCountry && isIncluded(ident.birthCountry)) {
+      console.log(`  Birth Country: ${ident.birthCountry.name}`); // 2026-04-16
+    }
+    console.log(`  Birth Date: ${ident.birthDate}`);
+    console.log(`  Verified: ${ident.verified}`);
+    console.log(`  Created: ${ident.createdAt}`);
+  }
+
   // Get a country to use
   const countries = await client.countries().list({ filter: { iso: 'US' } });
   if (countries.data.length === 0) {
@@ -13,7 +36,7 @@ async function main() {
     return;
   }
   const country = countries.data[0];
-  console.log(`Using country: ${country.name} (${country.id})`);
+  console.log(`\nUsing country: ${country.name} (${country.id})`);
 
   // Create an identity
   const identity = await client.identities().create({

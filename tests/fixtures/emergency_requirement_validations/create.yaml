@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: '{"data":{"type":"emergency_requirement_validations","relationships":{"emergency_requirement":{"data":{"id":"b4ca7d30-7393-44c1-9509-40d89d2d8005","type":"emergency_requirements"}},"address":{"data":{"id":"a8adc376-ff24-46f4-bf80-8d408771a4d9","type":"addresses"}},"identity":{"data":{"id":"84578a0b-be5b-446a-9cd8-b56122c5be7f","type":"identities"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Api-Key:
+      - test-api-key
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/emergency_requirement_validations
+  response:
+    body:
+      string: '{"data":{"id":"b4ca7d30-7393-44c1-9509-40d89d2d8005","type":"emergency_requirement_validations"},"meta":{"api_version":"2026-04-16"}}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 201
+      message: Created
+version: 1

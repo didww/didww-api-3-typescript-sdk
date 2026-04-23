@@ -29,6 +29,7 @@ describe('Addresses', () => {
     expect(first.proofs).toBeDefined();
     expect(Array.isArray(first.proofs)).toBe(true);
     expect(first.proofs!.length).toBe(1);
+    expect(first.externalReferenceId).toBe('crm-addr-0001');
   });
 
   it('creates an address', async () => {

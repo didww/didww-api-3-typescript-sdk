@@ -16,7 +16,11 @@ This SDK uses [kitsu-core](https://github.com/wopian/kitsu/tree/master/packages/
 
 Read more https://doc.didww.com/api
 
-This SDK sends the `X-DIDWW-API-Version: 2022-05-10` header with every request.
+This SDK sends the `X-DIDWW-API-Version: 2026-04-16` header with every request.
+
+NPM Versions **3.X.X** are intended to use with DIDWW API 3 version [2026-04-16](https://doc.didww.com/api3/2026-04-16/index.html).
+
+NPM Versions **2.X.X** and branch [release-2](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-2) are intended to use with DIDWW API 3 version [2022-05-10](https://doc.didww.com/api3/2022-05-10/index.html).
 
 ## Installation
 
@@ -134,7 +138,7 @@ client.didGroupTypes();
 client.nanpaPrefixes();
 client.proofTypes();
 client.publicKeys();
-client.requirements();
+client.addressRequirements();
 client.supportingDocumentTemplates();
 
 // Stock keeping units and qty-based pricings are include-only resources:
@@ -222,15 +226,28 @@ const group = await client.voiceInTrunkGroups().create({
 
 > **Note:** Voice Out Trunks and some `OnCliMismatchAction` values (`REPLACE_CLI`, `RANDOMIZE_CLI`) require additional account configuration. Contact DIDWW support to enable these features.
 
-```typescript
-import { DefaultDstAction, OnCliMismatchAction } from '@didww/sdk';
+Voice Out Trunks use a polymorphic `authenticationMethod` (2026-04-16). Three types are supported:
 
+- **`credentials_and_ip`** -- default method; `username` and `password` are server-generated and returned in the response.
+- **`twilio`** -- requires a `twilioAccountSid`.
+- **`ip_only`** -- read-only; can only be configured by DIDWW staff upon request. Cannot be set via the API.
+
+```typescript
+import { DefaultDstAction, OnCliMismatchAction, credentialsAndIpAuthenticationMethod } from '@didww/sdk';
+
+// NOTE: 203.0.113.0/24 is RFC 5737 TEST-NET-3 documentation space.
+// Replace with the real CIDR of your SIP infrastructure.
 const voTrunk = await client.voiceOutTrunks().create({
   name: 'My Outbound Trunk',
-  allowedSipIps: ['0.0.0.0/0'],
+  authenticationMethod: credentialsAndIpAuthenticationMethod({
+    allowedSipIps: ['203.0.113.0/24'],
+    techPrefix: '',
+  }),
   defaultDstAction: DefaultDstAction.ALLOW_ALL,
   onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
 });
+// voTrunk.data.authenticationMethod.username -- server-generated
+// voTrunk.data.authenticationMethod.password -- server-generated
 ```
 
 ### Orders
@@ -315,11 +332,57 @@ import { ExportType } from '@didww/sdk';
 
 const exp = await client.exports().create({
   exportType: ExportType.CDR_IN,
-  filters: { year: 2025, month: 1 },
+  filters: {
+    from: '2026-04-15 00:00:00', // inclusive (time_start >= from)
+    to: '2026-04-16 00:00:00',   // exclusive (time_start < to)
+  },
 });
 
 // Download when completed
 const data = await client.downloadExport(exp.data.url);
+```
+
+### Address Verifications
+
+```typescript
+// List address verifications
+const verifications = await client.addressVerifications().list();
+
+// Create address verification
+const verification = await client.addressVerifications().create({
+  callbackUrl: 'https://example.com/callback',
+  callbackMethod: CallbackMethod.POST,
+  address: ref('addresses', 'address-id'),
+  dids: [ref('dids', 'did-id')],
+});
+```
+
+### Emergency Services (2026-04-16)
+
+```typescript
+// List emergency requirements
+const emergReqs = await client.emergencyRequirements().list();
+
+// Create emergency verification
+const emergVerification = await client.emergencyVerifications().create({
+  callbackUrl: 'https://example.com/callback',
+  callbackMethod: CallbackMethod.POST,
+  address: ref('addresses', 'address-id'),
+  dids: [ref('dids', 'did-id')],
+});
+
+// List emergency calling services
+const emergServices = await client.emergencyCallingServices().list();
+```
+
+### DID History (2026-04-16)
+
+```typescript
+// List DID history
+const history = await client.didHistory().list();
+for (const entry of history.data) {
+  console.log(entry.action, entry.createdAt);
+}
 ```
 
 ## Included Resources
@@ -471,16 +534,29 @@ await client.dids().update(did);
 | Available DID   | `availableDidOrderItem({ skuId, availableDidId })`     |
 | Reservation DID | `reservationDidOrderItem({ skuId, didReservationId })` |
 | Capacity        | `capacityOrderItem({ capacityPoolId, qty })`           |
+| Emergency       | `emergencyOrderItem({ emergencyCallingServiceId, qty })` |
 
 ## Date and Datetime Fields
 
 All date and datetime fields are returned as ISO 8601 strings. JavaScript's `Date` object has known pitfalls (mutable, timezone handling, 0-indexed months), so the SDK intentionally keeps these as `string` and lets you parse them with the library of your choice.
 
 - **Datetime fields** — ISO 8601 strings e.g. `"2024-01-15T10:00:00.000Z"`:
-  - All `createdAt` fields — present on most resources
-  - Expiry fields: `Did.expiresAt`, `DidReservation.expireAt`, `Proof.expiresAt`, `EncryptedFile.expireAt`
+  - `createdAt` — present on most resources
+  - `expiresAt` — `Did`, `DidReservation`, `Proof`, `EncryptedFile` (nullable)
+  - `activatedAt` — `EmergencyCallingService` (nullable)
+  - `canceledAt` — `EmergencyCallingService` (nullable)
 - **Date-only fields** — date strings e.g. `"1990-05-20"`:
-  - `Identity.birthDate`, `CapacityPool.renewDate`, `DidOrderItem.billedFrom`, `DidOrderItem.billedTo`
+  - `Identity.birthDate`
+  - `CapacityPool.renewDate`, `EmergencyCallingService.renewDate` (nullable)
+  - `DidOrderItem.billedFrom`, `DidOrderItem.billedTo`
+- **String fields** (not numeric):
+  - `EmergencyRequirement.estimateSetupTime` — e.g. `"7-14 days"`, `"1"`
+  - `EmergencyRequirement.requirementRestrictionMessage` — nullable
+
+**Important changes from previous API versions:**
+- `expireAt` renamed to `expiresAt` on `DidReservation` and `EncryptedFile`
+- `renewDate` is a date-only string, NOT a datetime
+- `estimateSetupTime` is a string, NOT a number
 
 ```typescript
 const did = await client.dids().find('uuid');
@@ -505,14 +581,17 @@ import {
   ExportStatus, // PENDING, PROCESSING, COMPLETED
   IdentityType, // PERSONAL, BUSINESS, ANY
   OrderStatus, // PENDING, CANCELED, COMPLETED
-  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI*
+  OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI* (requires account config)
   MediaEncryptionMode, // DISABLED, SRTP_SDES, SRTP_DTLS, ZRTP
   DefaultDstAction, // ALLOW_ALL, REJECT_ALL
   VoiceOutTrunkStatus, // ACTIVE, BLOCKED
   CliFormat, // RAW, E164, LOCAL
   AreaLevel, // WORLDWIDE, COUNTRY, AREA, CITY
-  Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT
+  Feature, // VOICE, VOICE_IN, VOICE_OUT, T38, SMS, SMS_IN, SMS_OUT, P2P, A2P, EMERGENCY, CNAM_OUT
   StirShakenMode, // DISABLED, ORIGINAL, PAI, ORIGINAL_PAI, VERSTAT
+  EmergencyCallingServiceStatus, // ACTIVE, CANCELED, CHANGES_REQUIRED, IN_PROCESS, NEW, PENDING_UPDATE
+  EmergencyVerificationStatus, // PENDING, APPROVED, REJECTED
+  DiversionRelayPolicy, // NONE, AS_IS, SIP, TEL
   // Integer enums
   TransportProtocol, // UDP=1, TCP=2, TLS=3
   RxDtmfFormat, // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
@@ -611,7 +690,7 @@ try {
 | AvailableDid                      | `client.availableDids()`                      | list, find                         |
 | ProofType                         | `client.proofTypes()`                         | list, find                         |
 | PublicKey                         | `client.publicKeys()`                         | list, find                         |
-| Requirement                       | `client.requirements()`                       | list, find                         |
+| AddressRequirement                | `client.addressRequirements()`                | list, find                         |
 | SupportingDocumentTemplate        | `client.supportingDocumentTemplates()`        | list, find                         |
 | StockKeepingUnit                  | include on `didGroups()`                      | include only                       |
 | QtyBasedPricing                   | include on `capacityPools()`                  | include only                       |
@@ -627,12 +706,17 @@ try {
 | Order                             | `client.orders()`                             | list, find, create, update, delete |
 | Export                            | `client.exports()`                            | list, find, create, update, delete |
 | Address                           | `client.addresses()`                          | list, find, create, update, delete |
-| AddressVerification               | `client.addressVerifications()`               | list, find, create, delete         |
+| AddressVerification               | `client.addressVerifications()`               | list, find, create, update, delete |
 | Identity                          | `client.identities()`                         | list, find, create, update, delete |
 | EncryptedFile                     | `client.encryptedFiles()`                     | list, find, delete                 |
 | PermanentSupportingDocument       | `client.permanentSupportingDocuments()`       | create, delete                     |
 | Proof                             | `client.proofs()`                             | create, delete                     |
-| RequirementValidation             | `client.requirementValidations()`             | create                             |
+| AddressRequirementValidation      | `client.addressRequirementValidations()`      | create                             |
+| DidHistory                        | `client.didHistory()`                         | list, find                         |
+| EmergencyRequirement              | `client.emergencyRequirements()`              | list, find                         |
+| EmergencyRequirementValidation    | `client.emergencyRequirementValidations()`    | create                             |
+| EmergencyCallingService           | `client.emergencyCallingServices()`           | list, find, delete                 |
+| EmergencyVerification             | `client.emergencyVerifications()`             | list, find, create, update         |
 
 ## Contributing
 

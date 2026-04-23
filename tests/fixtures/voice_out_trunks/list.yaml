@@ -12,49 +12,35 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/voice_out_trunks
   response:
     body:
-      string: "{\n  \"data\": [\n    {\n      \"id\": \"425ce763-a3a9-49b4-af5b-ada1a65c8864\"\
-        ,\n      \"type\": \"voice_out_trunks\",\n      \"attributes\": {\n      \
-        \  \"allowed_sip_ips\": [\n          \"10.11.12.13/32\"\n        ],\n    \
-        \    \"allowed_rtp_ips\": null,\n        \"allow_any_did_as_cli\": false,\n\
-        \        \"status\": \"blocked\",\n        \"on_cli_mismatch_action\": \"\
-        replace_cli\",\n        \"name\": \"test\",\n        \"capacity_limit\": 123,\n\
-        \        \"username\": \"dpjgwbbac9\",\n        \"password\": \"z0hshvbcy7\"\
-        ,\n        \"created_at\": \"2022-02-02T16:50:45.053Z\",\n        \"threshold_reached\"\
-        : false,\n        \"threshold_amount\": \"200.0\",\n        \"media_encryption_mode\"\
-        : \"srtp_sdes\",\n        \"default_dst_action\": \"reject_all\",\n      \
-        \  \"dst_prefixes\": [\n          \"370\"\n        ],\n        \"force_symmetric_rtp\"\
-        : true,\n        \"rtp_ping\": true,\n        \"callback_url\": null\n   \
-        \   },\n      \"relationships\": {\n        \"default_did\": {\n         \
-        \ \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/default_did\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/default_did\"\
-        \n          }\n        },\n        \"dids\": {\n          \"links\": {\n \
-        \           \"self\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/dids\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/dids\"\
-        \n          }\n        }\n      },\n      \"meta\": {\n        \"spent_amount\"\
-        : \"0.0\"\n      }\n    },\n    {\n      \"id\": \"b7183e37-f660-4d67-87dc-b2d9faa7041d\"\
-        ,\n      \"type\": \"voice_out_trunks\",\n      \"attributes\": {\n      \
-        \  \"allowed_sip_ips\": [\n          \"0.0.0.0/0\"\n        ],\n        \"\
-        allowed_rtp_ips\": null,\n        \"allow_any_did_as_cli\": false,\n     \
-        \   \"status\": \"active\",\n        \"on_cli_mismatch_action\": \"send_original_cli\"\
-        ,\n        \"name\": \"ts-sdk\",\n        \"capacity_limit\": null,\n   \
-        \     \"username\": \"50fb4hugfv\",\n        \"password\": \"evhwkcfjm5\"\
-        ,\n        \"created_at\": \"2022-02-02T17:05:58.661Z\",\n        \"threshold_reached\"\
-        : false,\n        \"threshold_amount\": null,\n        \"media_encryption_mode\"\
-        : \"disabled\",\n        \"default_dst_action\": \"allow_all\",\n        \"\
-        dst_prefixes\": [],\n        \"force_symmetric_rtp\": false,\n        \"rtp_ping\"\
-        : false,\n        \"callback_url\": null\n      },\n      \"relationships\"\
-        : {\n        \"default_did\": {\n          \"links\": {\n            \"self\"\
-        : \"https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/relationships/default_did\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/default_did\"\
-        \n          }\n        },\n        \"dids\": {\n          \"links\": {\n \
-        \           \"self\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/relationships/dids\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/dids\"\
-        \n          }\n        }\n      },\n      \"meta\": {\n        \"spent_amount\"\
-        : \"0.0\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 2,\n\
-        \    \"api_version\": \"2021-12-15\"\n  },\n  \"links\": {\n    \"first\"\
-        : \"https://sandbox-api.didww.com/v3/voice_out_trunks?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
-        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/voice_out_trunks?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
-        \n  }\n}"
+      string: '{"data": [{"id": "425ce763-a3a9-49b4-af5b-ada1a65c8864", "type": "voice_out_trunks",
+        "attributes": {"allowed_rtp_ips": null, "allow_any_did_as_cli": false, "status":
+        "blocked", "on_cli_mismatch_action": "replace_cli", "name": "test", "capacity_limit":
+        123, "created_at": "2022-02-02T16:50:45.053Z", "threshold_reached": false,
+        "threshold_amount": "200.0", "media_encryption_mode": "srtp_sdes", "default_dst_action":
+        "reject_all", "dst_prefixes": ["370"], "force_symmetric_rtp": true, "rtp_ping":
+        true, "callback_url": null, "authentication_method": {"type": "credentials_and_ip",
+        "attributes": {"allowed_sip_ips": ["203.0.113.1/32"], "tech_prefix": "", "username":
+        "dpjgwbbac9", "password": "z0hshvbcy7"}}, "external_reference_id": "vot-ref-001"},
+        "relationships": {"default_did": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/default_did",
+        "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/default_did"}},
+        "dids": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/relationships/dids",
+        "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/425ce763-a3a9-49b4-af5b-ada1a65c8864/dids"}}},
+        "meta": {"spent_amount": "0.0"}}, {"id": "b7183e37-f660-4d67-87dc-b2d9faa7041d",
+        "type": "voice_out_trunks", "attributes": {"allowed_rtp_ips": null, "allow_any_did_as_cli":
+        false, "status": "active", "on_cli_mismatch_action": "send_original_cli",
+        "name": "ts-sdk", "capacity_limit": null, "created_at": "2022-02-02T17:05:58.661Z",
+        "threshold_reached": false, "threshold_amount": null, "media_encryption_mode":
+        "disabled", "default_dst_action": "allow_all", "dst_prefixes": [], "force_symmetric_rtp":
+        false, "rtp_ping": false, "callback_url": null, "authentication_method": {"type":
+        "credentials_and_ip", "attributes": {"allowed_sip_ips": ["203.0.113.0/24"], "tech_prefix":
+        "", "username": "50fb4hugfv", "password": "evhwkcfjm5"}}, "external_reference_id":
+        "vot-ref-001"}, "relationships": {"default_did": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/relationships/default_did",
+        "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/default_did"}},
+        "dids": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/relationships/dids",
+        "related": "https://sandbox-api.didww.com/v3/voice_out_trunks/b7183e37-f660-4d67-87dc-b2d9faa7041d/dids"}}},
+        "meta": {"spent_amount": "0.0"}}], "meta": {"total_records": 2, "api_version":
+        "2021-12-15"}, "links": {"first": "https://sandbox-api.didww.com/v3/voice_out_trunks?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+        "last": "https://sandbox-api.didww.com/v3/voice_out_trunks?page%5Bnumber%5D=1&page%5Bsize%5D=50"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

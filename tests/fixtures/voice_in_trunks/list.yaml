@@ -12,70 +12,46 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/voice_in_trunks
   response:
     body:
-      string: "{\n  \"data\": [\n    {\n      \"id\": \"2b4b1fcf-fe6a-4de9-8a58-7df46820ba13\",\n      \"type\"\
-        : \"voice_in_trunks\",\n      \"attributes\": {\n        \"priority\": 1,\n\
-        \        \"capacity_limit\": null,\n        \"weight\": 65535,\n        \"\
-        name\": \"sample trunk pstn\",\n        \"cli_format\": \"e164\",\n      \
-        \  \"cli_prefix\": \"\",\n        \"description\": \"\",\n        \"ringing_timeout\"\
-        : null,\n        \"configuration\": {\n          \"type\": \"pstn_configurations\"\
-        ,\n          \"attributes\": {\n            \"dst\": \"442080995011\"\n  \
-        \        }\n        },\n        \"created_at\": \"2018-12-28T15:03:48.751Z\"\
-        \n      },\n      \"relationships\": {\n        \"voice_in_trunk_group\":\
-        \ {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/voice_in_trunk_group\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/voice_in_trunk_group\"\
-        \n          },\n          \"data\": null\n        },\n        \"pop\": {\n\
-        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/pop\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/pop\"\
-        \n          },\n          \"data\": null\n        }\n      }\n    },\n   \
-        \ {\n      \"id\": \"24cec518-da51-4274-9a4b-1aad910b996f\"\
-        ,\n      \"type\": \"voice_in_trunks\",\n      \"attributes\": {\n       \
-        \ \"priority\": 1,\n        \"capacity_limit\": null,\n        \"weight\"\
-        : 65535,\n        \"name\": \"Sip trunk sample\",\n        \"cli_format\"\
-        : \"local\",\n        \"cli_prefix\": \"\",\n        \"description\": \"\"\
-        ,\n        \"ringing_timeout\": null,\n        \"configuration\": {\n    \
-        \      \"type\": \"sip_configurations\",\n          \"attributes\": {\n  \
-        \          \"username\": \"username\",\n            \"host\": \"216.58.215.78\"\
-        ,\n            \"port\": 8060,\n            \"codec_ids\": [\n           \
-        \   9,\n              10,\n              8\n            ],\n            \"\
-        rx_dtmf_format_id\": 1,\n            \"tx_dtmf_format_id\": 1,\n         \
-        \   \"resolve_ruri\": true,\n            \"auth_enabled\": true,\n       \
-        \     \"auth_user\": \"auth_user\",\n            \"auth_password\": \"auth_password\"\
-        ,\n            \"auth_from_user\": \"\",\n            \"auth_from_domain\"\
-        : \"\",\n            \"sst_enabled\": false,\n            \"sst_min_timer\"\
-        : 600,\n            \"sst_max_timer\": 900,\n            \"sst_accept_501\"\
-        : true,\n            \"sip_timer_b\": 8000,\n            \"dns_srv_failover_timer\"\
-        : 2000,\n            \"rtp_ping\": false,\n            \"rtp_timeout\": 30,\n\
-        \            \"force_symmetric_rtp\": false,\n            \"symmetric_rtp_ignore_rtcp\"\
-        : false,\n            \"rerouting_disconnect_code_ids\": null,\n         \
-        \   \"sst_session_expires\": null,\n            \"sst_refresh_method_id\"\
-        : 1,\n            \"transport_protocol_id\": 1,\n            \"max_transfers\"\
-        : 2,\n            \"max_30x_redirects\": 5,\n            \"media_encryption_mode\"\
-        : \"disabled\",\n            \"stir_shaken_mode\": \"disabled\",\n       \
-        \     \"allowed_rtp_ips\": null\n          }\n        },\n        \"created_at\"\
-        : \"2018-12-28T15:00:43.522Z\"\n      },\n      \"relationships\": {\n   \
-        \     \"voice_in_trunk_group\": {\n          \"links\": {\n            \"\
-        self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/voice_in_trunk_group\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/voice_in_trunk_group\"\
-        \n          },\n          \"data\": null\n        },\n        \"pop\": {\n\
-        \          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/pop\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/pop\"\
-        \n          },\n          \"data\": {\n            \"type\": \"pops\",\n \
-        \           \"id\": \"ba7ccbef-82ac-4372-9391-eac90d5c9479\"\n          }\n\
-        \        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\":\
-        \ \"837c5764-a6c3-456f-aa37-71fc8f8ca07b\",\n      \"type\": \"voice_in_trunk_groups\"\
-        ,\n      \"attributes\": {\n        \"created_at\": \"2017-11-14T15:07:25.571Z\"\
-        ,\n        \"name\": \"sample trunk group\",\n        \"capacity_limit\":\
-        \ null\n      },\n      \"relationships\": {\n        \"voice_in_trunks\"\
-        : {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/relationships/voice_in_trunks\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/voice_in_trunks\"\
-        \n          }\n        }\n      },\n      \"meta\": {\n        \"trunks_count\"\
-        : 2\n      }\n    },\n    {\n      \"id\": \"ba7ccbef-82ac-4372-9391-eac90d5c9479\"\
-        ,\n      \"type\": \"pops\",\n      \"attributes\": {\n        \"name\": \"\
-        DE, FRA\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 68\n\
-        \  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=1&page%5Bsize%5D=4&sort=-created_at\"\
-        ,\n    \"next\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=2&page%5Bsize%5D=4&sort=-created_at\"\
-        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=18&page%5Bsize%5D=4&sort=-created_at\"\
-        \n  }\n}"
+      string: '{"data": [{"id": "2b4b1fcf-fe6a-4de9-8a58-7df46820ba13", "type": "voice_in_trunks",
+        "attributes": {"priority": 1, "capacity_limit": null, "weight": 65535, "name":
+        "sample trunk pstn", "cli_format": "e164", "cli_prefix": "", "description":
+        "", "ringing_timeout": null, "configuration": {"type": "pstn_configurations",
+        "attributes": {"dst": "442080995011"}}, "created_at": "2018-12-28T15:03:48.751Z",
+        "external_reference_id": "vit-ref-001"}, "relationships": {"voice_in_trunk_group":
+        {"links": {"self": "https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/voice_in_trunk_group",
+        "related": "https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/voice_in_trunk_group"},
+        "data": null}, "pop": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/relationships/pop",
+        "related": "https://sandbox-api.didww.com/v3/voice_in_trunks/2b4b1fcf-fe6a-4de9-8a58-7df46820ba13/pop"},
+        "data": null}}}, {"id": "24cec518-da51-4274-9a4b-1aad910b996f", "type": "voice_in_trunks",
+        "attributes": {"priority": 1, "capacity_limit": null, "weight": 65535, "name":
+        "Sip trunk sample", "cli_format": "local", "cli_prefix": "", "description":
+        "", "ringing_timeout": null, "configuration": {"type": "sip_configurations",
+        "attributes": {"username": "username", "host": "203.0.113.78", "port": 8060,
+        "codec_ids": [9, 10, 8], "rx_dtmf_format_id": 1, "tx_dtmf_format_id": 1, "resolve_ruri":
+        true, "auth_enabled": true, "auth_user": "auth_user", "auth_password": "auth_password",
+        "auth_from_user": "", "auth_from_domain": "", "sst_enabled": false, "sst_min_timer":
+        600, "sst_max_timer": 900, "sst_accept_501": true, "sip_timer_b": 8000, "dns_srv_failover_timer":
+        2000, "rtp_ping": false, "rtp_timeout": 30, "force_symmetric_rtp": false,
+        "symmetric_rtp_ignore_rtcp": false, "rerouting_disconnect_code_ids": null,
+        "sst_session_expires": null, "sst_refresh_method_id": 1, "transport_protocol_id":
+        1, "max_transfers": 2, "max_30x_redirects": 5, "media_encryption_mode": "disabled",
+        "stir_shaken_mode": "disabled", "allowed_rtp_ips": null}}, "created_at": "2018-12-28T15:00:43.522Z",
+        "external_reference_id": "vit-ref-001"}, "relationships": {"voice_in_trunk_group":
+        {"links": {"self": "https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/voice_in_trunk_group",
+        "related": "https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/voice_in_trunk_group"},
+        "data": null}, "pop": {"links": {"self": "https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/relationships/pop",
+        "related": "https://sandbox-api.didww.com/v3/voice_in_trunks/24cec518-da51-4274-9a4b-1aad910b996f/pop"},
+        "data": {"type": "pops", "id": "ba7ccbef-82ac-4372-9391-eac90d5c9479"}}}}],
+        "included": [{"id": "837c5764-a6c3-456f-aa37-71fc8f8ca07b", "type": "voice_in_trunk_groups",
+        "attributes": {"created_at": "2017-11-14T15:07:25.571Z", "name": "sample trunk
+        group", "capacity_limit": null}, "relationships": {"voice_in_trunks": {"links":
+        {"self": "https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/relationships/voice_in_trunks",
+        "related": "https://sandbox-api.didww.com/v3/voice_in_trunk_groups/837c5764-a6c3-456f-aa37-71fc8f8ca07b/voice_in_trunks"}}},
+        "meta": {"trunks_count": 2}}, {"id": "ba7ccbef-82ac-4372-9391-eac90d5c9479",
+        "type": "pops", "attributes": {"name": "DE, FRA"}}], "meta": {"total_records":
+        68}, "links": {"first": "https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=1&page%5Bsize%5D=4&sort=-created_at",
+        "next": "https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=2&page%5Bsize%5D=4&sort=-created_at",
+        "last": "https://sandbox-api.didww.com/v3/voice_in_trunks?include=trunk_group%2Cpop&page%5Bnumber%5D=18&page%5Bsize%5D=4&sort=-created_at"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

@@ -12,11 +12,12 @@ describe('Orders', () => {
     const client = setupClient('orders/show.yaml');
     const result = await client.orders().find('9df11dac-9d83-448c-8866-19c998be33db');
     expect(result.data.id).toBe('9df11dac-9d83-448c-8866-19c998be33db');
-    expect(result.data.status).toBe('Completed');
+    expect(result.data.status).toBe('completed');
     expect(result.data.amount).toBe('25.07');
     expect(result.data.description).toBe('Payment processing fee');
     expect(result.data.reference).toBe('SPT-474057');
     expect(result.data.items.length).toBeGreaterThan(0);
+    expect(result.data.externalReferenceId).toBe('ord-ref-001');
   });
 
   it('creates an order', async () => {
@@ -29,7 +30,7 @@ describe('Orders', () => {
       ],
     });
     expect(result.data.id).toBe('5da18706-be9f-49b0-aeec-0480aacd49ad');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.description).toBe('DID');
     expect(result.data.items.length).toBe(2);
   });
@@ -43,7 +44,7 @@ describe('Orders', () => {
       ],
     });
     expect(result.data.id).toBe('9b9f2121-8d9e-4aa8-9754-dbaf6f695fd6');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.items.length).toBe(1);
   });
 
@@ -59,7 +60,7 @@ describe('Orders', () => {
       ],
     });
     expect(result.data.id).toBe('9b9f2121-8d9e-4aa8-9754-dbaf6f695fd6');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.items.length).toBe(1);
   });
 
@@ -75,7 +76,7 @@ describe('Orders', () => {
       ],
     });
     expect(result.data.id).toBe('a9a7ff2d-d634-4545-bf28-dfda92d1c723');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.items.length).toBe(1);
   });
 
@@ -85,7 +86,7 @@ describe('Orders', () => {
       items: [{ type: 'capacity_order_items', capacityPoolId: 'b7522a31-4bf3-4c23-81e8-e7a14b23663f', qty: 1 }],
     });
     expect(result.data.id).toBe('68a46dd5-d405-4283-b7a5-62503267e9f8');
-    expect(result.data.status).toBe('Completed');
+    expect(result.data.status).toBe('completed');
     expect(result.data.description).toBe('Capacity');
     expect(result.data.items.length).toBe(1);
   });
@@ -104,7 +105,7 @@ describe('Orders', () => {
       ],
     });
     expect(result.data.id).toBe('c617f0ff-f819-477f-a17b-a8d248c4443e');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.items.length).toBe(1);
   });
 
@@ -113,13 +114,13 @@ describe('Orders', () => {
     const result = await client.orders().create({
       allowBackOrdering: true,
       callbackUrl: 'https://example.com/callback',
-      callbackMethod: 'POST',
+      callbackMethod: 'post',
       items: [{ type: 'did_order_items', skuId: 'f36d2812-2195-4385-85e8-e59c3484a8bc', qty: 1 }],
     });
     expect(result.data.id).toBe('5da18706-be9f-49b0-aeec-0480aacd49ad');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.callbackUrl).toBe('https://example.com/callback');
-    expect(result.data.callbackMethod).toBe('POST');
+    expect(result.data.callbackMethod).toBe('post');
     expect(result.data.items.length).toBe(1);
   });
 });

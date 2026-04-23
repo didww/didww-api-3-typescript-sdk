@@ -19,6 +19,7 @@ export interface VoiceInTrunk {
   capacityLimit: number | null;
   configuration: TrunkConfiguration;
   createdAt: string;
+  externalReferenceId: string | null;
   pop?: Pop | ResourceRef;
   voiceInTrunkGroup?: VoiceInTrunkGroup | ResourceRef;
 }
@@ -33,6 +34,7 @@ export interface VoiceInTrunkWrite {
   ringingTimeout?: number;
   capacityLimit?: number | null;
   configuration?: TrunkConfiguration;
+  externalReferenceId?: string | null;
   pop?: ResourceRef;
   voiceInTrunkGroup?: ResourceRef;
 }
@@ -47,6 +49,7 @@ const WRITABLE_KEYS = [
   'ringingTimeout',
   'capacityLimit',
   'configuration',
+  'externalReferenceId',
   'pop',
   'voiceInTrunkGroup',
 ] as const satisfies readonly (keyof VoiceInTrunkWrite)[];

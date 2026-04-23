@@ -7,22 +7,22 @@ import type { SupportingDocumentTemplate } from '../../src/resources/supporting-
 import type { ProofType } from '../../src/resources/proof-type.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
-describe('Requirements', () => {
+describe('AddressRequirements', () => {
   describeOperationEnforcement({
-    clientMethod: 'requirements',
+    clientMethod: 'addressRequirements',
     allowedOperations: ['list', 'find'],
-    resourceType: 'requirements',
+    resourceType: 'address_requirements',
   });
-  it('lists requirements', async () => {
-    const client = setupClient('requirements/list.yaml');
-    const result = await client.requirements().list();
+  it('lists address requirements', async () => {
+    const client = setupClient('address_requirements/list.yaml');
+    const result = await client.addressRequirements().list();
     expect(result.data.length).toBeGreaterThan(0);
-    expect(result.data[0].type).toBe('requirements');
+    expect(result.data[0].type).toBe('address_requirements');
   });
 
-  it('finds a requirement', async () => {
-    const client = setupClient('requirements/show.yaml');
-    const result = await client.requirements().find('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
+  it('finds an address requirement', async () => {
+    const client = setupClient('address_requirements/show.yaml');
+    const result = await client.addressRequirements().find('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.id).toBe('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.identityType).toBe('Any');
     const country = result.data.country;

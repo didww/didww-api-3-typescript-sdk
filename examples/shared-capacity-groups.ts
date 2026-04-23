@@ -1,4 +1,5 @@
 import { DidwwClient, Environment, ref } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -16,7 +17,7 @@ async function main() {
   console.log(`Using capacity pool: ${pool.name} (${pool.id})`);
 
   // Create a shared capacity group
-  const suffix = Math.random().toString(36).substring(2, 10);
+  const suffix = crypto.randomBytes(4).toString('hex');
   const created = await client.sharedCapacityGroups().create({
     name: `My Channel Group ${suffix}`,
     meteredChannelsCount: 10,
@@ -27,6 +28,9 @@ async function main() {
   console.log(`  name: ${created.data.name}`);
   console.log(`  metered: ${created.data.meteredChannelsCount}`);
   console.log(`  shared: ${created.data.sharedChannelsCount}`);
+  if (created.data.externalReferenceId) {
+    console.log(`  externalReferenceId: ${created.data.externalReferenceId}`);
+  }
 
   // Clean up
   await client.sharedCapacityGroups().remove(created.data.id);

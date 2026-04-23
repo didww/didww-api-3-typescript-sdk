@@ -8,6 +8,7 @@
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/did-trunk-assignment.ts
  */
 import { DidwwClient, Environment, ref, isIncluded, pstnConfiguration, availableDidOrderItem } from '../src/index.js';
+import crypto from 'node:crypto';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -17,7 +18,7 @@ const client = new DidwwClient({
 async function main() {
   // --- Setup: create a trunk, a trunk group, and get a DID ---
 
-  const suffix = Math.random().toString(36).substring(2, 8);
+  const suffix = crypto.randomBytes(4).toString('hex');
 
   // Create a trunk
   const trunk = await client.voiceInTrunks().create({

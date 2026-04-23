@@ -15,13 +15,14 @@ describe('Exports', () => {
     const client = setupClient('exports/list.yaml');
     const result = await client.exports().list();
     expect(result.data.length).toBeGreaterThan(0);
+    expect(result.data[0].externalReferenceId).toBe('exp-ref-001');
   });
 
   it('finds an export', async () => {
     const client = setupClient('exports/show.yaml');
     const result = await client.exports().find('da15f006-5da4-45ca-b0df-735baeadf423');
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Completed');
+    expect(result.data.status).toBe('completed');
     expect(result.data.exportType).toBe('cdr_in');
   });
 
@@ -29,20 +30,30 @@ describe('Exports', () => {
     const client = setupClient('exports/create.yaml');
     const result = await client.exports().create({
       exportType: 'cdr_in',
-      filters: { did_number: '1234556789', year: '2019', month: '01' },
+      filters: { didNumber: '1234556789', from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
+  });
+
+  it('updates external_reference_id on an export', async () => {
+    const client = setupClient('exports/update.yaml');
+    const result = await client.exports().update({
+      id: 'da15f006-5da4-45ca-b0df-735baeadf423',
+      externalReferenceId: 'updated-exp-ref',
+    });
+    expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
+    expect(result.data.externalReferenceId).toBe('updated-exp-ref');
   });
 
   it('creates a cdr_out export', async () => {
     const client = setupClient('exports/create_1.yaml');
     const result = await client.exports().create({
       exportType: 'cdr_out',
-      filters: { year: '2019', month: '01' },
+      filters: { from: '2019-01-01 00:00:00', to: '2019-01-31 23:59:59' },
     });
     expect(result.data.id).toBe('da15f006-5da4-45ca-b0df-735baeadf423');
-    expect(result.data.status).toBe('Pending');
+    expect(result.data.status).toBe('pending');
     expect(result.data.exportType).toBe('cdr_out');
   });
 
@@ -86,7 +97,7 @@ describe('Exports', () => {
       const headers = await downloadExportAndCaptureHeaders();
       expect(headers.get('Api-Key')).toBe('test-key');
       expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
-      expect(headers.get('X-DIDWW-API-Version')).toBe('2022-05-10');
+      expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
     });
 
     it('does not send Content-Type or Accept headers', async () => {
