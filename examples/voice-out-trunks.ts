@@ -19,8 +19,9 @@ const client = new DidwwClient({
 
 async function main() {
   // Create a voice out trunk with credentials_and_ip authentication
+  const suffix = Math.random().toString(36).slice(2, 10);
   const trunk = await client.voiceOutTrunks().create({
-    name: 'My Outbound Trunk',
+    name: `TS Outbound Trunk ${suffix}`,
     authenticationMethod: credentialsAndIpAuthenticationMethod({
       allowedSipIps: ['203.0.113.0/24'],
       techPrefix: '',
@@ -28,6 +29,7 @@ async function main() {
     }),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
+    externalReferenceId: `ts-example-${suffix}`,
   });
   console.log(`Created voice out trunk: ${trunk.data.id}`);
   console.log(`  name: ${trunk.data.name}`);

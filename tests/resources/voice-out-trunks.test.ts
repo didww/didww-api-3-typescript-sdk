@@ -72,6 +72,38 @@ describe('VoiceOutTrunks', () => {
     expect((authMethod as any).password).toBeUndefined();
   });
 
+  it('finds a voice out trunk with twilio authentication_method', async () => {
+    const client = setupClient('voice_out_trunks/show_twilio.yaml');
+    const result = await client.voiceOutTrunks().find('b5e701f4-ea15-4f9d-8f35-6a0bdce04385');
+    expect(result.data.id).toBe('b5e701f4-ea15-4f9d-8f35-6a0bdce04385');
+    expect(result.data.name).toBe('SDK Test twilio');
+    expect(result.data.status).toBe('active');
+    // Polymorphic authentication_method must be twilio
+    const authMethod = result.data.authenticationMethod;
+    expect(authMethod).toBeDefined();
+    expect(authMethod.type).toBe('twilio');
+    expect((authMethod as any).twilioAccountSid).toBe('AC22222222222222222222222222222222');
+  });
+
+  it('creates a voice out trunk with twilio authentication_method', async () => {
+    const client = setupClient('voice_out_trunks/create_twilio.yaml');
+    const result = await client.voiceOutTrunks().create({
+      name: 'SDK Test twilio create',
+      onCliMismatchAction: 'reject_call' as any,
+      authenticationMethod: {
+        type: 'twilio',
+        twilioAccountSid: 'AC33333333333333333333333333333333',
+      },
+    });
+    expect(result.data.id).toBe('507fa5a2-fd58-4c4d-a231-efba27f67c3a');
+    expect(result.data.name).toBe('SDK Test twilio create');
+    expect(result.data.status).toBe('active');
+    const authMethod = result.data.authenticationMethod;
+    expect(authMethod).toBeDefined();
+    expect(authMethod.type).toBe('twilio');
+    expect((authMethod as any).twilioAccountSid).toBe('AC33333333333333333333333333333333');
+  });
+
   it('creates a voice out trunk with ip_only authentication_method', async () => {
     const client = setupClient('voice_out_trunks/create.yaml');
     const result = await client.voiceOutTrunks().create({

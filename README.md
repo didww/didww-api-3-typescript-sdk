@@ -226,18 +226,28 @@ const group = await client.voiceInTrunkGroups().create({
 
 > **Note:** Voice Out Trunks and some `OnCliMismatchAction` values (`REPLACE_CLI`, `RANDOMIZE_CLI`) require additional account configuration. Contact DIDWW support to enable these features.
 
-```typescript
-import { DefaultDstAction, OnCliMismatchAction, ipOnlyAuthenticationMethod } from '@didww/sdk';
+Voice Out Trunks use a polymorphic `authenticationMethod` (2026-04-16). Three types are supported:
 
+- **`credentials_and_ip`** -- default method; `username` and `password` are server-generated and returned in the response.
+- **`twilio`** -- requires a `twilioAccountSid`.
+- **`ip_only`** -- read-only; can only be configured by DIDWW staff upon request. Cannot be set via the API.
+
+```typescript
+import { DefaultDstAction, OnCliMismatchAction, credentialsAndIpAuthenticationMethod } from '@didww/sdk';
+
+// NOTE: 203.0.113.0/24 is RFC 5737 TEST-NET-3 documentation space.
+// Replace with the real CIDR of your SIP infrastructure.
 const voTrunk = await client.voiceOutTrunks().create({
   name: 'My Outbound Trunk',
-  authenticationMethod: ipOnlyAuthenticationMethod({
+  authenticationMethod: credentialsAndIpAuthenticationMethod({
     allowedSipIps: ['203.0.113.0/24'],
     techPrefix: '',
   }),
   defaultDstAction: DefaultDstAction.ALLOW_ALL,
   onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
 });
+// voTrunk.data.authenticationMethod.username -- server-generated
+// voTrunk.data.authenticationMethod.password -- server-generated
 ```
 
 ### Orders
