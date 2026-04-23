@@ -27,5 +27,8 @@ describe('EmergencyRequirements', () => {
     expect(result.data.type).toBe('emergency_requirements');
     expect(result.data.estimateSetupTime).toBe('7-14 days');
     expect(result.data.requirementRestrictionMessage).toBeNull();
+    expect(result.data.meta).toBeDefined();
+    expect(result.data.meta!.setupPrice).toBeNull();
+    expect(result.data.meta!.monthlyPrice).toBeNull();
   });
 });

@@ -31,6 +31,12 @@ export interface EmergencyCallingService {
   emergencyRequirement?: EmergencyRequirement | ResourceRef;
   emergencyVerification?: EmergencyVerification | ResourceRef;
   dids?: (Did | ResourceRef)[];
+  /**
+   * Resource-level meta returned by the server.
+   * Contains pricing information: `setup_price` and `monthly_price`
+   * (e.g. `{ "setupPrice": "0.0", "monthlyPrice": "1.5" }`).
+   */
+  meta?: Record<string, string | null>;
 }
 
 export const EMERGENCY_CALLING_SERVICE_RESOURCE = defineResource<EmergencyCallingService>()({

@@ -38,6 +38,10 @@ async function main() {
     if (req.requirementRestrictionMessage) {
       console.log(`  Restriction: ${req.requirementRestrictionMessage}`);
     }
+    if (req.meta) {
+      console.log(`  Setup price: ${req.meta.setupPrice}`);
+      console.log(`  Monthly price: ${req.meta.monthlyPrice}`);
+    }
   }
 
   // Filter by country
