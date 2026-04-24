@@ -16,11 +16,14 @@ This SDK uses [kitsu-core](https://github.com/wopian/kitsu/tree/master/packages/
 
 Read more https://doc.didww.com/api
 
-This SDK sends the `X-DIDWW-API-Version: 2026-04-16` header with every request.
+## API Version
 
-NPM Versions **3.X.X** are intended to use with DIDWW API 3 version [2026-04-16](https://doc.didww.com/api3/2026-04-16/index.html).
+This SDK sends the `X-DIDWW-API-Version: 2026-04-16` header with every request by default.
 
-NPM Versions **2.X.X** and branch [release-2](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-2) are intended to use with DIDWW API 3 version [2022-05-10](https://doc.didww.com/api3/2022-05-10/index.html).
+| NPM Version | Branch | DIDWW API Version |
+|-------------|--------|-------------------|
+| **3.x** | [`main`](https://github.com/didww/didww-api-3-typescript-sdk) | [`2026-04-16`](https://doc.didww.com/api3/2026-04-16/index.html) |
+| **2.x** | [`2022-05-10`](https://github.com/didww/didww-api-3-typescript-sdk/tree/2022-05-10) | [`2022-05-10`](https://doc.didww.com/api3/2022-05-10/index.html) |
 
 ## Installation
 
