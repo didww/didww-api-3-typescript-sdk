@@ -1,6 +1,6 @@
 {
   "name": "@didww/sdk",
-  "version": "3.0.0-dev",
+  "version": "3.0.0",
   "description": "DIDWW API v3 TypeScript SDK",
   "type": "module",
   "main": "./dist/cjs/index.cjs",
