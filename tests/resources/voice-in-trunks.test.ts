@@ -204,9 +204,11 @@ describe('TrunkConfiguration serialization', () => {
   });
 
   describe('V3.5 SIP-registration attributes', () => {
+    // The server requires `host` and `port` to be left blank when
+    // `enabled_sip_registration` is true, so the test fixtures below
+    // intentionally omit them.
     it('serializes the writable V3.5 attributes for POST/PATCH', () => {
       const config = sipConfiguration({
-        host: 'example.com',
         enabledSipRegistration: true,
         useDidInRuri: true,
         cnamLookup: true,
@@ -216,7 +218,6 @@ describe('TrunkConfiguration serialization', () => {
       const data = serializeTrunkConfiguration(config);
       expect(data.type).toBe('sip_configurations');
       expect(data.attributes).toMatchObject({
-        host: 'example.com',
         enabledSipRegistration: true,
         useDidInRuri: true,
         cnamLookup: true,
@@ -226,10 +227,14 @@ describe('TrunkConfiguration serialization', () => {
     });
 
     it('deserializes the read-only incoming_auth credentials from a server response', () => {
+      // Real wire shape (captured from sandbox): when sip_registration is
+      // enabled, host/port/username come back as null.
       const sipData = {
         type: 'sip_configurations',
         attributes: {
-          host: 'example.com',
+          username: null,
+          host: null,
+          port: null,
           enabledSipRegistration: true,
           useDidInRuri: true,
           cnamLookup: true,
@@ -255,8 +260,6 @@ describe('TrunkConfiguration serialization', () => {
       // if these fields are echoed, so the SDK must strip them defensively.
       const loaded = {
         type: 'sip_configurations',
-        username: 'user',
-        host: 'example.com',
         enabledSipRegistration: true,
         useDidInRuri: true,
         incomingAuthUsername: 'sipreg-user-1',
