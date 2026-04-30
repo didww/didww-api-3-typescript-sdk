@@ -100,10 +100,7 @@ export const SIP_CONFIGURATION_READ_ONLY_KEYS = ['incomingAuthUsername', 'incomi
  * server-managed read-only fields (`incomingAuthUsername`,
  * `incomingAuthPassword`).
  */
-export type SipConfigurationInput = Omit<
-  SipConfiguration,
-  'type' | (typeof SIP_CONFIGURATION_READ_ONLY_KEYS)[number]
->;
+export type SipConfigurationInput = Omit<SipConfiguration, 'type' | (typeof SIP_CONFIGURATION_READ_ONLY_KEYS)[number]>;
 
 export interface PstnConfiguration {
   type: 'pstn_configurations';
