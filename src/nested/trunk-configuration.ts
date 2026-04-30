@@ -1,6 +1,8 @@
 import type {
   Codec,
   DiversionRelayPolicy,
+  DiversionInjectMode,
+  NetworkProtocolPriority,
   TransportProtocol,
   RxDtmfFormat,
   TxDtmfFormat,
@@ -10,6 +12,19 @@ import type {
   ReroutingDisconnectCode,
 } from '../enums.js';
 
+/**
+ * SIP configuration for VoiceInTrunk.
+ *
+ * The shape is the "read shape" returned by the API: it contains every
+ * attribute the server may emit, including the two server-generated read-only
+ * SIP-registration credentials (`incomingAuthUsername`, `incomingAuthPassword`).
+ *
+ * For write payloads, prefer the {@link sipConfiguration} builder which accepts
+ * a {@link SipConfigurationInput} type that excludes read-only fields. The
+ * runtime serializer also strips `incomingAuthUsername` and
+ * `incomingAuthPassword` from outgoing JSON:API attributes as a defensive
+ * measure if a caller mutates a read-shape object and submits it back.
+ */
 export interface SipConfiguration {
   type: 'sip_configurations';
   username?: string;
@@ -42,7 +57,53 @@ export interface SipConfiguration {
   stirShakenMode?: StirShakenMode;
   allowedRtpIps?: string[];
   diversionRelayPolicy?: DiversionRelayPolicy;
+  // -- API 2026-04-16 V3.5 attributes --
+  /** Diversion header injection mode. (API 2026-04-16) */
+  diversionInjectMode?: DiversionInjectMode;
+  /** SIP network protocol priority. (API 2026-04-16) */
+  networkProtocolPriority?: NetworkProtocolPriority;
+  /**
+   * Enables SIP registration. When true the API generates
+   * `incomingAuthUsername` / `incomingAuthPassword`; the trunk's `host` and
+   * `port` must be left blank. When disabling sip registration on an
+   * existing trunk, the same PATCH must also set `host` to a non-blank
+   * value and `useDidInRuri` to false, or the server returns 422.
+   * (API 2026-04-16)
+   */
+  enabledSipRegistration?: boolean;
+  /**
+   * When true, the trunk's R-URI uses the DID number. Requires
+   * `enabledSipRegistration` to be true. (API 2026-04-16)
+   */
+  useDidInRuri?: boolean;
+  /** Enables CNAM resolution for inbound calls on this trunk. (API 2026-04-16) */
+  cnamLookup?: boolean;
+  /**
+   * Server-generated SIP authentication username. **Read-only:** present in
+   * responses when `enabledSipRegistration` is true; the API rejects any
+   * write attempt with `400 Param not allowed`. (API 2026-04-16)
+   */
+  incomingAuthUsername?: string | null;
+  /**
+   * Server-generated SIP authentication password. **Read-only:** present in
+   * responses when `enabledSipRegistration` is true; the API rejects any
+   * write attempt with `400 Param not allowed`. (API 2026-04-16)
+   */
+  incomingAuthPassword?: string | null;
 }
+
+/**
+ * Read-only SIP configuration attributes returned by the server but never
+ * accepted in write payloads. Stripped at serialization time.
+ */
+export const SIP_CONFIGURATION_READ_ONLY_KEYS = ['incomingAuthUsername', 'incomingAuthPassword'] as const;
+
+/**
+ * Input shape accepted by the {@link sipConfiguration} builder. Excludes
+ * server-managed read-only fields (`incomingAuthUsername`,
+ * `incomingAuthPassword`).
+ */
+export type SipConfigurationInput = Omit<SipConfiguration, 'type' | (typeof SIP_CONFIGURATION_READ_ONLY_KEYS)[number]>;
 
 export interface PstnConfiguration {
   type: 'pstn_configurations';
@@ -51,7 +112,7 @@ export interface PstnConfiguration {
 
 export type TrunkConfiguration = SipConfiguration | PstnConfiguration;
 
-export function sipConfiguration(attrs: Omit<SipConfiguration, 'type'>): SipConfiguration {
+export function sipConfiguration(attrs: SipConfigurationInput): SipConfiguration {
   return { type: 'sip_configurations', ...attrs };
 }
 
@@ -66,6 +127,15 @@ export interface SerializedTrunkConfiguration {
 
 export function serializeTrunkConfiguration(config: TrunkConfiguration): SerializedTrunkConfiguration {
   const { type, ...attributes } = config;
+  if (type === 'sip_configurations') {
+    // Strip read-only keys so a caller mutating a read-shape object never
+    // echoes server-generated SIP-registration credentials back to the API.
+    for (const key of SIP_CONFIGURATION_READ_ONLY_KEYS) {
+      if (key in attributes) {
+        delete (attributes as Record<string, unknown>)[key];
+      }
+    }
+  }
   return { type, attributes };
 }
 

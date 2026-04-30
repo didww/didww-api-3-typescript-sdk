@@ -205,6 +205,19 @@ export enum DiversionRelayPolicy {
   TEL = 'tel',
 }
 
+export enum DiversionInjectMode {
+  NONE = 'none',
+  DID_NUMBER = 'did_number',
+}
+
+export enum NetworkProtocolPriority {
+  FORCE_IPV4 = 'force_ipv4',
+  FORCE_IPV6 = 'force_ipv6',
+  ANY = 'any',
+  PREFER_IPV4 = 'prefer_ipv4',
+  PREFER_IPV6 = 'prefer_ipv6',
+}
+
 export enum ConfigurationType {
   SIP = 'sip_configurations',
   PSTN = 'pstn_configurations',
