@@ -10,6 +10,7 @@ import {
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
+import type { DiversionInjectMode, NetworkProtocolPriority } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceInTrunks', () => {
@@ -200,5 +201,72 @@ describe('TrunkConfiguration serialization', () => {
     const sip = deserializeTrunkConfiguration(sipData);
     expect(sip.type).toBe('sip_configurations');
     expect((sip as SipConfiguration).username).toBe('user');
+  });
+
+  describe('V3.5 SIP-registration attributes', () => {
+    it('serializes the writable V3.5 attributes for POST/PATCH', () => {
+      const config = sipConfiguration({
+        host: 'example.com',
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        cnamLookup: true,
+        diversionInjectMode: 'did_number' as DiversionInjectMode,
+        networkProtocolPriority: 'prefer_ipv4' as NetworkProtocolPriority,
+      });
+      const data = serializeTrunkConfiguration(config);
+      expect(data.type).toBe('sip_configurations');
+      expect(data.attributes).toMatchObject({
+        host: 'example.com',
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        cnamLookup: true,
+        diversionInjectMode: 'did_number',
+        networkProtocolPriority: 'prefer_ipv4',
+      });
+    });
+
+    it('deserializes the read-only incoming_auth credentials from a server response', () => {
+      const sipData = {
+        type: 'sip_configurations',
+        attributes: {
+          host: 'example.com',
+          enabledSipRegistration: true,
+          useDidInRuri: true,
+          cnamLookup: true,
+          diversionInjectMode: 'none',
+          networkProtocolPriority: 'any',
+          incomingAuthUsername: 'sipreg-user-1',
+          incomingAuthPassword: 's3cret-Pa55',
+        },
+      };
+      const sip = deserializeTrunkConfiguration(sipData) as SipConfiguration;
+      expect(sip.enabledSipRegistration).toBe(true);
+      expect(sip.useDidInRuri).toBe(true);
+      expect(sip.cnamLookup).toBe(true);
+      expect(sip.diversionInjectMode).toBe('none');
+      expect(sip.networkProtocolPriority).toBe('any');
+      expect(sip.incomingAuthUsername).toBe('sipreg-user-1');
+      expect(sip.incomingAuthPassword).toBe('s3cret-Pa55');
+    });
+
+    it('strips read-only incoming_auth credentials from the write payload', () => {
+      // Simulate a caller mutating a read-shape object (e.g. trunk loaded from
+      // a GET) and submitting it back. The server returns 400 Param not allowed
+      // if these fields are echoed, so the SDK must strip them defensively.
+      const loaded = {
+        type: 'sip_configurations',
+        username: 'user',
+        host: 'example.com',
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        incomingAuthUsername: 'sipreg-user-1',
+        incomingAuthPassword: 's3cret-Pa55',
+      } as SipConfiguration;
+      const data = serializeTrunkConfiguration(loaded);
+      expect(data.attributes.enabledSipRegistration).toBe(true);
+      expect(data.attributes.useDidInRuri).toBe(true);
+      expect(data.attributes).not.toHaveProperty('incomingAuthUsername');
+      expect(data.attributes).not.toHaveProperty('incomingAuthPassword');
+    });
   });
 });
