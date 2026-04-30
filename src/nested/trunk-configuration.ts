@@ -64,8 +64,11 @@ export interface SipConfiguration {
   networkProtocolPriority?: NetworkProtocolPriority;
   /**
    * Enables SIP registration. When true the API generates
-   * `incomingAuthUsername` / `incomingAuthPassword`; the trunk's `port` must
-   * be left blank. (API 2026-04-16)
+   * `incomingAuthUsername` / `incomingAuthPassword`; the trunk's `host` and
+   * `port` must be left blank. When disabling sip registration on an
+   * existing trunk, the same PATCH must also set `host` to a non-blank
+   * value and `useDidInRuri` to false, or the server returns 422.
+   * (API 2026-04-16)
    */
   enabledSipRegistration?: boolean;
   /**
