@@ -50,10 +50,48 @@ export function ipOnlyAuthenticationMethod(
   return { type: 'ip_only', ...attrs };
 }
 
+/**
+ * Credential fields on {@link CredentialsAndIpAuthenticationMethod}. The wire
+ * format is unchanged — these are still emitted on the wire when present —
+ * but {@link redactCredentialsAndIpAuthenticationMethod} and the Node.js
+ * `util.inspect.custom` hook installed by the builder replace these values
+ * with `[FILTERED]` so default `console.log` / `util.inspect` output never
+ * leaks the credential downstream.
+ */
+export const CREDENTIALS_AND_IP_SENSITIVE_KEYS = ['username', 'password'] as const;
+
+/**
+ * Returns a shallow copy of the authentication method with credential fields
+ * replaced by `'[FILTERED]'`. Use this before logging the method to an
+ * external system. The original object is unchanged.
+ */
+export function redactCredentialsAndIpAuthenticationMethod(
+  method: CredentialsAndIpAuthenticationMethod,
+): CredentialsAndIpAuthenticationMethod {
+  const out = { ...method };
+  for (const key of CREDENTIALS_AND_IP_SENSITIVE_KEYS) {
+    if (out[key] != null) {
+      (out as Record<string, unknown>)[key] = '[FILTERED]';
+    }
+  }
+  return out;
+}
+
+const NODE_INSPECT_CUSTOM = Symbol.for('nodejs.util.inspect.custom');
+
 export function credentialsAndIpAuthenticationMethod(
   attrs: Omit<CredentialsAndIpAuthenticationMethod, 'type'>,
 ): CredentialsAndIpAuthenticationMethod {
-  return { type: 'credentials_and_ip', ...attrs };
+  const method: CredentialsAndIpAuthenticationMethod = { type: 'credentials_and_ip', ...attrs };
+  // Install a non-enumerable `util.inspect.custom` hook so default
+  // `console.log` / `util.inspect` output redacts credentials. The
+  // wire serializer (serializeAuthenticationMethod) is unaffected.
+  Object.defineProperty(method, NODE_INSPECT_CUSTOM, {
+    value: () => redactCredentialsAndIpAuthenticationMethod(method),
+    enumerable: false,
+    writable: false,
+  });
+  return method;
 }
 
 export function twilioAuthenticationMethod(

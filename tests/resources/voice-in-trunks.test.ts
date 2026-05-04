@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { inspect } from 'node:util';
 import { setupClient } from '../helpers/client.js';
 import { isIncluded } from '../../src/resources/base.js';
 import type { Pop } from '../../src/resources/pop.js';
@@ -7,6 +8,7 @@ import {
   deserializeTrunkConfiguration,
   sipConfiguration,
   pstnConfiguration,
+  redactSipConfiguration,
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
 import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
@@ -331,6 +333,40 @@ describe('TrunkConfiguration serialization', () => {
       expect(data.attributes.useDidInRuri).toBe(true);
       expect(data.attributes).not.toHaveProperty('incomingAuthUsername');
       expect(data.attributes).not.toHaveProperty('incomingAuthPassword');
+    });
+
+    it('redactSipConfiguration masks credential fields without mutating the input', () => {
+      const config = sipConfiguration({
+        host: 'sip.example.com',
+        port: 5060,
+        codecIds: [Codec.PCMU],
+        authPassword: 's3cret-Pa55',
+      });
+      // Manually populate read-only credentials so we can confirm they
+      // are also redacted (the helper accepts read-shape objects too).
+      (config as unknown as Record<string, unknown>).incomingAuthUsername = 'srv-user-xyz';
+      (config as unknown as Record<string, unknown>).incomingAuthPassword = 'srv-pass-xyz';
+
+      const redacted = redactSipConfiguration(config);
+      expect(redacted.host).toBe('sip.example.com');
+      expect(redacted.authPassword).toBe('[FILTERED]');
+      expect(redacted.incomingAuthUsername).toBe('[FILTERED]');
+      expect(redacted.incomingAuthPassword).toBe('[FILTERED]');
+      // Original is unchanged.
+      expect(config.authPassword).toBe('s3cret-Pa55');
+    });
+
+    it('default util.inspect output redacts credentials on builder-returned configs', () => {
+      const config = sipConfiguration({
+        host: 'sip.example.com',
+        port: 5060,
+        codecIds: [Codec.PCMU],
+        authPassword: 's3cret-Pa55',
+      });
+      const output = inspect(config);
+      expect(output).toContain('sip.example.com');
+      expect(output).not.toContain('s3cret-Pa55');
+      expect(output).toContain('[FILTERED]');
     });
   });
 });

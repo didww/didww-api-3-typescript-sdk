@@ -99,6 +99,34 @@ export interface SipConfiguration {
 export const SIP_CONFIGURATION_READ_ONLY_KEYS = ['incomingAuthUsername', 'incomingAuthPassword'] as const;
 
 /**
+ * SIP configuration credentials. The wire format is unchanged — these are
+ * still emitted on the wire when present — but {@link redactSipConfiguration}
+ * and the Node.js `util.inspect.custom` hook installed by the builders
+ * replace these values with `[FILTERED]` so default `console.log` /
+ * `util.inspect` output never leaks the credential downstream.
+ */
+export const SIP_CONFIGURATION_SENSITIVE_KEYS = [
+  'authPassword',
+  'incomingAuthUsername',
+  'incomingAuthPassword',
+] as const;
+
+/**
+ * Returns a shallow copy of the configuration with all credential fields
+ * replaced by `'[FILTERED]'`. Use this before logging a configuration to
+ * an external system. The original object is unchanged.
+ */
+export function redactSipConfiguration(config: SipConfiguration): SipConfiguration {
+  const out = { ...config };
+  for (const key of SIP_CONFIGURATION_SENSITIVE_KEYS) {
+    if (out[key] != null) {
+      (out as Record<string, unknown>)[key] = '[FILTERED]';
+    }
+  }
+  return out;
+}
+
+/**
  * Input shape accepted by the {@link sipConfiguration} builder. Excludes
  * server-managed read-only fields (`incomingAuthUsername`,
  * `incomingAuthPassword`).
@@ -112,8 +140,20 @@ export interface PstnConfiguration {
 
 export type TrunkConfiguration = SipConfiguration | PstnConfiguration;
 
+const NODE_INSPECT_CUSTOM = Symbol.for('nodejs.util.inspect.custom');
+
 export function sipConfiguration(attrs: SipConfigurationInput): SipConfiguration {
-  return { type: 'sip_configurations', ...attrs };
+  const config: SipConfiguration = { type: 'sip_configurations', ...attrs };
+  // Install a non-enumerable `util.inspect.custom` hook so default
+  // `console.log` / `util.inspect` output redacts credentials. The
+  // wire serializer (serializeTrunkConfiguration) is unaffected — it
+  // still emits the real values.
+  Object.defineProperty(config, NODE_INSPECT_CUSTOM, {
+    value: () => redactSipConfiguration(config),
+    enumerable: false,
+    writable: false,
+  });
+  return config;
 }
 
 export function pstnConfiguration(attrs: Omit<PstnConfiguration, 'type'>): PstnConfiguration {
