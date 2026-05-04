@@ -11,6 +11,7 @@ import type {
   StirShakenMode,
   ReroutingDisconnectCode,
 } from '../enums.js';
+import { redactSensitiveKeys } from '../redact.js';
 
 /**
  * SIP configuration for VoiceInTrunk.
@@ -123,13 +124,7 @@ export const SIP_CONFIGURATION_SENSITIVE_KEYS = [
  * an external system. The original object is unchanged.
  */
 export function redactSipConfiguration(config: SipConfiguration): SipConfiguration {
-  const out = { ...config };
-  for (const key of SIP_CONFIGURATION_SENSITIVE_KEYS) {
-    if (out[key] != null) {
-      (out as Record<string, unknown>)[key] = '[FILTERED]';
-    }
-  }
-  return out;
+  return redactSensitiveKeys(config, SIP_CONFIGURATION_SENSITIVE_KEYS);
 }
 
 /**

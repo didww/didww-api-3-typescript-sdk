@@ -1,3 +1,5 @@
+import { redactSensitiveKeys } from '../redact.js';
+
 /**
  * IP-only authentication method for Voice Out Trunks.
  *
@@ -68,13 +70,7 @@ export const CREDENTIALS_AND_IP_SENSITIVE_KEYS = ['username', 'password'] as con
 export function redactCredentialsAndIpAuthenticationMethod(
   method: CredentialsAndIpAuthenticationMethod,
 ): CredentialsAndIpAuthenticationMethod {
-  const out = { ...method };
-  for (const key of CREDENTIALS_AND_IP_SENSITIVE_KEYS) {
-    if (out[key] != null) {
-      (out as Record<string, unknown>)[key] = '[FILTERED]';
-    }
-  }
-  return out;
+  return redactSensitiveKeys(method, CREDENTIALS_AND_IP_SENSITIVE_KEYS);
 }
 
 const NODE_INSPECT_CUSTOM = Symbol.for('nodejs.util.inspect.custom');
