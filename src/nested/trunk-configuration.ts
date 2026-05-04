@@ -28,8 +28,14 @@ import type {
 export interface SipConfiguration {
   type: 'sip_configurations';
   username?: string;
-  host: string;
-  port: number;
+  // host / port are optional because the API rejects them when
+  // `enabledSipRegistration` is true (server returns 422). Declaring
+  // them as required would force callers to set placeholder values
+  // that the cascade in serializeTrunkConfiguration would only strip
+  // again — and would force the same on the documented sip_registration
+  // builder usage `sipConfiguration({ enabledSipRegistration: true, ... })`.
+  host?: string;
+  port?: number;
   codecIds: Codec[];
   transportProtocolId?: TransportProtocol;
   authEnabled?: boolean;
@@ -174,6 +180,26 @@ export function serializeTrunkConfiguration(config: TrunkConfiguration): Seriali
       if (key in attributes) {
         delete (attributes as Record<string, unknown>)[key];
       }
+    }
+    // Auto-cascade server-enforced field dependencies (API 2026-04-16).
+    // The cascade runs at serialization time (rather than via property
+    // setters / Proxy on the builder-returned object) so that mutating
+    // the plain object — `cfg.host = '...';` — always produces a wire
+    // payload the server accepts, without the caller having to know the
+    // rule set. Future server-required cascades extend this block.
+    const attrs = attributes as Record<string, unknown>;
+    if (attrs.host != null) {
+      attrs.enabledSipRegistration = false;
+      attrs.useDidInRuri = false;
+    } else if (attrs.enabledSipRegistration === true) {
+      // Always emit host: null and port: null on the wire so a PATCH
+      // against a trunk that already has them persisted on the server
+      // side is told to clear them. Without this, the server merges the
+      // partial PATCH with the existing host and rejects with 422.
+      attrs.host = null;
+      attrs.port = null;
+    } else if (attrs.enabledSipRegistration === false) {
+      attrs.useDidInRuri = false;
     }
   }
   return { type, attributes };

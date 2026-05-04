@@ -293,13 +293,13 @@ describe('TrunkConfiguration serialization', () => {
     });
 
     it('disable patch sends enabled_sip_registration:false + host + use_did_in_ruri:false together', async () => {
-      // The disable flow is a multi-field PATCH because the server's V3
-      // form rejects (422) any request that flips
+      // The disable flow is a multi-field PATCH because the server
+      // returns 422 for any request that flips
       // `enabled_sip_registration` to false without simultaneously
-      // providing a non-blank `host` (model-level presence) and
-      // `use_did_in_ruri: false` (form-level). Lock those three fields
-      // in the same request body — nock's body matcher rejects the
-      // request if any of them is missing or has the wrong value.
+      // providing a non-blank `host` and `use_did_in_ruri: false`.
+      // Lock those three fields in the same request body — nock's body
+      // matcher rejects the request if any of them is missing or has
+      // the wrong value.
       const client = setupClient('voice_in_trunks/disable_sip_registration.yaml');
       const result = await client.voiceInTrunks().update({
         id: '57a939dd-1600-41a6-80b1-f624e22a1f4c',
@@ -333,6 +333,115 @@ describe('TrunkConfiguration serialization', () => {
       expect(data.attributes.useDidInRuri).toBe(true);
       expect(data.attributes).not.toHaveProperty('incomingAuthUsername');
       expect(data.attributes).not.toHaveProperty('incomingAuthPassword');
+    });
+
+    it('deserializeTrunkConfiguration does not trigger cascade for server-returned shapes', () => {
+      // Server may return host: present together with enabled_sip_registration:
+      // false and use_did_in_ruri: true (a regular SIP trunk shape). Cascade
+      // must not run during deserialization or it would clobber valid
+      // combinations. The cascade is gated to the serialize path only.
+      const sipData = {
+        type: 'sip_configurations',
+        attributes: {
+          host: 'sip.example.com',
+          port: 5060,
+          enabledSipRegistration: false,
+          useDidInRuri: true,
+        },
+      };
+      const config = deserializeTrunkConfiguration(sipData) as SipConfiguration;
+      expect(config.host).toBe('sip.example.com');
+      expect(config.port).toBe(5060);
+      expect(config.enabledSipRegistration).toBe(false);
+      expect(config.useDidInRuri).toBe(true);
+    });
+
+    it('serializeTrunkConfiguration cascades enabled_sip_registration / use_did_in_ruri to false when host is set', () => {
+      // Setting host implies sip_registration is disabled (server-side rule);
+      // the SDK normalizes the wire so callers don't have to enumerate
+      // every dependent field manually.
+      const config = sipConfiguration({
+        host: 'sip.example.com',
+        port: 5060,
+        codecIds: [Codec.PCMU],
+        enabledSipRegistration: true,  // contradicts host; cascade overrides
+        useDidInRuri: true,            // contradicts disabled state; cascade overrides
+      });
+      const data = serializeTrunkConfiguration(config);
+      expect(data.attributes.host).toBe('sip.example.com');
+      expect(data.attributes.enabledSipRegistration).toBe(false);
+      expect(data.attributes.useDidInRuri).toBe(false);
+    });
+
+    it('serializeTrunkConfiguration cascades use_did_in_ruri to false when sip_registration is disabled', () => {
+      const config = sipConfiguration({
+        enabledSipRegistration: false,
+        useDidInRuri: true,
+        host: '',
+        port: 0,
+        codecIds: [Codec.PCMU],
+      });
+      // Replace the empty host with null so the host branch doesn't pre-empt
+      // the enabled_sip_registration: false branch in the cascade.
+      (config as unknown as Record<string, unknown>).host = null;
+      const data = serializeTrunkConfiguration(config);
+      expect(data.attributes.enabledSipRegistration).toBe(false);
+      expect(data.attributes.useDidInRuri).toBe(false);
+    });
+
+    it('builds a sip_registration-mode config without host/port (host/port are optional)', () => {
+      // SIP registration mode forbids host/port server-side. The
+      // SipConfiguration type therefore declares both as optional so
+      // sipConfiguration({ enabledSipRegistration: true }) compiles
+      // without forcing a placeholder host/port. The cascade in
+      // serializeTrunkConfiguration emits host=null / port=null on the
+      // wire so a PATCH against an existing trunk explicitly clears
+      // any persisted values.
+      const config = sipConfiguration({
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        cnamLookup: true,
+        codecIds: [Codec.PCMU],
+      });
+      const data = serializeTrunkConfiguration(config);
+      expect(data.attributes.enabledSipRegistration).toBe(true);
+      expect(data.attributes.useDidInRuri).toBe(true);
+      expect(data.attributes.host).toBeNull();
+      expect(data.attributes.port).toBeNull();
+    });
+
+    it('serializeTrunkConfiguration leaves use_did_in_ruri alone when sip_registration stays enabled', () => {
+      const config = sipConfiguration({
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        host: '',
+        port: 0,
+        codecIds: [Codec.PCMU],
+      });
+      (config as unknown as Record<string, unknown>).host = null;
+      const data = serializeTrunkConfiguration(config);
+      expect(data.attributes.enabledSipRegistration).toBe(true);
+      expect(data.attributes.useDidInRuri).toBe(true);
+    });
+
+    it('serializeTrunkConfiguration emits host=null and port=null when enabledSipRegistration is true on a fresh config', () => {
+      // Regression: PATCH against an existing trunk that has host
+      // persisted on the server side. The local config carries only
+      // enabledSipRegistration: true, but the wire MUST also carry
+      // host: null / port: null so the server clears the values it
+      // had — otherwise it merges and rejects with 422 (host must be
+      // blank when the SIP registration is enabled).
+      const config = sipConfiguration({
+        enabledSipRegistration: true,
+        useDidInRuri: true,
+        codecIds: [Codec.PCMU],
+      });
+      const data = serializeTrunkConfiguration(config);
+      expect(data.attributes).toHaveProperty('host');
+      expect(data.attributes.host).toBeNull();
+      expect(data.attributes).toHaveProperty('port');
+      expect(data.attributes.port).toBeNull();
+      expect(data.attributes.enabledSipRegistration).toBe(true);
     });
 
     it('redactSipConfiguration masks credential fields without mutating the input', () => {
