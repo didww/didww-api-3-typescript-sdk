@@ -364,8 +364,8 @@ describe('TrunkConfiguration serialization', () => {
         host: 'sip.example.com',
         port: 5060,
         codecIds: [Codec.PCMU],
-        enabledSipRegistration: true,  // contradicts host; cascade overrides
-        useDidInRuri: true,            // contradicts disabled state; cascade overrides
+        enabledSipRegistration: true, // contradicts host; cascade overrides
+        useDidInRuri: true, // contradicts disabled state; cascade overrides
       });
       const data = serializeTrunkConfiguration(config);
       expect(data.attributes.host).toBe('sip.example.com');
