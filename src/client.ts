@@ -1,4 +1,3 @@
-import { createRequire } from 'module';
 import { Environment } from './configuration.js';
 import { DidwwApiError, DidwwClientError } from './errors.js';
 import { buildQueryString, type QueryParams } from './query-params.js';
@@ -36,8 +35,11 @@ import { PROOF_RESOURCE } from './resources/proof.js';
 import { REQUIREMENT_VALIDATION_RESOURCE } from './resources/requirement-validation.js';
 import { VOICE_OUT_TRUNK_REGENERATE_CREDENTIAL_RESOURCE } from './resources/voice-out-trunk-regenerate-credential.js';
 
-const require = createRequire(import.meta.url);
-const pkg = require('../package.json') as { version: string };
+// Injected at build time by tsup's `define` (see tsup.config.ts). Falls
+// back to a sentinel for source consumers (vitest, ts-node) that don't
+// run through tsup — tests don't assert the User-Agent value.
+declare const __SDK_VERSION__: string;
+const SDK_VERSION = typeof __SDK_VERSION__ === 'string' ? __SDK_VERSION__ : '0.0.0-source';
 
 export type FetchFunction = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
@@ -51,7 +53,7 @@ export interface DidwwClientOptions {
 
 export class DidwwClient implements HttpClient {
   private static readonly API_VERSION = '2022-05-10';
-  private static readonly USER_AGENT = `didww-typescript-sdk/${pkg.version}`;
+  private static readonly USER_AGENT = `didww-typescript-sdk/${SDK_VERSION}`;
   private readonly apiKey: string;
   private readonly baseUrl: string;
   private readonly timeout?: number;
