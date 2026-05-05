@@ -1,6 +1,8 @@
 import type {
   Codec,
   DiversionRelayPolicy,
+  DiversionInjectMode,
+  NetworkProtocolPriority,
   TransportProtocol,
   RxDtmfFormat,
   TxDtmfFormat,
@@ -9,12 +11,32 @@ import type {
   StirShakenMode,
   ReroutingDisconnectCode,
 } from '../enums.js';
+import { redactSensitiveKeys } from '../redact.js';
 
+/**
+ * SIP configuration for VoiceInTrunk.
+ *
+ * The shape is the "read shape" returned by the API: it contains every
+ * attribute the server may emit, including the two server-generated read-only
+ * SIP-registration credentials (`incomingAuthUsername`, `incomingAuthPassword`).
+ *
+ * For write payloads, prefer the {@link sipConfiguration} builder which accepts
+ * a {@link SipConfigurationInput} type that excludes read-only fields. The
+ * runtime serializer also strips `incomingAuthUsername` and
+ * `incomingAuthPassword` from outgoing JSON:API attributes as a defensive
+ * measure if a caller mutates a read-shape object and submits it back.
+ */
 export interface SipConfiguration {
   type: 'sip_configurations';
   username?: string;
-  host: string;
-  port: number;
+  // host / port are optional because the API rejects them when
+  // `enabledSipRegistration` is true (server returns 422). Declaring
+  // them as required would force callers to set placeholder values
+  // that the cascade in serializeTrunkConfiguration would only strip
+  // again — and would force the same on the documented sip_registration
+  // builder usage `sipConfiguration({ enabledSipRegistration: true, ... })`.
+  host?: string;
+  port?: number;
   codecIds: Codec[];
   transportProtocolId?: TransportProtocol;
   authEnabled?: boolean;
@@ -42,7 +64,75 @@ export interface SipConfiguration {
   stirShakenMode?: StirShakenMode;
   allowedRtpIps?: string[];
   diversionRelayPolicy?: DiversionRelayPolicy;
+  // -- API 2026-04-16 attributes --
+  /** Diversion header injection mode. (API 2026-04-16) */
+  diversionInjectMode?: DiversionInjectMode;
+  /** SIP network protocol priority. (API 2026-04-16) */
+  networkProtocolPriority?: NetworkProtocolPriority;
+  /**
+   * Enables SIP registration. When true the API generates
+   * `incomingAuthUsername` / `incomingAuthPassword`; the trunk's `host` and
+   * `port` must be left blank. When disabling sip registration on an
+   * existing trunk, the same PATCH must also set `host` to a non-blank
+   * value and `useDidInRuri` to false, or the server returns 422.
+   * (API 2026-04-16)
+   */
+  enabledSipRegistration?: boolean;
+  /**
+   * When true, the trunk's R-URI uses the DID number. Requires
+   * `enabledSipRegistration` to be true. (API 2026-04-16)
+   */
+  useDidInRuri?: boolean;
+  /** Enables CNAM resolution for inbound calls on this trunk. (API 2026-04-16) */
+  cnamLookup?: boolean;
+  /**
+   * Server-generated SIP authentication username. **Read-only:** present in
+   * responses when `enabledSipRegistration` is true; the API rejects any
+   * write attempt with `400 Param not allowed`. (API 2026-04-16)
+   */
+  incomingAuthUsername?: string | null;
+  /**
+   * Server-generated SIP authentication password. **Read-only:** present in
+   * responses when `enabledSipRegistration` is true; the API rejects any
+   * write attempt with `400 Param not allowed`. (API 2026-04-16)
+   */
+  incomingAuthPassword?: string | null;
 }
+
+/**
+ * Read-only SIP configuration attributes returned by the server but never
+ * accepted in write payloads. Stripped at serialization time.
+ */
+export const SIP_CONFIGURATION_READ_ONLY_KEYS = ['incomingAuthUsername', 'incomingAuthPassword'] as const;
+
+/**
+ * SIP configuration credentials. The wire format is unchanged — these are
+ * still emitted on the wire when present — but {@link redactSipConfiguration}
+ * and the Node.js `util.inspect.custom` hook installed by the builders
+ * replace these values with `[FILTERED]` so default `console.log` /
+ * `util.inspect` output never leaks the credential downstream.
+ */
+export const SIP_CONFIGURATION_SENSITIVE_KEYS = [
+  'authPassword',
+  'incomingAuthUsername',
+  'incomingAuthPassword',
+] as const;
+
+/**
+ * Returns a shallow copy of the configuration with all credential fields
+ * replaced by `'[FILTERED]'`. Use this before logging a configuration to
+ * an external system. The original object is unchanged.
+ */
+export function redactSipConfiguration(config: SipConfiguration): SipConfiguration {
+  return redactSensitiveKeys(config, SIP_CONFIGURATION_SENSITIVE_KEYS);
+}
+
+/**
+ * Input shape accepted by the {@link sipConfiguration} builder. Excludes
+ * server-managed read-only fields (`incomingAuthUsername`,
+ * `incomingAuthPassword`).
+ */
+export type SipConfigurationInput = Omit<SipConfiguration, 'type' | (typeof SIP_CONFIGURATION_READ_ONLY_KEYS)[number]>;
 
 export interface PstnConfiguration {
   type: 'pstn_configurations';
@@ -51,8 +141,20 @@ export interface PstnConfiguration {
 
 export type TrunkConfiguration = SipConfiguration | PstnConfiguration;
 
-export function sipConfiguration(attrs: Omit<SipConfiguration, 'type'>): SipConfiguration {
-  return { type: 'sip_configurations', ...attrs };
+const NODE_INSPECT_CUSTOM = Symbol.for('nodejs.util.inspect.custom');
+
+export function sipConfiguration(attrs: SipConfigurationInput): SipConfiguration {
+  const config: SipConfiguration = { type: 'sip_configurations', ...attrs };
+  // Install a non-enumerable `util.inspect.custom` hook so default
+  // `console.log` / `util.inspect` output redacts credentials. The
+  // wire serializer (serializeTrunkConfiguration) is unaffected — it
+  // still emits the real values.
+  Object.defineProperty(config, NODE_INSPECT_CUSTOM, {
+    value: () => redactSipConfiguration(config),
+    enumerable: false,
+    writable: false,
+  });
+  return config;
 }
 
 export function pstnConfiguration(attrs: Omit<PstnConfiguration, 'type'>): PstnConfiguration {
@@ -66,6 +168,35 @@ export interface SerializedTrunkConfiguration {
 
 export function serializeTrunkConfiguration(config: TrunkConfiguration): SerializedTrunkConfiguration {
   const { type, ...attributes } = config;
+  if (type === 'sip_configurations') {
+    // Strip read-only keys so a caller mutating a read-shape object never
+    // echoes server-generated SIP-registration credentials back to the API.
+    for (const key of SIP_CONFIGURATION_READ_ONLY_KEYS) {
+      if (key in attributes) {
+        delete (attributes as Record<string, unknown>)[key];
+      }
+    }
+    // Auto-cascade server-enforced field dependencies (API 2026-04-16).
+    // The cascade runs at serialization time (rather than via property
+    // setters / Proxy on the builder-returned object) so that mutating
+    // the plain object — `cfg.host = '...';` — always produces a wire
+    // payload the server accepts, without the caller having to know the
+    // rule set. Future server-required cascades extend this block.
+    const attrs = attributes as Record<string, unknown>;
+    if (attrs.host != null) {
+      attrs.enabledSipRegistration = false;
+      attrs.useDidInRuri = false;
+    } else if (attrs.enabledSipRegistration === true) {
+      // Always emit host: null and port: null on the wire so a PATCH
+      // against a trunk that already has them persisted on the server
+      // side is told to clear them. Without this, the server merges the
+      // partial PATCH with the existing host and rejects with 422.
+      attrs.host = null;
+      attrs.port = null;
+    } else if (attrs.enabledSipRegistration === false) {
+      attrs.useDidInRuri = false;
+    }
+  }
   return { type, attributes };
 }
 

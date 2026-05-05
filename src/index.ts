@@ -64,7 +64,12 @@ export type {
 
 // Nested types
 export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './nested/trunk-configuration.js';
-export { sipConfiguration, pstnConfiguration } from './nested/trunk-configuration.js';
+export {
+  sipConfiguration,
+  pstnConfiguration,
+  redactSipConfiguration,
+  SIP_CONFIGURATION_SENSITIVE_KEYS,
+} from './nested/trunk-configuration.js';
 
 export type {
   OrderItem,
@@ -89,6 +94,8 @@ export {
   isCredentialsAndIp,
   isTwilio,
   isGenericAuth,
+  redactCredentialsAndIpAuthenticationMethod,
+  CREDENTIALS_AND_IP_SENSITIVE_KEYS,
 } from './nested/authentication-method.js';
 export {
   didOrderItem,
