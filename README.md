@@ -469,6 +469,8 @@ for (const did of dids.data) {
 
 ## Query Parameters
 
+> See [`FILTERS.md`](FILTERS.md) for the canonical list of `filter[KEY]` keys accepted by every list endpoint, verified live against the DIDWW API at version `2026-04-16`.
+
 ```typescript
 const result = await client.regions().list({
   filter: { 'country.id': 'uuid', name: 'Arizona' },
