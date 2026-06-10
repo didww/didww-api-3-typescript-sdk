@@ -31,7 +31,7 @@ interactions:
         \            \"self\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/relationships/region\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes/d557ec68-fdb9-41bd-adc1-ebcc2ecd8f98/region\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
-        : 2,\n    \"api_version\": \"2022-05-09\"\n  },\n  \"links\": {\n    \"first\"\
+        : 2,\n    \"api_version\": \"2026-04-16\"\n  },\n  \"links\": {\n    \"first\"\
         : \"https://sandbox-api.didww.com/v3/nanpa_prefixes?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/nanpa_prefixes?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
         \n  }\n}"

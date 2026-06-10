@@ -29,7 +29,7 @@ interactions:
         "address_requirement": {"links": {"self": "https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/relationships/address_requirement",
         "related": "https://sandbox-api.didww.com/v3/did_groups/f6cc4ea6-6dda-4c51-9952-c1440441bc2f/address_requirement"}}},
         "meta": {"available_dids_enabled": false, "needs_registration": false, "is_available":
-        true, "total_count": 1}}], "meta": {"total_records": 1, "api_version": "2022-05-09"},
+        true, "total_count": 1}}], "meta": {"total_records": 1, "api_version": "2026-04-16"},
         "links": {"first": "https://sandbox-api.didww.com/v3/did_groups?filter%5Bnanpa_prefix.id%5D=eeed293b-f3d8-4ef8-91ef-1b077d174b3b&page%5Bnumber%5D=1&page%5Bsize%5D=50",
         "last": "https://sandbox-api.didww.com/v3/did_groups?filter%5Bnanpa_prefix.id%5D=eeed293b-f3d8-4ef8-91ef-1b077d174b3b&page%5Bnumber%5D=1&page%5Bsize%5D=50"}}'
     headers:

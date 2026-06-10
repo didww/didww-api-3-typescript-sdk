@@ -192,7 +192,7 @@ interactions:
         links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/address_requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/relationships/address_proof_types\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/address_requirements/90b72a1a-1ebd-4771-b818-f7123f8ff7ec/address_proof_types\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
-        : 73,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\"\
+        : 73,\n    \"api_version\": \"2026-04-16\"\n  },\n  \"links\": {\n    \"first\"\
         : \"https://sandbox-api.didww.com/v3/address_requirements?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         ,\n    \"next\": \"https://sandbox-api.didww.com/v3/address_requirements?page%5Bnumber%5D=2&page%5Bsize%5D=5\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/address_requirements?page%5Bnumber%5D=15&page%5Bsize%5D=5\"\

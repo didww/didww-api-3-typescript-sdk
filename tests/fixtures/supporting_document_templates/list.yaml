@@ -33,7 +33,7 @@ interactions:
         : {\n        \"name\": \"TestPermanDoc\",\n        \"permanent\": true,\n\
         \        \"url\": \"https://sandbox-api.didww.com/storage/public/owwqi77007ks4qx198b7su3eukg6\"\
         \n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\": 30,\n    \"\
-        api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/supporting_document_templates?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
+        api_version\": \"2026-04-16\"\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/supporting_document_templates?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         ,\n    \"next\": \"https://sandbox-api.didww.com/v3/supporting_document_templates?page%5Bnumber%5D=2&page%5Bsize%5D=5\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/supporting_document_templates?page%5Bnumber%5D=6&page%5Bsize%5D=5\"\
         \n  }\n}"
