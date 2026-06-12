@@ -123,7 +123,7 @@ interactions:
         \           \"self\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/relationships/area\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/cities/a87445bf-6169-4bca-81a1-2cfb53616ac4/area\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
-        : 1647,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"\
+        : 1647,\n    \"api_version\": \"2026-04-16\"\n  },\n  \"links\": {\n    \"\
         first\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=1&page%5Bsize%5D=10\"\
         ,\n    \"next\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=2&page%5Bsize%5D=10\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/cities?page%5Bnumber%5D=165&page%5Bsize%5D=10\"\

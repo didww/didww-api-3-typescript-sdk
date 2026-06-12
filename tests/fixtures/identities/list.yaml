@@ -82,7 +82,7 @@ interactions:
         \            \"self\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/relationships/proofs\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/addresses/d3414687-40f4-4346-a267-c2c65117d28c/proofs\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
-        : 2,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"links\": {\n    \"first\"\
+        : 2,\n    \"api_version\": \"2026-04-16\"\n  },\n  \"links\": {\n    \"first\"\
         : \"https://sandbox-api.didww.com/v3/identities?include=country%2Caddresses%2Cproofs%2Cpermanent_documents&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/identities?include=country%2Caddresses%2Cproofs%2Cpermanent_documents&page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         \n  }\n}"

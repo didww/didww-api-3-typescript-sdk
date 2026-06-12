@@ -27,7 +27,7 @@ interactions:
         d2c1b3fb-29f7-46ca-ba82-b617f4630b78\",\n      \"type\": \"proof_types\",\n\
         \      \"attributes\": {\n        \"name\": \"Copy of Phone Bill\",\n    \
         \    \"entity_type\": \"Address\"\n      }\n    }\n  ],\n  \"meta\": {\n \
-        \   \"total_records\": 17,\n    \"api_version\": \"2021-04-19\"\n  },\n  \"\
+        \   \"total_records\": 17,\n    \"api_version\": \"2026-04-16\"\n  },\n  \"\
         links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=1&page%5Bsize%5D=5\"\
         ,\n    \"next\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=2&page%5Bsize%5D=5\"\
         ,\n    \"last\": \"https://sandbox-api.didww.com/v3/proof_types?page%5Bnumber%5D=4&page%5Bsize%5D=5\"\

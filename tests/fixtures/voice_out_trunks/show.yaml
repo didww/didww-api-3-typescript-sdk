@@ -67,7 +67,7 @@ interactions:
         "related": "https://sandbox-api.didww.com/v3/dids/eeda315a-f016-4945-a3a9-bafc24302cdd/voice_in_trunk"}},
         "voice_in_trunk_group": {"links": {"self": "https://sandbox-api.didww.com/v3/dids/eeda315a-f016-4945-a3a9-bafc24302cdd/relationships/voice_in_trunk_group",
         "related": "https://sandbox-api.didww.com/v3/dids/eeda315a-f016-4945-a3a9-bafc24302cdd/voice_in_trunk_group"}}}}],
-        "meta": {"api_version": "2021-12-15"}}'
+        "meta": {"api_version": "2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

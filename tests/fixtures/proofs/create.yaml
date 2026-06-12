@@ -22,7 +22,7 @@ interactions:
         "related": "https://sandbox-api.didww.com/v3/proofs/ed46925b-a830-482d-917d-015858cf7ab9/entity"}}}},
         "included": [{"id": "19cd7b22-559b-41d4-99c9-7ad7ad63d5d1", "type": "proof_types",
         "attributes": {"name": "Drivers License", "entity_type": "Personal"}}], "meta":
-        {"api_version": "2021-04-19"}}'
+        {"api_version": "2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

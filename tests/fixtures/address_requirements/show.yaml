@@ -121,7 +121,7 @@ interactions:
         \ {\n      \"id\": \"d2c1b3fb-29f7-46ca-ba82-b617f4630b78\",\n      \"type\"\
         : \"proof_types\",\n      \"attributes\": {\n        \"name\": \"Copy of Phone\
         \ Bill\",\n        \"entity_type\": \"Address\"\n      }\n    }\n  ],\n  \"\
-        meta\": {\n    \"api_version\": \"2021-04-19\"\n  }\n}"
+        meta\": {\n    \"api_version\": \"2026-04-16\"\n  }\n}"
     headers:
       Content-Type:
       - application/vnd.api+json

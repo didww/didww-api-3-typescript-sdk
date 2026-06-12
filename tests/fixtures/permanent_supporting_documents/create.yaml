@@ -22,7 +22,7 @@ interactions:
         "included": [{"id": "4199435f-646e-4e9d-a143-8f3b972b10c5", "type": "supporting_document_templates",
         "attributes": {"name": "Germany Special Registration Form", "permanent": true,
         "url": "https://sandbox-api.didww.com/storage/public/4rghqnqtba0fa7mbdgig086xej1e"}}],
-        "meta": {"api_version": "2021-04-19"}}'
+        "meta": {"api_version": "2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

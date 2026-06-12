@@ -14,7 +14,7 @@ interactions:
     body:
       string: "{\n  \"data\": {\n    \"id\": \"5fc59e7e-79eb-498a-8779-800416b5c68a\"\
         ,\n    \"type\": \"voice_out_trunk_regenerate_credentials\"\n  },\n  \"meta\"\
-        : {\n    \"api_version\": \"2021-12-15\"\n  }\n}"
+        : {\n    \"api_version\": \"2026-04-16\"\n  }\n}"
     headers:
       Content-Type:
       - application/vnd.api+json
