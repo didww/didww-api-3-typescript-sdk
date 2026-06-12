@@ -12,56 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4
   response:
     body:
-      string: "{\n  \"data\": {\n    \"id\": \"fd38d3ff-80cf-4e67-a605-609a2884a5c4\"\
-        ,\n    \"type\": \"did_reservations\",\n    \"attributes\": {\n      \"expires_at\"\
-        : \"2018-12-28T16:22:00.417Z\",\n      \"created_at\": \"2018-12-28T16:12:00.440Z\"\
-        ,\n      \"description\": \"DIDWW\"\n    },\n    \"relationships\": {\n  \
-        \    \"available_did\": {\n        \"links\": {\n          \"self\": \"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/relationships/available_did\"\
-        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/available_did\"\
-        \n        },\n        \"data\": {\n          \"type\": \"available_dids\"\
-        ,\n          \"id\": \"857d1462-5f43-4238-b007-ff05f282e41b\"\n        }\n\
-        \      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"857d1462-5f43-4238-b007-ff05f282e41b\"\
-        ,\n      \"type\": \"available_dids\",\n      \"attributes\": {\n        \"\
-        number\": \"19492033398\"\n      },\n      \"relationships\": {\n        \"\
-        did_group\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/relationships/did_group\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/did_group\"\
-        \n          },\n          \"data\": {\n            \"type\": \"did_groups\"\
-        ,\n            \"id\": \"23bc0f41-67c0-40c3-b877-dccbbb65d5e4\"\n        \
-        \  }\n        }\n      }\n    },\n    {\n      \"id\": \"23bc0f41-67c0-40c3-b877-dccbbb65d5e4\"\
-        ,\n      \"type\": \"did_groups\",\n      \"attributes\": {\n        \"prefix\"\
-        : \"949\",\n        \"local_prefix\": \"\",\n        \"features\": [\n   \
-        \       \"voice\"\n        ],\n        \"is_metered\": false,\n        \"\
-        area_name\": \"Saddleback Valley\",\n        \"allow_additional_channels\"\
-        : true\n      },\n      \"relationships\": {\n        \"country\": {\n   \
-        \       \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/country\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/country\"\
-        \n          }\n        },\n        \"city\": {\n          \"links\": {\n \
-        \           \"self\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/city\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/city\"\
-        \n          }\n        },\n        \"did_group_type\": {\n          \"links\"\
-        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/did_group_type\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/did_group_type\"\
-        \n          }\n        },\n        \"region\": {\n          \"links\": {\n\
-        \            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/region\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/region\"\
-        \n          }\n        },\n        \"stock_keeping_units\": {\n          \"\
-        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/stock_keeping_units\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/stock_keeping_units\"\
-        \n          },\n          \"data\": [\n            {\n              \"type\"\
-        : \"stock_keeping_units\",\n              \"id\": \"209a43fa-41a5-490f-9376-97fdb0a727b3\"\
-        \n            },\n            {\n              \"type\": \"stock_keeping_units\"\
-        ,\n              \"id\": \"76492222-4895-42bc-89be-a681a1e40f37\"\n      \
-        \      }\n          ]\n        }\n      },\n      \"meta\": {\n        \"\
-        needs_registration\": false,\n        \"is_available\": true,\n        \"\
-        restrictions\": null,\n        \"available_dids_enabled\": true\n      }\n\
-        \    },\n    {\n      \"id\": \"209a43fa-41a5-490f-9376-97fdb0a727b3\",\n\
-        \      \"type\": \"stock_keeping_units\",\n      \"attributes\": {\n     \
-        \   \"setup_price\": \"0.0\",\n        \"monthly_price\": \"0.09\",\n    \
-        \    \"channels_included_count\": 0\n      }\n    },\n    {\n      \"id\"\
-        : \"76492222-4895-42bc-89be-a681a1e40f37\",\n      \"type\": \"stock_keeping_units\"\
-        ,\n      \"attributes\": {\n        \"setup_price\": \"0.0\",\n        \"\
-        monthly_price\": \"0.19\",\n        \"channels_included_count\": 2\n     \
-        \ }\n    }\n  ],\n  \"meta\": {\n    \"available_count\": 9\n  }\n}"
+      string: '{"data":{"id":"fd38d3ff-80cf-4e67-a605-609a2884a5c4","type":"did_reservations","attributes":{"expires_at":"2018-12-28T16:22:00.417Z","created_at":"2018-12-28T16:12:00.440Z","description":"DIDWW"},"relationships":{"available_did":{"links":{"self":"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/relationships/available_did","related":"https://sandbox-api.didww.com/v3/did_reservations/fd38d3ff-80cf-4e67-a605-609a2884a5c4/available_did"},"data":{"type":"available_dids","id":"857d1462-5f43-4238-b007-ff05f282e41b"}}}},"included":[{"id":"857d1462-5f43-4238-b007-ff05f282e41b","type":"available_dids","attributes":{"number":"19492033398"},"relationships":{"did_group":{"links":{"self":"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/relationships/did_group","related":"https://sandbox-api.didww.com/v3/available_dids/857d1462-5f43-4238-b007-ff05f282e41b/did_group"},"data":{"type":"did_groups","id":"23bc0f41-67c0-40c3-b877-dccbbb65d5e4"}}}},{"id":"23bc0f41-67c0-40c3-b877-dccbbb65d5e4","type":"did_groups","attributes":{"prefix":"949","local_prefix":"","features":["voice"],"is_metered":false,"area_name":"Saddleback Valley","allow_additional_channels":true},"relationships":{"country":{"links":{"self":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/country","related":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/country"}},"city":{"links":{"self":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/city","related":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/city"}},"did_group_type":{"links":{"self":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/did_group_type","related":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/did_group_type"}},"region":{"links":{"self":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/region","related":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/region"}},"stock_keeping_units":{"links":{"self":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/relationships/stock_keeping_units","related":"https://sandbox-api.didww.com/v3/did_groups/23bc0f41-67c0-40c3-b877-dccbbb65d5e4/stock_keeping_units"},"data":[{"type":"stock_keeping_units","id":"209a43fa-41a5-490f-9376-97fdb0a727b3"},{"type":"stock_keeping_units","id":"76492222-4895-42bc-89be-a681a1e40f37"}]}},"meta":{"needs_registration":false,"is_available":true,"restrictions":null,"available_dids_enabled":true}},{"id":"209a43fa-41a5-490f-9376-97fdb0a727b3","type":"stock_keeping_units","attributes":{"setup_price":"0.0","monthly_price":"0.09","channels_included_count":0}},{"id":"76492222-4895-42bc-89be-a681a1e40f37","type":"stock_keeping_units","attributes":{"setup_price":"0.0","monthly_price":"0.19","channels_included_count":2}}],"meta":{"available_count":9}}'
     headers:
       Content-Type:
       - application/vnd.api+json

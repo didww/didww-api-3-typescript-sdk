@@ -12,9 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/address_requirement_validations
   response:
     body:
-      string: "{\n  \"data\": {\n    \"id\": \"aea92b24-a044-4864-9740-89d3e15b65c7\"\
-        ,\n    \"type\": \"address_requirement_validations\"\n  },\n  \"meta\": {\n    \"\
-        api_version\": \"2026-04-16\"\n  }\n}"
+      string: '{"data":{"id":"aea92b24-a044-4864-9740-89d3e15b65c7","type":"address_requirement_validations"},"meta":{"api_version":"2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json
