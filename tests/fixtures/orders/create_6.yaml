@@ -24,7 +24,7 @@ interactions:
         ,\n            \"did_group_id\": \"8d909d98-9385-4635-b123-809d64b2d4bb\"\n\
         \          }\n        }\n      ],\n      \"callback_method\": null,\n    \
         \  \"callback_url\": null\n    }\n  },\n  \"meta\": {\n    \"api_version\"\
-        : \"2022-05-09\"\n  }\n}"
+        : \"2026-04-16\"\n  }\n}"
     headers:
       Content-Type:
       - application/vnd.api+json

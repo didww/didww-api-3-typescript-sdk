@@ -31,7 +31,7 @@ interactions:
         : \"https://sandbox-api.didww.com/v3/regions/346e64c8-18c2-4a12-b1e2-20e090043fca/relationships/country\"\
         ,\n            \"related\": \"https://sandbox-api.didww.com/v3/regions/346e64c8-18c2-4a12-b1e2-20e090043fca/country\"\
         \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
-        : \"2022-05-09\"\n  }\n}"
+        : \"2026-04-16\"\n  }\n}"
     headers:
       Content-Type:
       - application/vnd.api+json
