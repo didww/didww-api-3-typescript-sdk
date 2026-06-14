@@ -12,10 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/encrypted_files/6eed102c-66a9-4a9b-a95f-4312d70ec12a
   response:
     body:
-      string: "{\n  \"data\": {\n    \"id\": \"6eed102c-66a9-4a9b-a95f-4312d70ec12a\"\
-        ,\n    \"type\": \"encrypted_files\",\n    \"attributes\": {\n      \"description\"\
-        : \"some description\",\n      \"expires_at\": \"2021-04-06T16:38:34.396Z\"\
-        \n    }\n  },\n  \"meta\": {\n    \"api_version\": \"2026-04-16\"\n  }\n}"
+      string: '{"data":{"id":"6eed102c-66a9-4a9b-a95f-4312d70ec12a","type":"encrypted_files","attributes":{"description":"some description","expires_at":"2021-04-06T16:38:34.396Z"}},"meta":{"api_version":"2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

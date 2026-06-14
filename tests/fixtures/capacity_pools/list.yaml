@@ -12,41 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/capacity_pools
   response:
     body:
-      string: "{\n  \"data\": [\n    {\n      \"id\": \"f288d07c-e2fc-4ae6-9837-b18fb469c324\"\
-        ,\n      \"type\": \"capacity_pools\",\n      \"attributes\": {\n        \"\
-        name\": \"Standard\",\n        \"renew_date\": \"2019-01-21\",\n        \"\
-        total_channels_count\": 34,\n        \"assigned_channels_count\": 24,\n  \
-        \      \"minimum_limit\": 0,\n        \"minimum_qty_per_order\": 1,\n    \
-        \    \"setup_price\": \"0.0\",\n        \"monthly_price\": \"15.0\",\n   \
-        \     \"metered_rate\": \"1.0\"\n      },\n      \"relationships\": {\n  \
-        \      \"countries\": {\n          \"links\": {\n            \"self\": \"\
-        https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/countries\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/countries\"\
-        \n          }\n        },\n        \"shared_capacity_groups\": {\n       \
-        \   \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/shared_capacity_groups\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/shared_capacity_groups\"\
-        \n          }\n        },\n        \"qty_based_pricings\": {\n          \"\
-        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/qty_based_pricings\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/qty_based_pricings\"\
-        \n          }\n        }\n      }\n    },\n    {\n      \"id\": \"b7522a31-4bf3-4c23-81e8-e7a14b23663f\"\
-        ,\n      \"type\": \"capacity_pools\",\n      \"attributes\": {\n        \"\
-        name\": \"Extended\",\n        \"renew_date\": \"2019-01-21\",\n        \"\
-        total_channels_count\": 8,\n        \"assigned_channels_count\": 1,\n    \
-        \    \"minimum_limit\": 0,\n        \"minimum_qty_per_order\": 1,\n      \
-        \  \"setup_price\": \"25.0\",\n        \"monthly_price\": \"25.0\",\n    \
-        \    \"metered_rate\": \"1.0\"\n      },\n      \"relationships\": {\n   \
-        \     \"countries\": {\n          \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/countries\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/countries\"\
-        \n          }\n        },\n        \"shared_capacity_groups\": {\n       \
-        \   \"links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/shared_capacity_groups\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/shared_capacity_groups\"\
-        \n          }\n        },\n        \"qty_based_pricings\": {\n          \"\
-        links\": {\n            \"self\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/qty_based_pricings\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/qty_based_pricings\"\
-        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total_records\"\
-        : 2\n  },\n  \"links\": {\n    \"first\": \"https://sandbox-api.didww.com/v3/capacity_pools?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
-        ,\n    \"last\": \"https://sandbox-api.didww.com/v3/capacity_pools?page%5Bnumber%5D=1&page%5Bsize%5D=50\"\
-        \n  }\n}"
+      string: '{"data":[{"id":"f288d07c-e2fc-4ae6-9837-b18fb469c324","type":"capacity_pools","attributes":{"name":"Standard","renew_date":"2019-01-21","total_channels_count":34,"assigned_channels_count":24,"minimum_limit":0,"minimum_qty_per_order":1,"setup_price":"0.0","monthly_price":"15.0","metered_rate":"1.0"},"relationships":{"countries":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/countries","related":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/countries"}},"shared_capacity_groups":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/shared_capacity_groups","related":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/shared_capacity_groups"}},"qty_based_pricings":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/relationships/qty_based_pricings","related":"https://sandbox-api.didww.com/v3/capacity_pools/f288d07c-e2fc-4ae6-9837-b18fb469c324/qty_based_pricings"}}}},{"id":"b7522a31-4bf3-4c23-81e8-e7a14b23663f","type":"capacity_pools","attributes":{"name":"Extended","renew_date":"2019-01-21","total_channels_count":8,"assigned_channels_count":1,"minimum_limit":0,"minimum_qty_per_order":1,"setup_price":"25.0","monthly_price":"25.0","metered_rate":"1.0"},"relationships":{"countries":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/countries","related":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/countries"}},"shared_capacity_groups":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/shared_capacity_groups","related":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/shared_capacity_groups"}},"qty_based_pricings":{"links":{"self":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/relationships/qty_based_pricings","related":"https://sandbox-api.didww.com/v3/capacity_pools/b7522a31-4bf3-4c23-81e8-e7a14b23663f/qty_based_pricings"}}}}],"meta":{"total_records":2},"links":{"first":"https://sandbox-api.didww.com/v3/capacity_pools?page%5Bnumber%5D=1&page%5Bsize%5D=50","last":"https://sandbox-api.didww.com/v3/capacity_pools?page%5Bnumber%5D=1&page%5Bsize%5D=50"}}'
     headers:
       Content-Type:
       - application/vnd.api+json

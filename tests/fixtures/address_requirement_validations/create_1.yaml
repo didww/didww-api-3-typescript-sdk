@@ -12,18 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/address_requirement_validations
   response:
     body:
-      string: "{\n  \"errors\": [\n    {\n      \"title\": \"Identity Place of Birth\
-        \ must be Belgium\",\n      \"detail\": \"Identity Place of Birth must be\
-        \ Belgium\",\n      \"code\": \"100\",\n      \"source\": {\n        \"pointer\"\
-        : \"/data\"\n      },\n      \"status\": \"422\"\n    },\n    {\n      \"\
-        title\": \"Following Supporting Document(s) required (Belgium Registration\
-        \ Form)\",\n      \"detail\": \"Following Supporting Document(s) required\
-        \ (Belgium Registration Form)\",\n      \"code\": \"100\",\n      \"source\"\
-        : {\n        \"pointer\": \"/data\"\n      },\n      \"status\": \"422\"\n\
-        \    },\n    {\n      \"title\": \"Address in Belgium required\",\n      \"\
-        detail\": \"Address in Belgium required\",\n      \"code\": \"100\",\n   \
-        \   \"source\": {\n        \"pointer\": \"/data\"\n      },\n      \"status\"\
-        : \"422\"\n    }\n  ]\n}"
+      string: '{"errors":[{"title":"Identity Place of Birth must be Belgium","detail":"Identity Place of Birth must be Belgium","code":"100","source":{"pointer":"/data"},"status":"422"},{"title":"Following Supporting Document(s) required (Belgium Registration Form)","detail":"Following Supporting Document(s) required (Belgium Registration Form)","code":"100","source":{"pointer":"/data"},"status":"422"},{"title":"Address in Belgium required","detail":"Address in Belgium required","code":"100","source":{"pointer":"/data"},"status":"422"}]}'
     headers:
       Content-Type:
       - application/vnd.api+json

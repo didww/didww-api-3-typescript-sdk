@@ -12,21 +12,7 @@ interactions:
     uri: https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22
   response:
     body:
-      string: "{\n  \"data\": {\n    \"id\": \"ab2adc18-7c94-42d9-bdde-b28dfc373a22\"\
-        ,\n    \"type\": \"areas\",\n    \"attributes\": {\n      \"name\": \"Tuscany\"\
-        \n    },\n    \"relationships\": {\n      \"country\": {\n        \"links\"\
-        : {\n          \"self\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/relationships/country\"\
-        ,\n          \"related\": \"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/country\"\
-        \n        },\n        \"data\": {\n          \"type\": \"countries\",\n  \
-        \        \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\n        }\n   \
-        \   }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"05baebb6-4053-4870-acd6-8491eb200e0b\"\
-        ,\n      \"type\": \"countries\",\n      \"attributes\": {\n        \"name\"\
-        : \"Italy\",\n        \"prefix\": \"39\",\n        \"iso\": \"IT\"\n     \
-        \ },\n      \"relationships\": {\n        \"regions\": {\n          \"links\"\
-        : {\n            \"self\": \"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/relationships/regions\"\
-        ,\n            \"related\": \"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/regions\"\
-        \n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"api_version\"\
-        : \"2021-04-19\"\n  }\n}"
+      string: '{"data":{"id":"ab2adc18-7c94-42d9-bdde-b28dfc373a22","type":"areas","attributes":{"name":"Tuscany"},"relationships":{"country":{"links":{"self":"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/relationships/country","related":"https://sandbox-api.didww.com/v3/areas/ab2adc18-7c94-42d9-bdde-b28dfc373a22/country"},"data":{"type":"countries","id":"05baebb6-4053-4870-acd6-8491eb200e0b"}}}},"included":[{"id":"05baebb6-4053-4870-acd6-8491eb200e0b","type":"countries","attributes":{"name":"Italy","prefix":"39","iso":"IT"},"relationships":{"regions":{"links":{"self":"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/relationships/regions","related":"https://sandbox-api.didww.com/v3/countries/05baebb6-4053-4870-acd6-8491eb200e0b/regions"}}}}],"meta":{"api_version":"2026-04-16"}}'
     headers:
       Content-Type:
       - application/vnd.api+json
