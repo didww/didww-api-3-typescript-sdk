@@ -1,3 +1,4 @@
+import { isDeepStrictEqual } from 'node:util';
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceConfig, ResourceRef } from './resources/base.js';
 import { getResourceConfig } from './registry.js';
@@ -190,7 +191,7 @@ function detectDirtyWritableKeys<T, TWrite>(
     if (!(key in data)) continue;
     const current = relKeys.has(key) ? extractLinkage(data[key]) : data[key];
     const original = snapshot?.[key];
-    if (!snapshot || !(key in snapshot) || !deepEqual(current, original)) {
+    if (!snapshot || !(key in snapshot) || !isDeepStrictEqual(current, original)) {
       result.add(key);
     }
   }
@@ -235,48 +236,6 @@ function cloneValue(value: unknown, seen: WeakMap<object, unknown> = new WeakMap
     cloned[k] = cloneValue(v, seen);
   }
   return cloned;
-}
-
-function deepEqual(
-  a: unknown,
-  b: unknown,
-  seen: WeakMap<object, WeakSet<object>> = new WeakMap<object, WeakSet<object>>(),
-): boolean {
-  if (Object.is(a, b)) return true;
-  if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') return false;
-
-  const aObj = a as object;
-  const bObj = b as object;
-
-  let compared = seen.get(aObj);
-  if (!compared) {
-    compared = new WeakSet<object>();
-    seen.set(aObj, compared);
-  } else if (compared.has(bObj)) {
-    return true;
-  }
-  compared.add(bObj);
-
-  if (Array.isArray(a) || Array.isArray(b)) {
-    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i += 1) {
-      if (!deepEqual(a[i], b[i], seen)) return false;
-    }
-    return true;
-  }
-
-  const aRecord = a as Record<string, unknown>;
-  const bRecord = b as Record<string, unknown>;
-  const aKeys = Object.keys(aRecord);
-  const bKeys = Object.keys(bRecord);
-  if (aKeys.length !== bKeys.length) return false;
-
-  for (const key of aKeys) {
-    if (!(key in bRecord)) return false;
-    if (!deepEqual(aRecord[key], bRecord[key], seen)) return false;
-  }
-
-  return true;
 }
 
 function isResourceRef(value: unknown): value is ResourceRef {

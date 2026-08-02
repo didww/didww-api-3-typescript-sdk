@@ -161,6 +161,14 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       expect(result.data.relationships).toBeUndefined();
     });
 
+    it('treats an untouched NaN capacityLimit as clean (SameValue equality)', () => {
+      const did = deserializeDid({ capacity_limit: NaN });
+      // No mutation at all — NaN must compare equal to itself against the snapshot
+
+      const result = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
+      expect(result.data.attributes).toBeUndefined();
+    });
+
     it('fresh object (no snapshot) treats all present keys as dirty', () => {
       // When user builds a fresh object (not deserialized), there's no snapshot,
       // so all present writable keys are treated as dirty
