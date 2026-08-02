@@ -208,34 +208,10 @@ function snapshotCleanWritableValues<T, TWrite>(
   for (const key of meta.writableKeys) {
     if (key in resource) {
       const value = relKeys.has(key) ? extractLinkage(resource[key]) : resource[key];
-      snapshot[key] = cloneValue(value);
+      snapshot[key] = structuredClone(value);
     }
   }
   CLEAN_WRITABLE_SNAPSHOTS.set(resource, snapshot);
-}
-
-function cloneValue(value: unknown, seen: WeakMap<object, unknown> = new WeakMap<object, unknown>()): unknown {
-  if (value === null || typeof value !== 'object') return value;
-
-  if (seen.has(value)) {
-    return seen.get(value);
-  }
-
-  if (Array.isArray(value)) {
-    const cloned: unknown[] = [];
-    seen.set(value, cloned);
-    for (const item of value) {
-      cloned.push(cloneValue(item, seen));
-    }
-    return cloned;
-  }
-
-  const cloned: Record<string, unknown> = {};
-  seen.set(value, cloned);
-  for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
-    cloned[k] = cloneValue(v, seen);
-  }
-  return cloned;
 }
 
 function isResourceRef(value: unknown): value is ResourceRef {

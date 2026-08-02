@@ -5,6 +5,7 @@ import { VOICE_IN_TRUNK_GROUP_RESOURCE } from '../src/resources/voice-in-trunk-g
 import { VOICE_OUT_TRUNK_RESOURCE } from '../src/resources/voice-out-trunk.js';
 import type { Did, DidWrite } from '../src/resources/did.js';
 import type { VoiceInTrunkGroup, VoiceInTrunkGroupWrite } from '../src/resources/voice-in-trunk-group.js';
+import type { VoiceOutTrunk, VoiceOutTrunkWrite } from '../src/resources/voice-out-trunk.js';
 
 describe('Dirty tracking - PATCH sends only changed fields', () => {
   describe('Scenario 1: build(id), set one attribute, update', () => {
@@ -167,6 +168,32 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
 
       const result = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
       expect(result.data.attributes).toBeUndefined();
+    });
+
+    it('deep-clones array-valued writable attributes into the snapshot (mutating the source array afterwards is still detected as dirty)', () => {
+      const body = {
+        data: {
+          id: 'trunk-1',
+          type: 'voice_out_trunks',
+          attributes: {
+            name: 'Trunk',
+            allowed_rtp_ips: ['10.0.0.1/32'],
+            dst_prefixes: [],
+            created_at: '2024-01-01T00:00:00.000Z',
+          },
+        },
+      };
+      const trunk = deserialize<VoiceOutTrunk>(body).data as VoiceOutTrunk;
+      // Mutate the same array reference in place after the clean snapshot was captured
+      (trunk.allowedRtpIps as string[])[0] = '10.0.0.2/32';
+
+      const result = serializeForUpdate(
+        VOICE_OUT_TRUNK_RESOURCE,
+        trunk as unknown as VoiceOutTrunkWrite & { id: string },
+      );
+      // If the snapshot held a reference (not a deep clone) to the array, this mutation
+      // would have "changed" the snapshot too, and the field would look unchanged.
+      expect(result.data.attributes.allowed_rtp_ips).toEqual(['10.0.0.2/32']);
     });
 
     it('fresh object (no snapshot) treats all present keys as dirty', () => {
