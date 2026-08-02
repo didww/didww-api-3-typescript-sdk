@@ -335,11 +335,3 @@ function wrapRelationships(data: Record<string, unknown>): Record<string, unknow
   }
   return result;
 }
-
-/**
- * Wrap a null value as a null relationship for JSON:API.
- * Used by resources that need to explicitly clear relationships.
- */
-export function nullRelationship(): { data: null } {
-  return { data: null };
-}
