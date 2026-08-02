@@ -29,19 +29,19 @@ function camelToSnakeKeys(obj: unknown): unknown {
   return transformKeys(obj, snake);
 }
 
-export interface DeserializedResponse<T> {
+interface DeserializedResponse<T> {
   data: T;
   meta?: Record<string, unknown>;
   links?: Record<string, unknown>;
 }
 
-export interface DeserializedListResponse<T> {
+interface DeserializedListResponse<T> {
   data: T[];
   meta?: Record<string, unknown>;
   links?: Record<string, unknown>;
 }
 
-export interface SerializedResource {
+interface SerializedResource {
   data: {
     type: string;
     id?: string;
