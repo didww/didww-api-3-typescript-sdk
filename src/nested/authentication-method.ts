@@ -113,7 +113,7 @@ export function isGenericAuth(m: AuthenticationMethod): m is GenericAuthenticati
   return m.type !== 'ip_only' && m.type !== 'credentials_and_ip' && m.type !== 'twilio';
 }
 
-export interface SerializedAuthenticationMethod {
+interface SerializedAuthenticationMethod {
   type: string;
   attributes: Record<string, unknown>;
 }

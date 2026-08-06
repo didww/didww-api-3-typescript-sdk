@@ -26,6 +26,7 @@ import {
   ipOnlyAuthenticationMethod,
 } from '../src/index.js';
 import crypto from 'node:crypto';
+import assert from 'node:assert';
 
 const API_KEY = process.env.DIDWW_API_KEY!;
 const client = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX });
@@ -45,10 +46,6 @@ async function test(name: string, fn: () => Promise<void>) {
     failures.push(`${name}: ${msg}`);
     console.log(`  ✗ ${name}: ${msg}`);
   }
-}
-
-function assert(condition: boolean, msg: string) {
-  if (!condition) throw new Error(msg);
 }
 
 // ─── Quick Start ───────────────────────────────────────────

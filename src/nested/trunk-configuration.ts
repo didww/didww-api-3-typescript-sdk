@@ -161,7 +161,7 @@ export function pstnConfiguration(attrs: Omit<PstnConfiguration, 'type'>): PstnC
   return { type: 'pstn_configurations', ...attrs };
 }
 
-export interface SerializedTrunkConfiguration {
+interface SerializedTrunkConfiguration {
   type: string;
   attributes: Record<string, unknown>;
 }

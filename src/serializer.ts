@@ -1,3 +1,4 @@
+import { isDeepStrictEqual } from 'node:util';
 import { camel, snake, deserialise, serialise } from 'kitsu-core';
 import type { ResourceConfig, ResourceRef } from './resources/base.js';
 import { getResourceConfig } from './registry.js';
@@ -28,19 +29,19 @@ function camelToSnakeKeys(obj: unknown): unknown {
   return transformKeys(obj, snake);
 }
 
-export interface DeserializedResponse<T> {
+interface DeserializedResponse<T> {
   data: T;
   meta?: Record<string, unknown>;
   links?: Record<string, unknown>;
 }
 
-export interface DeserializedListResponse<T> {
+interface DeserializedListResponse<T> {
   data: T[];
   meta?: Record<string, unknown>;
   links?: Record<string, unknown>;
 }
 
-export interface SerializedResource {
+interface SerializedResource {
   data: {
     type: string;
     id?: string;
@@ -190,7 +191,7 @@ function detectDirtyWritableKeys<T, TWrite>(
     if (!(key in data)) continue;
     const current = relKeys.has(key) ? extractLinkage(data[key]) : data[key];
     const original = snapshot?.[key];
-    if (!snapshot || !(key in snapshot) || !deepEqual(current, original)) {
+    if (!snapshot || !(key in snapshot) || !isDeepStrictEqual(current, original)) {
       result.add(key);
     }
   }
@@ -207,76 +208,10 @@ function snapshotCleanWritableValues<T, TWrite>(
   for (const key of meta.writableKeys) {
     if (key in resource) {
       const value = relKeys.has(key) ? extractLinkage(resource[key]) : resource[key];
-      snapshot[key] = cloneValue(value);
+      snapshot[key] = structuredClone(value);
     }
   }
   CLEAN_WRITABLE_SNAPSHOTS.set(resource, snapshot);
-}
-
-function cloneValue(value: unknown, seen: WeakMap<object, unknown> = new WeakMap<object, unknown>()): unknown {
-  if (value === null || typeof value !== 'object') return value;
-
-  if (seen.has(value)) {
-    return seen.get(value);
-  }
-
-  if (Array.isArray(value)) {
-    const cloned: unknown[] = [];
-    seen.set(value, cloned);
-    for (const item of value) {
-      cloned.push(cloneValue(item, seen));
-    }
-    return cloned;
-  }
-
-  const cloned: Record<string, unknown> = {};
-  seen.set(value, cloned);
-  for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
-    cloned[k] = cloneValue(v, seen);
-  }
-  return cloned;
-}
-
-function deepEqual(
-  a: unknown,
-  b: unknown,
-  seen: WeakMap<object, WeakSet<object>> = new WeakMap<object, WeakSet<object>>(),
-): boolean {
-  if (Object.is(a, b)) return true;
-  if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') return false;
-
-  const aObj = a as object;
-  const bObj = b as object;
-
-  let compared = seen.get(aObj);
-  if (!compared) {
-    compared = new WeakSet<object>();
-    seen.set(aObj, compared);
-  } else if (compared.has(bObj)) {
-    return true;
-  }
-  compared.add(bObj);
-
-  if (Array.isArray(a) || Array.isArray(b)) {
-    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i += 1) {
-      if (!deepEqual(a[i], b[i], seen)) return false;
-    }
-    return true;
-  }
-
-  const aRecord = a as Record<string, unknown>;
-  const bRecord = b as Record<string, unknown>;
-  const aKeys = Object.keys(aRecord);
-  const bKeys = Object.keys(bRecord);
-  if (aKeys.length !== bKeys.length) return false;
-
-  for (const key of aKeys) {
-    if (!(key in bRecord)) return false;
-    if (!deepEqual(aRecord[key], bRecord[key], seen)) return false;
-  }
-
-  return true;
 }
 
 function isResourceRef(value: unknown): value is ResourceRef {
@@ -334,12 +269,4 @@ function wrapRelationships(data: Record<string, unknown>): Record<string, unknow
     }
   }
   return result;
-}
-
-/**
- * Wrap a null value as a null relationship for JSON:API.
- * Used by resources that need to explicitly clear relationships.
- */
-export function nullRelationship(): { data: null } {
-  return { data: null };
 }
