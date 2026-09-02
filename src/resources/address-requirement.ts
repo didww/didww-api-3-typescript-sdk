@@ -9,14 +9,18 @@ export interface AddressRequirement {
   id: string;
   type: 'address_requirements';
   identityType: IdentityType;
-  personalAreaLevel: AreaLevel;
-  businessAreaLevel: AreaLevel;
+  /** Null when the country does not accept a personal identity. */
+  personalAreaLevel: AreaLevel | null;
+  /** Null when the country does not accept a business identity. */
+  businessAreaLevel: AreaLevel | null;
   addressAreaLevel: AreaLevel;
   personalProofQty: number;
   businessProofQty: number;
   addressProofQty: number;
-  personalMandatoryFields: string[];
-  businessMandatoryFields: string[];
+  /** Null when no field is mandatory for a personal identity. */
+  personalMandatoryFields: string[] | null;
+  /** Null when no field is mandatory for a business identity. */
+  businessMandatoryFields: string[] | null;
   serviceDescriptionRequired: boolean;
   restrictionMessage: string | null;
   country?: Country | ResourceRef;

@@ -59,6 +59,6 @@ describe('DidGroups', () => {
     expect(addressRequirement).toBeDefined();
     expect(isIncluded(addressRequirement!)).toBe(true);
     expect((addressRequirement as AddressRequirement).id).toBe('8da1e0b2-047c-4baf-9c57-57143f09b9ce');
-    expect((addressRequirement as AddressRequirement).identityType).toBe('Any');
+    expect((addressRequirement as AddressRequirement).identityType).toBe('any');
   });
 });
