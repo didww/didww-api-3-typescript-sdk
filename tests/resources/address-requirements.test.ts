@@ -18,13 +18,17 @@ describe('AddressRequirements', () => {
     const result = await client.addressRequirements().list();
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('address_requirements');
+    expect(result.data[0].personalAreaLevel).toBeNull();
+    expect(result.data[0].businessMandatoryFields).toBeNull();
+    expect(result.data[2].personalMandatoryFields).toBeNull();
+    expect(result.data[4].businessAreaLevel).toBeNull();
   });
 
   it('finds an address requirement', async () => {
     const client = setupClient('address_requirements/show.yaml');
     const result = await client.addressRequirements().find('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.id).toBe('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
-    expect(result.data.identityType).toBe('Any');
+    expect(result.data.identityType).toBe('any');
     const country = result.data.country;
     expect(country).toBeDefined();
     expect(isIncluded(country!)).toBe(true);

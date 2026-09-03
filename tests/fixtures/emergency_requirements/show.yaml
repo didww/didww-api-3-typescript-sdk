@@ -9,10 +9,10 @@ interactions:
       Content-Type:
       - application/vnd.api+json
     method: GET
-    uri: https://sandbox-api.didww.com/v3/emergency_requirements/er-001
+    uri: https://sandbox-api.didww.com/v3/emergency_requirements/er-002
   response:
     body:
-      string: '{"data":{"id":"er-001","type":"emergency_requirements","attributes":{"identity_type":"personal","address_area_level":"city","personal_area_level":"city","business_area_level":"country","address_mandatory_fields":["city_name","postal_code"],"personal_mandatory_fields":["first_name","last_name"],"business_mandatory_fields":[],"estimate_setup_time":"7-14 days","requirement_restriction_message":null},"relationships":{"country":{"links":{"self":"https://sandbox-api.didww.com/v3/emergency_requirements/er-001/relationships/country","related":"https://sandbox-api.didww.com/v3/emergency_requirements/er-001/country"}},"did_group_type":{"links":{"self":"https://sandbox-api.didww.com/v3/emergency_requirements/er-001/relationships/did_group_type","related":"https://sandbox-api.didww.com/v3/emergency_requirements/er-001/did_group_type"}}},"meta":{"setup_price":null,"monthly_price":null}}}'
+      string: '{"data":{"id":"er-002","type":"emergency_requirements","attributes":{"identity_type":"business","address_area_level":"city","personal_area_level":null,"business_area_level":"world_wide","address_mandatory_fields":["city_name","postal_code"],"personal_mandatory_fields":[],"business_mandatory_fields":[],"estimate_setup_time":"7-14 days","requirement_restriction_message":null},"relationships":{"country":{"links":{"self":"https://sandbox-api.didww.com/v3/emergency_requirements/er-002/relationships/country","related":"https://sandbox-api.didww.com/v3/emergency_requirements/er-002/country"}},"did_group_type":{"links":{"self":"https://sandbox-api.didww.com/v3/emergency_requirements/er-002/relationships/did_group_type","related":"https://sandbox-api.didww.com/v3/emergency_requirements/er-002/did_group_type"}}},"meta":{"setup_price":null,"monthly_price":null}}}'
     headers:
       Content-Type:
       - application/vnd.api+json
