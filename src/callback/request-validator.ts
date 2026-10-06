@@ -1,10 +1,13 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
 export class RequestValidator {
-  private readonly apiKey: string;
+  private readonly callbackSecret: string;
 
-  constructor(apiKey: string) {
-    this.apiKey = apiKey;
+  /**
+   * @param callbackSecret the callback secret enabled in the DIDWW User Panel
+   */
+  constructor(callbackSecret: string) {
+    this.callbackSecret = callbackSecret;
   }
 
   validate(url: string, payload: Record<string, string>, signature: string): boolean {
@@ -27,7 +30,7 @@ export class RequestValidator {
     for (const key of sortedKeys) {
       data += key + payload[key];
     }
-    const hmac = createHmac('sha1', this.apiKey);
+    const hmac = createHmac('sha1', this.callbackSecret);
     hmac.update(data);
     return hmac.digest('hex');
   }
