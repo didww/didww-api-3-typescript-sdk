@@ -688,10 +688,12 @@ await client.proofs().create({
 
 Validate incoming webhook callbacks from DIDWW using HMAC-SHA1 signature verification.
 
+Initialize the validator with the callback secret that is enabled in the DIDWW User Panel (**APIs → DIDWW API 3 → Callback Secrets**). DIDWW signs every callback with it and sends callbacks only while a callback secret is enabled.
+
 ```typescript
 import { RequestValidator } from '@didww/sdk';
 
-const validator = new RequestValidator('your-api-key');
+const validator = new RequestValidator('your-callback-secret');
 
 // In your webhook handler:
 const valid = validator.validate(
