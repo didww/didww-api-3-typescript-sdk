@@ -10,6 +10,7 @@ import {
   DefaultDstAction,
   OnCliMismatchAction,
   credentialsAndIpAuthenticationMethod,
+  type CredentialsAndIpAuthenticationMethod,
 } from '../src/index.js';
 
 const client = new DidwwClient({
@@ -22,11 +23,12 @@ async function main() {
   const suffix = Math.random().toString(36).slice(2, 10);
   const trunk = await client.voiceOutTrunks().create({
     name: `TS Outbound Trunk ${suffix}`,
+    // username and password are server-generated and returned in the response,
+    // so they are left out here (the builder's input type lists them as required)
     authenticationMethod: credentialsAndIpAuthenticationMethod({
       allowedSipIps: ['203.0.113.0/24'],
       techPrefix: '',
-      // username and password are server-generated and returned in the response
-    }),
+    } as Omit<CredentialsAndIpAuthenticationMethod, 'type'>),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
     externalReferenceId: `ts-example-${suffix}`,

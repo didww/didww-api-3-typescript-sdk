@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { DidwwClientError } from '../src/errors.js';
+import { Pop } from '../src/enums.js';
 import { serializeForCreate, serializeForUpdate } from '../src/serializer.js';
 import { DID_RESOURCE } from '../src/resources/did.js';
 import { ORDER_RESOURCE } from '../src/resources/order.js';
@@ -134,6 +136,14 @@ describe('Serialization - excludes read-only fields', () => {
     expect(attrs.created_at).toBeUndefined();
   });
 
+  it('VoiceInTrunk sends pop as an attribute, null included', () => {
+    const created = serializeForCreate(VOICE_IN_TRUNK_RESOURCE, { name: 't', pop: Pop.FRA });
+    expect(created.data.attributes.pop).toBe('FRA');
+    const cleared = serializeForUpdate(VOICE_IN_TRUNK_RESOURCE, { id: 'vit-1', pop: null });
+    expect(cleared.data).toEqual({ type: 'voice_in_trunks', id: 'vit-1', attributes: { pop: null } });
+    expect(cleared.data.relationships).toBeUndefined();
+  });
+
   it('VoiceInTrunkGroup excludes read-only fields', () => {
     const data = {
       name: 'test group',
@@ -250,6 +260,47 @@ describe('DID trunk/trunk group exclusive relationships', () => {
     });
     // trunk should NOT be touched
     expect(result.data.relationships?.voice_in_trunk).toBeUndefined();
+  });
+
+  it('assigning smsTrunk auto-nullifies smsTrunkGroup', () => {
+    const result = serializeForUpdate(DID_RESOURCE, { id: 'did-1', smsTrunk: { id: 't-1', type: 'sms_trunks' } });
+    expect(result.data.relationships?.sms_trunk).toEqual({ data: { id: 't-1', type: 'sms_trunks' } });
+    expect(result.data.relationships?.sms_trunk_group).toEqual({ data: null });
+  });
+
+  it('assigning smsTrunkGroup auto-nullifies smsTrunk', () => {
+    const result = serializeForUpdate(DID_RESOURCE, {
+      id: 'did-1',
+      smsTrunkGroup: { id: 'g-1', type: 'sms_trunk_groups' },
+    });
+    expect(result.data.relationships?.sms_trunk_group).toEqual({ data: { id: 'g-1', type: 'sms_trunk_groups' } });
+    expect(result.data.relationships?.sms_trunk).toEqual({ data: null });
+  });
+
+  it('setting smsTrunk to null does not auto-nullify smsTrunkGroup', () => {
+    const result = serializeForUpdate(DID_RESOURCE, { id: 'did-1', smsTrunk: null });
+    expect(result.data.relationships).toEqual({ sms_trunk: { data: null } });
+  });
+
+  it('setting smsTrunkGroup to null does not auto-nullify smsTrunk', () => {
+    const result = serializeForUpdate(DID_RESOURCE, { id: 'did-1', smsTrunkGroup: null });
+    expect(result.data.relationships).toEqual({ sms_trunk_group: { data: null } });
+  });
+
+  it('setting both smsTrunk and smsTrunkGroup throws', () => {
+    expect(() =>
+      serializeForUpdate(DID_RESOURCE, {
+        id: 'did-1',
+        smsTrunk: { id: 't-1', type: 'sms_trunks' },
+        smsTrunkGroup: { id: 'g-1', type: 'sms_trunk_groups' },
+      }),
+    ).toThrow(DidwwClientError);
+  });
+
+  it('the SMS pair does not affect the voice pair', () => {
+    const result = serializeForUpdate(DID_RESOURCE, { id: 'did-1', smsTrunk: { id: 't-1', type: 'sms_trunks' } });
+    expect(result.data.relationships?.voice_in_trunk).toBeUndefined();
+    expect(result.data.relationships?.voice_in_trunk_group).toBeUndefined();
   });
 
   it('updating only description does not affect trunk relationships', () => {

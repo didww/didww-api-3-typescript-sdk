@@ -1,5 +1,6 @@
 import { defineResource, type ResourceRef } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
+import { DidwwClientError } from '../errors.js';
 import type { Order } from './order.js';
 import type { DidGroup } from './did-group.js';
 import type { VoiceInTrunk } from './voice-in-trunk.js';
@@ -10,6 +11,8 @@ import type { AddressVerification } from './address-verification.js';
 import type { EmergencyCallingService } from './emergency-calling-service.js';
 import type { EmergencyVerification } from './emergency-verification.js';
 import type { Identity } from './identity.js';
+import type { SmsTrunk } from './sms-trunk.js';
+import type { SmsTrunkGroup } from './sms-trunk-group.js';
 
 export interface Did {
   id: string;
@@ -30,6 +33,8 @@ export interface Did {
   didGroup?: DidGroup | ResourceRef;
   voiceInTrunk?: VoiceInTrunk | ResourceRef | null;
   voiceInTrunkGroup?: VoiceInTrunkGroup | ResourceRef | null;
+  smsTrunk?: SmsTrunk | ResourceRef | null;
+  smsTrunkGroup?: SmsTrunkGroup | ResourceRef | null;
   capacityPool?: CapacityPool | ResourceRef;
   sharedCapacityGroup?: SharedCapacityGroup | ResourceRef | null;
   addressVerification?: AddressVerification | ResourceRef;
@@ -46,6 +51,12 @@ export interface DidWrite {
   dedicatedChannelsCount?: number;
   voiceInTrunk?: ResourceRef | null;
   voiceInTrunkGroup?: ResourceRef | null;
+  /**
+   * Assigning an SMS trunk clears `smsTrunkGroup` and vice versa; setting both
+   * throws. `null` clears only itself.
+   */
+  smsTrunk?: ResourceRef | null;
+  smsTrunkGroup?: ResourceRef | null;
   capacityPool?: ResourceRef | null;
   sharedCapacityGroup?: ResourceRef | null;
   emergencyCallingService?: ResourceRef | null;
@@ -59,6 +70,8 @@ const WRITABLE_KEYS = [
   'dedicatedChannelsCount',
   'voiceInTrunk',
   'voiceInTrunkGroup',
+  'smsTrunk',
+  'smsTrunkGroup',
   'capacityPool',
   'sharedCapacityGroup',
   'emergencyCallingService',
@@ -71,6 +84,8 @@ export const DID_RESOURCE = defineResource<Did, DidWrite>()({
   relationshipKeys: [
     'voiceInTrunk',
     'voiceInTrunkGroup',
+    'smsTrunk',
+    'smsTrunkGroup',
     'capacityPool',
     'sharedCapacityGroup',
     'emergencyCallingService',
@@ -95,6 +110,16 @@ export const DID_RESOURCE = defineResource<Did, DidWrite>()({
         result.voiceInTrunk = null;
       }
     }
+    const d = data as Record<string, unknown>;
+    const setSmsTrunk = d.smsTrunk !== undefined && d.smsTrunk !== null;
+    const setSmsTrunkGroup = d.smsTrunkGroup !== undefined && d.smsTrunkGroup !== null;
+    if (setSmsTrunk && setSmsTrunkGroup) {
+      throw new DidwwClientError(
+        'smsTrunk and smsTrunkGroup are mutually exclusive: assign one of them, and set the other to null to clear it',
+      );
+    }
+    if (setSmsTrunk) result.smsTrunkGroup = null;
+    if (setSmsTrunkGroup) result.smsTrunk = null;
     return result;
   },
 });

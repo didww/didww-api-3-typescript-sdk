@@ -12,7 +12,6 @@ import {
   pstnConfiguration,
   didOrderItem,
   availableDidOrderItem,
-  capacityOrderItem,
   Codec,
   TransportProtocol,
   DefaultDstAction,
@@ -24,7 +23,19 @@ import {
   encryptWithKeys,
   RequestValidator,
   ipOnlyAuthenticationMethod,
+  NumberType,
+  Pop,
+  Scope,
+  MemoryTokenStore,
+  DidwwPricesError,
+  PricesErrorKind,
+  SmsHttpMethod,
+  SmsBodyType,
+  smsHttpInConfiguration,
+  isSmsHttpIn,
+  SenderIdVerificationStatus,
 } from '../src/index.js';
+import type { QtyBasedPricing } from '../src/index.js';
 import crypto from 'node:crypto';
 import assert from 'node:assert';
 
@@ -95,12 +106,6 @@ await test('List areas', async () => {
   console.log(`    got ${areas.data.length} areas`);
 });
 
-await test('List POPs', async () => {
-  const pops = await client.pops().list();
-  assert(pops.data.length > 0, 'should have POPs');
-  console.log(`    got ${pops.data.length} POPs`);
-});
-
 await test('DID Groups with stock_keeping_units include', async () => {
   const groups = await client.didGroups().list({
     include: 'stock_keeping_units',
@@ -132,10 +137,12 @@ await test('Available DIDs with nested includes', async () => {
   }
 });
 
-await test('List DID group types', async () => {
-  const types = await client.didGroupTypes().list();
-  assert(types.data.length > 0, 'should have types');
-  console.log(`    got ${types.data.length} types`);
+await test('DID groups with number type', async () => {
+  const groups = await client.didGroups().list({ filter: { number_type: NumberType.LOCAL }, page: { size: 3 } });
+  for (const group of groups.data) {
+    assert(group.numberType === NumberType.LOCAL, 'should be a local DID group');
+    console.log(`    ${group.prefix} numberType=${group.numberType} isDemo=${group.isDemo}`);
+  }
 });
 
 await test('List NANPA prefixes', async () => {
@@ -156,8 +163,8 @@ await test('List public keys', async () => {
   console.log(`    got ${keys.data.length} public keys`);
 });
 
-await test('List requirements', async () => {
-  const requirements = await client.requirements().list({ page: { size: 3 } });
+await test('List address requirements', async () => {
+  const requirements = await client.addressRequirements().list({ page: { size: 3 } });
   assert(Array.isArray(requirements.data), 'should be array');
   console.log(`    got ${requirements.data.length} requirements`);
 });
@@ -189,9 +196,9 @@ await test('Qty based pricings (via capacity_pools include)', async () => {
     page: { size: 1 },
   });
   assert(pools.data.length > 0, 'should have capacity pools');
-  const pricings = (pools.data[0] as Record<string, unknown>).qtyBasedPricings;
-  assert(Array.isArray(pricings) && pricings.length > 0, 'should have pricings included');
-  for (const p of pricings as Array<Record<string, unknown>>) {
+  const pricings = (pools.data[0].qtyBasedPricings || []).filter((p): p is QtyBasedPricing => isIncluded(p));
+  assert(pricings.length > 0, 'should have pricings included');
+  for (const p of pricings) {
     console.log(`    qty=${p.qty} $${p.monthlyPrice}/mo setup=$${p.setupPrice}`);
   }
 });
@@ -252,8 +259,6 @@ console.log('\n== Voice In Trunks ==');
 let createdTrunkId: string | undefined;
 
 await test('Create SIP trunk', async () => {
-  const pops = await client.pops().list();
-  const popId = pops.data[0].id;
   const trunk = await client.voiceInTrunks().create({
     name: 'Test SIP Trunk',
     configuration: sipConfiguration({
@@ -262,11 +267,12 @@ await test('Create SIP trunk', async () => {
       codecIds: [Codec.PCMU, Codec.PCMA],
       transportProtocolId: TransportProtocol.UDP,
     }),
-    pop: ref('pops', popId),
+    pop: Pop.FRA,
   });
   assert(trunk.data.id !== undefined, 'should have id');
   assert(trunk.data.name === 'Test SIP Trunk', 'name should match');
   assert(trunk.data.configuration.type === 'sip_configurations', 'should be SIP config');
+  assert(trunk.data.pop === Pop.FRA, 'pop should match');
   createdTrunkId = trunk.data.id;
   console.log(`    created SIP trunk: ${trunk.data.id}`);
 });
@@ -488,12 +494,96 @@ if (createdIdentityId) {
 console.log('\n== Exports ==');
 
 await test('Create export', async () => {
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+  const day = (d: Date) => d.toISOString().slice(0, 10);
   const exp = await client.exports().create({
     exportType: ExportType.CDR_IN,
-    filters: { year: 2025, month: 1 },
+    filters: { from: `${day(yesterday)} 00:00:00`, to: `${day(today)} 00:00:00` },
   });
   assert(exp.data.id !== undefined, 'should have id');
   console.log(`    created export: ${exp.data.id}, status=${exp.data.status}`);
+});
+
+await test('Create SMS-Out export', async () => {
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+  const day = (d: Date) => d.toISOString().slice(0, 10);
+  const exp = await client.exports().create({
+    exportType: ExportType.SMS_OUT,
+    filters: { from: `${day(yesterday)} 00:00:00`, to: `${day(today)} 00:00:00`, serviceType: 'a2p' },
+  });
+  assert(exp.data.exportType === ExportType.SMS_OUT, 'should be an sms_out export');
+  console.log(`    created SMS-Out export: ${exp.data.id}, status=${exp.data.status}`);
+});
+
+// ─── SMS Trunks ────────────────────────────────────────────
+
+console.log('\n== SMS Trunks ==');
+
+await test('Create, update and delete HTTP IN SMS trunk', async () => {
+  const trunk = await client.smsTrunks().create({
+    name: `Test HTTP IN ${crypto.randomBytes(4).toString('hex')}`,
+    configuration: smsHttpInConfiguration({
+      url: 'https://example.com/sms',
+      httpMethod: SmsHttpMethod.POST,
+      bodyType: SmsBodyType.JSON,
+      body: '{"text":"{SMS_TEXT}","from":"{SMS_SRC_ADDR}"}',
+    }),
+  });
+  try {
+    assert(trunk.data.allowIn, 'should accept inbound messages');
+    console.log(`    created SMS trunk: ${trunk.data.id}`);
+    const updated = await client.smsTrunks().update({
+      id: trunk.data.id,
+      configuration: smsHttpInConfiguration({ url: 'https://example.com/sms-v2' }),
+    });
+    const config = updated.data.configuration;
+    assert(isSmsHttpIn(config) && config.url === 'https://example.com/sms-v2', 'url should be updated');
+    console.log('    updated SMS trunk');
+  } finally {
+    await client.smsTrunks().remove(trunk.data.id);
+    console.log('    deleted SMS trunk');
+  }
+});
+
+await test('List SMS trunk groups with trunks', async () => {
+  const groups = await client.smsTrunkGroups().list({ include: 'sms_trunks', page: { size: 3 } });
+  assert(Array.isArray(groups.data), 'should be array');
+  console.log(`    got ${groups.data.length} SMS trunk groups`);
+});
+
+await test('List active Sender ID verifications', async () => {
+  const verifications = await client.senderIdVerifications().list({
+    filter: { status: SenderIdVerificationStatus.ACTIVE },
+    include: 'sms_trunk',
+  });
+  for (const v of verifications.data) {
+    const trunkName = v.smsTrunk && isIncluded(v.smsTrunk) ? v.smsTrunk.name : 'none';
+    console.log(`    ${v.reference} ${v.name} [${v.senderIds.join(', ')}] trunk=${trunkName}`);
+  }
+});
+
+// ─── Prices ────────────────────────────────────────────────
+
+console.log('\n== Prices ==');
+
+await test('Voice IN price lookup', async () => {
+  const readClient = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, scope: Scope.READ });
+  try {
+    const prices = await readClient.voiceInPrices().lookup({ number: '18005550123' });
+    for (const p of prices.rows) {
+      console.log(`    ${p.country} ${p.sourceType}: rate=${p.rate} connectionFee=${p.connectionFee}`);
+    }
+  } catch (error) {
+    if (error instanceof DidwwPricesError && error.kind === PricesErrorKind.PRICE_PLAN_NOT_ASSIGNED) {
+      console.log(`    skipped: ${error.message}`);
+    } else {
+      throw error;
+    }
+  }
 });
 
 // ─── DIDs (list only — update needs existing DID) ─────────
@@ -508,13 +598,14 @@ await test('List DIDs', async () => {
 
 await test('DIDs with includes', async () => {
   const dids = await client.dids().list({
-    include: 'voice_in_trunk,capacity_pool',
+    include: 'voice_in_trunk,capacity_pool,sms_trunk',
     page: { size: 3 },
   });
   for (const did of dids.data) {
     const trunkName = did.voiceInTrunk && isIncluded(did.voiceInTrunk) ? did.voiceInTrunk.name : 'none';
     const poolName = did.capacityPool && isIncluded(did.capacityPool) ? did.capacityPool.name : 'none';
-    console.log(`    ${did.number} trunk=${trunkName} pool=${poolName}`);
+    const smsTrunkName = did.smsTrunk && isIncluded(did.smsTrunk) ? did.smsTrunk.name : 'none';
+    console.log(`    ${did.number} trunk=${trunkName} pool=${poolName} smsTrunk=${smsTrunkName}`);
   }
 });
 
@@ -592,6 +683,19 @@ await test('Client with timeout', async () => {
   // Just verify it creates fine
   assert(clientWithTimeout !== undefined, 'should create client');
   console.log('    client with timeout created OK');
+});
+
+await test('Client with token store and logger', async () => {
+  const configured = new DidwwClient({
+    apiKey: API_KEY,
+    environment: Environment.SANDBOX,
+    tokenStore: new MemoryTokenStore(),
+    logger: console,
+  });
+  const balance = await configured.balance().find();
+  assert(typeof balance.data.totalBalance === 'string', 'totalBalance should be a string');
+  assert(!JSON.stringify(configured).includes(API_KEY), 'the API key should not be serialized');
+  console.log('    client with token store and logger OK');
 });
 
 // ─── Summary ───────────────────────────────────────────────

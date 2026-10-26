@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: '{"data":{"type":"sms_trunk_regenerate_credentials","relationships":{"sms_trunk":{"data":{"type":"sms_trunks","id":"1a2b3c4d-0003-4a5b-8c6d-7e8f9a0b1c03"}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/sms_trunk_regenerate_credentials
+  response:
+    body:
+      string: '{"errors":[{"title":"is invalid","detail":"sms_trunk - the trunk has no credentials to rotate","code":"100","source":{"pointer":"/data/relationships/sms_trunk"},"status":"422"}]}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

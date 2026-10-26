@@ -15,8 +15,19 @@ export interface ResourceConfig<T = Record<string, unknown>, TWrite = Record<str
   readonly path: string;
   readonly writableKeys: readonly (string & keyof TWrite)[];
   readonly relationshipKeys?: readonly (string & keyof TWrite)[];
-  readonly serializeCustom?: (data: TWrite, method: 'POST' | 'PATCH') => Record<string, unknown>;
+  /**
+   * Builds the attributes and relationships to send from `data` (on PATCH, only
+   * the changed writable keys). `source` is the whole object passed to
+   * create/update.
+   */
+  readonly serializeCustom?: (data: TWrite, method: 'POST' | 'PATCH', source: TWrite) => Record<string, unknown>;
   readonly deserializeCustom?: (data: Record<string, unknown>) => Partial<T>;
+  /**
+   * Attributes whose value is already in wire form (camelCase names): the
+   * serializer neither renames their keys nor turns their exact numbers
+   * (`JsonNumber`) into `number`, in either direction.
+   */
+  readonly wireAttributes?: readonly (string & keyof TWrite)[];
   readonly operations: readonly Operation[];
   readonly singleton?: boolean;
 }

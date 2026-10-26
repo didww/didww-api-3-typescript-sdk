@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: '{"data":{"id":"e5a4e2f1-3b26-4a5c-9a0a-2f7c1f3e8d10","type":"sender_id_verifications","attributes":{"name":"ACME notifications"}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: PATCH
+    uri: https://sandbox-api.didww.com/v3/sender_id_verifications/e5a4e2f1-3b26-4a5c-9a0a-2f7c1f3e8d10
+  response:
+    body:
+      string: '{"errors":[{"title":"Sender ID Verification is closed and can not be changed","detail":"Sender ID Verification is closed and can not be changed","code":"100","source":{"pointer":"/data"},"status":"422"}]}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

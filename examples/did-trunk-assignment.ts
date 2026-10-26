@@ -53,8 +53,8 @@ async function main() {
       return;
     }
     const ad = available.data[0];
-    const didGroup = ad.didGroup;
-    const skus = (didGroup as Record<string, unknown>)?.stockKeepingUnits;
+    const didGroup = ad.didGroup && isIncluded(ad.didGroup) ? ad.didGroup : undefined;
+    const skus = didGroup?.stockKeepingUnits;
     if (!Array.isArray(skus) || skus.length === 0) {
       console.log('No SKUs found. Exiting.');
       await cleanup(trunk.data.id, group.data.id);

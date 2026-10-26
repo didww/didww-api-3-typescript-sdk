@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { setupClient } from '../helpers/client.js';
-import { DidwwClient } from '../../src/client.js';
-import { Environment } from '../../src/configuration.js';
+import nock from 'nock';
+import { createTestClient, setupClient, TEST_ACCESS_TOKEN } from '../helpers/client.js';
 import pkg from '../../package.json';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
+import { ExportTrunkType, ExportType } from '../../src/enums.js';
 
 describe('Exports', () => {
   describeOperationEnforcement({
@@ -57,6 +57,40 @@ describe('Exports', () => {
     expect(result.data.exportType).toBe('cdr_out');
   });
 
+  it('creates an sms_in export', async () => {
+    const client = setupClient('exports/create_sms_in.yaml');
+    const result = await client.exports().create({
+      exportType: ExportType.SMS_IN,
+      filters: {
+        from: '2026-10-01 00:00:00',
+        to: '2026-10-15 00:00:00',
+        trunkType: [ExportTrunkType.SMPP_SMSC, ExportTrunkType.HTTP_IN],
+        destinationAddressEq: '12125550100',
+      },
+    });
+    expect(result.data.exportType).toBe(ExportType.SMS_IN);
+    expect(result.data.filters.trunkType).toEqual(['SMPP SMSC', 'HTTP IN']);
+    expect(result.data.filters.destinationAddressEq).toBe('12125550100');
+  });
+
+  it('creates an sms_out export with dotted filter keys', async () => {
+    const client = setupClient('exports/create_sms_out.yaml');
+    const result = await client.exports().create({
+      exportType: ExportType.SMS_OUT,
+      filters: {
+        from: '2026-10-01 00:00:00',
+        to: '2026-10-15 00:00:00',
+        'smsTrunk.id': ['b2c3d4e5-0000-4000-8000-000000000001', 'b2c3d4e5-0000-4000-8000-000000000003'],
+        serviceType: 'a2p',
+        'senderIdVerification.id': 'c3d4e5f6-0000-4000-8000-000000000002',
+      },
+    });
+    expect(result.data.exportType).toBe(ExportType.SMS_OUT);
+    expect(result.data.filters['smsTrunk.id']).toHaveLength(2);
+    expect(result.data.filters['senderIdVerification.id']).toBe('c3d4e5f6-0000-4000-8000-000000000002');
+    expect(result.data.filters.serviceType).toBe('a2p');
+  });
+
   it('downloads an export', async () => {
     const client = setupClient('exports/download.yaml');
     const buffer = await client.downloadExport(
@@ -78,32 +112,31 @@ describe('Exports', () => {
   });
 
   describe('export download headers', () => {
-    async function downloadExportAndCaptureHeaders(): Promise<Headers> {
-      let capturedHeaders: HeadersInit | undefined;
-      const mockFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
-        capturedHeaders = init?.headers;
-        return new Response(Buffer.from([0x1f, 0x8b]), {
-          status: 200,
-          headers: { 'Content-Type': 'application/octet-stream' },
+    async function downloadExportAndCaptureHeaders(): Promise<Record<string, string | string[] | undefined>> {
+      let captured: Record<string, string | string[] | undefined> = {};
+      nock('https://sandbox-api.didww.com')
+        .get('/v3/exports/test.csv.gz')
+        .reply(function () {
+          captured = this.req.headers;
+          return [200, Buffer.from([0x1f, 0x8b]), { 'Content-Type': 'application/octet-stream' }];
         });
-      };
-      const client = new DidwwClient({ apiKey: 'test-key', environment: Environment.SANDBOX, fetch: mockFetch });
-      await client.downloadExport('https://sandbox-api.didww.com/v3/exports/test.csv.gz');
-      expect(capturedHeaders).toBeDefined();
-      return new Headers(capturedHeaders);
+      await createTestClient().downloadExport('https://sandbox-api.didww.com/v3/exports/test.csv.gz');
+      return captured;
     }
 
-    it('sends Api-Key, User-Agent, and X-DIDWW-API-Version headers', async () => {
+    it('sends the bearer token and User-Agent, and neither Api-Key nor X-DIDWW-API-Version', async () => {
       const headers = await downloadExportAndCaptureHeaders();
-      expect(headers.get('Api-Key')).toBe('test-key');
-      expect(headers.get('User-Agent')).toBe(`didww-typescript-sdk/${pkg.version}`);
-      expect(headers.get('X-DIDWW-API-Version')).toBe('2026-04-16');
+      expect(headers.authorization).toBe(`Bearer ${TEST_ACCESS_TOKEN}`);
+      expect(headers['user-agent']).toBe(`didww-typescript-sdk/${pkg.version}`);
+      expect(headers['api-key']).toBeUndefined();
+      expect(headers['x-didww-api-version']).toBeUndefined();
     });
 
-    it('does not send Content-Type or Accept headers', async () => {
+    it('asks for the file unencoded and sends no Content-Type or Accept headers', async () => {
       const headers = await downloadExportAndCaptureHeaders();
-      expect(headers.has('Content-Type')).toBe(false);
-      expect(headers.has('Accept')).toBe(false);
+      expect(headers['accept-encoding']).toBe('identity');
+      expect(headers['content-type']).toBeUndefined();
+      expect(headers.accept).toBeUndefined();
     });
   });
 });

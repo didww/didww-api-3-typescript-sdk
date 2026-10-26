@@ -5,7 +5,9 @@ import {
   didOrderItem,
   availableDidOrderItem,
   reservationDidOrderItem,
+  isIncluded,
 } from '../src/index.js';
+import type { AvailableDid } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -85,8 +87,9 @@ async function main() {
   }
 }
 
-function getSku(ad: Record<string, unknown>): string {
-  const skus = ad.didGroup?.stockKeepingUnits || [];
+function getSku(ad: AvailableDid): string {
+  const didGroup = ad.didGroup && isIncluded(ad.didGroup) ? ad.didGroup : undefined;
+  const skus = didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
     throw new Error(`No stockKeepingUnits for available DID ${ad.id}`);
   }

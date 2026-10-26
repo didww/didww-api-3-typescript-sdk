@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: DELETE
+    uri: https://sandbox-api.didww.com/v3/sms_trunk_groups/2b3c4d5e-0001-4b6c-9d7e-8f9a0b1c2d01
+  response:
+    body:
+      string: '{"errors":[{"title":"is in use","detail":"base - Cannot delete an SMS trunk group while DIDs are routed to it or to its trunks","code":"100","status":"422"}]}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

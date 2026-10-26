@@ -1,8 +1,7 @@
 import { defineResource, type ResourceRef } from './base.js';
 import { filterWritableKeys } from '../filter-writable-keys.js';
 import type { TrunkConfiguration } from '../nested/trunk-configuration.js';
-import type { CliFormat } from '../enums.js';
-import type { Pop } from './pop.js';
+import type { CliFormat, Pop } from '../enums.js';
 import type { VoiceInTrunkGroup } from './voice-in-trunk-group.js';
 import { serializeTrunkConfiguration, deserializeTrunkConfiguration } from '../nested/trunk-configuration.js';
 
@@ -20,7 +19,11 @@ export interface VoiceInTrunk {
   configuration: TrunkConfiguration;
   createdAt: string;
   externalReferenceId: string | null;
-  pop?: Pop | ResourceRef;
+  /**
+   * Point of presence; null when not pinned. Typed `Pop` for reading and writing
+   * alike, so a point of presence added to the API later arrives as its raw string.
+   */
+  pop: Pop | null;
   voiceInTrunkGroup?: VoiceInTrunkGroup | ResourceRef;
 }
 
@@ -35,7 +38,8 @@ export interface VoiceInTrunkWrite {
   capacityLimit?: number | null;
   configuration?: TrunkConfiguration;
   externalReferenceId?: string | null;
-  pop?: ResourceRef;
+  /** `null` clears it. */
+  pop?: Pop | null;
   voiceInTrunkGroup?: ResourceRef;
 }
 
@@ -59,7 +63,7 @@ export const VOICE_IN_TRUNK_RESOURCE = defineResource<VoiceInTrunk, VoiceInTrunk
   path: 'voice_in_trunks',
   writableKeys: WRITABLE_KEYS,
   operations: ['list', 'find', 'create', 'update', 'remove'],
-  relationshipKeys: ['pop', 'voiceInTrunkGroup'],
+  relationshipKeys: ['voiceInTrunkGroup'],
   serializeCustom(data) {
     const result = filterWritableKeys(data, WRITABLE_KEYS);
     if (result.configuration) {

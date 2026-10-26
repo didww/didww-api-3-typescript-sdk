@@ -1,6 +1,6 @@
 {
   "name": "@didww/sdk",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "DIDWW API v3 TypeScript SDK",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -27,6 +27,8 @@
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
+    "typecheck:examples": "tsc -p tsconfig.examples.json",
+    "typecheck:tests-types": "tsc -p tsconfig.type-tests.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -50,9 +52,6 @@
     "typescript-eslint": "^8.56.0",
     "vitest": "^3.2.4",
     "yaml": "^2.3.4"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   },
   "license": "MIT"
 }

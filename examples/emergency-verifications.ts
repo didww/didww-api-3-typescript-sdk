@@ -9,10 +9,8 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-verifications.ts
  */
-import { DidwwClient, Environment } from '../src/index.js';
-import type { EmergencyVerification } from '../src/resources/emergency-verification.js';
-import type { Did } from '../src/resources/did.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { Did, EmergencyVerification } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,

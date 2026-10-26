@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: GET
+    uri: https://sandbox-api.didww.com/v3/sms_trunks/1a2b3c4d-0003-4a5b-8c6d-7e8f9a0b1c03
+  response:
+    body:
+      string: '{"errors":[{"title":"Record not found","detail":"The record identified by 1a2b3c4d-0003-4a5b-8c6d-7e8f9a0b1c03 could not be found.","code":"404","status":"404"}]}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 404
+      message: Not Found
+version: 1
