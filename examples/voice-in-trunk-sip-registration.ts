@@ -1,5 +1,5 @@
 /**
- * End-to-end SIP registration flow on /voice_in_trunks (API 2026-04-16):
+ * End-to-end SIP registration flow on /voice_in_trunks:
  * create with sip_registration enabled → rename → disable by setting `host`
  * → re-enable by toggling the flag. Demonstrates how the SDK keeps the
  * dependent fields (`host`, `port`, `useDidInRuri`) aligned with the
@@ -13,6 +13,7 @@ import {
   Environment,
   sipConfiguration,
   type SipConfiguration,
+  CliFormat,
   Codec,
   TransportProtocol,
 } from '../src/index.js';
@@ -31,7 +32,7 @@ async function main() {
     name: `ts-sip-registration-${Date.now()}`,
     priority: 1,
     weight: 100,
-    cliFormat: 'e164',
+    cliFormat: CliFormat.E164,
     ringingTimeout: 30,
     configuration: sipConfiguration({
       enabledSipRegistration: true,
@@ -44,8 +45,9 @@ async function main() {
   const trunkId = created.data.id!;
   const cfg1 = created.data.configuration as SipConfiguration;
   console.log(`  id=${trunkId}`);
+  // Generated credentials; console.log(cfg1) masks them
   console.log(`  incomingAuthUsername=${cfg1.incomingAuthUsername}`);
-  console.log(`  incomingAuthPassword=${cfg1.incomingAuthPassword}`);
+  console.log(`  incomingAuthPassword: ${cfg1.incomingAuthPassword ? 'present' : 'absent'}`);
 
   // 2) Rename — single-field PATCH.
   console.log('\n[2/4] Rename trunk...');
@@ -59,7 +61,7 @@ async function main() {
   console.log('\n[3/4] Disable by setting host...');
   await client.voiceInTrunks().update({
     id: trunkId,
-    configuration: sipConfiguration({ host: '203.0.113.10' }),
+    configuration: sipConfiguration({ host: '203.0.113.10', codecIds: [Codec.PCMU, Codec.PCMA] }),
   });
   const fresh3 = await client.voiceInTrunks().find(trunkId);
   const cfg3 = fresh3.data.configuration as SipConfiguration;
@@ -77,6 +79,7 @@ async function main() {
       configuration: sipConfiguration({
         enabledSipRegistration: true,
         useDidInRuri: true,
+        codecIds: [Codec.PCMU, Codec.PCMA],
       }),
     });
     const fresh4 = await client.voiceInTrunks().find(trunkId);

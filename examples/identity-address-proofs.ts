@@ -6,7 +6,7 @@ const client = new DidwwClient({
 });
 
 async function main() {
-  // List identities (include country + birth_country, 2026-04-16 adds birth_country)
+  // List identities (include country + birth_country)
   console.log('=== Identities ===');
   const identities = await client.identities().list({
     include: ['country', 'birth_country'],
@@ -18,11 +18,13 @@ async function main() {
     console.log(`  Name: ${ident.firstName} ${ident.lastName}`);
     console.log(`  Phone: ${ident.phoneNumber}`);
     console.log(`  Type: ${ident.identityType}`);
+    // Optional; null when not set
+    if (ident.companyWebsite) console.log(`  Company website: ${ident.companyWebsite}`);
     if (ident.country && isIncluded(ident.country)) {
       console.log(`  Country: ${ident.country.name}`);
     }
     if (ident.birthCountry && isIncluded(ident.birthCountry)) {
-      console.log(`  Birth Country: ${ident.birthCountry.name}`); // 2026-04-16
+      console.log(`  Birth Country: ${ident.birthCountry.name}`);
     }
     console.log(`  Birth Date: ${ident.birthDate}`);
     console.log(`  Verified: ${ident.verified}`);

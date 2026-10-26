@@ -1,11 +1,21 @@
 import { describe, it, expect } from 'vitest';
+import { inspect } from 'node:util';
 import { deserialize, serializeForCreate, serializeForUpdate } from '../src/serializer.js';
 import { isIncluded } from '../src/resources/base.js';
+import type { Did } from '../src/resources/did.js';
+import { SMS_TRUNK_RESOURCE, type SmsTrunk } from '../src/resources/sms-trunk.js';
+import type { SmsTrunkGroup } from '../src/resources/sms-trunk-group.js';
+import { type HttpClient, Repository } from '../src/repositories/repository.js';
+import { isSmsHttpOut } from '../src/nested/sms-trunk-configuration.js';
+import type { SmsHttpOutConfiguration } from '../src/nested/sms-trunk-configuration.js';
 import type { Region } from '../src/resources/region.js';
 import type { Country } from '../src/resources/country.js';
 import type { Export } from '../src/resources/export.js';
+import type { VoiceInTrunk } from '../src/resources/voice-in-trunk.js';
+import type { VoiceInTrunkGroup } from '../src/resources/voice-in-trunk-group.js';
 import type { VoiceOutTrunk } from '../src/resources/voice-out-trunk.js';
 import type { EmergencyCallingService } from '../src/resources/emergency-calling-service.js';
+import type { DidGroup } from '../src/resources/did-group.js';
 import { isExportCompleted, isActive, isEcsActive } from '../src/status-helpers.js';
 
 describe('Serializer', () => {
@@ -102,6 +112,380 @@ describe('Serializer', () => {
       expect(config.type).toBe('sip_configurations');
       expect(config.username).toBe('user1');
       expect(config.host).toBe('203.0.113.1');
+    });
+
+    it('builds a cyclic nested include completely, once per include path', () => {
+      // sms_trunks?include=outgoing_dids.sms_trunk: every DID is an outgoing DID of
+      // one trunk and receives on another trunk of the same page.
+      const trunks = 50;
+      const didsPerTrunk = 2;
+      const trunkId = (i: number) => `t-${i}`;
+      const didId = (i: number) => `d-${i}`;
+      const receivingTrunk = (m: number) => (m * 7 + 3) % trunks;
+      const body = {
+        data: Array.from({ length: trunks }, (_, i) => ({
+          id: trunkId(i),
+          type: 'sms_trunks',
+          attributes: {
+            name: `trunk ${i}`,
+            configuration: { type: 'http_out', attributes: { auth_name: 'generated-name', auth_password: 'secret' } },
+          },
+          relationships: {
+            outgoing_dids: {
+              data: Array.from({ length: didsPerTrunk }, (_, j) => ({ type: 'dids', id: didId(i * didsPerTrunk + j) })),
+            },
+          },
+        })),
+        included: Array.from({ length: trunks * didsPerTrunk }, (_, m) => ({
+          id: didId(m),
+          type: 'dids',
+          attributes: { number: String(m) },
+          relationships: { sms_trunk: { data: { type: 'sms_trunks', id: trunkId(receivingTrunk(m)) } } },
+        })),
+      };
+
+      const started = Date.now();
+      const result = deserialize<SmsTrunk>(body, 'outgoing_dids.sms_trunk');
+      expect(Date.now() - started).toBeLessThan(1000);
+
+      const seen = new Set<object>();
+      const visit = (value: unknown): void => {
+        if (value === null || typeof value !== 'object' || seen.has(value)) return;
+        seen.add(value);
+        Object.values(value).forEach(visit);
+      };
+      visit(result.data);
+      expect(seen.size).toBeLessThan(20 * trunks * (didsPerTrunk + 1));
+      expect(() => JSON.stringify(result.data)).not.toThrow();
+
+      const data = result.data as SmsTrunk[];
+      expect(data).toHaveLength(trunks);
+      const dids = data.flatMap((t) => t.outgoingDids ?? []);
+      expect(dids).toHaveLength(trunks * didsPerTrunk);
+      dids.forEach((did, m) => {
+        expect(isIncluded(did)).toBe(true);
+        const smsTrunk = (did as Did).smsTrunk!;
+        expect(isIncluded(smsTrunk)).toBe(true);
+        expect((smsTrunk as SmsTrunk).name).toBe(`trunk ${receivingTrunk(m)}`);
+        // outgoing_dids is not requested below sms_trunk.
+        expect((smsTrunk as SmsTrunk).outgoingDids).toEqual(
+          Array.from({ length: didsPerTrunk }, (_, j) => ({
+            id: didId(receivingTrunk(m) * didsPerTrunk + j),
+            type: 'dids',
+          })),
+        );
+      });
+
+      const twice = (dids as Did[]).filter((d) => d.smsTrunk!.id === trunkId(10));
+      expect(twice).toHaveLength(2);
+      expect(twice[0].smsTrunk).toBe(twice[1].smsTrunk);
+      const trunk = twice[0].smsTrunk as SmsTrunk;
+      expect(isSmsHttpOut(trunk.configuration)).toBe(true);
+      expect((trunk.configuration as SmsHttpOutConfiguration).authPassword).toBe('secret');
+      expect(inspect(trunk.configuration)).not.toContain('secret');
+      expect(JSON.stringify(trunk.configuration)).toContain('[FILTERED]');
+    });
+
+    describe('a resource reached by two include paths', () => {
+      // GET /dids?include=sms_trunk.sms_trunk_group.sms_trunks,sms_trunk_group.sms_trunks:
+      // d1 receives on trunk s1 of group g1, d2 on group g1.
+      const include = 'sms_trunk.sms_trunk_group.sms_trunks,sms_trunk_group.sms_trunks';
+      const d1 = {
+        id: 'd1',
+        type: 'dids',
+        attributes: { number: '1' },
+        relationships: { sms_trunk: { data: { id: 's1', type: 'sms_trunks' } } },
+      };
+      const d2 = {
+        id: 'd2',
+        type: 'dids',
+        attributes: { number: '2' },
+        relationships: { sms_trunk_group: { data: { id: 'g1', type: 'sms_trunk_groups' } } },
+      };
+      const included = [
+        {
+          id: 's1',
+          type: 'sms_trunks',
+          attributes: {
+            name: 'Trunk S1',
+            configuration: { type: 'http_in', attributes: { url: 'https://example.com' } },
+          },
+          relationships: { sms_trunk_group: { data: { id: 'g1', type: 'sms_trunk_groups' } } },
+        },
+        {
+          id: 'g1',
+          type: 'sms_trunk_groups',
+          attributes: { name: 'Group G1' },
+          relationships: { sms_trunks: { data: [{ id: 's1', type: 'sms_trunks' }] } },
+        },
+      ];
+      const expectTrunk = (value: unknown) => {
+        expect(isIncluded(value as SmsTrunk)).toBe(true);
+        expect((value as SmsTrunk).name).toBe('Trunk S1');
+        expect((value as SmsTrunk).configuration.type).toBe('http_in');
+      };
+      const expectGroup = (value: unknown) => {
+        expect(isIncluded(value as SmsTrunkGroup)).toBe(true);
+        expect((value as SmsTrunkGroup).name).toBe('Group G1');
+      };
+
+      for (const [order, data] of [
+        ['d1, d2', [d1, d2]],
+        ['d2, d1', [d2, d1]],
+      ] as const) {
+        it(`holds it in full on every requested path, in the order ${order}`, () => {
+          const result = deserialize<Did>(structuredClone({ data, included }), include);
+          const dids = result.data as Did[];
+          const first = dids.find((d) => d.id === 'd1')!;
+          const second = dids.find((d) => d.id === 'd2')!;
+
+          const trunk = first.smsTrunk as SmsTrunk;
+          expectTrunk(trunk);
+          const trunkGroup = trunk.smsTrunkGroup as SmsTrunkGroup;
+          expectGroup(trunkGroup);
+          expectTrunk(trunkGroup.smsTrunks![0]);
+          // sms_trunk_group is not requested below sms_trunk.sms_trunk_group.sms_trunks.
+          expect((trunkGroup.smsTrunks![0] as SmsTrunk).smsTrunkGroup).toEqual({ id: 'g1', type: 'sms_trunk_groups' });
+
+          const group = second.smsTrunkGroup as SmsTrunkGroup;
+          expectGroup(group);
+          expectTrunk(group.smsTrunks![0]);
+          expect((group.smsTrunks![0] as SmsTrunk).smsTrunkGroup).toEqual({ id: 'g1', type: 'sms_trunk_groups' });
+          expect(() => JSON.stringify(result.data)).not.toThrow();
+        });
+
+        it(`without the include paths places it where it is first reached, in the order ${order}`, () => {
+          const dids = deserialize<Did>(structuredClone({ data, included })).data as Did[];
+          const first = dids.find((d) => d.id === 'd1')!;
+          const second = dids.find((d) => d.id === 'd2')!;
+          expectTrunk(first.smsTrunk);
+          expect((first.smsTrunk as SmsTrunk).smsTrunkGroup).toEqual({ id: 'g1', type: 'sms_trunk_groups' });
+          expectGroup(second.smsTrunkGroup);
+          expect((second.smsTrunkGroup as SmsTrunkGroup).smsTrunks).toEqual([{ id: 's1', type: 'sms_trunks' }]);
+        });
+      }
+    });
+
+    describe('a resource with meta that a requested path reaches again', () => {
+      // GET /dids?include=sms_trunk.sms_trunk_group.sms_trunks: d1 and d2 receive on
+      // trunks t1 and t2 of group g, which carries meta.
+      const include = 'sms_trunk.sms_trunk_group.sms_trunks';
+      const did = (id: string, trunk: string) => ({
+        id,
+        type: 'dids',
+        attributes: { number: id },
+        relationships: { sms_trunk: { data: { id: trunk, type: 'sms_trunks' } } },
+      });
+      const trunk = (id: string) => ({
+        id,
+        type: 'sms_trunks',
+        attributes: {
+          name: `Trunk ${id}`,
+          configuration: { type: 'http_in', attributes: { url: 'https://example.com' } },
+        },
+        relationships: { sms_trunk_group: { data: { id: 'g', type: 'sms_trunk_groups' } } },
+      });
+      const included = [
+        trunk('t1'),
+        trunk('t2'),
+        {
+          id: 'g',
+          type: 'sms_trunk_groups',
+          attributes: { name: 'Group G' },
+          relationships: {
+            sms_trunks: {
+              data: [
+                { id: 't1', type: 'sms_trunks' },
+                { id: 't2', type: 'sms_trunks' },
+              ],
+            },
+          },
+          meta: { sms_trunks_count: 2 },
+        },
+      ];
+      const expectComplete = (value: unknown) => {
+        const keys = JSON.stringify(value);
+        expect(keys).not.toContain('"attributes"');
+        expect(keys).not.toContain('"relationships"');
+      };
+
+      for (const order of [
+        ['d1', 'd2'],
+        ['d2', 'd1'],
+      ]) {
+        it(`holds it in full on every position, in the order ${order.join(', ')}`, () => {
+          const data = order.map((id) => did(id, id === 'd1' ? 't1' : 't2'));
+          const dids = deserialize<Did>(structuredClone({ data, included }), include).data as Did[];
+          for (const d of dids) {
+            const group = (d.smsTrunk as SmsTrunk).smsTrunkGroup as SmsTrunkGroup;
+            expect(group.name).toBe('Group G');
+            expect(group.meta).toEqual({ smsTrunksCount: 2 });
+            expect((group.smsTrunks as SmsTrunk[]).map((t) => t.name)).toEqual(['Trunk t1', 'Trunk t2']);
+          }
+          expectComplete(dids);
+        });
+
+        it(`holds a voice IN trunk group in full on every position, in the order ${order.join(', ')}`, () => {
+          const body = {
+            data: order.map((id) => ({
+              id,
+              type: 'dids',
+              attributes: {},
+              relationships: {
+                voice_in_trunk: { data: { id: id === 'd1' ? 'v1' : 'v2', type: 'voice_in_trunks' } },
+              },
+            })),
+            included: [
+              ...['v1', 'v2'].map((id) => ({
+                id,
+                type: 'voice_in_trunks',
+                attributes: { name: `Trunk ${id}` },
+                relationships: { voice_in_trunk_group: { data: { id: 'g', type: 'voice_in_trunk_groups' } } },
+              })),
+              {
+                id: 'g',
+                type: 'voice_in_trunk_groups',
+                attributes: { name: 'Group G' },
+                relationships: {
+                  voice_in_trunks: {
+                    data: [
+                      { id: 'v1', type: 'voice_in_trunks' },
+                      { id: 'v2', type: 'voice_in_trunks' },
+                    ],
+                  },
+                },
+                meta: { trunks_count: 2 },
+              },
+            ],
+          };
+          const dids = deserialize<Did>(body, 'voice_in_trunk.voice_in_trunk_group.voice_in_trunks').data as Did[];
+          for (const d of dids) {
+            const group = (d.voiceInTrunk as VoiceInTrunk).voiceInTrunkGroup as VoiceInTrunkGroup;
+            expect(group).toMatchObject({ name: 'Group G', meta: { trunksCount: 2 } });
+          }
+          expectComplete(dids);
+        });
+      }
+
+      it('masks the credentials of an HTTP OUT trunk on every position', () => {
+        // GET /sender_id_verifications?include=sms_trunk.sender_id_verifications.sms_trunk
+        const verification = (id: string) => ({
+          id,
+          type: 'sender_id_verifications',
+          attributes: { name: id },
+          relationships: { sms_trunk: { data: { id: 't', type: 'sms_trunks' } } },
+          meta: { setup_price: '1.0' },
+        });
+        const body = {
+          data: [verification('s1'), verification('s2')],
+          included: [
+            {
+              id: 't',
+              type: 'sms_trunks',
+              attributes: {
+                name: 'Trunk T',
+                configuration: {
+                  type: 'http_out',
+                  attributes: { auth_name: 'USER-SECRET', auth_password: 'PASS-SECRET' },
+                },
+              },
+              relationships: {
+                sender_id_verifications: {
+                  data: [
+                    { id: 's1', type: 'sender_id_verifications' },
+                    { id: 's2', type: 'sender_id_verifications' },
+                  ],
+                },
+              },
+              meta: { host: 'https://example.com' },
+            },
+          ],
+        };
+        const result = deserialize(body, 'sms_trunk.sender_id_verifications.sms_trunk');
+        for (const text of [inspect(result, { depth: null }), JSON.stringify(result)]) {
+          expect(text).not.toContain('USER-SECRET');
+          expect(text).not.toContain('PASS-SECRET');
+          expect(text).toContain('[FILTERED]');
+        }
+        expectComplete(result.data);
+      });
+    });
+
+    it('holds the primary resource in full where a requested path leads back to it', () => {
+      // GET /sms_trunks/s1?include=sms_trunk_group.sms_trunks
+      const body = {
+        data: {
+          id: 's1',
+          type: 'sms_trunks',
+          attributes: {
+            name: 'Trunk S1',
+            configuration: { type: 'http_in', attributes: { url: 'https://example.com' } },
+          },
+          relationships: { sms_trunk_group: { data: { id: 'g1', type: 'sms_trunk_groups' } } },
+        },
+        included: [
+          {
+            id: 'g1',
+            type: 'sms_trunk_groups',
+            attributes: { name: 'Group G1' },
+            relationships: {
+              sms_trunks: {
+                data: [
+                  { id: 's1', type: 'sms_trunks' },
+                  { id: 's2', type: 'sms_trunks' },
+                ],
+              },
+            },
+          },
+          { id: 's2', type: 'sms_trunks', attributes: { name: 'Trunk S2' } },
+        ],
+      };
+      const trunk = deserialize<SmsTrunk>(body, ['sms_trunk_group.sms_trunks']).data as SmsTrunk;
+      const members = (trunk.smsTrunkGroup as SmsTrunkGroup).smsTrunks as SmsTrunk[];
+      expect(members.map((t) => t.name)).toEqual(['Trunk S1', 'Trunk S2']);
+      expect(members[0]).not.toBe(trunk);
+      expect(members[0].configuration.type).toBe('http_in');
+      expect(members[0].smsTrunkGroup).toEqual({ id: 'g1', type: 'sms_trunk_groups' });
+      expect(() => JSON.stringify(trunk)).not.toThrow();
+    });
+
+    it('expands the include paths of every repository read', async () => {
+      // A trunk of group g1 whose group lists it back, read with include=sms_trunk_group.sms_trunks.
+      const document = () => ({
+        data: {
+          id: 's1',
+          type: 'sms_trunks',
+          attributes: { name: 'Trunk S1' },
+          relationships: { sms_trunk_group: { data: { id: 'g1', type: 'sms_trunk_groups' } } },
+        },
+        included: [
+          {
+            id: 'g1',
+            type: 'sms_trunk_groups',
+            attributes: { name: 'Group G1' },
+            relationships: { sms_trunks: { data: [{ id: 's1', type: 'sms_trunks' }] } },
+          },
+        ],
+      });
+      const client: HttpClient = {
+        get: async () => document(),
+        post: async () => document(),
+        patch: async () => document(),
+        delete: async () => undefined,
+      };
+      const repository = new Repository(client, SMS_TRUNK_RESOURCE);
+      const params = { include: 'sms_trunk_group.sms_trunks' };
+      const reads = [
+        (await repository.list(params)).data[0],
+        (await repository.find('s1', params)).data,
+        (await repository.create({ name: 'Trunk S1' }, params)).data,
+        (await repository.update({ id: 's1', name: 'Trunk S1' }, params)).data,
+      ];
+      for (const trunk of reads) {
+        const member = (trunk.smsTrunkGroup as SmsTrunkGroup).smsTrunks![0];
+        expect(isIncluded(member)).toBe(true);
+        expect((member as SmsTrunk).name).toBe('Trunk S1');
+      }
     });
   });
 
@@ -242,6 +626,16 @@ describe('unknown enum values (forward-compat)', () => {
     const data = result.data as EmergencyCallingService;
     expect(data.status).toBe('under_review');
     expect(isEcsActive(data)).toBe(false);
+  });
+});
+
+describe('numberType (forward-compat)', () => {
+  it('reads an unknown number type as is', () => {
+    const result = deserialize<DidGroup>({
+      data: { id: 'dg-1', type: 'did_groups', attributes: { number_type: 'future', is_demo: true } },
+    });
+    expect((result.data as DidGroup).numberType).toBe('future');
+    expect((result.data as DidGroup).isDemo).toBe(true);
   });
 });
 

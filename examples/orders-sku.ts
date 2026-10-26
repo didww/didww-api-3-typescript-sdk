@@ -1,4 +1,5 @@
-import { DidwwClient, Environment, didOrderItem } from '../src/index.js';
+import { DidwwClient, Environment, didOrderItem, isIncluded } from '../src/index.js';
+import type { StockKeepingUnit } from '../src/index.js';
 import crypto from 'node:crypto';
 
 const client = new DidwwClient({
@@ -20,10 +21,10 @@ async function main() {
 
   // Find a group with SKUs
   let selectedGroup = null;
-  let sku: Record<string, unknown> | null = null;
+  let sku: StockKeepingUnit | null = null;
   for (const group of groups.data) {
-    const skus = group.stockKeepingUnits;
-    if (Array.isArray(skus) && skus.length > 0) {
+    const skus = (group.stockKeepingUnits || []).filter((s): s is StockKeepingUnit => isIncluded(s));
+    if (skus.length > 0) {
       selectedGroup = group;
       sku = skus[0];
       console.log(`DID Group: ${group.prefix} - ${group.areaName}`);
@@ -37,7 +38,7 @@ async function main() {
     return;
   }
 
-  // Create an order (2026-04-16 external_reference_id -- customer-supplied tag, max 100 chars)
+  // Create an order (external_reference_id -- customer-supplied tag, max 100 chars)
   const suffix = crypto.randomBytes(4).toString('hex');
   const order = await client.orders().create({
     allowBackOrdering: true,

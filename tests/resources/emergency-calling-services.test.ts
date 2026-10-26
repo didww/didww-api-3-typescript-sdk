@@ -5,7 +5,7 @@ import type { Address } from '../../src/resources/address.js';
 import type { EmergencyRequirement } from '../../src/resources/emergency-requirement.js';
 import type { EmergencyVerification } from '../../src/resources/emergency-verification.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
-import { EmergencyCallingServiceStatus } from '../../src/enums.js';
+import { EmergencyCallingServiceStatus, NumberType } from '../../src/enums.js';
 
 describe('EmergencyCallingServices', () => {
   describeOperationEnforcement({
@@ -33,6 +33,7 @@ describe('EmergencyCallingServices', () => {
     expect(result.data.name).toBe('Emergency US');
     expect(result.data.status).toBe(EmergencyCallingServiceStatus.ACTIVE);
     expect(result.data.renewDate).toBe('2026-05-01');
+    expect(result.data.numberType).toBe(NumberType.LOCAL);
     expect(result.data.meta).toBeDefined();
     expect(result.data.meta!.setupPrice).toBe('0.0');
     expect(result.data.meta!.monthlyPrice).toBe('1.5');

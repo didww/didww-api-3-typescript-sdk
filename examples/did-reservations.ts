@@ -26,7 +26,7 @@ async function main() {
   });
   console.log(`\nCreated reservation: ${reservation.data.id}`);
   console.log(`  description: ${reservation.data.description}`);
-  console.log(`  expireAt: ${reservation.data.expireAt}`);
+  console.log(`  expiresAt: ${reservation.data.expiresAt}`);
 
   // List reservations with included available DID
   const reservations = await client.didReservations().list({
@@ -36,7 +36,7 @@ async function main() {
   for (const r of reservations.data) {
     const adRef = r.availableDid;
     const adNumber = adRef && isIncluded(adRef) ? adRef.number : 'unknown';
-    console.log(`  ${r.id} number=${adNumber} expires=${r.expireAt}`);
+    console.log(`  ${r.id} number=${adNumber} expires=${r.expiresAt}`);
   }
 
   // Find the reservation by id

@@ -1,9 +1,8 @@
 import { createReadOnlyResource, type ResourceRef } from './base.js';
-import type { Feature } from '../enums.js';
+import type { Feature, NumberType } from '../enums.js';
 import type { Country } from './country.js';
 import type { Region } from './region.js';
 import type { City } from './city.js';
-import type { DidGroupType } from './did-group-type.js';
 import type { StockKeepingUnit } from './stock-keeping-unit.js';
 import type { AddressRequirement } from './address-requirement.js';
 
@@ -16,10 +15,12 @@ export interface DidGroup {
   areaName: string;
   allowAdditionalChannels: boolean;
   serviceRestrictions: string | null;
+  numberType: NumberType | (string & {});
+  /** True for a demo DID group. */
+  isDemo: boolean;
   country?: Country | ResourceRef;
   region?: Region | ResourceRef;
   city?: City | ResourceRef;
-  didGroupType?: DidGroupType | ResourceRef;
   stockKeepingUnits?: (StockKeepingUnit | ResourceRef)[];
   addressRequirement?: AddressRequirement | ResourceRef;
 }

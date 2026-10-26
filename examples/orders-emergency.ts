@@ -11,8 +11,7 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/orders-emergency.ts
  */
-import { DidwwClient, Environment, OrderItemType } from '../src/index.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, OrderItemType, isIncluded } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,

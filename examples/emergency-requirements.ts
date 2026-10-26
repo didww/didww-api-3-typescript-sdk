@@ -1,6 +1,6 @@
 /**
  * Emergency Requirements: list emergency service requirements for a
- * country/did_group_type (2026-04-16).
+ * country and number type.
  *
  * Emergency requirements describe what address precision, identity type,
  * and supporting fields an end-customer must provide to enable 911/112
@@ -8,8 +8,7 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-requirements.ts
  */
-import { DidwwClient, Environment } from '../src/index.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -19,7 +18,7 @@ const client = new DidwwClient({
 async function main() {
   console.log('=== Emergency Requirements ===');
   const requirements = await client.emergencyRequirements().list({
-    include: ['country', 'did_group_type'],
+    include: ['country'],
   });
   console.log(`Found ${requirements.data.length} emergency requirements`);
 
@@ -28,9 +27,8 @@ async function main() {
     if (req.country && isIncluded(req.country)) {
       console.log(`  Country: ${req.country.name}`);
     }
-    if (req.didGroupType && isIncluded(req.didGroupType)) {
-      console.log(`  DID Group Type: ${req.didGroupType.name}`);
-    }
+    // A NumberType value: local, national, mobile, toll_free, shared_cost or global
+    console.log(`  Number type: ${req.numberType}`);
     console.log(`  Identity type required: ${req.identityType}`);
     console.log(`  Address area level: ${req.addressAreaLevel}`);
     console.log(`  Address mandatory fields: ${req.addressMandatoryFields?.join(', ')}`);

@@ -1,17 +1,17 @@
-# DIDWW 2026-04-16 — Server-side filter reference
+# DIDWW 2026-10-22 — Server-side filter reference
 
-This is the canonical list of `filter[KEY]` query parameters accepted by each list endpoint of the DIDWW API at version `2026-04-16` — the default API version targeted by this SDK.
+This is the canonical list of `filter[KEY]` query parameters accepted by each list endpoint of the DIDWW API at version `2026-10-22` — the default API version targeted by this SDK.
 
 The SDK passes filters through as untyped `Record<string, string | string[]>` maps (e.g. `client.regions().list({ filter: { iso: "US" } })`), so this document is the authoritative source for which keys actually do something on the server.
 
-Every key listed here was verified live against the DIDWW API at version `2026-04-16`.
+Keys that already existed at version `2026-04-16` were verified live against the DIDWW API at that version. Keys added at version `2026-10-22` are taken from its published OpenAPI document.
 
-Pass values URL-encoded as strings. Where the server accepts arrays, comma-separate the values.
+Pass values as strings; the SDK URL-encodes them. Where the server accepts arrays, comma-separate the values, or pass a `string[]`, which the SDK joins with commas. An enum member, such as `NumberType.TOLL_FREE`, is its wire value (`'toll_free'`) and can be passed as is.
 
 ## AddressRequirement — `GET /v3/address_requirements`
 
 - `filter[country.id]`
-- `filter[did_group_type.id]`
+- `filter[number_type]` — a `NumberType` value, e.g. `NumberType.TOLL_FREE` (`'toll_free'`)
 
 ## Address — `GET /v3/addresses`
 
@@ -51,7 +51,7 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[did_group.features]`
 - `filter[did_group.id]`
 - `filter[did_group.needs_registration]`
-- `filter[did_group_type.id]`
+- `filter[did_group.number_type]`
 - `filter[nanpa_prefix.id]`
 - `filter[number_contains]`
 - `filter[region.id]`
@@ -84,20 +84,17 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[available_dids_enabled]`
 - `filter[city.id]`
 - `filter[country.id]`
-- `filter[did_group_type.id]`
 - `filter[features]`
 - `filter[is_available]`
+- `filter[is_demo]`
 - `filter[is_metered]`
 - `filter[meta.total_count_gteq]`
 - `filter[nanpa_prefix.id]`
 - `filter[nanpa_prefix.npanxx]`
 - `filter[needs_registration]`
+- `filter[number_type]`
 - `filter[prefix]`
 - `filter[region.id]`
-
-## DidGroupType — `GET /v3/did_group_types`
-
-- `filter[name]`
 
 ## DidHistory — `GET /v3/did_history`
 
@@ -130,25 +127,26 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[order.reference]`
 - `filter[region.id]`
 - `filter[shared_capacity_group.id]`
+- `filter[sms_trunk.id]`
+- `filter[sms_trunk_group.id]`
 - `filter[terminated]`
 - `filter[voice_in_trunk.id]`
 - `filter[voice_in_trunk_group.id]`
-
 
 ## EmergencyCallingService — `GET /v3/emergency_calling_services`
 
 - `filter[address.id]`
 - `filter[country.id]`
-- `filter[did_group_type.id]`
 - `filter[identity.id]`
 - `filter[name]`
+- `filter[number_type]`
 - `filter[reference]`
 - `filter[status]`
 
 ## EmergencyRequirement — `GET /v3/emergency_requirements`
 
 - `filter[country.id]`
-- `filter[did_group_type.id]`
+- `filter[number_type]`
 
 ## EmergencyVerification — `GET /v3/emergency_verifications`
 
@@ -158,7 +156,11 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 
 ## Export — `GET /v3/exports`
 
+- `filter[created_at_gteq]`
+- `filter[created_at_lteq]`
+- `filter[export_type]`
 - `filter[external_reference_id]`
+- `filter[status]`
 
 ## Identity — `GET /v3/identities`
 
@@ -167,6 +169,8 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[company_name_contains]`
 - `filter[company_reg_number]`
 - `filter[company_reg_number_contains]`
+- `filter[company_website]`
+- `filter[company_website_contains]`
 - `filter[country.id]`
 - `filter[description]`
 - `filter[description_contains]`
@@ -221,9 +225,28 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[iso]`
 - `filter[name]`
 
+## SenderIdVerification — `GET /v3/sender_id_verifications`
+
+- `filter[name]` — contains
+- `filter[reference]`
+- `filter[sender_type]` — a `SenderType` value, e.g. `SenderType.LONG_CODE` (`'long_code'`)
+- `filter[sms_trunk.id]` — comma-separate several
+- `filter[status]` — a `SenderIdVerificationStatus` value, e.g. `SenderIdVerificationStatus.CHANGES_REQUIRED` (`'changes_required'`)
+
 ## SharedCapacityGroup — `GET /v3/shared_capacity_groups`
 
 - `filter[capacity_pool.id]`
+- `filter[external_reference_id]`
+- `filter[name]`
+
+## SmsTrunkGroup — `GET /v3/sms_trunk_groups`
+
+- `filter[external_reference_id]`
+- `filter[name]`
+
+## SmsTrunk — `GET /v3/sms_trunks`
+
+- `filter[configuration.type]` — `sms_to_email`, `http_in`, `http_out`, `smpp_esme` or `smpp_smsc` (the `SmsTrunkConfigurationType` values, the `type` of an `SmsTrunkConfiguration`); comma-separate several
 - `filter[external_reference_id]`
 - `filter[name]`
 
@@ -256,3 +279,48 @@ Pass values URL-encoded as strings. Where the server accepts arrays, comma-separ
 - `filter[on_cli_mismatch_action]`
 - `filter[status]`
 - `filter[threshold_reached]`
+
+## Export filters — `filters` of `POST /v3/exports`
+
+Set them as an object on `filters` of `client.exports().create()`, typed `ExportFilters`. `from` and `to` are required for every export type, as `YYYY-MM-DD HH:MM:SS` in UTC (`from` inclusive, `to` exclusive). Write the keys in camelCase, each part of a dotted key included (`'smsTrunk.id'`); the SDK sends them in snake_case, and the `filters` of an export read from the API come back the same way. Where a key takes several values, pass a `string[]`; it is sent as a JSON array. Any key that the export type does not accept is rejected.
+
+| Key | `ExportFilters` property | Export types |
+|---|---|---|
+| `from` | `from` | all |
+| `to` | `to` | all |
+| `did_number` | `didNumber` | `cdr_in` |
+| `source_number` | `sourceNumber` | `cdr_in` |
+| `source_number_out` | `sourceNumberOut` | `cdr_in` |
+| `source_country_iso` | `sourceCountryIso` | `cdr_in` |
+| `voice_out_trunk.id` | — (see below) | `cdr_out` |
+| `source` | `source` | `cdr_out` |
+| `cli` | `cli` | `cdr_out` |
+| `destination` | `destination` | `cdr_out` |
+| `source_address_eq` | `sourceAddressEq` | `sms_in`, `sms_out` |
+| `source_address_cont` | `sourceAddressCont` | `sms_in`, `sms_out` |
+| `destination_address_eq` | `destinationAddressEq` | `sms_in`, `sms_out` |
+| `destination_address_cont` | `destinationAddressCont` | `sms_in`, `sms_out` |
+| `status` | `status` | `sms_in` (`Success`, `Failed`, `Queued`), `sms_out` (`Routing Error`, `In Progress`, `Queued`, `Failed`, `Success`) |
+| `sms_id` | `smsId` | `sms_in`, `sms_out` |
+| `sms_trunk.id` | `'smsTrunk.id'` | `sms_in`, `sms_out` — one id or an array of ids |
+| `trunk_type` | `trunkType` | `sms_in` — one or an array of `ExportTrunkType` values, e.g. `ExportTrunkType.HTTP_IN` (`'HTTP IN'`) |
+| `service_type` | `serviceType` | `sms_out` — `a2p` or `p2p` |
+| `sender_id_verification.id` | `'senderIdVerification.id'` | `sms_out` — one id or an array of ids |
+
+`ExportFilters` declares no property for `voice_out_trunk.id`: its `voiceOutTrunkId` is sent as `voice_out_trunk_id`, which the API does not accept. Write the key as `'voiceOutTrunk.id'`, which is sent as `voice_out_trunk.id`, in an object typed `ExportFilters` with a type assertion.
+
+## Price lookups — `GET /v3/…/lookup/prices`
+
+Pass them as an object to `lookup(filters)` of a price accessor of `DidwwClient`, without the `filter[…]` wrapper, e.g. `client.voiceInPrices().lookup({ number: '18005550123' })`. The filter types of each accessor (`VoiceInPriceFilters`, `VoiceOutPriceFilters`, `SmsPriceFilters`) check the names at compile time; at run time a missing or unknown filter rejects with a `DidwwClientError` before any request is sent, and `null`, `undefined` and blank values are dropped. Values are strings; a number may also be given as a non-negative safe integer. The formats of the values are checked by the server. `service.allowedFilters` lists the names.
+
+| Accessor | Path | Filters |
+|---|---|---|
+| `voiceInPrices()` | `/v3/lookup/prices` on the Voice IN host | `number` (required), `src_country_iso` |
+| `voiceOutPrices()` | `/v3/lookup/prices` on the Voice OUT host | `number` (required) |
+| `smsOutA2pPrices()` | `/v3/sms_out/a2p/lookup/prices` on the SMS host | `dst_number`, `dst_country_iso` — at least one |
+| `smsOutP2pPrices()` | `/v3/sms_out/p2p/lookup/prices` on the SMS host | `dst_number`, `dst_country_iso` — at least one |
+| `smsOutOtpPrices()` | `/v3/sms_out/otp/lookup/prices` on the SMS host | `dst_number`, `dst_country_iso` — at least one |
+| `smsInPrices()` | `/v3/sms_in/lookup/prices` on the SMS host | `dst_number`, `dst_country_iso` — at least one |
+
+- `number`, `dst_number` — 8 to 15 digits with a non-zero first digit, in international format without a `+` or a dialling prefix.
+- `src_country_iso`, `dst_country_iso` — an upper-case ISO 3166-1 alpha-2 code.

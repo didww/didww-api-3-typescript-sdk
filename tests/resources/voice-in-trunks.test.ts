@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { inspect } from 'node:util';
 import { setupClient } from '../helpers/client.js';
-import { isIncluded } from '../../src/resources/base.js';
-import type { Pop } from '../../src/resources/pop.js';
 import {
   serializeTrunkConfiguration,
   deserializeTrunkConfiguration,
@@ -11,7 +9,7 @@ import {
   redactSipConfiguration,
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
-import { Codec, ReroutingDisconnectCode } from '../../src/enums.js';
+import { Codec, Pop, ReroutingDisconnectCode } from '../../src/enums.js';
 import type { DiversionInjectMode, DiversionRelayPolicy, NetworkProtocolPriority } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
@@ -31,11 +29,9 @@ describe('VoiceInTrunks', () => {
     expect(first.id).toBe('2b4b1fcf-fe6a-4de9-8a58-7df46820ba13');
     expect(first.name).toBe('sample trunk pstn');
     expect(first.voiceInTrunkGroup).toBeUndefined();
-    expect(first.pop).toBeUndefined();
+    expect(first.pop).toBeNull();
     const second = result.data[1];
-    expect(second.pop).toBeDefined();
-    expect(isIncluded(second.pop!)).toBe(true);
-    expect((second.pop as Pop).name).toBe('DE, FRA');
+    expect(second.pop).toBe(Pop.FRA);
     expect(first.externalReferenceId).toBe('vit-ref-001');
   });
 
@@ -159,6 +155,22 @@ describe('VoiceInTrunks', () => {
     const config = result.data.configuration as PstnConfiguration;
     expect(config.type).toBe('pstn_configurations');
     expect(config.dst).toBe('558540420025');
+  });
+
+  it('creates a voice in trunk pinned to a point of presence', async () => {
+    const client = setupClient('voice_in_trunks/create_with_pop.yaml');
+    const result = await client.voiceInTrunks().create({
+      name: 'hello, test pstn trunk',
+      configuration: pstnConfiguration({ dst: '558540420024' }),
+      pop: Pop.FRA,
+    });
+    expect(result.data.pop).toBe(Pop.FRA);
+  });
+
+  it('clears the point of presence as an attribute', async () => {
+    const client = setupClient('voice_in_trunks/update_clear_pop.yaml');
+    const result = await client.voiceInTrunks().update({ id: '41b94706-325e-4704-a433-d65105758836', pop: null });
+    expect(result.data.pop).toBeNull();
   });
 
   it('deletes a voice in trunk', async () => {

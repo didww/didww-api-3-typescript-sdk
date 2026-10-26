@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
+import { NumberType } from '../../src/enums.js';
 
 describe('EmergencyRequirements', () => {
   describeOperationEnforcement({
@@ -34,6 +35,7 @@ describe('EmergencyRequirements', () => {
     expect(result.data.personalAreaLevel).toBeNull();
     expect(result.data.businessAreaLevel).toBe('world_wide');
     expect(result.data.requirementRestrictionMessage).toBeNull();
+    expect(result.data.numberType).toBe(NumberType.LOCAL);
     expect(result.data.meta).toBeDefined();
     expect(result.data.meta!.setupPrice).toBeNull();
     expect(result.data.meta!.monthlyPrice).toBeNull();

@@ -14,6 +14,16 @@ export enum AddressVerificationStatus {
 export enum ExportType {
   CDR_IN = 'cdr_in',
   CDR_OUT = 'cdr_out',
+  SMS_IN = 'sms_in',
+  SMS_OUT = 'sms_out',
+}
+
+/** Values of the `trunkType` filter of an `sms_in` export. */
+export enum ExportTrunkType {
+  SMPP_SMSC = 'SMPP SMSC',
+  SMPP_ESME = 'SMPP ESME',
+  EMAIL = 'Email',
+  HTTP_IN = 'HTTP IN',
 }
 
 export enum ExportStatus {
@@ -221,6 +231,69 @@ export enum NetworkProtocolPriority {
 export enum ConfigurationType {
   SIP = 'sip_configurations',
   PSTN = 'pstn_configurations',
+}
+
+export enum NumberType {
+  LOCAL = 'local',
+  NATIONAL = 'national',
+  MOBILE = 'mobile',
+  TOLL_FREE = 'toll_free',
+  SHARED_COST = 'shared_cost',
+  GLOBAL = 'global',
+}
+
+/** Point of presence of a Voice IN trunk. */
+export enum Pop {
+  NYC = 'NYC',
+  FRA = 'FRA',
+  LAC = 'LAC',
+  MIA = 'MIA',
+  SG = 'SG',
+  HK = 'HK',
+  AMS = 'AMS',
+}
+
+export enum SmsTrunkConfigurationType {
+  SMS_TO_EMAIL = 'sms_to_email',
+  HTTP_IN = 'http_in',
+  HTTP_OUT = 'http_out',
+  SMPP_ESME = 'smpp_esme',
+  SMPP_SMSC = 'smpp_smsc',
+}
+
+export enum SmsHttpMethod {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+}
+
+export enum SmsBodyType {
+  JSON = 'json',
+  HTML_MULTIPART = 'html_multipart',
+  HTML_URL_ENCODED = 'html_url_encoded',
+  RAW = 'raw',
+}
+
+export enum SmsServerLocation {
+  NYC = 'nyc',
+  AMS = 'ams',
+}
+
+export enum SenderIdVerificationStatus {
+  ACTIVE = 'active',
+  CHANGES_REQUIRED = 'changes_required',
+  CLOSED = 'closed',
+  CLOSING_IN_PROCESS = 'closing_in_process',
+  IN_PROCESS = 'in_process',
+  NEW = 'new',
+}
+
+export enum SenderType {
+  ALPHANUMERIC = 'alphanumeric',
+  CARRIER = 'carrier',
+  LONG_CODE = 'long_code',
+  SHORT_CODE = 'short_code',
+  TOLL_FREE = 'toll_free',
 }
 
 export enum OrderItemType {

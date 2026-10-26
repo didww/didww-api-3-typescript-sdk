@@ -1,17 +1,16 @@
 /**
- * Emergency Calling Services: list and cancel customer 911/112 subscriptions (2026-04-16).
+ * Emergency Calling Services: list and cancel customer 911/112 subscriptions.
  *
  * An EmergencyCallingService represents a customer's 911/112 subscription
- * attached to one or more DIDs. It ties an address, identity, DID group type
+ * attached to one or more DIDs. It ties an address, identity, number type
  * and country together.
  *
  * Supported operations: list, find, remove (cancel).
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-calling-services.ts
  */
-import { DidwwClient, Environment } from '../src/index.js';
-import type { Did } from '../src/resources/did.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { Did } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -21,7 +20,7 @@ const client = new DidwwClient({
 async function main() {
   console.log('=== Emergency Calling Services ===');
   const services = await client.emergencyCallingServices().list({
-    include: ['country', 'did_group_type', 'dids'],
+    include: ['country', 'dids'],
   });
   console.log(`Found ${services.data.length} emergency calling services`);
 
@@ -33,9 +32,7 @@ async function main() {
     if (svc.country && isIncluded(svc.country)) {
       console.log(`  Country: ${svc.country.name}`);
     }
-    if (svc.didGroupType && isIncluded(svc.didGroupType)) {
-      console.log(`  DID Group Type: ${svc.didGroupType.name}`);
-    }
+    console.log(`  Number type: ${svc.numberType}`);
     console.log(`  Activated: ${svc.activatedAt}`);
     if (svc.canceledAt) console.log(`  Canceled: ${svc.canceledAt}`);
     if (svc.renewDate) console.log(`  Renews: ${svc.renewDate}`);

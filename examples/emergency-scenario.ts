@@ -1,10 +1,10 @@
 /**
- * End-to-end Emergency Calling Service purchase flow (2026-04-16).
+ * End-to-end Emergency Calling Service purchase flow.
  *
  * Walks through the full lifecycle:
  *   0. Find an address with country, order a DID with emergency feature in that country
  *   1. Find the newly ordered DID (not yet emergency-enabled, no ECS)
- *   2. Look up emergency requirements for that DID's country + did_group_type
+ *   2. Look up emergency requirements for that DID's country + number type
  *   3. Find an existing identity on the account
  *   4. Find an existing address on the account
  *   5. Validate the triple (requirement + address + identity)
@@ -14,8 +14,8 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/emergency-scenario.ts
  */
-import { DidwwClient, Environment, availableDidOrderItem, isIncluded } from '../src/index.js';
-import type { Did } from '../src/resources/did.js';
+import { CallbackMethod, DidwwClient, Environment, availableDidOrderItem, isIncluded } from '../src/index.js';
+import type { Did } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -42,6 +42,10 @@ async function main() {
   const addressCountry =
     addressForOrder.country && isIncluded(addressForOrder.country) ? addressForOrder.country : null;
   const addressCountryId = addressForOrder.country?.id;
+  if (!addressCountryId) {
+    console.log('The address has no country.');
+    return;
+  }
   console.log(`  Using address country: ${addressCountry?.name ?? 'unknown'} (${addressCountryId})`);
 
   // Find an available DID with emergency feature in that country
@@ -90,8 +94,8 @@ async function main() {
   // === Step 1: Find the newly ordered DID ===
   console.log('\n=== Step 1: Find the newly ordered DID ===');
   const dids = await client.dids().list({
-    filter: { 'did_group.features': 'emergency', emergency_enabled: false },
-    include: ['did_group', 'did_group.country', 'did_group.did_group_type', 'emergency_calling_service'],
+    filter: { 'did_group.features': 'emergency', emergency_enabled: 'false' },
+    include: ['did_group', 'did_group.country', 'emergency_calling_service'],
     sort: '-created_at',
     page: { size: 10, number: 1 },
   });
@@ -105,27 +109,28 @@ async function main() {
 
   const didGroup = did.didGroup && isIncluded(did.didGroup) ? did.didGroup : null;
   const country = didGroup?.country && isIncluded(didGroup.country) ? didGroup.country : null;
-  const dgt = didGroup?.didGroupType && isIncluded(didGroup.didGroupType) ? didGroup.didGroupType : null;
+  // A NumberType value, e.g. toll_free
+  const numberType = didGroup?.numberType;
 
   console.log(`  DID:            ${did.number} (${did.id})`);
   console.log(`  DID Group:      ${didGroup?.id}`);
   console.log(`  Country:        ${country?.name} (${country?.id})`);
-  console.log(`  DID Group Type: ${dgt?.name} (${dgt?.id})`);
+  console.log(`  Number type:    ${numberType}`);
 
   // === Step 2: Get emergency requirements ===
-  console.log('\n=== Step 2: Get emergency requirements for country + did_group_type ===');
-  if (!country?.id || !dgt?.id) {
-    console.log('DID group missing country or type relationship. Exiting.');
+  console.log('\n=== Step 2: Get emergency requirements for country + number type ===');
+  if (!country?.id || !numberType) {
+    console.log('DID group missing country or number type. Exiting.');
     return;
   }
 
   const requirements = await client.emergencyRequirements().list({
-    filter: { 'country.id': country.id, 'did_group_type.id': dgt.id },
+    filter: { 'country.id': country.id, number_type: numberType },
   });
 
   const requirement = requirements.data[0];
   if (!requirement) {
-    console.log(`No emergency requirements found for country ${country.name} / ${dgt.name}.`);
+    console.log(`No emergency requirements found for country ${country.name} / ${numberType}.`);
     return;
   }
 
@@ -179,7 +184,7 @@ async function main() {
   try {
     const verification = await client.emergencyVerifications().create({
       callbackUrl: 'https://example.com/webhooks/emergency',
-      callbackMethod: 'post' as const,
+      callbackMethod: CallbackMethod.POST,
       externalReferenceId: `ts-scenario-${suffix}`,
       address: { id: address.id, type: 'addresses' },
       dids: [{ id: did.id, type: 'dids' }],
@@ -210,7 +215,7 @@ async function main() {
     const ecs = fetched.data.emergencyCallingService;
     if (ecs) {
       const service = await client.emergencyCallingServices().find(ecs.id, {
-        include: ['country', 'did_group_type', 'dids'],
+        include: ['country', 'dids'],
       });
       const svc = service.data;
       console.log(`  Service:        ${svc.id}`);
@@ -220,9 +225,7 @@ async function main() {
       if (svc.country && isIncluded(svc.country)) {
         console.log(`  Country:        ${svc.country.name}`);
       }
-      if (svc.didGroupType && isIncluded(svc.didGroupType)) {
-        console.log(`  DID Group Type: ${svc.didGroupType.name}`);
-      }
+      console.log(`  Number type:    ${svc.numberType}`);
       if (svc.dids && svc.dids.length > 0) {
         const numbers = svc.dids.filter((d): d is Did => isIncluded(d)).map((d) => d.number);
         console.log(`  Attached DIDs:  ${numbers.join(', ')}`);
