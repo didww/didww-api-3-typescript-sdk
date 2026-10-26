@@ -512,9 +512,18 @@ describe('downloadToFile', () => {
     expect(leftovers()).toEqual([]);
   });
 
+  it('writes a destination whose name has the longest length allowed', async () => {
+    const s = await start(fileReply());
+    const dest = join(dir, `${'p'.repeat(248)}.csv.gz`);
+    const file = await client(s).voiceInPrices().downloadToFile(dest);
+    expect(file.bytesWritten).toBe(GZ.length);
+    expect(readFileSync(dest).equals(GZ)).toBe(true);
+    expect(leftovers()).toEqual([]);
+  });
+
   it('leaves other temporary files alone', async () => {
     const s = await start(fileReply());
-    const other = join(dir, '.voice_in_prices.csv.gz.0123456789abcdef.tmp');
+    const other = join(dir, '.didww-0123456789abcdef.tmp');
     writeFileSync(other, 'someone else');
     await client(s).voiceInPrices().downloadToFile(join(dir, 'voice_in_prices.csv.gz'));
     expect(readFileSync(other, 'utf8')).toBe('someone else');

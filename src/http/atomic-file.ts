@@ -19,7 +19,8 @@ export async function writeFileAtomically<T>(
   fill: (write: (chunk: Buffer) => Promise<void>) => Promise<T>,
   options: AtomicFileOptions = {},
 ): Promise<T> {
-  const temp = path.join(path.dirname(dest), `.${path.basename(dest)}.${randomBytes(8).toString('hex')}.tmp`);
+  // A short fixed name, so that any valid destination name leaves room for it.
+  const temp = path.join(path.dirname(dest), `.didww-${randomBytes(8).toString('hex')}.tmp`);
   const handle = await fs.open(temp, 'wx', 0o666);
   let committed = false;
   const write = async (chunk: Buffer) => {
