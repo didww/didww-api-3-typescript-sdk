@@ -176,21 +176,30 @@ export function resumeReadTimer(res: http.IncomingMessage): void {
   if (exchange?.read != null && typeof res.socket?.setTimeout === 'function') res.socket.setTimeout(exchange.read);
 }
 
+/** `value` without its leading and trailing spaces and tabs, in linear time. */
+export function trimOws(value: string): string {
+  let start = 0;
+  let end = value.length;
+  while (start < end && (value[start] === ' ' || value[start] === '\t')) start++;
+  while (end > start && (value[end - 1] === ' ' || value[end - 1] === '\t')) end--;
+  return value.slice(start, end);
+}
+
 /** The Content-Length of `res`, or null when absent, malformed or chunked. */
 export function contentLength(res: http.IncomingMessage): number | null {
   const te = res.headers['transfer-encoding'];
   if (typeof te === 'string' && /chunked/i.test(te)) return null;
   const value = res.headers['content-length'];
   if (typeof value !== 'string') return null;
-  const trimmed = value.replace(/^[ \t]+|[ \t]+$/g, '');
-  return /^[0-9]{1,15}$/.test(trimmed) ? Number(trimmed) : null;
+  const trimmed = trimOws(value);
+  return /^\d{1,15}$/.test(trimmed) ? Number(trimmed) : null;
 }
 
 /** The delay-seconds of a Retry-After header, or null for an HTTP date or anything else. */
 export function retryAfterSeconds(value: string | string[] | undefined): number | null {
   if (typeof value !== 'string') return null;
-  const trimmed = value.replace(/^[ \t]+|[ \t]+$/g, '');
-  return /^[0-9]{1,9}$/.test(trimmed) ? Number(trimmed) : null;
+  const trimmed = trimOws(value);
+  return /^\d{1,9}$/.test(trimmed) ? Number(trimmed) : null;
 }
 
 /** `seconds` plus up to a fifth of it, or up to a second when that is more. */
@@ -222,7 +231,8 @@ export function originOf(url: unknown): Origin | null {
   if (parsed.hostname === '') return null;
   const protocol = parsed.protocol;
   const host = parsed.hostname.endsWith('.') ? parsed.hostname.slice(0, -1) : parsed.hostname;
-  const port = parsed.port !== '' ? Number(parsed.port) : protocol === 'https:' ? 443 : 80;
+  const defaultPort = protocol === 'https:' ? 443 : 80;
+  const port = parsed.port === '' ? defaultPort : Number(parsed.port);
   return { protocol, host, port };
 }
 

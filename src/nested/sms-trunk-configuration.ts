@@ -177,7 +177,7 @@ const SENSITIVE_KEYS: Record<KnownType, readonly string[]> = {
 };
 
 function isKnownType(type: unknown): type is KnownType {
-  return typeof type === 'string' && Object.prototype.hasOwnProperty.call(WIRE_KEYS, type);
+  return typeof type === 'string' && Object.hasOwn(WIRE_KEYS, type);
 }
 
 export function isGenericSmsTrunkConfiguration(c: SmsTrunkConfiguration): c is GenericSmsTrunkConfiguration {

@@ -255,7 +255,7 @@ export class PricesService<Row, Filters> {
 
   #query(filters: unknown): string {
     const given = givenFilters(filters);
-    const names = [...given.keys()].sort();
+    const names = [...given.keys()].sort(byCodeUnits);
     const unknown = names.filter((name) => !this.allowedFilters.includes(name));
     if (unknown.length > 0) {
       throw new DidwwClientError(
@@ -483,6 +483,12 @@ function readError(error: BodyReadError): DidwwPricesError {
 
 function connectionError(message: string, cause?: unknown): DidwwPricesError {
   return new DidwwPricesError({ kind: PricesErrorKind.CONNECTION_ERROR, status: 200, message, cause });
+}
+
+// The order of the default sort, by UTF-16 code units: the query does not depend on the locale.
+function byCodeUnits(a: string, b: string): number {
+  if (a < b) return -1;
+  return a > b ? 1 : 0;
 }
 
 function givenFilters(filters: unknown): Map<string, string> {

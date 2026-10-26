@@ -682,16 +682,30 @@ async function copyExport(
 ): Promise<void> {
   const expected = contentLength(res);
   const counter = { count: 0 };
-  if (!decompress) {
-    try {
-      for await (const chunk of rawChunks(res, counter)) await write(chunk);
-    } catch (e) {
-      throw e instanceof BodyReadError ? exportReadError(e) : e;
-    }
-    if (expected !== null && counter.count !== expected) throw incompleteExport(counter.count, expected);
-    return;
-  }
+  if (decompress) await copyGunzippedExport(res, expected, counter, write);
+  else await copyRawExport(res, expected, counter, write);
+}
 
+async function copyRawExport(
+  res: http.IncomingMessage,
+  expected: number | null,
+  counter: { count: number },
+  write: (chunk: Buffer) => Promise<void>,
+): Promise<void> {
+  try {
+    for await (const chunk of rawChunks(res, counter)) await write(chunk);
+  } catch (e) {
+    throw e instanceof BodyReadError ? exportReadError(e) : e;
+  }
+  if (expected !== null && counter.count !== expected) throw incompleteExport(counter.count, expected);
+}
+
+async function copyGunzippedExport(
+  res: http.IncomingMessage,
+  expected: number | null,
+  counter: { count: number },
+  write: (chunk: Buffer) => Promise<void>,
+): Promise<void> {
   const gunzip = zlib.createGunzip();
   const feeding = feedGunzip(rawChunks(res, counter), gunzip);
   feeding.catch(() => undefined);
@@ -708,13 +722,21 @@ async function copyExport(
     await feeding;
   } catch (e) {
     if (writeErrors.has(e)) throw e;
-    if (e instanceof BodyReadError) throw exportReadError(e);
-    if (counter.count === 0) throw new DidwwClientError('Failed to decompress export data: the export is empty');
-    if (expected !== null && res.complete && counter.count !== expected) {
-      throw incompleteExport(counter.count, expected);
-    }
-    throw new DidwwClientError('Failed to decompress export data', { cause: e });
+    throw decompressError(e, res, expected, counter.count);
   }
   if (expected !== null && counter.count !== expected) throw incompleteExport(counter.count, expected);
   if (counter.count === 0) throw new DidwwClientError('Failed to decompress export data: the export is empty');
+}
+
+// The error of a decompressed export whose reading or decompression failed after `count` bytes.
+function decompressError(
+  error: unknown,
+  res: http.IncomingMessage,
+  expected: number | null,
+  count: number,
+): DidwwClientError {
+  if (error instanceof BodyReadError) return exportReadError(error);
+  if (count === 0) return new DidwwClientError('Failed to decompress export data: the export is empty');
+  if (expected !== null && res.complete && count !== expected) return incompleteExport(count, expected);
+  return new DidwwClientError('Failed to decompress export data', { cause: error });
 }

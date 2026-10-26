@@ -15,7 +15,7 @@ import {
 } from '../http/transport.js';
 import { safeLog, type DidwwLogger } from '../logger.js';
 import { ACCESS_TOKEN_BRAND, AccessToken } from './access-token.js';
-import { FLIGHTS, KEY_LOCKS, mapFor, RATE_LIMITS, REFUSED, type TestingHooks } from './state.js';
+import { AUTH_STATE, mapFor, type TestingHooks } from './state.js';
 import { MemoryTokenStore, type TokenStore } from './token-store.js';
 
 export const CACHE_KEY_PREFIX = 'didww:token:v1:';
@@ -125,7 +125,7 @@ export class TokenProvider {
     const cached = await this.#readCached(key);
     if (cached) return cached;
 
-    const flights = mapFor(FLIGHTS, this.#store);
+    const flights = mapFor(AUTH_STATE.flights, this.#store);
     const existing = flights.get(key);
     if (existing) return existing;
     const flight: Promise<AccessToken> = (async () => {
@@ -148,7 +148,7 @@ export class TokenProvider {
    */
   async invalidate(audience: string, refusedAccessToken: string): Promise<void> {
     const key = this.cacheKey(audience);
-    mapFor(REFUSED, this.#store).set(key, refusedAccessToken);
+    mapFor(AUTH_STATE.refused, this.#store).set(key, refusedAccessToken);
     await this.#withKeyLock(key, async () => {
       const stored = await this.#getStored(key);
       if (stored && sameToken(stored.accessToken, refusedAccessToken)) {
@@ -164,7 +164,7 @@ export class TokenProvider {
   async #readCached(key: string): Promise<AccessToken | null> {
     const stored = await this.#getStored(key);
     if (!stored) return null;
-    const refused = REFUSED.get(this.#store)?.get(key);
+    const refused = AUTH_STATE.refused.get(this.#store)?.get(key);
     if (refused !== undefined && sameToken(refused, stored.accessToken)) return null;
     return stored;
   }
@@ -185,7 +185,7 @@ export class TokenProvider {
   }
 
   async #storeToken(key: string, token: AccessToken): Promise<void> {
-    const refused = mapFor(REFUSED, this.#store);
+    const refused = mapFor(AUTH_STATE.refused, this.#store);
     const refusedBefore = refused.get(key);
     const outcome = await this.#withKeyLock(key, async () => {
       const result = await this.#callStore(() => this.#store.set(key, token, token.expiresIn), STORE_WRITE_FAILED);
@@ -200,7 +200,7 @@ export class TokenProvider {
 
   // A promise-chain mutex per store and key; gives up when not acquired in time.
   async #withKeyLock<T>(key: string, fn: () => Promise<T>): Promise<T | typeof SKIPPED> {
-    const locks = mapFor(KEY_LOCKS, this.#store);
+    const locks = mapFor(AUTH_STATE.keyLocks, this.#store);
     const previous = locks.get(key) ?? Promise.resolve();
     let release!: () => void;
     const mine = new Promise<void>((resolve) => (release = resolve));
@@ -316,21 +316,18 @@ export class TokenProvider {
   > {
     let res: http.IncomingMessage;
     try {
-      res = await this.#transport.send(
-        {
-          method: 'POST',
-          url: this.#tokenUrl,
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'Accept-Encoding': 'identity',
-            'Api-Key': this.#apiKey,
-          },
-          body: payload,
-          timeouts: { connect: this.#mintTimeoutMs, read: this.#mintTimeoutMs, total: this.#mintTimeoutMs },
+      res = await this.#transport.send({
+        method: 'POST',
+        url: this.#tokenUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Accept-Encoding': 'identity',
+          'Api-Key': this.#apiKey,
         },
-        undefined,
-      );
+        body: payload,
+        timeouts: { connect: this.#mintTimeoutMs, read: this.#mintTimeoutMs, total: this.#mintTimeoutMs },
+      });
     } catch (e) {
       if (e instanceof RequestSetupError) return { fatal: `could not be sent (${e.code})` };
       if (e instanceof Error) return { failure: e };
@@ -369,7 +366,7 @@ export class TokenProvider {
     if (status === 429) {
       const parsed = retryAfterSeconds(retryAfter);
       const seconds = parsed === null ? 1 : Math.max(1, parsed);
-      RATE_LIMITS.set(this.#rateLimitKey(), this.#now() + spread(seconds, this.#random) * 1000);
+      AUTH_STATE.rateLimits.set(this.#rateLimitKey(), this.#now() + spread(seconds, this.#random) * 1000);
       throw new DidwwAuthError({
         kind: AuthErrorKind.RATE_LIMITED,
         status,
@@ -420,11 +417,11 @@ export class TokenProvider {
 
   #raiseIfRateLimited(): void {
     const key = this.#rateLimitKey();
-    const until = RATE_LIMITS.get(key);
+    const until = AUTH_STATE.rateLimits.get(key);
     if (until === undefined) return;
     const remaining = until - this.#now();
     if (remaining <= 0) {
-      RATE_LIMITS.delete(key);
+      AUTH_STATE.rateLimits.delete(key);
       return;
     }
     throw new DidwwAuthError({
@@ -461,7 +458,7 @@ function jsonObject(body: Buffer): Record<string, unknown> {
 }
 
 function text(fields: Record<string, unknown>, name: string): string | null {
-  const value = Object.prototype.hasOwnProperty.call(fields, name) ? fields[name] : undefined;
+  const value = Object.hasOwn(fields, name) ? fields[name] : undefined;
   return typeof value === 'string' ? value : null;
 }
 

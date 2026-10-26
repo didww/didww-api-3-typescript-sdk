@@ -1,8 +1,7 @@
 import { inspect } from 'node:util';
 
 const FILTERED = '[FILTERED]';
-const MINTED_AT_RE =
-  /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,9})?(?:Z|[+-][0-9]{2}:[0-9]{2})$/;
+const MINTED_AT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?(?:Z|[+-]\d{2}:\d{2})$/;
 
 /** Marks every `AccessToken`, so that a token built by another copy of the SDK (ESM and CJS) is recognised. */
 export const ACCESS_TOKEN_BRAND: unique symbol = Symbol.for('@didww/sdk.AccessToken');

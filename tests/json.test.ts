@@ -163,7 +163,7 @@ describe('JsonNumber', () => {
       Object.defineProperties({}, { text: { enumerable: true, ...text }, [brand]: { value: true } });
     // As the constructor of another copy builds it.
     const other = Object.freeze(branded({ value: '1.10', writable: true, configurable: true }));
-    expect(other instanceof JsonNumber).toBe(true);
+    expect(other).toBeInstanceOf(JsonNumber);
     expect(stringifyJson({ a: other })).toBe('{"a":1.10}');
 
     const forged = [
@@ -173,7 +173,7 @@ describe('JsonNumber', () => {
       branded({ get: () => '1.10' }),
     ];
     for (const value of forged) {
-      expect(value instanceof JsonNumber).toBe(false);
+      expect(value).not.toBeInstanceOf(JsonNumber);
       expect(stringifyJson({ a: value })).toBe(JSON.stringify({ a: value }));
     }
   });

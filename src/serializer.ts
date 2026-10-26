@@ -51,7 +51,10 @@ const keyOf = (resource: ResourceObject) => `${resource.type}#${resource.id}`;
 
 function childOf(node: IncludeTree, name: string): IncludeTree {
   let child = node.get(name);
-  if (!child) node.set(name, (child = new Map()));
+  if (!child) {
+    child = new Map();
+    node.set(name, child);
+  }
   return child;
 }
 
@@ -59,8 +62,9 @@ function addIncludePaths(tree: IncludeTree, include: string | readonly string[] 
   const paths = typeof include === 'string' ? [include] : (include ?? []);
   for (const path of paths.flatMap((p) => p.split(','))) {
     const names = path.split('.').map((name) => snake(name.trim()));
-    if (names.some((name) => name === '')) continue;
-    names.reduce(childOf, tree);
+    if (names.includes('')) continue;
+    let node = tree;
+    for (const name of names) node = childOf(node, name);
   }
 }
 
@@ -87,24 +91,38 @@ function addDocumentPaths(
   while (level.length > 0) {
     const next: Array<[IncludeTree, ReadonlySet<string>]> = [];
     for (const [node, keys] of level) {
-      const reached = new Map<string, Set<string>>();
-      for (const key of keys) {
-        for (const [name, relationship] of Object.entries(relationshipsOf.get(key) ?? {})) {
-          for (const target of linkageOf(relationship)) {
-            if (!relationshipsOf.has(keyOf(target))) continue;
-            let targets = reached.get(name);
-            if (!targets) reached.set(name, (targets = new Set()));
-            targets.add(keyOf(target));
-          }
-        }
-      }
-      for (const [name, targets] of reached) {
+      for (const [name, targets] of reachedFrom(keys, relationshipsOf)) {
         if ([...targets].some((key) => !claimed.has(key))) next.push([childOf(node, name), targets]);
       }
     }
     for (const [, targets] of next) for (const key of targets) claimed.add(key);
     level = next;
   }
+}
+
+// The resources of the document that the relationships of `keys` reach, by relationship name.
+function reachedFrom(
+  keys: ReadonlySet<string>,
+  relationshipsOf: ReadonlyMap<string, Record<string, unknown>>,
+): Map<string, Set<string>> {
+  const reached = new Map<string, Set<string>>();
+  for (const key of keys) {
+    for (const [name, relationship] of Object.entries(relationshipsOf.get(key) ?? {})) {
+      for (const target of linkageOf(relationship)) {
+        if (relationshipsOf.has(keyOf(target))) targetsOf(reached, name).add(keyOf(target));
+      }
+    }
+  }
+  return reached;
+}
+
+function targetsOf(reached: Map<string, Set<string>>, name: string): Set<string> {
+  let targets = reached.get(name);
+  if (!targets) {
+    targets = new Set();
+    reached.set(name, targets);
+  }
+  return targets;
 }
 
 // Builds the read result of a JSON:API document from its resource objects, as
@@ -129,8 +147,7 @@ class ReadBuilder {
 
   resource(value: unknown, node: IncludeTree): unknown {
     if (!isPlainObject(value)) return readValue(value);
-    let built = this.built.get(node);
-    if (!built) this.built.set(node, (built = new Map()));
+    const built = this.builtAt(node);
     const cached = built.get(value);
     if (cached) return cached;
     const key = isResourceObject(value) ? keyOf(value) : null;
@@ -142,14 +159,29 @@ class ReadBuilder {
     };
     for (const [k, v] of Object.entries(value)) if (k !== 'attributes' && k !== 'relationships') read(k, v);
     const relationships = (key !== null && this.relationshipsOf.get(key)) || value.relationships;
-    if (isPlainObject(relationships)) {
-      for (const [k, v] of Object.entries(relationships)) {
-        if (isPlainObject(v)) result[camel(k)] = this.relationship(v, node.get(k));
-      }
-    }
+    if (isPlainObject(relationships)) this.readRelationships(relationships, node, result);
     if (isPlainObject(value.attributes)) for (const [k, v] of Object.entries(value.attributes)) read(k, v);
     built.set(value, result);
     return result;
+  }
+
+  private builtAt(node: IncludeTree): Map<object, Record<string, unknown>> {
+    let built = this.built.get(node);
+    if (!built) {
+      built = new Map();
+      this.built.set(node, built);
+    }
+    return built;
+  }
+
+  private readRelationships(
+    relationships: Record<string, unknown>,
+    node: IncludeTree,
+    result: Record<string, unknown>,
+  ): void {
+    for (const [k, v] of Object.entries(relationships)) {
+      if (isPlainObject(v)) result[camel(k)] = this.relationship(v, node.get(k));
+    }
   }
 
   private relationship(relationship: Record<string, unknown>, node: IncludeTree | undefined): unknown {

@@ -71,8 +71,7 @@ export function readPriceFile(source: PriceFileSource): AsyncGenerator<PriceFile
 
 // An abort of `signal` tears the streams down and ends the rows without an error, also while waiting for data.
 async function* rows(source: PriceFileSource, signal?: AbortSignal): AsyncGenerator<PriceFileRow, void, undefined> {
-  const input =
-    typeof source === 'string' ? createReadStream(source) : source instanceof Uint8Array ? [source] : source;
+  const input = inputOf(source);
   const gunzip = zlib.createGunzip();
   // Stops the feeding when the rows end without completing, also after padding has ended gunzip early.
   const stop = new AbortController();
@@ -172,4 +171,12 @@ export class PriceFileReader implements AsyncIterable<PriceFileRow> {
   }
 }
 
-async function* empty(): AsyncGenerator<PriceFileRow, void, undefined> {}
+async function* empty(): AsyncGenerator<PriceFileRow, void, undefined> {
+  // The rows of a closed reader: none.
+}
+
+function inputOf(source: PriceFileSource) {
+  if (typeof source === 'string') return createReadStream(source);
+  if (source instanceof Uint8Array) return [source];
+  return source;
+}

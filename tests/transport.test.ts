@@ -239,7 +239,7 @@ describe('responses', () => {
     const error = (await failure(stubClient(s).balance().find())) as DidwwApiError;
     expect(error.status).toBe(500);
     expect(error.errors).toEqual([]);
-    expect((error.body as string).length).toBe(1 << 20);
+    expect(error.body as string).toHaveLength(1 << 20);
   });
 
   it('reads an error body within the read timeout', async () => {

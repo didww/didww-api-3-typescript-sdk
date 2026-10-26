@@ -54,67 +54,75 @@ export class CsvParser {
     while (i < n) {
       switch (this.#state) {
         case FIELD_START:
-          if (text.charCodeAt(i) === QUOTE) {
-            this.#state = QUOTED;
-            this.#empty = false;
-            i++;
-          } else {
-            this.#state = UNQUOTED;
-          }
+          i = this.#fieldStart(text, i);
           break;
-        case UNQUOTED: {
-          UNQUOTED_STOP.lastIndex = i;
-          const m = UNQUOTED_STOP.exec(text);
-          const end = m === null ? n : m.index;
-          if (end > i) this.#append(text.slice(i, end));
-          if (m === null) {
-            i = n;
-            break;
-          }
-          const c = text.charCodeAt(end);
-          i = end + 1;
-          if (c === COMMA) {
-            this.#endField();
-          } else if (c === QUOTE) {
-            throw this.#error('a quote inside an unquoted field');
-          } else {
-            i = this.#endRecord(text, i, c, out);
-          }
+        case UNQUOTED:
+          i = this.#unquoted(text, i, out);
           break;
-        }
-        case QUOTED: {
-          const q = text.indexOf('"', i);
-          const end = q === -1 ? n : q;
-          if (end > i) {
-            const part = text.slice(i, end);
-            this.#append(part);
-            for (let at = part.indexOf('\n'); at !== -1; at = part.indexOf('\n', at + 1)) this.#line++;
-          }
-          if (q === -1) {
-            i = n;
-          } else {
-            this.#state = QUOTE_IN_QUOTED;
-            i = q + 1;
-          }
+        case QUOTED:
+          i = this.#quoted(text, i);
           break;
-        }
-        case QUOTE_IN_QUOTED: {
-          const c = text.charCodeAt(i);
-          i++;
-          if (c === QUOTE) {
-            this.#append('"');
-            this.#state = QUOTED;
-          } else if (c === COMMA) {
-            this.#endField();
-          } else if (c === CR || c === LF) {
-            i = this.#endRecord(text, i, c, out);
-          } else {
-            throw this.#error('text after a closing quote');
-          }
+        case QUOTE_IN_QUOTED:
+          i = this.#quoteInQuoted(text, i, out);
           break;
-        }
       }
     }
+  }
+
+  // Each state step parses from `i` and returns the position to go on from.
+
+  #fieldStart(text: string, i: number): number {
+    if (text.charCodeAt(i) === QUOTE) {
+      this.#state = QUOTED;
+      this.#empty = false;
+      return i + 1;
+    }
+    this.#state = UNQUOTED;
+    return i;
+  }
+
+  #unquoted(text: string, i: number, out: CsvRecord[]): number {
+    const n = text.length;
+    UNQUOTED_STOP.lastIndex = i;
+    const m = UNQUOTED_STOP.exec(text);
+    const end = m === null ? n : m.index;
+    if (end > i) this.#append(text.slice(i, end));
+    if (m === null) return n;
+    const c = text.charCodeAt(end);
+    if (c === COMMA) {
+      this.#endField();
+      return end + 1;
+    }
+    if (c === QUOTE) throw this.#error('a quote inside an unquoted field');
+    return this.#endRecord(text, end + 1, c, out);
+  }
+
+  #quoted(text: string, i: number): number {
+    const q = text.indexOf('"', i);
+    const end = q === -1 ? text.length : q;
+    if (end > i) {
+      const part = text.slice(i, end);
+      this.#append(part);
+      for (let at = part.indexOf('\n'); at !== -1; at = part.indexOf('\n', at + 1)) this.#line++;
+    }
+    if (q === -1) return text.length;
+    this.#state = QUOTE_IN_QUOTED;
+    return q + 1;
+  }
+
+  #quoteInQuoted(text: string, i: number, out: CsvRecord[]): number {
+    const c = text.charCodeAt(i);
+    if (c === QUOTE) {
+      this.#append('"');
+      this.#state = QUOTED;
+      return i + 1;
+    }
+    if (c === COMMA) {
+      this.#endField();
+      return i + 1;
+    }
+    if (c === CR || c === LF) return this.#endRecord(text, i + 1, c, out);
+    throw this.#error('text after a closing quote');
   }
 
   /** Ends the input; appends the last record, if any, to `out`. */

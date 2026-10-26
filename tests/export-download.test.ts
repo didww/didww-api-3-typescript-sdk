@@ -346,9 +346,11 @@ describe('export failures', () => {
     const body = Buffer.alloc(2 << 20, 7);
     const s = await startStub(fileReply(body));
     let first = true;
+    let written = 0;
     const slow = new Writable({
       highWaterMark: 1024,
-      write(_chunk, _encoding, callback) {
+      write(chunk: Buffer, _encoding, callback) {
+        written += chunk.length;
         if (first) {
           first = false;
           setTimeout(callback, 400);
@@ -358,6 +360,7 @@ describe('export failures', () => {
       },
     });
     await stubClient(s, { readTimeout: 150 }).downloadExport(`${s.url}${PATH}`, slow);
+    expect(written).toBe(body.length);
   });
 });
 

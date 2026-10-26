@@ -3,8 +3,10 @@ import { createReadStream, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { PassThrough, Readable } from 'node:stream';
-import { gzipSync } from 'node:zlib';
+import { once } from 'node:events';
+import { createGunzip, gzipSync } from 'node:zlib';
 import { DidwwClientError } from '../src/errors.js';
+import { feedGunzip } from '../src/gzip.js';
 import { CsvParser, MAX_FIELD_LENGTH, MAX_FIELDS, MAX_RECORD_LENGTH, type CsvRecord } from '../src/prices/csv.js';
 import { PriceFileReader, readPriceFile, type PriceFileRow } from '../src/prices/price-file-reader.js';
 import { paddedGzipInThreeParts } from './helpers/gzip.js';
@@ -545,6 +547,27 @@ describe('PriceFileReader', () => {
     const rows: PriceFileRow[] = [];
     for await (const row of reader) rows.push(row);
     expect(rows).toEqual([]);
+  });
+});
+
+describe('feedGunzip', () => {
+  it('rejects with an input error after the output has ended without an unheard error event', async () => {
+    let consumed!: () => void;
+    const outputRead = new Promise<void>((resolve) => (consumed = resolve));
+    async function* input() {
+      yield Buffer.concat([gzipSync('a,b\n1,2\n'), Buffer.alloc(1)]);
+      await outputRead;
+      throw new Error('cut short');
+    }
+    const gunzip = createGunzip();
+    const feeding = feedGunzip(input(), gunzip);
+    feeding.catch(() => undefined);
+    gunzip.on('data', () => undefined);
+    await once(gunzip, 'end');
+    expect(gunzip.listenerCount('error')).toBe(0);
+    consumed();
+    await expect(feeding).rejects.toThrow('cut short');
+    expect(gunzip.destroyed).toBe(true);
   });
 });
 

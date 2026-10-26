@@ -85,9 +85,8 @@ class ParseError extends Error {}
 
 type Convert = (value: unknown) => unknown;
 
-const DECIMAL = /^[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/;
-const DATE_TIME =
-  /^([0-9]{4})-([0-9]{2})-([0-9]{2})[Tt]([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.[0-9]+)?(?:[Zz]|[+-]([0-9]{2}):([0-9]{2}))$/;
+const DECIMAL = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
+const DATE_TIME = /^(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:[Zz]|[+-](\d{2}):(\d{2}))$/;
 
 const string: Convert = (value) => {
   if (typeof value !== 'string') throw new ParseError('is not a string');
@@ -214,21 +213,22 @@ function parseRow(item: unknown, index: number, fields: RowFields): Readonly<Rec
   const attributes = item.attributes;
   if (!isObject(attributes)) throw fail(`data[${index}].attributes is not an object`);
   const row: Record<string, unknown> = { id };
-  for (const f of fields) {
-    const value = Object.prototype.hasOwnProperty.call(attributes, f.attribute) ? attributes[f.attribute] : undefined;
-    if (value === null || value === undefined) {
-      if (!f.nullable) throw fail(`data[${index}].attributes.${f.attribute} is missing`);
-      row[f.property] = null;
-      continue;
-    }
-    try {
-      row[f.property] = f.convert(value);
-    } catch (e) {
-      if (!(e instanceof ParseError)) throw e;
-      throw fail(`data[${index}].attributes.${f.attribute} ${e.message}`);
-    }
-  }
+  for (const f of fields) row[f.property] = parseField(attributes, index, f);
   return Object.freeze(row);
+}
+
+function parseField(attributes: Record<string, unknown>, index: number, f: Field): unknown {
+  const value = Object.hasOwn(attributes, f.attribute) ? attributes[f.attribute] : undefined;
+  if (value === null || value === undefined) {
+    if (!f.nullable) throw fail(`data[${index}].attributes.${f.attribute} is missing`);
+    return null;
+  }
+  try {
+    return f.convert(value);
+  } catch (e) {
+    if (!(e instanceof ParseError)) throw e;
+    throw fail(`data[${index}].attributes.${f.attribute} ${e.message}`);
+  }
 }
 
 function totalRecords(meta: unknown): number {

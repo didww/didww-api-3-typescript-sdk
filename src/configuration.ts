@@ -53,7 +53,7 @@ export const ENVIRONMENT_ENDPOINTS: Readonly<Record<Environment, EnvironmentEndp
 export const MAX_TIMEOUT_MS = 2_147_483_647;
 
 const API_KEY_RE = /^[\x21-\x7e]+$/;
-const API_VERSION_RE = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+const API_VERSION_RE = /^\d{4}-\d{2}-\d{2}$/;
 const SERVICE_URL_RE = /^https?:\/\/[^/@]+(?:\/.*)?$/i;
 
 export function validateApiKey(apiKey: unknown): string {
@@ -110,11 +110,16 @@ export function isServiceUrl(url: unknown): url is string {
 
 export function validateServiceUrl(name: string, url: unknown): string {
   if (!isServiceUrl(url)) {
-    const shown =
-      typeof url === 'string' ? (url.includes('@') ? 'a URL with user info' : JSON.stringify(url)) : typeof url;
-    throw new DidwwClientError(`${name} URL must be an http or https URL without a query or fragment, got ${shown}`);
+    throw new DidwwClientError(
+      `${name} URL must be an http or https URL without a query or fragment, got ${shownUrl(url)}`,
+    );
   }
   return url;
+}
+
+function shownUrl(url: unknown): string {
+  if (typeof url !== 'string') return typeof url;
+  return url.includes('@') ? 'a URL with user info' : JSON.stringify(url);
 }
 
 export function trimTrailingSlash(url: string): string {

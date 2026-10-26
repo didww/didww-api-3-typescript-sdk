@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import http from 'node:http';
 import https from 'node:https';
 import net from 'node:net';
@@ -14,14 +14,20 @@ let testTls: { key: Buffer; cert: Buffer } | null = null;
 
 /** A fresh self-signed certificate for 127.0.0.1, only for tests: clients refuse it. Made on first use, as it needs openssl. */
 export function testTlsCertificate(): { key: Buffer; cert: Buffer } {
-  return (testTls ??= selfSignedCertificate());
+  testTls ??= selfSignedCertificate();
+  return testTls;
 }
 
+// Run from a fixed path, not looked up through PATH.
+const OPENSSL_PATHS = ['/usr/bin/openssl', '/usr/local/bin/openssl', '/opt/homebrew/bin/openssl'];
+
 function selfSignedCertificate(): { key: Buffer; cert: Buffer } {
+  const openssl = OPENSSL_PATHS.find((path) => existsSync(path));
+  if (openssl === undefined) throw new Error(`openssl not found in ${OPENSSL_PATHS.join(', ')}`);
   const dir = mkdtempSync(join(tmpdir(), 'didww-tls-'));
   try {
     execFileSync(
-      'openssl',
+      openssl,
       ['req', '-x509', '-newkey', 'ec', '-pkeyopt', 'ec_paramgen_curve:prime256v1', '-nodes']
         .concat(['-keyout', join(dir, 'key.pem'), '-out', join(dir, 'cert.pem'), '-days', '1'])
         .concat(['-subj', '/CN=127.0.0.1', '-addext', 'subjectAltName=IP:127.0.0.1']),
@@ -50,6 +56,12 @@ export interface CannedReply {
 
 export type Handler = (req: RecordedRequest, res: http.ServerResponse) => void | Promise<void>;
 export type Reply = CannedReply | Handler;
+
+function replyBody(body: CannedReply['body']): Buffer {
+  if (body === undefined) return Buffer.alloc(0);
+  if (Buffer.isBuffer(body)) return body;
+  return Buffer.from(typeof body === 'string' ? body : JSON.stringify(body));
+}
 
 /**
  * A local HTTP(S) server with scripted replies per `METHOD /path`. Replies
@@ -114,12 +126,7 @@ export class StubServer {
       return;
     }
     if (reply.delayMs) await new Promise((r) => setTimeout(r, reply.delayMs));
-    const body =
-      reply.body === undefined
-        ? Buffer.alloc(0)
-        : Buffer.isBuffer(reply.body)
-          ? reply.body
-          : Buffer.from(typeof reply.body === 'string' ? reply.body : JSON.stringify(reply.body));
+    const body = replyBody(reply.body);
     const headers: Record<string, string | string[]> = { 'Content-Length': String(body.length), ...reply.headers };
     if (reply.body !== undefined && typeof reply.body === 'object' && !Buffer.isBuffer(reply.body)) {
       headers['Content-Type'] ??= 'application/json';
@@ -228,6 +235,6 @@ export function stubClient(stub: { url: string }, options: StubClientOptions = {
     smsPricesUrl: `${stub.url}/v3`,
     tokenStore: new MemoryTokenStore(),
     ...rest,
-    [TESTING]: { sleep: async () => undefined, ...hooks },
+    [TESTING]: { sleep: () => Promise.resolve(), ...hooks },
   } as DidwwClientOptions);
 }

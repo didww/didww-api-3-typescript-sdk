@@ -26,6 +26,16 @@ function webIterator(input: WebByteStream): AsyncIterator<Uint8Array> {
   };
 }
 
+function iteratorOf(
+  input: AsyncIterable<Uint8Array> | Iterable<Uint8Array> | WebByteStream,
+): AsyncIterator<Uint8Array> {
+  if (isWebStream(input)) return webIterator(input);
+  if (Symbol.asyncIterator in input) return input[Symbol.asyncIterator]();
+  return (async function* () {
+    yield* input;
+  })();
+}
+
 /**
  * Writes `input` into `gunzip`, one chunk at a time, and ends it. zlib stops
  * at a zero byte after a gzip member and takes the rest as padding; from then
@@ -36,7 +46,8 @@ function webIterator(input: WebByteStream): AsyncIterator<Uint8Array> {
  * it alongside the reading of `gunzip`: a write waits until its output has
  * been read, or until `gunzip` ends or closes.
  *
- * An error of `input` destroys `gunzip` with it and rejects. When the reader
+ * An error of `input` destroys `gunzip` with it (without it once the readable
+ * side of `gunzip` has ended, when nobody may listen any more) and rejects. When the reader
  * destroys `gunzip` before reading its end, the feeding stops: `input` is no
  * longer read, its iterator is returned and a destroyable `input` is
  * destroyed. A web `ReadableStream` is read through a reader and cancelled,
@@ -49,13 +60,7 @@ export function feedGunzip(
   gunzip: zlib.Gunzip,
   signal?: AbortSignal,
 ): Promise<void> {
-  const iterator = isWebStream(input)
-    ? webIterator(input)
-    : Symbol.asyncIterator in input
-      ? input[Symbol.asyncIterator]()
-      : (async function* () {
-          yield* input;
-        })();
+  const iterator = iteratorOf(input);
   let settled = false;
   const releaseInput = () => {
     if (settled) return;
@@ -64,9 +69,17 @@ export function feedGunzip(
       .then(() => iterator.return?.())
       .catch(() => undefined);
   };
+  // Once the readable side has ended nobody may listen for an 'error' any
+  // more, so `gunzip` is then closed without one; the promise carries it.
+  const fail = (error: Error) => {
+    if (gunzip.readableEnded) gunzip.destroy();
+    else gunzip.destroy(error);
+  };
   const onClose = () => {
     if (!gunzip.readableEnded) releaseInput();
   };
+  // Destroyed before its readable side ended.
+  const dropped = () => gunzip.destroyed && !gunzip.readableEnded;
 
   // Settles on the write callback, or on 'end' or 'close' of `gunzip`: once
   // its readable side has ended, Node 18 may never call the write callback.
@@ -89,16 +102,16 @@ export function feedGunzip(
     try {
       for await (const chunk of { [Symbol.asyncIterator]: () => iterator }) {
         if (signal?.aborted) return;
-        if (gunzip.destroyed && !gunzip.readableEnded) return;
+        if (dropped()) return;
         if (gunzip.readableEnded) consuming = false;
         if (!consuming) continue;
         fed += chunk.length;
         await write(chunk);
-        if (gunzip.destroyed && !gunzip.readableEnded) return;
+        if (dropped()) return;
         if (gunzip.readableEnded || gunzip.bytesWritten < fed) consuming = false;
       }
     } catch (e) {
-      gunzip.destroy(e as Error);
+      fail(e as Error);
       throw e;
     }
     if (!gunzip.destroyed) gunzip.end();
@@ -106,7 +119,7 @@ export function feedGunzip(
 
   return new Promise<void>((resolve, reject) => {
     const onAbort = () => {
-      gunzip.destroy(signal!.reason as Error);
+      fail(signal!.reason as Error);
       releaseInput();
       reject(signal!.reason);
     };

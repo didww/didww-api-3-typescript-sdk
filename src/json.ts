@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto';
 import { inspect } from 'node:util';
 import { DidwwClientError } from './errors.js';
 
-const NUMBER_RE = /^-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$/;
+const NUMBER_RE = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/;
 
 // Marks a JsonNumber of any copy of the SDK (an ESM and a CJS build loaded together).
 const JSON_NUMBER_BRAND = Symbol.for('@didww/sdk.JsonNumber');
@@ -40,8 +40,7 @@ export class JsonNumber {
     if ((value as { [JSON_NUMBER_BRAND]?: unknown })[JSON_NUMBER_BRAND] !== true) return false;
     const text = Object.getOwnPropertyDescriptor(value, 'text');
     return (
-      text !== undefined &&
-      text.writable === false &&
+      text?.writable === false &&
       text.configurable === false &&
       typeof text.value === 'string' &&
       NUMBER_RE.test(text.value)
@@ -77,7 +76,7 @@ export class JsonNumber {
 
 const MAX_DEPTH = 512;
 const WS = /[ \t\n\r]*/y;
-const NUMBER = /-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/y;
+const NUMBER = /-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/y;
 
 class Parser {
   pos = 0;
@@ -242,7 +241,7 @@ export function stringifyJson(value: unknown): string {
     return v;
   });
   if (raws.length === 0) return out;
-  return out.replace(new RegExp(`"\\\\u0000${tag}:(\\d+)\\\\u0000"`, 'g'), (_, i: string) => raws[Number(i)]);
+  return out.replace(new RegExp(String.raw`"\\u0000${tag}:(\d+)\\u0000"`, 'g'), (_, i: string) => raws[Number(i)]);
 }
 
 export function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -257,7 +256,7 @@ export function isPlainObject(value: unknown): value is Record<string, unknown> 
  */
 export function cloneJson<T>(value: T): T {
   if (Array.isArray(value)) return value.map(cloneJson) as T;
-  if (value instanceof Date) return new Date(value.getTime()) as T;
+  if (value instanceof Date) return new Date(value) as T;
   if (isPlainObject(value)) {
     const out: Record<string, unknown> = {};
     for (const key of Object.keys(value)) defineOwn(out, key, cloneJson(value[key]));
