@@ -13,10 +13,13 @@ import {
   didOrderItem,
   availableDidOrderItem,
   Codec,
+  IceMode,
   TransportProtocol,
   DefaultDstAction,
   OnCliMismatchAction,
+  VoiceOutCodec,
   ExportType,
+  ExportServiceType,
   IdentityType,
   Encrypt,
   calculateFingerprint,
@@ -264,7 +267,8 @@ await test('Create SIP trunk', async () => {
     configuration: sipConfiguration({
       host: 'sip.example.com',
       port: 5060,
-      codecIds: [Codec.PCMU, Codec.PCMA],
+      codecs: [Codec.PCMA, Codec.PCMU, Codec.TELEPHONE_EVENT], // in priority order
+      iceMode: IceMode.ACCEPT,
       transportProtocolId: TransportProtocol.UDP,
     }),
     pop: Pop.FRA,
@@ -336,8 +340,10 @@ await test('Create voice out trunk', async () => {
     }),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
+    codecs: [VoiceOutCodec.OPUS, VoiceOutCodec.PCMA, VoiceOutCodec.TELEPHONE_EVENT],
   });
   assert(voTrunk.data.id !== undefined, 'should have id');
+  assert.deepStrictEqual(voTrunk.data.codecs, ['opus', 'pcma', 'telephone_event'], 'codecs should match');
   console.log(`    created voice out trunk: ${voTrunk.data.id}`);
   // Clean up
   await client.voiceOutTrunks().remove(voTrunk.data.id);
@@ -513,7 +519,7 @@ await test('Create SMS-Out export', async () => {
   const day = (d: Date) => d.toISOString().slice(0, 10);
   const exp = await client.exports().create({
     exportType: ExportType.SMS_OUT,
-    filters: { from: `${day(yesterday)} 00:00:00`, to: `${day(today)} 00:00:00`, serviceType: 'a2p' },
+    filters: { from: `${day(yesterday)} 00:00:00`, to: `${day(today)} 00:00:00`, serviceType: ExportServiceType.A2P },
   });
   assert(exp.data.exportType === ExportType.SMS_OUT, 'should be an sms_out export');
   console.log(`    created SMS-Out export: ${exp.data.id}, status=${exp.data.status}`);
@@ -661,6 +667,7 @@ await test('DidwwApiError on invalid request', async () => {
       assert(typeof error.status === 'number', 'should have status');
       assert(Array.isArray(error.errors), 'should have errors array');
       console.log(`    caught DidwwApiError: status=${error.status}, errors=${error.errors.length}`);
+      if (error.status === 429) console.log(`    rate limited, retry after ${error.retryAfter} s`);
       for (const err of error.errors) {
         console.log(`      ${err.detail} (code: ${err.code})`);
       }

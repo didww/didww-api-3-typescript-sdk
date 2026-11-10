@@ -21,9 +21,15 @@ describe('EmergencyRequirements', () => {
     expect(result.data[0].meta).toBeDefined();
     expect(result.data[0].meta!.setupPrice).toBe('0.0');
     expect(result.data[0].meta!.monthlyPrice).toBe('1.5');
-    expect(result.data[0].addressMandatoryFields).toBeInstanceOf(Array);
-    expect(result.data[0].personalMandatoryFields).toBeInstanceOf(Array);
-    expect(result.data[0].businessMandatoryFields).toBeInstanceOf(Array);
+    expect(result.data[0].addressMandatoryFields).toEqual(['area']);
+    expect(result.data[0].personalMandatoryFields).toEqual([
+      'birth_date',
+      'country',
+      'id_number',
+      'personal_tax_id',
+      'contact_email',
+    ]);
+    expect(result.data[0].businessMandatoryFields).toEqual([]);
   });
 
   it('finds an emergency requirement', async () => {
@@ -35,6 +41,16 @@ describe('EmergencyRequirements', () => {
     expect(result.data.personalAreaLevel).toBeNull();
     expect(result.data.businessAreaLevel).toBe('world_wide');
     expect(result.data.requirementRestrictionMessage).toBeNull();
+    expect(result.data.personalMandatoryFields).toEqual([]);
+    expect(result.data.businessMandatoryFields).toEqual([
+      'id_number',
+      'tax_id',
+      'country',
+      'company_reg_number',
+      'personal_tax_id',
+      'contact_email',
+      'birth_date',
+    ]);
     expect(result.data.numberType).toBe(NumberType.LOCAL);
     expect(result.data.meta).toBeDefined();
     expect(result.data.meta!.setupPrice).toBeNull();

@@ -8,7 +8,9 @@ import {
   DidwwClient,
   Environment,
   DefaultDstAction,
+  IceMode,
   OnCliMismatchAction,
+  VoiceOutCodec,
   credentialsAndIpAuthenticationMethod,
   type CredentialsAndIpAuthenticationMethod,
 } from '../src/index.js';
@@ -31,6 +33,8 @@ async function main() {
     } as Omit<CredentialsAndIpAuthenticationMethod, 'type'>),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
+    // In priority order; left out, the trunk offers pcma, pcmu and telephone_event
+    codecs: [VoiceOutCodec.OPUS, VoiceOutCodec.PCMA, VoiceOutCodec.TELEPHONE_EVENT],
     externalReferenceId: `ts-example-${suffix}`,
   });
   console.log(`Created voice out trunk: ${trunk.data.id}`);
@@ -40,6 +44,10 @@ async function main() {
   console.log(`  externalReferenceId: ${trunk.data.externalReferenceId}`);
   console.log(`  emergencyEnableAll: ${trunk.data.emergencyEnableAll}`);
   console.log(`  rtpTimeout: ${trunk.data.rtpTimeout}`);
+  console.log(`  codecs: ${trunk.data.codecs.join(', ')}`);
+  console.log(
+    `  ICE / RTCP mux / RTCP feedback: ${trunk.data.iceMode} / ${trunk.data.rtcpMuxMode} / ${trunk.data.rtcpFeedbackMode}`,
+  );
 
   // List voice out trunks
   const trunks = await client.voiceOutTrunks().list();
@@ -52,8 +60,9 @@ async function main() {
   const updated = await client.voiceOutTrunks().update({
     id: trunk.data.id,
     name: 'Updated Outbound Trunk',
+    iceMode: IceMode.DISABLED,
   });
-  console.log(`\nUpdated name: ${updated.data.name}`);
+  console.log(`\nUpdated name: ${updated.data.name}, iceMode: ${updated.data.iceMode}`);
 
   // Delete
   await client.voiceOutTrunks().remove(trunk.data.id);

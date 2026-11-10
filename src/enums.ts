@@ -20,10 +20,16 @@ export enum ExportType {
 
 /** Values of the `trunkType` filter of an `sms_in` export. */
 export enum ExportTrunkType {
-  SMPP_SMSC = 'SMPP SMSC',
-  SMPP_ESME = 'SMPP ESME',
-  EMAIL = 'Email',
-  HTTP_IN = 'HTTP IN',
+  SMPP_SMSC = 'smpp_smsc',
+  SMPP_ESME = 'smpp_esme',
+  SMS_TO_EMAIL = 'sms_to_email',
+  HTTP_IN = 'http_in',
+}
+
+/** Values of the `serviceType` filter of an `sms_out` export. */
+export enum ExportServiceType {
+  A2P = 'a2p',
+  P2P = 'p2p',
 }
 
 export enum ExportStatus {
@@ -105,6 +111,60 @@ export enum Feature {
   A2P = 'a2p',
   EMERGENCY = 'emergency',
   CNAM_OUT = 'cnam_out',
+}
+
+/** Codecs of the SIP configuration of a Voice IN trunk (`SipConfiguration.codecs`). */
+export enum Codec {
+  TELEPHONE_EVENT = 'telephone_event',
+  G723 = 'g723',
+  G729 = 'g729',
+  PCMU = 'pcmu',
+  PCMA = 'pcma',
+  SPEEX = 'speex',
+  GSM = 'gsm',
+  G726_32 = 'g726_32',
+  G721 = 'g721',
+  G726_24 = 'g726_24',
+  G726_40 = 'g726_40',
+  G726_16 = 'g726_16',
+  L16 = 'l16',
+  AMR = 'amr',
+  AMR_WB = 'amr_wb',
+}
+
+/** Codecs of a Voice OUT trunk (`VoiceOutTrunk.codecs`); not the same set as `Codec`. */
+export enum VoiceOutCodec {
+  TELEPHONE_EVENT = 'telephone_event',
+  G723 = 'g723',
+  G729 = 'g729',
+  PCMU = 'pcmu',
+  PCMA = 'pcma',
+  GSM = 'gsm',
+  G722 = 'g722',
+  OPUS = 'opus',
+  AMR = 'amr',
+  AMR_WB = 'amr_wb',
+}
+
+/** ICE (Interactive Connectivity Establishment) on the calls of a trunk. */
+export enum IceMode {
+  DISABLED = 'disabled',
+  ACCEPT = 'accept',
+  INITIATE = 'initiate',
+}
+
+/** RTP and RTCP multiplexed on one port on the calls of a trunk. */
+export enum RtcpMuxMode {
+  DISABLED = 'disabled',
+  ACCEPT = 'accept',
+  INITIATE = 'initiate',
+}
+
+/** RTCP feedback (AVPF) on the calls of a trunk. */
+export enum RtcpFeedbackMode {
+  DISABLED = 'disabled',
+  ACCEPT = 'accept',
+  INITIATE = 'initiate',
 }
 
 export enum StirShakenMode {
@@ -192,22 +252,6 @@ export enum ReroutingDisconnectCode {
   RINGING_TIMEOUT = 1505,
 }
 
-export enum Codec {
-  TELEPHONE_EVENT = 6,
-  G723 = 7,
-  G729 = 8,
-  PCMU = 9,
-  PCMA = 10,
-  SPEEX = 12,
-  GSM = 13,
-  G726_32 = 14,
-  G721 = 15,
-  G726_24 = 16,
-  G726_40 = 17,
-  G726_16 = 18,
-  L16 = 19,
-}
-
 export enum DiversionRelayPolicy {
   NONE = 'none',
   AS_IS = 'as_is',
@@ -244,13 +288,13 @@ export enum NumberType {
 
 /** Point of presence of a Voice IN trunk. */
 export enum Pop {
-  NYC = 'NYC',
-  FRA = 'FRA',
-  LAC = 'LAC',
-  MIA = 'MIA',
-  SG = 'SG',
-  HK = 'HK',
-  AMS = 'AMS',
+  NYC = 'nyc',
+  FRA = 'fra',
+  LAC = 'lac',
+  MIA = 'mia',
+  SG = 'sg',
+  HK = 'hk',
+  AMS = 'ams',
 }
 
 export enum SmsTrunkConfigurationType {

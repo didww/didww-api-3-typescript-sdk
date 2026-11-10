@@ -260,6 +260,7 @@ describe('DidwwApiError', () => {
     const error = new DidwwApiError(500, {});
     expect(error.errors).toEqual([]);
     expect(error.message).toBe('API error 500');
+    expect(error.retryAfter).toBeNull();
   });
 
   it('ignores error entries that are not objects', () => {

@@ -1,5 +1,5 @@
 import { defineResource } from './base.js';
-import type { ExportType, ExportStatus, ExportTrunkType, CallbackMethod } from '../enums.js';
+import type { ExportType, ExportStatus, ExportTrunkType, ExportServiceType, CallbackMethod } from '../enums.js';
 
 /** Export criteria. Any key the export type does not accept is rejected by the API. */
 export interface ExportFilters {
@@ -31,7 +31,10 @@ export interface ExportFilters {
   destinationAddressEq?: string;
   /** SMS: recipient address contains this value. */
   destinationAddressCont?: string;
-  /** SMS: message state (`Success`, `Failed`, `Queued`, and for sms_out also `Routing Error`, `In Progress`). */
+  /**
+   * SMS: message state: `success`, `failed` or `queued` for sms_in; `routing_error`,
+   * `in_progress`, `queued`, `failed` or `success` for sms_out.
+   */
   status?: string;
   /** SMS: message id. */
   smsId?: string;
@@ -39,8 +42,8 @@ export interface ExportFilters {
   'smsTrunk.id'?: string | string[];
   /** sms_in: trunk type, or any of these. */
   trunkType?: ExportTrunkType | ExportTrunkType[];
-  /** sms_out: `a2p` or `p2p` (any case). */
-  serviceType?: string;
+  /** sms_out: `a2p` or `p2p`. */
+  serviceType?: ExportServiceType;
   /** sms_out: one Sender ID verification, or any of these. */
   'senderIdVerification.id'?: string | string[];
   /** Read-only: present on exports created with an earlier API version. */

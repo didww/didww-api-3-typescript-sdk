@@ -55,7 +55,7 @@ DIDWW_API_KEY=your_api_key npx tsx examples/prices-lookup.ts 18005550123
 | [`identity-address-proofs.ts`](identity-address-proofs.ts) | Lists identities (birth country, company website), creates an identity and an address, deletes them. |
 | [`address-verifications.ts`](address-verifications.ts) | Lists address verifications with reject_comment / external_reference_id. |
 | [`voice-in-trunk-groups.ts`](voice-in-trunk-groups.ts) | CRUD for trunk groups with trunk relationships. |
-| [`voice-out-trunks.ts`](voice-out-trunks.ts) | CRUD for voice out trunks with polymorphic authentication_method. Requires account configuration. |
+| [`voice-out-trunks.ts`](voice-out-trunks.ts) | CRUD for voice out trunks with polymorphic authentication_method, codecs in priority order and the ICE mode. Requires account configuration. |
 | [`did-trunk-assignment.ts`](did-trunk-assignment.ts) | Demonstrates exclusive trunk/trunk group assignment on DIDs. |
 | [`did-reservations.ts`](did-reservations.ts) | Creates, lists, finds and deletes DID reservations. |
 | [`exports.ts`](exports.ts) | Creates a CDR export with from/to datetime range filters (UTC) and lists exports. |

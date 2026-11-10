@@ -19,8 +19,10 @@ describe('AddressRequirements', () => {
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('address_requirements');
     expect(result.data[0].personalAreaLevel).toBeNull();
-    expect(result.data[0].businessMandatoryFields).toBeNull();
-    expect(result.data[2].personalMandatoryFields).toBeNull();
+    expect(result.data[0].personalMandatoryFields).toEqual(['country']);
+    expect(result.data[0].businessMandatoryFields).toEqual([]);
+    expect(result.data[2].personalMandatoryFields).toEqual([]);
+    expect(result.data[2].businessMandatoryFields).toEqual(['country']);
     expect(result.data[4].businessAreaLevel).toBeNull();
   });
 
@@ -29,6 +31,14 @@ describe('AddressRequirements', () => {
     const result = await client.addressRequirements().find('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.id).toBe('25d12afe-1ec6-4fe3-9621-b250dd1fb959');
     expect(result.data.identityType).toBe('any');
+    expect(result.data.personalMandatoryFields).toEqual(['birth_date', 'country', 'personal_tax_id']);
+    expect(result.data.businessMandatoryFields).toEqual([
+      'id_number',
+      'tax_id',
+      'country',
+      'company_reg_number',
+      'personal_tax_id',
+    ]);
     const country = result.data.country;
     expect(country).toBeDefined();
     expect(isIncluded(country!)).toBe(true);
@@ -44,6 +54,7 @@ describe('AddressRequirements', () => {
     expect(result.data.personalProofTypes!.length).toBe(1);
     expect(isIncluded(result.data.personalProofTypes![0])).toBe(true);
     expect((result.data.personalProofTypes![0] as ProofType).name).toBe('Drivers License');
+    expect((result.data.personalProofTypes![0] as ProofType).entityType).toBe('personal');
     expect(result.data.businessProofTypes).toBeDefined();
     expect(result.data.businessProofTypes!.length).toBe(7);
     expect(result.data.addressProofTypes).toBeDefined();

@@ -79,13 +79,13 @@ describe('readPriceFile', () => {
       'Src country name': '',
       'Source type': 'cellular',
       Destination: '44800',
-      'Rate (USD, excl. VAT)': '',
-      'Connection fee (USD, excl. VAT)': '',
+      Rate: '',
+      'Connection fee': '',
       'Initial interval': '60',
       'Next interval': '60',
       'Reject calls': 'true',
     });
-    expect(rows[2]['Rate (USD, excl. VAT)']).toBe('0.025');
+    expect(rows[2].Rate).toBe('0.025');
     expect(Object.isFrozen(rows[0])).toBe(true);
   });
 
@@ -93,7 +93,8 @@ describe('readPriceFile', () => {
     const rows = await collect(pricesFixture('voice_out_prices.csv.gz'));
     expect(rows).toHaveLength(4);
     expect(rows[0]['Effective date']).toBe('2026-11-01T00:00:00Z');
-    expect(rows[2].Prefix).toBe('99950,99951,99952');
+    expect(rows[2].Prefix).toBe('99950');
+    expect(rows[2]['Initial increment']).toBe('60');
     expect(rows[3]['Reject calls']).toBe('true');
   });
 

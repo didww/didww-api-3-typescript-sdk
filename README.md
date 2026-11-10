@@ -433,7 +433,7 @@ An SMS trunk cannot be deleted while DIDs are routed to it, nor an SMS trunk gro
 ### Voice In Trunks
 
 ```typescript
-import { sipConfiguration, pstnConfiguration, Codec, Pop, TransportProtocol } from '@didww/sdk';
+import { sipConfiguration, pstnConfiguration, Codec, IceMode, Pop, TransportProtocol } from '@didww/sdk';
 
 // Create SIP trunk
 const trunk = await client.voiceInTrunks().create({
@@ -441,7 +441,8 @@ const trunk = await client.voiceInTrunks().create({
   configuration: sipConfiguration({
     host: 'sip.example.com',
     port: 5060,
-    codecIds: [Codec.PCMU, Codec.PCMA],
+    codecs: [Codec.PCMA, Codec.PCMU, Codec.TELEPHONE_EVENT], // in priority order
+    iceMode: IceMode.ACCEPT,
     transportProtocolId: TransportProtocol.UDP,
   }),
   pop: Pop.FRA, // optional; leave it out to let DIDWW choose
@@ -463,7 +464,9 @@ await client.voiceInTrunks().update({
 await client.voiceInTrunks().remove(trunk.data.id);
 ```
 
-`pop` is a plain attribute, one of the `Pop` values (`NYC`, `FRA`, `LAC`, `MIA`, `SG`, `HK`, `AMS`). Leave it out to let DIDWW choose; `pop: null` sends `"pop": null`. Like `cliFormat`, it is typed with its enum (`Pop | null`) for reading and writing alike, so a loaded trunk passes back to `update()` as it is; a point of presence added to the API later arrives as its raw string, which that type does not list. It is no longer a relationship and cannot be included.
+`codecs` lists the codecs offered on calls to the trunk by name, in priority order: the first has the highest priority. It replaces `codecIds`; the names are the `Codec` values. Left out, the trunk offers `pcmu`, `pcma`, `g729`, `g723` and `telephone_event`. `iceMode`, `rtcpMuxMode` and `rtcpFeedbackMode` take `disabled` (the default), `accept` or `initiate` (`IceMode`, `RtcpMuxMode` and `RtcpFeedbackMode`).
+
+`pop` is a plain attribute, one of the `Pop` values (`Pop.NYC`, `Pop.FRA`, `Pop.LAC`, `Pop.MIA`, `Pop.SG`, `Pop.HK`, `Pop.AMS`: `nyc`, `fra`, `lac`, `mia`, `sg`, `hk`, `ams` on the wire). Leave it out to let DIDWW choose; `pop: null` sends `"pop": null`. Like `cliFormat`, it is typed with its enum (`Pop | null`) for reading and writing alike, so a loaded trunk passes back to `update()` as it is; a point of presence added to the API later arrives as its raw string, which that type does not list. It is no longer a relationship and cannot be included.
 
 ```typescript
 import { Pop } from '@didww/sdk';
@@ -495,7 +498,7 @@ const trunk = await client.voiceInTrunks().create({
     enabledSipRegistration: true,
     useDidInRuri: true,
     cnamLookup: true,
-    codecIds: [Codec.PCMU, Codec.PCMA],
+    codecs: [Codec.PCMU, Codec.PCMA],
   }),
 });
 const config = trunk.data.configuration as SipConfiguration;
@@ -510,7 +513,7 @@ automatically on the wire:
 ```typescript
 await client.voiceInTrunks().update({
   id: trunk.data.id,
-  configuration: sipConfiguration({ host: 'sip.example.com', codecIds: [Codec.PCMU, Codec.PCMA] }),
+  configuration: sipConfiguration({ host: 'sip.example.com' }),
 });
 ```
 
@@ -522,6 +525,8 @@ const group = await client.voiceInTrunkGroups().create({
   capacityLimit: 50,
 });
 ```
+
+A trunk group cannot be deleted while it, or one of its trunks, is routed to a DID: the API answers 422 (a `DidwwApiError`).
 
 ### Voice Out Trunks
 
@@ -537,6 +542,7 @@ Voice Out Trunks use a polymorphic `authenticationMethod` (2026-04-16). Three ty
 import {
   DefaultDstAction,
   OnCliMismatchAction,
+  VoiceOutCodec,
   credentialsAndIpAuthenticationMethod,
   type CredentialsAndIpAuthenticationMethod,
 } from '@didww/sdk';
@@ -553,10 +559,13 @@ const voTrunk = await client.voiceOutTrunks().create({
   } as Omit<CredentialsAndIpAuthenticationMethod, 'type'>),
   defaultDstAction: DefaultDstAction.ALLOW_ALL,
   onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
+  codecs: [VoiceOutCodec.OPUS, VoiceOutCodec.PCMA, VoiceOutCodec.TELEPHONE_EVENT], // in priority order
 });
 // voTrunk.data.authenticationMethod.username -- server-generated
 // voTrunk.data.authenticationMethod.password -- server-generated
 ```
+
+`codecs` lists the codecs offered on calls from the trunk by name, in priority order: the first has the highest priority. The names are the `VoiceOutCodec` values, which differ from those of an inbound SIP trunk (`Codec`). Left out, the trunk offers `pcma`, `pcmu` and `telephone_event`. `iceMode`, `rtcpMuxMode` and `rtcpFeedbackMode` take `disabled`, `accept` (the default) or `initiate`.
 
 ### SMS Trunks
 
@@ -771,6 +780,8 @@ const identity = await client.identities().create({
 await client.identities().update({ id: 'identity-id', companyWebsite: 'https://www.example.com' });
 ```
 
+The mandatory fields of an `AddressRequirement` (`personalMandatoryFields`, `businessMandatoryFields`) and of an `EmergencyRequirement` (`addressMandatoryFields`, `personalMandatoryFields`, `businessMandatoryFields`) are field names as the API spells them, such as `birth_date`, `id_number` or `area`; `tax_id` is `vatId` of an identity. Each list is an array, empty when no field is mandatory, and the lists of the two requirements differ.
+
 ### Addresses
 
 ```typescript
@@ -788,7 +799,7 @@ const address = await client.addresses().create({
 ```typescript
 import { createWriteStream } from 'node:fs';
 import { finished } from 'node:stream/promises';
-import { ExportType, isExportCompleted } from '@didww/sdk';
+import { ExportServiceType, ExportType, isExportCompleted } from '@didww/sdk';
 
 // Dates are "YYYY-MM-DD HH:MM:SS" in UTC: from is inclusive, to is exclusive and not in the future
 const midnight = new Date();
@@ -805,7 +816,7 @@ const exp = await client.exports().create({
 // SMS export
 const smsOut = await client.exports().create({
   exportType: ExportType.SMS_OUT,
-  filters: { from, to, serviceType: 'a2p', 'smsTrunk.id': ['sms-trunk-id'] },
+  filters: { from, to, serviceType: ExportServiceType.A2P, 'smsTrunk.id': ['sms-trunk-id'] },
 });
 
 // The export is pending until its file is generated; read it again later
@@ -831,8 +842,10 @@ A path destination is written to a temporary file next to it, which replaces it 
 - `cdr_in`: `didNumber`, `sourceNumber`, `sourceNumberOut`, `sourceCountryIso`;
 - `cdr_out`: `source`, `cli`, `destination` (and `voice_out_trunk.id`, see [`FILTERS.md`](FILTERS.md#export-filters--filters-of-post-v3exports));
 - `sms_in` and `sms_out`: `sourceAddressEq`, `sourceAddressCont`, `destinationAddressEq`, `destinationAddressCont`, `status`, `smsId`, `'smsTrunk.id'` (a string or an array of strings);
-- `sms_in` only: `trunkType`, one or more of the `ExportTrunkType` values (`SMPP SMSC`, `SMPP ESME`, `Email`, `HTTP IN`);
-- `sms_out` only: `serviceType` (`a2p` or `p2p`) and `'senderIdVerification.id'` (a string or an array of strings).
+- `sms_in` only: `trunkType`, one or more of the `ExportTrunkType` values (`smpp_smsc`, `smpp_esme`, `sms_to_email`, `http_in`);
+- `sms_out` only: `serviceType`, an `ExportServiceType` value (`a2p` or `p2p`), and `'senderIdVerification.id'` (a string or an array of strings).
+
+The values of `status` are lowercase too: `success`, `failed` or `queued` for `sms_in`, and `routing_error`, `in_progress`, `queued`, `failed` or `success` for `sms_out`.
 
 ### Address Verifications
 
@@ -962,7 +975,7 @@ if (file.notModified) {
 const reader = new PriceFileReader(path);
 let count = 0;
 for await (const row of reader) {
-  console.log(`${row['Destination']}: ${row['Rate (USD, excl. VAT)']}`);
+  console.log(`${row['Destination']}: ${row['Rate']}`);
   if (++count === 5) break; // closes the file
 }
 
@@ -984,7 +997,8 @@ await finished(out);
 - `download(stream, options?)` writes the body into the stream only on a 200, as it arrives, so after a transfer error it may hold part of it. The stream is not ended. A destination that is not a writable stream, or one already closed, rejects with a `DidwwClientError`; an error of the stream itself, also one it emits during the call (such as `ENOENT` from `createWriteStream`), rejects as is.
 - A body whose size differs from its `Content-Length` rejects with `PricesErrorKind.CONNECTION_ERROR`; it never replaces a file.
 - `head` and the downloads resolve to a frozen `PriceFile`: `status` (200 or 304), `lastModified` (a `Date`, or `null` when absent or not an IMF-fixdate), `contentLength`, `filename` (as sent: check it before using it as a path), `bytesWritten` and `notModified`.
-- `new PriceFileReader(source)` and `readPriceFile(source)` gunzip a downloaded file and iterate over its rows with `for await`, each a frozen object keyed by the header line, as served (for example `Rate (USD, excl. VAT)`). `source` is a file path, a `Buffer` or `Uint8Array`, a readable stream, a web `ReadableStream` (such as the `body` of a `fetch()` response) or an async iterable of bytes. A path is opened on the first iteration and closed when the iteration ends, also on `break`. When the iteration ends early or fails, a stream source is destroyed, a web `ReadableStream` is cancelled, also while it is waiting for data, and an async iterable is no longer read and is returned (its `finally` runs); `reader.close()` ends an iteration in progress, also one waiting for data, and closes a stream source or cancels a web `ReadableStream`, also one no iteration has read from yet. A reader is iterated once. A UTF-8 byte order mark and empty lines are skipped, and invalid UTF-8 reads as U+FFFD. A file of several gzip members is read in full. After a member, a zero byte and everything that follows it are ignored as padding (zlib does so), a later member included, however the input is split into chunks and however fast the rows are read. While the rows are read, input that is not valid gzip (a bad checksum, corrupt compressed data or two or more bytes after the gzip data that do not start with a zero byte) rejects with a zlib error of code `Z_DATA_ERROR`, and gzip data cut short, an empty input or a single byte after the gzip data with `Z_BUF_ERROR`; bad quoting, a row whose field count differs from the header or a record over the limits (1,024 fields, 1,048,576 characters in a field, 4,194,304 in the record) rejects with a `DidwwClientError`. After a CSV error the rows before it have been passed on. After a zlib error the last rows before the damage (tens of KiB of CSV, depending on the Node version and how fast rows are read, so all rows of a small file) may not have been passed on.
+- `new PriceFileReader(source)` and `readPriceFile(source)` gunzip a downloaded file and iterate over its rows with `for await`, each a frozen object keyed by the header line, as served (for example `Rate`). `source` is a file path, a `Buffer` or `Uint8Array`, a readable stream, a web `ReadableStream` (such as the `body` of a `fetch()` response) or an async iterable of bytes. A path is opened on the first iteration and closed when the iteration ends, also on `break`. When the iteration ends early or fails, a stream source is destroyed, a web `ReadableStream` is cancelled, also while it is waiting for data, and an async iterable is no longer read and is returned (its `finally` runs); `reader.close()` ends an iteration in progress, also one waiting for data, and closes a stream source or cancels a web `ReadableStream`, also one no iteration has read from yet. A reader is iterated once. A UTF-8 byte order mark and empty lines are skipped, and invalid UTF-8 reads as U+FFFD. A file of several gzip members is read in full. After a member, a zero byte and everything that follows it are ignored as padding (zlib does so), a later member included, however the input is split into chunks and however fast the rows are read. While the rows are read, input that is not valid gzip (a bad checksum, corrupt compressed data or two or more bytes after the gzip data that do not start with a zero byte) rejects with a zlib error of code `Z_DATA_ERROR`, and gzip data cut short, an empty input or a single byte after the gzip data with `Z_BUF_ERROR`; bad quoting, a row whose field count differs from the header or a record over the limits (1,024 fields, 1,048,576 characters in a field, 4,194,304 in the record) rejects with a `DidwwClientError`. After a CSV error the rows before it have been passed on. After a zlib error the last rows before the damage (tens of KiB of CSV, depending on the Node version and how fast rows are read, so all rows of a small file) may not have been passed on.
+- The columns, with prices in USD with VAT excluded: Voice IN `Country`, `Src country name`, `Source type`, `Destination`, `Rate`, `Connection fee`, `Initial interval`, `Next interval` and `Reject calls`; Voice OUT `Category`, `Country`, `Network`, `Prefix` (one prefix per row), `Rate`, `Connection fee`, `Initial increment`, `Recurring increment`, `Reject calls`, `Next rate`, `Next connection fee`, `Next initial increment`, `Next recurring increment`, `Effective date` and `Comment`; SMS OUT `Source prefix`, `Destination prefix`, `Country`, `MCC`, `MCC name`, `MNC`, `MNC name`, `Reject SMS` (`true` or `false`) and `Price`; SMS IN `Source prefix`, `Source number length min`, `Source number length max`, `Destination prefix`, `Destination number length min`, `Destination number length max`, `Country` and `Price`.
 - Only `Last-Modified` and `If-Modified-Since` are used, in whole seconds. The service sends no `ETag`, and the SDK never sends `If-None-Match`, which would make the service ignore `If-Modified-Since`.
 - A 503 on a price file is retried up to 2 times when its `Retry-After` is 60 seconds or less, after waiting that long (at least 1 s) plus a small random delay so that clients do not retry in step. Otherwise it rejects with `PricesErrorKind.SERVICE_UNAVAILABLE` and `retryAfter`. Lookups and other statuses, 429 included, are not retried.
 - A 404 `price_not_found` rejects with `PRICE_NOT_FOUND`; any other 404, `price_plan_not_assigned` included, and any 404 on `head`, which has no body, rejects with `PRICE_PLAN_NOT_ASSIGNED`. `DidwwPricesError.code` holds the code of the answer, or `price_plan_not_assigned` for a 404 without one.
@@ -1080,6 +1094,8 @@ did.description = 'Updated description';
 await client.dids().update(did);
 ```
 
+Array and object attributes are compared by value, so a change in place is sent too: after `trunk.codecs.push(VoiceOutCodec.G722)` on a Voice OUT trunk read from the API, the PATCH carries `codecs`. A change inside the `configuration` of a fetched Voice IN trunk, such as reordering its `codecs`, sends the whole configuration.
+
 When you build an object manually (without fetching first), all provided fields are sent:
 
 ```typescript
@@ -1147,10 +1163,10 @@ await client.dids().update(did);
 
 ## Trunk Configuration Types
 
-| Type | Factory                                           |
-| ---- | ------------------------------------------------- |
-| SIP  | `sipConfiguration({ host, port, codecIds, ... })` |
-| PSTN | `pstnConfiguration({ dst })`                      |
+| Type | Factory                                         |
+| ---- | ----------------------------------------------- |
+| SIP  | `sipConfiguration({ host, port, codecs, ... })` |
+| PSTN | `pstnConfiguration({ dst })`                    |
 
 For the SMS trunk configuration types, see [SMS Trunks](#sms-trunks).
 
@@ -1223,7 +1239,8 @@ import {
   AddressVerificationStatus, // PENDING, APPROVED, REJECTED
   ExportType, // CDR_IN, CDR_OUT, SMS_IN, SMS_OUT
   ExportStatus, // PENDING, PROCESSING, COMPLETED
-  ExportTrunkType, // SMPP_SMSC, SMPP_ESME, EMAIL, HTTP_IN (trunkType filter of sms_in exports)
+  ExportTrunkType, // SMPP_SMSC, SMPP_ESME, SMS_TO_EMAIL, HTTP_IN (trunkType filter of sms_in exports)
+  ExportServiceType, // A2P, P2P (serviceType filter of sms_out exports)
   IdentityType, // PERSONAL, BUSINESS, ANY
   OrderStatus, // PENDING, CANCELED, COMPLETED
   OnCliMismatchAction, // SEND_ORIGINAL_CLI, REJECT_CALL, REPLACE_CLI*, RANDOMIZE_CLI* (requires account config)
@@ -1238,7 +1255,10 @@ import {
   EmergencyVerificationStatus, // PENDING, APPROVED, REJECTED
   DiversionRelayPolicy, // NONE, AS_IS, SIP, TEL
   NumberType, // LOCAL, NATIONAL, MOBILE, TOLL_FREE, SHARED_COST, GLOBAL
-  Pop, // NYC, FRA, LAC, MIA, SG, HK, AMS
+  Pop, // NYC, FRA, LAC, MIA, SG, HK, AMS (wire values lowercase: 'nyc', ...)
+  Codec, // TELEPHONE_EVENT, G723, G729, PCMU, PCMA, SPEEX, GSM, G726_32, G721, G726_24, G726_40, G726_16, L16, AMR, AMR_WB
+  VoiceOutCodec, // TELEPHONE_EVENT, G723, G729, PCMU, PCMA, GSM, G722, OPUS, AMR, AMR_WB
+  IceMode, // DISABLED, ACCEPT, INITIATE (also RtcpMuxMode and RtcpFeedbackMode)
   SmsTrunkConfigurationType, // SMS_TO_EMAIL, HTTP_IN, HTTP_OUT, SMPP_ESME, SMPP_SMSC
   SmsHttpMethod, // GET, POST, PUT
   SmsBodyType, // JSON, HTML_MULTIPART, HTML_URL_ENCODED, RAW
@@ -1251,7 +1271,6 @@ import {
   RxDtmfFormat, // RFC_2833=1, SIP_INFO=2, RFC_2833_OR_SIP_INFO=3
   TxDtmfFormat, // DISABLED=1, RFC_2833=2, SIP_INFO_RELAY=3, SIP_INFO_DTMF=4
   SstRefreshMethod, // INVITE=1, UPDATE=2, UPDATE_FALLBACK_INVITE=3
-  Codec, // TELEPHONE_EVENT=6, G723=7, G729=8, PCMU=9, PCMA=10, ...
   // Constant objects with a type of the same name
   Scope, // READ, FULL
   AuthErrorKind, // see Error Handling
@@ -1259,7 +1278,7 @@ import {
 } from '@didww/sdk';
 ```
 
-`ReroutingDisconnectCode`, `DiversionInjectMode` and `NetworkProtocolPriority` are exported too. A value the API sends that this SDK does not know reads as a plain string.
+`ReroutingDisconnectCode`, `DiversionInjectMode`, `NetworkProtocolPriority`, `RtcpMuxMode` and `RtcpFeedbackMode` are exported too. `Codec` holds the codecs of an inbound SIP trunk (`SipConfiguration.codecs`) and `VoiceOutCodec` those of a Voice OUT trunk (`VoiceOutTrunk.codecs`); the two lists differ. A value the API sends that this SDK does not know reads as a plain string.
 
 ## File Encryption & Upload
 
@@ -1349,12 +1368,28 @@ try {
 
 | Error | Rejected with for |
 |-------|-------------------|
-| `DidwwApiError` | An error status of the JSON:API repositories, of `uploadEncryptedFile` and of the export downloads, with `status`, `errors` (the JSON:API error objects; `[]` when the answer has none) and `body` (the parsed answer, read up to 1 MiB, or its text when it is not JSON). |
+| `DidwwApiError` | An error status of the JSON:API repositories, of `uploadEncryptedFile` and of the export downloads, with `status`, `errors` (the JSON:API error objects; `[]` when the answer has none), `body` (the parsed answer, read up to 1 MiB, or its text when it is not JSON) and `retryAfter` (the `Retry-After` of the answer in seconds, or `null` when it is missing or not a number of seconds). |
 | `DidwwClientError` | A failure on the client side: an invalid constructor argument (see [Configuration](#configuration)), a JSON:API, upload or export call that fails in transport (a connection failure, a timeout or a TLS error; the Node.js error is the `cause`, and an SDK timeout has the code `ERR_DIDWW_CONNECT_TIMEOUT`, `ERR_DIDWW_READ_TIMEOUT` or `ERR_DIDWW_TOTAL_TIMEOUT`), a 2xx answer that is not valid JSON, a refused export URL, an export download that breaks off, is incomplete or cannot be decompressed, a price lookup answer that cannot be parsed or holds no prices, an invalid price lookup filter or price file argument, an operation the resource does not support, `smsTrunk` and `smsTrunkGroup` assigned together, and `NaN` or `Infinity` in a request body. |
 | `DidwwAuthError` | The token service, from any call that needs a new token. |
 | `DidwwPricesError` | The prices services. |
 
 `DidwwApiError` also reports the authentication failures of the API: a 401 still answered after the token was replaced once (`status` 401), and a 403 such as `insufficient_scope` for a write with a `READ` token, which is never retried. Redirects are not followed: a 3xx answer of the JSON:API rejects with a `DidwwApiError` with that status, and the export downloads reject with one for any status other than 200, such as a 3xx or a 204.
+
+A 429 (`too_many_requests`) means the request budget of the account for the current window is spent. The JSON:API repositories, `uploadEncryptedFile` and the export downloads reject with a `DidwwApiError` with `status` 429 and `retryAfter`, the seconds to wait. The SDK does not retry it, as a write may not be safe to send twice: wait `retryAfter` seconds before sending the request again.
+
+```typescript
+import { DidwwApiError } from '@didww/sdk';
+
+try {
+  await client.dids().list();
+} catch (error) {
+  if (error instanceof DidwwApiError && error.status === 429) {
+    console.log(`API rate limit, retry after ${error.retryAfter} s`);
+  } else {
+    throw error;
+  }
+}
+```
 
 The token service and prices errors carry a `kind`:
 
@@ -1488,12 +1523,15 @@ Most code keeps working: `new DidwwClient({ apiKey, environment })` is unchanged
 - **Transport errors.** A connection failure, timeout or TLS error no longer rejects with a raw `TypeError: fetch failed`: the JSON:API, upload and export calls reject with a `DidwwClientError` with the Node.js error as its `cause`, the token service with a `DidwwAuthError` and the prices services with a `DidwwPricesError`. A 2xx answer that is not valid JSON now rejects with a `DidwwClientError` instead of resolving to `{ errors: [{ detail }] }`. An error answer that is not JSON (an HTML page of a proxy, for example) now gives a `DidwwApiError` with `errors: []`, the message `API error <status>` and its text in `body`, where 3.x put the text in `errors[0].detail` and in the message.
 - **Removed resources.** `client.pops()` and `client.didGroupTypes()` are removed, with the `DidGroupType` resource type and the `did_group_type` relationship and include; the name `Pop` now belongs to an enum (see the next item). `DidGroup`, `AddressRequirement`, `EmergencyRequirement` and `EmergencyCallingService` have `numberType` instead of `didGroupType`; filter with `number_type` instead of `did_group_type.id`, and with `did_group.number_type` on available DIDs.
 - **Point of presence.** `VoiceInTrunk.pop` is a value of the enum `Pop` (for example `Pop.FRA`), an attribute, where 3.x took `ref('pops', id)` and `Pop` was the type of the `pops` resource; it is no longer a relationship and cannot be included.
+- **Codecs.** `SipConfiguration.codecIds` is replaced by `codecs`, the codec names in priority order; `Codec` is now a string enum of names (`Codec.PCMU` is `'pcmu'`, no longer `9`).
+- **Lowercase values.** `ProofType.entityType` (and the `entity_type` filter of proof types) is `address`, `business` or `personal`.
+- **Requirement mandatory fields.** The mandatory fields of `AddressRequirement` and `EmergencyRequirement` are field names as the API spells them (`tax_id` where an address requirement listed `vat_id`, `birth_date` where an emergency requirement listed `Birth Date`).
 - **Exact numbers.** A non-canonical number in an answer (`1.10`, an integer above 2^53) is a `JsonNumber` where the SDK keeps the raw value: in the results of the low-level `client.get()`, `client.post()` and `client.patch()` and in the attributes of an unknown SMS trunk configuration. Request bodies write `JsonNumber` and `bigint` exactly, and refuse `NaN` and `Infinity`, which 3.x sent as `null` (see [Numbers](#numbers)).
 - **Export download and file upload.** `downloadExport` and `downloadAndDecompressExport` download only from the API origin or the environment origin (a `DidwwClientError` otherwise, without a request), succeed only on a 200 (any other status rejects with a `DidwwApiError` with the status and the parsed errors), write the file exactly as served, check it against its `Content-Length`, and take an optional file path or writable stream as destination (see [Exports](#exports)). `uploadEncryptedFile` reports the errors of the answer in its `DidwwApiError` instead of `Upload failed`, and rejects with a `TypeError` for `data` that is not a `Buffer` or `Uint8Array`.
 - **Errors.** `DidwwApiError` and `DidwwClientError` now derive from the new `DidwwError`, which is also the base of the new `DidwwAuthError` and `DidwwPricesError`.
 - **Secrets.** `console.log(client)`, `util.inspect(client)` and `JSON.stringify(client)` no longer show the API key, and neither do those of repositories and `Encrypt`, which hold the client.
 
-New in 4.0.0: [SMS trunks](#sms-trunks), [SMS trunk groups](#sms-trunk-groups), [Sender ID verifications](#sender-id-verifications), [DID SMS routing](#sms-routing), `sms_in` and `sms_out` [exports](#exports), [prices](#prices), `DidGroup.isDemo`, `Identity.companyWebsite`, `JsonNumber`, and the `apiVersion`, `scope`, `tokenStore`, `logger`, `connectTimeout`, `readTimeout`, `agent` and service URL options of `DidwwClient`.
+New in 4.0.0: [SMS trunks](#sms-trunks), [SMS trunk groups](#sms-trunk-groups), [Sender ID verifications](#sender-id-verifications), [DID SMS routing](#sms-routing), `sms_in` and `sms_out` [exports](#exports), [prices](#prices), the `codecs` and the ICE and RTCP modes of [Voice OUT trunks](#voice-out-trunks), the ICE and RTCP modes of [SIP trunks](#voice-in-trunks), `DidwwApiError.retryAfter`, `DidGroup.isDemo`, `Identity.companyWebsite`, `JsonNumber`, and the `apiVersion`, `scope`, `tokenStore`, `logger`, `connectTimeout`, `readTimeout`, `agent` and service URL options of `DidwwClient`.
 
 ## Development
 

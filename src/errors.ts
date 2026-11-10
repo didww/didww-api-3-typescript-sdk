@@ -18,13 +18,20 @@ export class DidwwError extends Error {
   }
 }
 
-/** The API answered with an error status (or a redirect, which is never followed). */
+/**
+ * The API answered with an error status (or a redirect, which is never followed).
+ *
+ * `retryAfter` is the Retry-After of the answer in seconds, when given in
+ * seconds, whatever the status; a 429 (`too_many_requests`) carries it and is
+ * never retried by the SDK.
+ */
 export class DidwwApiError extends DidwwError {
   public readonly status: number;
   public readonly errors: JsonApiError[];
   public readonly body: unknown;
+  public readonly retryAfter: number | null;
 
-  constructor(status: number, body: unknown) {
+  constructor(status: number, body: unknown, retryAfter: number | null = null) {
     const obj = body as Record<string, unknown> | null | undefined;
     const errors =
       obj && typeof obj === 'object' && Array.isArray(obj.errors)
@@ -37,6 +44,7 @@ export class DidwwApiError extends DidwwError {
     this.status = status;
     this.errors = errors;
     this.body = body;
+    this.retryAfter = retryAfter;
   }
 }
 
