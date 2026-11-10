@@ -6,6 +6,10 @@ import { VOICE_OUT_TRUNK_RESOURCE } from '../src/resources/voice-out-trunk.js';
 import type { Did, DidWrite } from '../src/resources/did.js';
 import type { VoiceInTrunkGroup, VoiceInTrunkGroupWrite } from '../src/resources/voice-in-trunk-group.js';
 import type { VoiceOutTrunk, VoiceOutTrunkWrite } from '../src/resources/voice-out-trunk.js';
+import { VOICE_IN_TRUNK_RESOURCE } from '../src/resources/voice-in-trunk.js';
+import type { VoiceInTrunk, VoiceInTrunkWrite } from '../src/resources/voice-in-trunk.js';
+import type { SipConfiguration } from '../src/nested/trunk-configuration.js';
+import { IceMode, VoiceOutCodec } from '../src/enums.js';
 
 describe('Dirty tracking - PATCH sends only changed fields', () => {
   describe('Scenario 1: build(id), set one attribute, update', () => {
@@ -294,6 +298,85 @@ describe('Dirty tracking - PATCH sends only changed fields', () => {
       // voiceInTrunkGroup should be auto-nullified by exclusive logic
       expect(result.data.relationships?.voice_in_trunk_group).toEqual({
         data: null,
+      });
+    });
+  });
+
+  describe('Codecs and modes of a loaded trunk', () => {
+    function loadVoiceOutTrunk(): VoiceOutTrunk {
+      const body = {
+        data: {
+          id: 'trunk-1',
+          type: 'voice_out_trunks',
+          attributes: {
+            name: 'Trunk',
+            codecs: ['pcma', 'pcmu', 'telephone_event'],
+            ice_mode: 'accept',
+            rtcp_mux_mode: 'accept',
+            rtcp_feedback_mode: 'accept',
+            dst_prefixes: [],
+          },
+        },
+      };
+      return deserialize<VoiceOutTrunk>(body).data as VoiceOutTrunk;
+    }
+
+    const patchOf = (trunk: VoiceOutTrunk) =>
+      serializeForUpdate(VOICE_OUT_TRUNK_RESOURCE, trunk as unknown as VoiceOutTrunkWrite & { id: string });
+
+    it('sends nothing for an untouched Voice OUT trunk', () => {
+      expect(patchOf(loadVoiceOutTrunk()).data.attributes).toBeUndefined();
+    });
+
+    it('sends the Voice OUT codecs after an in-place append', () => {
+      const trunk = loadVoiceOutTrunk();
+      trunk.codecs.push(VoiceOutCodec.OPUS);
+      expect(patchOf(trunk).data.attributes).toEqual({ codecs: ['pcma', 'pcmu', 'telephone_event', 'opus'] });
+    });
+
+    it('sends the Voice OUT codecs after an in-place reorder', () => {
+      const trunk = loadVoiceOutTrunk();
+      trunk.codecs.reverse();
+      expect(patchOf(trunk).data.attributes).toEqual({ codecs: ['telephone_event', 'pcmu', 'pcma'] });
+    });
+
+    it('sends only the changed Voice OUT mode', () => {
+      const trunk = loadVoiceOutTrunk();
+      trunk.iceMode = IceMode.INITIATE;
+      expect(patchOf(trunk).data.attributes).toEqual({ ice_mode: 'initiate' });
+    });
+
+    it('sends the SIP configuration after an in-place reorder of its codecs', () => {
+      const body = {
+        data: {
+          id: 'trunk-2',
+          type: 'voice_in_trunks',
+          attributes: {
+            name: 'SIP',
+            configuration: {
+              type: 'sip_configurations',
+              attributes: { host: 'sip.example.com', codecs: ['pcmu', 'pcma'], ice_mode: 'disabled' },
+            },
+          },
+        },
+      };
+      const trunk = deserialize<VoiceInTrunk>(body).data as VoiceInTrunk;
+      (trunk.configuration as SipConfiguration).codecs!.reverse();
+      const result = serializeForUpdate(
+        VOICE_IN_TRUNK_RESOURCE,
+        trunk as unknown as VoiceInTrunkWrite & { id: string },
+      );
+      expect(result.data.attributes).toEqual({
+        configuration: {
+          type: 'sip_configurations',
+          attributes: {
+            host: 'sip.example.com',
+            codecs: ['pcma', 'pcmu'],
+            ice_mode: 'disabled',
+            enabled_sip_registration: false,
+            use_did_in_ruri: false,
+          },
+        },
       });
     });
   });

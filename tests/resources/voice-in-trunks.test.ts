@@ -9,7 +9,7 @@ import {
   redactSipConfiguration,
 } from '../../src/nested/trunk-configuration.js';
 import type { SipConfiguration, PstnConfiguration } from '../../src/nested/trunk-configuration.js';
-import { Codec, Pop, ReroutingDisconnectCode } from '../../src/enums.js';
+import { Codec, IceMode, Pop, ReroutingDisconnectCode, RtcpFeedbackMode, RtcpMuxMode } from '../../src/enums.js';
 import type { DiversionInjectMode, DiversionRelayPolicy, NetworkProtocolPriority } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
@@ -31,7 +31,7 @@ describe('VoiceInTrunks', () => {
     expect(first.voiceInTrunkGroup).toBeUndefined();
     expect(first.pop).toBeNull();
     const second = result.data[1];
-    expect(second.pop).toBe(Pop.FRA);
+    expect(second.pop).toBe('fra');
     expect(first.externalReferenceId).toBe('vit-ref-001');
   });
 
@@ -44,7 +44,10 @@ describe('VoiceInTrunks', () => {
     expect(config.username).toBe('username');
     expect(config.host).toBe('203.0.113.78');
     expect(config.port).toBe(8060);
-    expect(config.codecIds).toEqual([9, 10, 8]);
+    expect(config.codecs).toEqual(['pcmu', 'pcma', 'g729']);
+    expect(config.iceMode).toBe('accept');
+    expect(config.rtcpMuxMode).toBe('initiate');
+    expect(config.rtcpFeedbackMode).toBe('disabled');
     expect(config.transportProtocolId).toBe(1);
     expect(config.authEnabled).toBe(true);
     expect(config.authUser).toBe('auth_user');
@@ -70,7 +73,8 @@ describe('VoiceInTrunks', () => {
     expect(config.allowedRtpIps).toBeNull();
   });
 
-  it('creates a voice in trunk with SIP config and rerouting disconnect codes', async () => {
+  // The cassette matches the exact request body: codecs in the order given and the three modes.
+  it('creates a voice in trunk with SIP config, codecs, modes and rerouting disconnect codes', async () => {
     const client = setupClient('voice_in_trunks/create_sip_with_rerouting.yaml');
     const result = await client.voiceInTrunks().create({
       name: 'hello, test sip trunk',
@@ -78,7 +82,10 @@ describe('VoiceInTrunks', () => {
         username: 'username',
         host: '203.0.113.110',
         port: 5060,
-        codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
+        codecs: [Codec.G729, Codec.PCMA, Codec.TELEPHONE_EVENT],
+        iceMode: IceMode.INITIATE,
+        rtcpMuxMode: RtcpMuxMode.ACCEPT,
+        rtcpFeedbackMode: RtcpFeedbackMode.DISABLED,
         reroutingDisconnectCodeIds: [
           ReroutingDisconnectCode.SIP_400_BAD_REQUEST,
           ReroutingDisconnectCode.SIP_402_PAYMENT_REQUIRED,
@@ -106,7 +113,8 @@ describe('VoiceInTrunks', () => {
     expect(config.reroutingDisconnectCodeIds).toContain(ReroutingDisconnectCode.RINGING_TIMEOUT);
   });
 
-  it('updates a voice in trunk with rerouting disconnect codes', async () => {
+  // The cassette matches the exact request body: codecs in the order given and the three modes.
+  it('updates a voice in trunk with codecs, modes and rerouting disconnect codes', async () => {
     const client = setupClient('voice_in_trunks/update_sip_with_rerouting.yaml');
     const result = await client.voiceInTrunks().update({
       id: 'a80006b6-4183-4865-8b99-7ebbd359a762',
@@ -115,7 +123,10 @@ describe('VoiceInTrunks', () => {
         username: 'new-username',
         host: '203.0.113.110',
         port: 5060,
-        codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729, Codec.G723, Codec.TELEPHONE_EVENT],
+        codecs: [Codec.AMR_WB, Codec.PCMU, Codec.G726_32],
+        iceMode: IceMode.ACCEPT,
+        rtcpMuxMode: RtcpMuxMode.INITIATE,
+        rtcpFeedbackMode: RtcpFeedbackMode.ACCEPT,
         reroutingDisconnectCodeIds: [
           ReroutingDisconnectCode.SIP_400_BAD_REQUEST,
           ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
@@ -193,7 +204,7 @@ describe('TrunkConfiguration serialization', () => {
     const config = sipConfiguration({
       host: 'example.com',
       port: 5060,
-      codecIds: [Codec.PCMU, Codec.PCMA, Codec.G729],
+      codecs: [Codec.PCMU, Codec.PCMA, Codec.G729],
       username: 'user',
       reroutingDisconnectCodeIds: [
         ReroutingDisconnectCode.SIP_486_BUSY_HERE,
@@ -205,12 +216,17 @@ describe('TrunkConfiguration serialization', () => {
     expect(data.type).toBe('sip_configurations');
     expect(data.attributes.username).toBe('user');
     expect(data.attributes.host).toBe('example.com');
-    expect(data.attributes.codecIds).toEqual([Codec.PCMU, Codec.PCMA, Codec.G729]);
+    expect(data.attributes.codecs).toEqual(['pcmu', 'pcma', 'g729']);
     expect(data.attributes.reroutingDisconnectCodeIds).toEqual([
       ReroutingDisconnectCode.SIP_486_BUSY_HERE,
       ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
       ReroutingDisconnectCode.RINGING_TIMEOUT,
     ]);
+  });
+
+  it('sends no codecs when none are given, so the API applies its default list', () => {
+    const data = serializeTrunkConfiguration(sipConfiguration({ host: 'example.com' }));
+    expect(data.attributes).not.toHaveProperty('codecs');
   });
 
   it('deserializes configuration', () => {
@@ -375,7 +391,7 @@ describe('TrunkConfiguration serialization', () => {
       const config = sipConfiguration({
         host: 'sip.example.com',
         port: 5060,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
         enabledSipRegistration: true, // contradicts host; cascade overrides
         useDidInRuri: true, // contradicts disabled state; cascade overrides
       });
@@ -391,7 +407,7 @@ describe('TrunkConfiguration serialization', () => {
         useDidInRuri: true,
         host: '',
         port: 0,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
       });
       // Replace the empty host with null so the host branch doesn't pre-empt
       // the enabled_sip_registration: false branch in the cascade.
@@ -413,7 +429,7 @@ describe('TrunkConfiguration serialization', () => {
         enabledSipRegistration: true,
         useDidInRuri: true,
         cnamLookup: true,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
       });
       const data = serializeTrunkConfiguration(config);
       expect(data.attributes.enabledSipRegistration).toBe(true);
@@ -428,7 +444,7 @@ describe('TrunkConfiguration serialization', () => {
         useDidInRuri: true,
         host: '',
         port: 0,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
       });
       (config as unknown as Record<string, unknown>).host = null;
       const data = serializeTrunkConfiguration(config);
@@ -446,7 +462,7 @@ describe('TrunkConfiguration serialization', () => {
       const config = sipConfiguration({
         enabledSipRegistration: true,
         useDidInRuri: true,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
       });
       const data = serializeTrunkConfiguration(config);
       expect(data.attributes).toHaveProperty('host');
@@ -460,7 +476,7 @@ describe('TrunkConfiguration serialization', () => {
       const config = sipConfiguration({
         host: 'sip.example.com',
         port: 5060,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
         authPassword: 's3cret-Pa55',
       });
       // Manually populate read-only credentials so we can confirm they
@@ -481,7 +497,7 @@ describe('TrunkConfiguration serialization', () => {
       const config = sipConfiguration({
         host: 'sip.example.com',
         port: 5060,
-        codecIds: [Codec.PCMU],
+        codecs: [Codec.PCMU],
         authPassword: 's3cret-Pa55',
       });
       const output = inspect(config);

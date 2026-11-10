@@ -9,11 +9,20 @@
  *     destinationAddressCont, status, smsId
  *   - 'smsTrunk.id': one id or a list of ids
  *   - sms_in only: trunkType, one or a list of ExportTrunkType values
- *   - sms_out only: serviceType ("a2p" or "p2p"), 'senderIdVerification.id'
+ *   - sms_out only: serviceType, an ExportServiceType value, 'senderIdVerification.id'
+ *   - the values of status, trunkType and serviceType are lowercase, e.g. status 'success' or 'routing_error'
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/exports-sms.ts
  */
-import { DidwwApiError, DidwwClient, Environment, ExportStatus, ExportTrunkType, ExportType } from '../src/index.js';
+import {
+  DidwwApiError,
+  DidwwClient,
+  Environment,
+  ExportServiceType,
+  ExportStatus,
+  ExportTrunkType,
+  ExportType,
+} from '../src/index.js';
 import type { ExportFilters } from '../src/index.js';
 import crypto from 'node:crypto';
 
@@ -45,13 +54,17 @@ async function create(exportType: ExportType, filters: ExportFilters, externalRe
 
 async function main() {
   console.log('=== Creating SMS-Out Export (A2P, yesterday) ===');
-  await create(ExportType.SMS_OUT, { from: dateFrom, to: dateTo, serviceType: 'a2p' }, `ts-sms-out-${suffix}`);
+  await create(
+    ExportType.SMS_OUT,
+    { from: dateFrom, to: dateTo, serviceType: ExportServiceType.A2P },
+    `ts-sms-out-${suffix}`,
+  );
 
   console.log('\n=== Creating SMS-In Export (HTTP IN and email trunks, yesterday) ===');
   const inFilters: ExportFilters = {
     from: dateFrom,
     to: dateTo,
-    trunkType: [ExportTrunkType.HTTP_IN, ExportTrunkType.EMAIL],
+    trunkType: [ExportTrunkType.HTTP_IN, ExportTrunkType.SMS_TO_EMAIL],
   };
   // 'smsTrunk.id' takes one id or a list of ids
   const trunks = await client.smsTrunks().list({ page: { number: 1, size: 2 } });

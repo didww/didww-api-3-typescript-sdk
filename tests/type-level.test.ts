@@ -21,6 +21,18 @@ import {
   type SmsTrunkWrite,
   type VoiceInTrunk,
   type VoiceInTrunkWrite,
+  type VoiceOutTrunk,
+  type VoiceOutTrunkWrite,
+  type SipConfiguration,
+  type ExportFilters,
+  type AddressRequirement,
+  type Codec,
+  type VoiceOutCodec,
+  type IceMode,
+  type RtcpMuxMode,
+  type RtcpFeedbackMode,
+  type ExportServiceType,
+  type DidwwApiError,
 } from '../src/index.js';
 import { createRepository, type HttpClient } from '../src/repositories/repository.js';
 import type { ResourceConfig } from '../src/resources/base.js';
@@ -162,6 +174,31 @@ describe('API 2026-10-22 resource types', () => {
     expectTypeOf<DidGroup>().toHaveProperty('numberType');
     expectTypeOf<DidGroup['isDemo']>().toEqualTypeOf<boolean>();
     expectTypeOf<DidGroup>().not.toHaveProperty('didGroupType');
+  });
+
+  it('types codecs and the ICE and RTCP modes of both trunk kinds', () => {
+    expectTypeOf<SipConfiguration>().not.toHaveProperty('codecIds');
+    expectTypeOf<SipConfiguration['codecs']>().toEqualTypeOf<Codec[] | undefined>();
+    expectTypeOf<SipConfiguration['iceMode']>().toEqualTypeOf<IceMode | undefined>();
+    expectTypeOf<SipConfiguration['rtcpMuxMode']>().toEqualTypeOf<RtcpMuxMode | undefined>();
+    expectTypeOf<SipConfiguration['rtcpFeedbackMode']>().toEqualTypeOf<RtcpFeedbackMode | undefined>();
+    expectTypeOf<VoiceOutTrunk['codecs']>().toEqualTypeOf<VoiceOutCodec[]>();
+    expectTypeOf<VoiceOutTrunk['iceMode']>().toEqualTypeOf<IceMode>();
+    expectTypeOf<VoiceOutTrunk['rtcpMuxMode']>().toEqualTypeOf<RtcpMuxMode>();
+    expectTypeOf<VoiceOutTrunk['rtcpFeedbackMode']>().toEqualTypeOf<RtcpFeedbackMode>();
+    expectTypeOf<VoiceOutTrunkWrite['codecs']>().toEqualTypeOf<VoiceOutCodec[] | undefined>();
+    expectTypeOf<VoiceOutTrunkWrite['iceMode']>().toEqualTypeOf<IceMode | undefined>();
+    expectTypeOf<VoiceOutTrunkWrite['rtcpMuxMode']>().toEqualTypeOf<RtcpMuxMode | undefined>();
+    expectTypeOf<VoiceOutTrunkWrite['rtcpFeedbackMode']>().toEqualTypeOf<RtcpFeedbackMode | undefined>();
+    // A Voice OUT trunk takes VoiceOutCodec values, not the inbound SIP codecs.
+    expectTypeOf<{ codecs: Codec[] }>().not.toExtend<VoiceOutTrunkWrite>();
+  });
+
+  it('types the changed contract fields', () => {
+    expectTypeOf<ExportFilters['serviceType']>().toEqualTypeOf<ExportServiceType | undefined>();
+    expectTypeOf<AddressRequirement['personalMandatoryFields']>().toEqualTypeOf<string[]>();
+    expectTypeOf<AddressRequirement['businessMandatoryFields']>().toEqualTypeOf<string[]>();
+    expectTypeOf<DidwwApiError['retryAfter']>().toEqualTypeOf<number | null>();
   });
 
   it('accepts a null scope, as the scope getter returns', () => {

@@ -40,6 +40,7 @@ import {
   describeFailure,
   formatOrigin,
   originOf,
+  retryAfterSeconds,
   sameOrigin,
   secureRandom,
   Transport,
@@ -366,7 +367,7 @@ export class DidwwClient implements HttpClient {
     } catch {
       document = body.toString('utf8');
     }
-    return new DidwwApiError(status, document);
+    return new DidwwApiError(status, document, retryAfterSeconds(res.headers['retry-after']));
   }
 
   // --- File upload / download ---

@@ -11,8 +11,20 @@ export interface EmergencyRequirement {
   personalAreaLevel: string | null;
   /** Null when the country does not accept a business identity for emergency calling. */
   businessAreaLevel: string | null;
+  /** The address fields that must be filled in (`area`); empty when none are. */
   addressMandatoryFields: string[];
+  /**
+   * The fields that must be filled in for a personal identity, as the API spells
+   * them, among `birth_date`, `country`, `id_number`, `personal_tax_id` and
+   * `contact_email`; empty when none are.
+   */
   personalMandatoryFields: string[];
+  /**
+   * The fields that must be filled in for a business identity, as the API spells
+   * them, among `id_number`, `tax_id` (`Identity.vatId`), `country`,
+   * `company_reg_number`, `personal_tax_id`, `contact_email` and `birth_date`;
+   * empty when none are.
+   */
   businessMandatoryFields: string[];
   estimateSetupTime: string;
   requirementRestrictionMessage: string | null;

@@ -17,6 +17,7 @@ export interface Identity {
   companyName: string;
   companyWebsite: string | null;
   companyRegNumber: string;
+  /** Listed as `tax_id` in the mandatory fields of `AddressRequirement` and `EmergencyRequirement`. */
   vatId: string;
   description: string;
   personalTaxId: string;
@@ -42,6 +43,7 @@ export interface IdentityWrite {
   /** `null` clears it on update; on create a null is not sent. */
   companyWebsite?: string | null;
   companyRegNumber?: string;
+  /** Listed as `tax_id` in the mandatory fields of `AddressRequirement` and `EmergencyRequirement`. */
   vatId?: string;
   description?: string;
   personalTaxId?: string;

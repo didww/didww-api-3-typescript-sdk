@@ -217,7 +217,7 @@ Pass values as strings; the SDK URL-encodes them. Where the server accepts array
 
 ## ProofType — `GET /v3/proof_types`
 
-- `filter[entity_type]`
+- `filter[entity_type]` — `address`, `business` or `personal`
 
 ## Region — `GET /v3/regions`
 
@@ -300,11 +300,11 @@ Set them as an object on `filters` of `client.exports().create()`, typed `Export
 | `source_address_cont` | `sourceAddressCont` | `sms_in`, `sms_out` |
 | `destination_address_eq` | `destinationAddressEq` | `sms_in`, `sms_out` |
 | `destination_address_cont` | `destinationAddressCont` | `sms_in`, `sms_out` |
-| `status` | `status` | `sms_in` (`Success`, `Failed`, `Queued`), `sms_out` (`Routing Error`, `In Progress`, `Queued`, `Failed`, `Success`) |
+| `status` | `status` | `sms_in` (`success`, `failed`, `queued`), `sms_out` (`routing_error`, `in_progress`, `queued`, `failed`, `success`) |
 | `sms_id` | `smsId` | `sms_in`, `sms_out` |
 | `sms_trunk.id` | `'smsTrunk.id'` | `sms_in`, `sms_out` — one id or an array of ids |
-| `trunk_type` | `trunkType` | `sms_in` — one or an array of `ExportTrunkType` values, e.g. `ExportTrunkType.HTTP_IN` (`'HTTP IN'`) |
-| `service_type` | `serviceType` | `sms_out` — `a2p` or `p2p` |
+| `trunk_type` | `trunkType` | `sms_in` — one or an array of `ExportTrunkType` values, e.g. `ExportTrunkType.HTTP_IN` (`'http_in'`) |
+| `service_type` | `serviceType` | `sms_out` — an `ExportServiceType` value: `a2p` or `p2p` |
 | `sender_id_verification.id` | `'senderIdVerification.id'` | `sms_out` — one id or an array of ids |
 
 `ExportFilters` declares no property for `voice_out_trunk.id`: its `voiceOutTrunkId` is sent as `voice_out_trunk_id`, which the API does not accept. Write the key as `'voiceOutTrunk.id'`, which is sent as `voice_out_trunk.id`, in an object typed `ExportFilters` with a type assertion.

@@ -3,7 +3,7 @@ import nock from 'nock';
 import { createTestClient, setupClient, TEST_ACCESS_TOKEN } from '../helpers/client.js';
 import pkg from '../../package.json';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
-import { ExportTrunkType, ExportType } from '../../src/enums.js';
+import { ExportServiceType, ExportTrunkType, ExportType } from '../../src/enums.js';
 
 describe('Exports', () => {
   describeOperationEnforcement({
@@ -57,6 +57,7 @@ describe('Exports', () => {
     expect(result.data.exportType).toBe('cdr_out');
   });
 
+  // The cassettes match the exact request bodies, so the filter values are sent lowercase.
   it('creates an sms_in export', async () => {
     const client = setupClient('exports/create_sms_in.yaml');
     const result = await client.exports().create({
@@ -69,7 +70,7 @@ describe('Exports', () => {
       },
     });
     expect(result.data.exportType).toBe(ExportType.SMS_IN);
-    expect(result.data.filters.trunkType).toEqual(['SMPP SMSC', 'HTTP IN']);
+    expect(result.data.filters.trunkType).toEqual(['smpp_smsc', 'http_in']);
     expect(result.data.filters.destinationAddressEq).toBe('12125550100');
   });
 
@@ -81,7 +82,7 @@ describe('Exports', () => {
         from: '2026-10-01 00:00:00',
         to: '2026-10-15 00:00:00',
         'smsTrunk.id': ['b2c3d4e5-0000-4000-8000-000000000001', 'b2c3d4e5-0000-4000-8000-000000000003'],
-        serviceType: 'a2p',
+        serviceType: ExportServiceType.A2P,
         'senderIdVerification.id': 'c3d4e5f6-0000-4000-8000-000000000002',
       },
     });

@@ -38,7 +38,7 @@ function checkSource(source: unknown): void {
  *
  * ```ts
  * for await (const row of readPriceFile('voice_in_prices.csv.gz')) {
- *   console.log(row['Rate (USD, excl. VAT)']);
+ *   console.log(row['Rate']);
  * }
  * ```
  *

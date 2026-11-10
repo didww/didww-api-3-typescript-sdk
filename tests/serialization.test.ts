@@ -138,7 +138,7 @@ describe('Serialization - excludes read-only fields', () => {
 
   it('VoiceInTrunk sends pop as an attribute, null included', () => {
     const created = serializeForCreate(VOICE_IN_TRUNK_RESOURCE, { name: 't', pop: Pop.FRA });
-    expect(created.data.attributes.pop).toBe('FRA');
+    expect(created.data.attributes.pop).toBe('fra');
     const cleared = serializeForUpdate(VOICE_IN_TRUNK_RESOURCE, { id: 'vit-1', pop: null });
     expect(cleared.data).toEqual({ type: 'voice_in_trunks', id: 'vit-1', attributes: { pop: null } });
     expect(cleared.data.relationships).toBeUndefined();

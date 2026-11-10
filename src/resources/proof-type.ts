@@ -4,6 +4,7 @@ export interface ProofType {
   id: string;
   type: 'proof_types';
   name: string;
+  /** What the proof is attached to: `address`, `business` or `personal`. */
   entityType: string;
 }
 

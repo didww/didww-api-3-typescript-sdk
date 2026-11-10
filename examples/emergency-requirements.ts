@@ -31,7 +31,10 @@ async function main() {
     console.log(`  Number type: ${req.numberType}`);
     console.log(`  Identity type required: ${req.identityType}`);
     console.log(`  Address area level: ${req.addressAreaLevel}`);
-    console.log(`  Address mandatory fields: ${req.addressMandatoryFields?.join(', ')}`);
+    // Field names as the API spells them, e.g. area, birth_date, tax_id (Identity.vatId)
+    console.log(`  Address mandatory fields: ${req.addressMandatoryFields.join(', ')}`);
+    console.log(`  Personal mandatory fields: ${req.personalMandatoryFields.join(', ')}`);
+    console.log(`  Business mandatory fields: ${req.businessMandatoryFields.join(', ')}`);
     console.log(`  Estimated setup time (days): ${req.estimateSetupTime}`);
     if (req.requirementRestrictionMessage) {
       console.log(`  Restriction: ${req.requirementRestrictionMessage}`);

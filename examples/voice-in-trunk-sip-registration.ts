@@ -38,7 +38,7 @@ async function main() {
       enabledSipRegistration: true,
       useDidInRuri: true,
       cnamLookup: false,
-      codecIds: [Codec.PCMU, Codec.PCMA],
+      codecs: [Codec.PCMU, Codec.PCMA],
       transportProtocolId: TransportProtocol.UDP,
     }),
   });
@@ -61,7 +61,7 @@ async function main() {
   console.log('\n[3/4] Disable by setting host...');
   await client.voiceInTrunks().update({
     id: trunkId,
-    configuration: sipConfiguration({ host: '203.0.113.10', codecIds: [Codec.PCMU, Codec.PCMA] }),
+    configuration: sipConfiguration({ host: '203.0.113.10' }),
   });
   const fresh3 = await client.voiceInTrunks().find(trunkId);
   const cfg3 = fresh3.data.configuration as SipConfiguration;
@@ -79,7 +79,6 @@ async function main() {
       configuration: sipConfiguration({
         enabledSipRegistration: true,
         useDidInRuri: true,
-        codecIds: [Codec.PCMU, Codec.PCMA],
       }),
     });
     const fresh4 = await client.voiceInTrunks().find(trunkId);

@@ -16,10 +16,18 @@ export interface AddressRequirement {
   personalProofQty: number;
   businessProofQty: number;
   addressProofQty: number;
-  /** Null when no field is mandatory for a personal identity. */
-  personalMandatoryFields: string[] | null;
-  /** Null when no field is mandatory for a business identity. */
-  businessMandatoryFields: string[] | null;
+  /**
+   * The fields that must be filled in for a personal identity, as the API spells
+   * them, among `birth_date`, `country`, `birth_country`, `id_number`,
+   * `personal_tax_id` and `contact_email`; empty when none are.
+   */
+  personalMandatoryFields: string[];
+  /**
+   * The fields that must be filled in for a business identity, as the API spells
+   * them, among `id_number`, `tax_id` (`Identity.vatId`), `country`,
+   * `company_reg_number`, `personal_tax_id` and `contact_email`; empty when none are.
+   */
+  businessMandatoryFields: string[];
   serviceDescriptionRequired: boolean;
   restrictionMessage: string | null;
   numberType: NumberType | (string & {});
