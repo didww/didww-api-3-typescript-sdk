@@ -27,7 +27,7 @@ describe('secrets', () => {
       environment: 'https://sandbox-api.didww.com/v3/',
       baseUrl: 'https://sandbox-api.didww.com/v3',
       authUrl: 'https://auth-sandbox.didww.com',
-      apiVersion: '2026-10-22',
+      apiVersion: '2026-11-19',
       scope: null,
     });
     expect(inspect(client)).toMatch(/^DidwwClient \{/);
@@ -81,7 +81,7 @@ describe('AccessToken', () => {
       expiresIn: 900,
       aud: ['api.didww.com', 'api-sms.didww.com'],
       scope: 'read',
-      apiVersion: '2026-10-22',
+      apiVersion: '2026-11-19',
       mintedAt,
     });
     const data = JSON.parse(JSON.stringify(token.toData()));
@@ -91,7 +91,7 @@ describe('AccessToken', () => {
       expires_in: 900,
       aud: ['api.didww.com', 'api-sms.didww.com'],
       scope: 'read',
-      api_version: '2026-10-22',
+      api_version: '2026-11-19',
       minted_at: '2026-10-22T08:05:03.123Z',
     });
     const back = AccessToken.fromData(data);

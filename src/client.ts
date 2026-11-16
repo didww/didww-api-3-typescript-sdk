@@ -111,7 +111,7 @@ export interface DidwwClientOptions {
   environment?: Environment;
   /** The JSON:API base URL; defaults to the environment's. */
   baseUrl?: string;
-  /** The API version requested for access tokens, `2026-10-22` or later. */
+  /** The API version requested for access tokens, `2026-11-19` or later. */
   apiVersion?: string;
   /** The scope requested for access tokens; when omitted or null none is requested and the token service grants `full`. */
   scope?: Scope | null;

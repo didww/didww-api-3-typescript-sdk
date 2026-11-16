@@ -62,12 +62,12 @@ describe('environment and API version', () => {
 
   it('points an earlier API version to 3.x', () => {
     expect(messageOf(make({ apiVersion: '2026-04-16' }))).toBe(
-      'API version 2026-04-16 is not supported: this SDK requires 2026-10-22 or later;' +
+      'API version 2026-04-16 is not supported: this SDK requires 2026-11-19 or later;' +
         ' use @didww/sdk 3.x (branch release-3) for 2026-04-16',
     );
   });
 
-  it.each(['2026-4-1', '2026-10-22\n', '２０２６-10-22', '2026/10/22', 'latest'])(
+  it.each(['2026-4-1', '2026-11-19\n', '２０２６-11-19', '2026/11/19', 'latest'])(
     'refuses the malformed API version %j',
     (apiVersion) => {
       expect(messageOf(make({ apiVersion }))).toMatch(/^API version must be a YYYY-MM-DD date, got /);
@@ -75,7 +75,7 @@ describe('environment and API version', () => {
   );
 
   it('accepts the default and later versions', () => {
-    expect(DEFAULT_API_VERSION).toBe('2026-10-22');
+    expect(DEFAULT_API_VERSION).toBe('2026-11-19');
     expect(make({ apiVersion: '2027-01-01' })).not.toThrow();
   });
 

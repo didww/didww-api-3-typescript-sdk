@@ -71,7 +71,7 @@ function provider(url: string, options: { store?: TokenStore; scope?: string | n
     transport,
     authUrl: url,
     apiKey: 'test-api-key',
-    apiVersion: '2026-10-22',
+    apiVersion: '2026-11-19',
     scope: options.scope ?? null,
     store: options.store ?? new MemoryTokenStore(),
     logger: options.logger ?? {},
@@ -161,12 +161,12 @@ describe('caching', () => {
       transport: new Transport(undefined, { connect: null, read: null, total: null }, 'test'),
       authUrl: 'https://auth.example.com',
       apiKey: 'key-1',
-      apiVersion: '2026-10-22',
+      apiVersion: '2026-11-19',
       scope: null,
       store: new MemoryTokenStore(),
       logger: {},
     });
-    expect(p.cacheKey(API)).toBe('didww:token:v1:2e1c5435f0e67f91d34497fabf69840a945923a47982fad172c353b3f26be539');
+    expect(p.cacheKey(API)).toBe('didww:token:v1:7f410b6b26861d5df39c9b3d800faec7f2feefa0c6949246c8d0cd3580714f57');
   });
 
   it('treats a stored value that is not a token as a miss and warns', async () => {
@@ -491,7 +491,7 @@ describe('retries', () => {
       transport: new Transport(undefined, { connect: null, read: null, total: null }, 'test'),
       authUrl: 'https://auth.example.com',
       apiKey: 'k',
-      apiVersion: '2026-10-22',
+      apiVersion: '2026-11-19',
       scope: null,
       store: new MemoryTokenStore(),
       logger: {},
@@ -680,7 +680,7 @@ describe('grant', () => {
     const token = store.get(provider(s.url, { store, scope: 'read' }).cacheKey(API));
     expect(token?.expiresIn).toBe(123);
     expect(token?.scope).toBe('read');
-    expect(token?.apiVersion).toBe('2026-10-22');
+    expect(token?.apiVersion).toBe('2026-11-19');
     expect(token?.mintedAt).toBeInstanceOf(Date);
   });
 });
@@ -702,7 +702,7 @@ describe('logging', () => {
     const { lines, logger } = recordingLogger();
     await stubClient(s, { logger }).balance().find();
     expect(lines.map((l) => l.message)).toContain(
-      'DIDWW token api_version mismatch: requested 2026-10-22, granted 2027-01-01',
+      'DIDWW token api_version mismatch: requested 2026-11-19, granted 2027-01-01',
     );
   });
 
@@ -720,7 +720,7 @@ describe('logging', () => {
     const debug = lines.filter((l) => l.level === 'debug');
     expect(debug).toHaveLength(1);
     expect(debug[0].message).toMatch(
-      /^DIDWW token minted: aud \["api.didww.com"\], scope full, api_version 2026-10-22, expires_in 900, duration_ms \d+$/,
+      /^DIDWW token minted: aud \["api.didww.com"\], scope full, api_version 2026-11-19, expires_in 900, duration_ms \d+$/,
     );
     expect(JSON.stringify(lines)).not.toContain('access-token-1');
     expect(JSON.stringify(lines)).not.toContain('test-api-key');

@@ -7,7 +7,7 @@ export enum Environment {
 }
 
 /** The API version requested for access tokens unless `apiVersion` is given. */
-export const DEFAULT_API_VERSION = '2026-10-22';
+export const DEFAULT_API_VERSION = '2026-11-19';
 
 /** The scope requested for access tokens. */
 export const Scope = {
