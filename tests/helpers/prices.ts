@@ -22,7 +22,7 @@ export function mintForRequestedAudience(): Handler {
       expires_in: 900,
       aud,
       scope: 'full',
-      api_version: '2026-10-22',
+      api_version: '2026-11-19',
     });
     res.writeHead(200, { 'Content-Type': 'application/json' }).end(body);
   };

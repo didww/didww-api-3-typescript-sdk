@@ -119,7 +119,7 @@ describe('Type-level operation constraints', () => {
   });
 });
 
-describe('API 2026-10-22 resource types', () => {
+describe('API 2026-11-19 resource types', () => {
   const client = new DidwwClient({ apiKey: 'test', environment: Environment.SANDBOX });
 
   it('has no pops() or didGroupTypes()', () => {

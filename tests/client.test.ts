@@ -70,7 +70,7 @@ describe('DidwwClient', () => {
   });
 
   it('defaults to the current API version', () => {
-    expect(new DidwwClient({ apiKey: 'test' }).apiVersion).toBe('2026-10-22');
+    expect(new DidwwClient({ apiKey: 'test' }).apiVersion).toBe('2026-11-19');
     expect(new DidwwClient({ apiKey: 'test', apiVersion: '2027-01-01' }).apiVersion).toBe('2027-01-01');
   });
 

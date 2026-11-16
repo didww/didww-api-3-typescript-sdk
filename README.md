@@ -18,15 +18,15 @@ Read more https://doc.didww.com/api
 
 ## API Version
 
-This SDK targets DIDWW API version `2026-10-22` (exported as `DEFAULT_API_VERSION`). The version is not sent as a header: it is requested in the `api_version` of every access token the SDK mints (see [Authentication](#authentication)).
+This SDK targets DIDWW API version `2026-11-19` (exported as `DEFAULT_API_VERSION`). The version is not sent as a header: it is requested in the `api_version` of every access token the SDK mints (see [Authentication](#authentication)).
 
 | NPM Version | Branch | DIDWW API Version |
 |-------------|--------|-------------------|
-| **4.x** | [`main`](https://github.com/didww/didww-api-3-typescript-sdk) | [`2026-10-22`](https://doc.didww.com/api3/2026-10-22/index.html) |
+| **4.x** | [`main`](https://github.com/didww/didww-api-3-typescript-sdk) | [`2026-11-19`](https://doc.didww.com/api3/2026-11-19/index.html) |
 | **3.x** | [`release-3`](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-3) | [`2026-04-16`](https://doc.didww.com/api3/2026-04-16/index.html) |
 | **2.x** | [`2022-05-10`](https://github.com/didww/didww-api-3-typescript-sdk/tree/2022-05-10) | [`2022-05-10`](https://doc.didww.com/api3/2022-05-10/index.html) |
 
-`new DidwwClient({ ..., apiVersion: 'YYYY-MM-DD' })` requests a later version. The constructor throws a `DidwwClientError` for a value that is not a `YYYY-MM-DD` date and for a version earlier than `2026-10-22`. The resources of earlier API versions are not in this release: use 3.x from the [`release-3`](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-3) branch for API `2026-04-16` (see [Migrating from 3.x](#migrating-from-3x)).
+`new DidwwClient({ ..., apiVersion: 'YYYY-MM-DD' })` requests a later version. The constructor throws a `DidwwClientError` for a value that is not a `YYYY-MM-DD` date and for a version earlier than `2026-11-19`. The resources of earlier API versions are not in this release: use 3.x from the [`release-3`](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-3) branch for API `2026-04-16` (see [Migrating from 3.x](#migrating-from-3x)).
 
 ## Requirements
 
@@ -106,7 +106,7 @@ All timeouts are in milliseconds.
 | `apiKey` | required | Your API key. |
 | `environment` | `Environment.SANDBOX` | `Environment.PRODUCTION` or `Environment.SANDBOX`. It selects the API, token service and price hosts. See [Environments](#environments). |
 | `baseUrl` | API URL of the environment | JSON:API base URL only, including `/v3`. |
-| `apiVersion` | `DEFAULT_API_VERSION` (`'2026-10-22'`) | API version requested in every token. See [API Version](#api-version). |
+| `apiVersion` | `DEFAULT_API_VERSION` (`'2026-11-19'`) | API version requested in every token. See [API Version](#api-version). |
 | `scope` | none | `Scope.READ` or `Scope.FULL` (`'read'`, `'full'`). Without it no scope is requested and the token service grants `full`. See [Scope](#scope). |
 | `tokenStore` | one `MemoryTokenStore` shared by every client of the process built without its own | Cache for access tokens. See [Token cache](#token-cache). |
 | `logger` | none (silent) | Receives the token warnings and debug events. See [Logging](#logging). |
@@ -123,7 +123,7 @@ The constructor throws a `DidwwClientError` (see [Error Handling](#error-handlin
 
 - a missing or empty API key, or one with a character outside printable ASCII or a space (a control character, such as a trailing newline or a tab, or a non-ASCII character, such as a non-breaking space);
 - an `environment` that is not an `Environment` member;
-- an API version that is not a `YYYY-MM-DD` date, or that is earlier than `2026-10-22`;
+- an API version that is not a `YYYY-MM-DD` date, or that is earlier than `2026-11-19`;
 - a `scope` other than `Scope.READ`, `Scope.FULL`, `null` or `undefined`;
 - a timeout that is not a positive number of milliseconds up to 2,147,483,647, or `null`;
 - a `tokenStore` without `get`, `set` and `delete` methods, a `logger` without any of the `debug`, `info`, `warn` and `error` methods, or an `agent` that is not an `http.Agent`;
@@ -365,7 +365,7 @@ const pools = await client.capacityPools().list({ include: 'qty_based_pricings' 
 const balance = await client.balance().find();
 ```
 
-`DidGroup`, `AddressRequirement`, `EmergencyRequirement` and `EmergencyCallingService` carry `numberType`, one of the `NumberType` values (`LOCAL`, `NATIONAL`, `MOBILE`, `TOLL_FREE`, `SHARED_COST`, `GLOBAL`), or a plain string for a number type this SDK does not know; filter with the `number_type` key. `DidGroup.isDemo` flags demo groups. `NumberType` replaces the `DidGroupType` resource and the `did_group_type` relationship, which API `2026-10-22` no longer has. The `pops` resource is gone too: a Voice IN trunk carries its point of presence in the `pop` attribute (see [Voice In Trunks](#voice-in-trunks)).
+`DidGroup`, `AddressRequirement`, `EmergencyRequirement` and `EmergencyCallingService` carry `numberType`, one of the `NumberType` values (`LOCAL`, `NATIONAL`, `MOBILE`, `TOLL_FREE`, `SHARED_COST`, `GLOBAL`), or a plain string for a number type this SDK does not know; filter with the `number_type` key. `DidGroup.isDemo` flags demo groups. `NumberType` replaces the `DidGroupType` resource and the `did_group_type` relationship, which API `2026-11-19` no longer has. The `pops` resource is gone too: a Voice IN trunk carries its point of presence in the `pop` attribute (see [Voice In Trunks](#voice-in-trunks)).
 
 ```typescript
 import { NumberType } from '@didww/sdk';
@@ -1060,7 +1060,7 @@ for (const did of dids.data) {
 
 ## Query Parameters
 
-> See [`FILTERS.md`](FILTERS.md) for the list of `filter[KEY]` keys accepted by every list endpoint at API version `2026-10-22`.
+> See [`FILTERS.md`](FILTERS.md) for the list of `filter[KEY]` keys accepted by every list endpoint at API version `2026-11-19`.
 
 ```typescript
 const result = await client.regions().list({
@@ -1510,12 +1510,12 @@ When the SDK is loaded both as an ES module and as CommonJS in one process, `ins
 
 ## Migrating from 3.x
 
-4.0.0 targets API `2026-10-22` only. To stay on API `2026-04-16`, keep 3.x (`npm install @didww/sdk@^3`, branch [`release-3`](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-3)).
+4.0.0 targets API `2026-11-19` only. To stay on API `2026-04-16`, keep 3.x (`npm install @didww/sdk@^3`, branch [`release-3`](https://github.com/didww/didww-api-3-typescript-sdk/tree/release-3)).
 
 Most code keeps working: `new DidwwClient({ apiKey, environment })` is unchanged, and the SDK mints the access tokens itself. The breaking changes:
 
 - **Authentication.** Every request carries a bearer token minted from the API key (see [Authentication](#authentication)). The `Api-Key` header is sent only to the token service, so outgoing traffic must reach `auth.didww.com` (`auth-sandbox.didww.com` in the sandbox), and the price hosts when you use prices. The token service can reject any call with a `DidwwAuthError`; an API key that is refused now rejects with `DidwwAuthError` of kind `AuthErrorKind.INVALID_CLIENT` instead of a `DidwwApiError` with status 401.
-- **API version.** `X-DIDWW-API-Version` is no longer sent: the version is requested in the token. The default is `2026-10-22` (`DEFAULT_API_VERSION`, `client.apiVersion`), and an earlier version makes the constructor throw a `DidwwClientError`.
+- **API version.** `X-DIDWW-API-Version` is no longer sent: the version is requested in the token. The default is `2026-11-19` (`DEFAULT_API_VERSION`, `client.apiVersion`), and an earlier version makes the constructor throw a `DidwwClientError`.
 - **Environment.** `environment` also selects the token service and the price hosts, and is not derived from `baseUrl`: to reach production, pass `environment: Environment.PRODUCTION` (a production `baseUrl` alone mints at the sandbox token service and fails with `DidwwAuthError`).
 - **Validation.** The constructor throws a `DidwwClientError` for an invalid API key, API version, scope, timeout, token store, logger, agent or service URL (see [Configuration](#configuration)), which 3.x accepted.
 - **Transport.** Requests are no longer sent with `fetch`. The `fetch` option and the `FetchFunction` type are removed; pass an `http.Agent` as `agent` for a proxy or TLS settings (see [Proxy, TLS and connections](#proxy-tls-and-connections)), for example `https-proxy-agent` where 3.x used undici's `ProxyAgent`. A JavaScript caller still passing `fetch` gets a `DidwwClientError`. On Node.js 18 connections are not kept alive unless your agent does so.
