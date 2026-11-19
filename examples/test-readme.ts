@@ -1257,26 +1257,14 @@ await check('Emergency Services: create an emergency verification', async () => 
   const countryId = address.country!.id;
   const identityId = address.identity!.id;
 
-  // A DID with emergency calling in the country of the address, without an emergency calling service
-  const owned = await client.dids().list({
-    filter: {
-      'country.id': countryId,
-      'did_group.features': 'emergency',
-      emergency_enabled: 'false',
-      terminated: 'false',
-    },
-    include: 'emergency_calling_service',
-    page: { size: 50 },
+  // A new DID with emergency calling in the country of the address: a DID of an earlier
+  // verification stays bound to the identity of that verification's address
+  const available = await client.availableDids().list({
+    filter: { 'country.id': countryId, 'did_group.features': 'emergency' },
+    include: 'did_group.stock_keeping_units',
+    page: { size: 1 },
   });
-  let did = owned.data.find((d) => !d.emergencyCallingService && !usedDidIds.has(d.id));
-  if (!did) {
-    const available = await client.availableDids().list({
-      filter: { 'country.id': countryId, 'did_group.features': 'emergency' },
-      include: 'did_group.stock_keeping_units',
-      page: { size: 1 },
-    });
-    did = await orderAvailableDid(needs(available.data[0], 'an available DID with emergency calling'));
-  }
+  const did = await orderAvailableDid(needs(available.data[0], 'an available DID with emergency calling'));
   usedDidIds.add(did.id);
   const { data: withGroup } = await client.dids().find(did.id, { include: 'did_group' });
   const group = withGroup.didGroup;
