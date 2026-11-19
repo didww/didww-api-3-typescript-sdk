@@ -20,6 +20,8 @@ import { MemoryTokenStore, type TokenStore } from './token-store.js';
 
 export const CACHE_KEY_PREFIX = 'didww:token:v1:';
 export const MAX_MINT_ATTEMPTS = 4;
+// The longest lifetime the token service grants: the fewer mints, the better.
+const REQUESTED_LIFETIME = 3600;
 const BACKOFF_BASE = 0.5;
 const BACKOFF_CAP = 8;
 const MINT_TIMEOUT_MS = 10_000;
@@ -258,6 +260,7 @@ export class TokenProvider {
     this.#raiseIfRateLimited();
     const request: Record<string, unknown> = { aud: [audience], api_version: this.#apiVersion };
     if (this.#scope !== null) request.scope = this.#scope;
+    request.expires_in = REQUESTED_LIFETIME;
     const payload = Buffer.from(JSON.stringify(request));
 
     const start = this.#now();
