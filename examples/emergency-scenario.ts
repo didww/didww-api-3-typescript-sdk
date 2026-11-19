@@ -78,8 +78,8 @@ async function main() {
   let order = orderResult.data;
   console.log(`  Order: ${order.id} -- ${order.status}`);
 
-  // Wait for order to complete
-  for (let i = 0; i < 10; i++) {
+  // Wait for the order to complete: the sandbox can take up to two minutes (24 checks, 5 seconds apart)
+  for (let i = 0; i < 24; i++) {
     if (order.status === 'completed') break;
     await sleep(5000);
     const fetched = await client.orders().find(order.id);

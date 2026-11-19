@@ -245,7 +245,8 @@ async function orderAvailableDid(ad: AvailableDid): Promise<Did> {
   let { data: order } = await client.orders().create({
     items: [availableDidOrderItem({ skuId, availableDidId: ad.id })],
   });
-  for (let attempt = 0; attempt < 12 && order.status === OrderStatus.PENDING; attempt++) {
+  // The sandbox can take up to two minutes to complete an order: 24 checks, 5 seconds apart
+  for (let attempt = 0; attempt < 24 && order.status === OrderStatus.PENDING; attempt++) {
     await sleep(5_000);
     order = (await client.orders().find(order.id)).data;
   }
