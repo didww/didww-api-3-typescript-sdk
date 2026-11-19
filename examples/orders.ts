@@ -8,7 +8,7 @@
  */
 import crypto from 'node:crypto';
 import { DidwwClient, Environment, didOrderItem, isIncluded } from '../src/index.js';
-import type { StockKeepingUnit } from '../src/index.js';
+import type { DidGroup, StockKeepingUnit } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -26,20 +26,21 @@ async function main() {
     if (order.externalReferenceId) console.log(`  External reference: ${order.externalReferenceId}`);
   }
 
-  // Order a DID by SKU
+  // Order a DID by SKU, from a DID group that has numbers in stock: the DID group of an available DID
   console.log('\n=== Creating DID Order ===');
-  const groups = await client.didGroups().list({ include: 'stock_keeping_units', page: { number: 1, size: 10 } });
-  let sku: StockKeepingUnit | undefined;
-  for (const group of groups.data) {
-    sku = (group.stockKeepingUnits ?? []).find((s): s is StockKeepingUnit => isIncluded(s));
-    if (sku) {
-      console.log(`DID group: ${group.prefix} ${group.areaName}, SKU ${sku.id} ($${sku.monthlyPrice}/mo)`);
-      break;
-    }
+  const available = await client.availableDids().list({
+    include: 'did_group.stock_keeping_units',
+    page: { number: 1, size: 1 },
+  });
+  const group = available.data[0]?.didGroup;
+  if (!isIncluded<DidGroup>(group)) {
+    throw new Error('No available DID found');
   }
+  const sku = (group.stockKeepingUnits ?? []).find((s): s is StockKeepingUnit => isIncluded(s));
   if (!sku) {
-    throw new Error('No DID group with stock keeping units found');
+    throw new Error(`DID group ${group.areaName} has no stock keeping units`);
   }
+  console.log(`DID group: ${group.prefix} ${group.areaName}, SKU ${sku.id} ($${sku.monthlyPrice}/mo)`);
 
   const suffix = crypto.randomBytes(4).toString('hex');
   const created = await client.orders().create({
