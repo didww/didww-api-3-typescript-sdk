@@ -44,7 +44,7 @@ export class Repository<T, TWrite = Record<string, unknown>> {
   async list(params?: QueryParams): Promise<ListResponse<T>> {
     this.assertOperation('list');
     const body = await this.client.get(this.meta.path, params);
-    return this.deserializeList(body);
+    return this.deserializeList(body, params);
   }
 
   async find(id: string, params?: QueryParams): Promise<ApiResponse<T>>;
@@ -58,7 +58,7 @@ export class Repository<T, TWrite = Record<string, unknown>> {
         );
       }
       const body = await this.client.get(this.meta.path, idOrParams as QueryParams);
-      return this.deserializeSingle(body);
+      return this.deserializeSingle(body, idOrParams as QueryParams);
     }
     if (typeof idOrParams !== 'string' || idOrParams.trim() === '') {
       throw new DidwwClientError(
@@ -66,21 +66,21 @@ export class Repository<T, TWrite = Record<string, unknown>> {
       );
     }
     const body = await this.client.get(`${this.meta.path}/${idOrParams}`, params);
-    return this.deserializeSingle(body);
+    return this.deserializeSingle(body, params);
   }
 
   async create(resource: TWrite, params?: QueryParams): Promise<ApiResponse<T>> {
     this.assertOperation('create');
     const body = serializeForCreate(this.meta, resource);
     const response = await this.client.post(this.meta.path, body, params);
-    return this.deserializeSingle(response);
+    return this.deserializeSingle(response, params);
   }
 
   async update(resource: TWrite & { id: string }, params?: QueryParams): Promise<ApiResponse<T>> {
     this.assertOperation('update');
     const body = serializeForUpdate(this.meta, resource);
     const response = await this.client.patch(`${this.meta.path}/${resource.id}`, body, params);
-    return this.deserializeSingle(response);
+    return this.deserializeSingle(response, params);
   }
 
   async remove(id: string): Promise<void> {
@@ -88,13 +88,13 @@ export class Repository<T, TWrite = Record<string, unknown>> {
     await this.client.delete(`${this.meta.path}/${id}`);
   }
 
-  protected deserializeSingle(body: unknown): ApiResponse<T> {
-    const result = deserialize<T>(body);
+  protected deserializeSingle(body: unknown, params?: QueryParams): ApiResponse<T> {
+    const result = deserialize<T>(body, params?.include);
     return { data: result.data as T, meta: result.meta, links: result.links };
   }
 
-  protected deserializeList(body: unknown): ListResponse<T> {
-    const result = deserialize<T>(body);
+  protected deserializeList(body: unknown, params?: QueryParams): ListResponse<T> {
+    const result = deserialize<T>(body, params?.include);
     const data = Array.isArray(result.data) ? result.data : [result.data];
     return { data, meta: result.meta, links: result.links };
   }

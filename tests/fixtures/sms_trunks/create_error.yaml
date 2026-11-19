@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: '{"data":{"type":"sms_trunks","attributes":{"name":"sms_to_email trunk","configuration":{"type":"sms_to_email","attributes":{}}}}}'
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: POST
+    uri: https://sandbox-api.didww.com/v3/sms_trunks
+  response:
+    body:
+      string: '{"errors":[{"title":"can''t be blank","detail":"configuration - send_to can''t be blank","code":"100","source":{"pointer":"/data/attributes/configuration"},"status":"422"}]}'
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 422
+      message: Unprocessable Entity
+version: 1

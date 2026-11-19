@@ -14,6 +14,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    // File-permission tests call process.umask(), which worker threads cannot do.
+    pool: 'forks',
     include: ['tests/**/*.test.ts'],
     setupFiles: ['./tests/setup.ts'],
     testTimeout: 10000,

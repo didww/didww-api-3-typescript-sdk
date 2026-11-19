@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import type { Operation } from '../../src/resources/base.js';
-import { DidwwClient } from '../../src/client.js';
-import { Environment } from '../../src/configuration.js';
+import nock from 'nock';
+import type { DidwwClient } from '../../src/client.js';
+import { createTestClient } from './client.js';
 
 const ALL_OPERATIONS: Operation[] = ['list', 'find', 'create', 'update', 'remove'];
 
@@ -17,30 +18,21 @@ interface OperationEnforcementOptions {
 }
 
 /**
- * Creates a DidwwClient with a stub fetch that returns valid JSON:API responses.
- * This avoids hitting the network and makes tests fast.
+ * Creates a client whose API answers every request with a minimal valid
+ * JSON:API document (204 for DELETE), so no cassette is needed.
  */
 function createStubClient(): DidwwClient {
-  const stubFetch = async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
-    const method = init?.method ?? 'GET';
-    if (method === 'DELETE') {
-      return new Response(null, { status: 204 });
-    }
-    // Return a minimal valid JSON:API response
-    const body = JSON.stringify({
-      data: { id: 'stub-id', type: 'stub', attributes: {} },
-    });
-    return new Response(body, {
-      status: 200,
-      headers: { 'Content-Type': 'application/vnd.api+json' },
-    });
-  };
-
-  return new DidwwClient({
-    apiKey: 'test-key',
-    environment: Environment.SANDBOX,
-    fetch: stubFetch,
-  });
+  const body = { data: { id: 'stub-id', type: 'stub', attributes: {} } };
+  nock('https://sandbox-api.didww.com')
+    .get(/.*/)
+    .reply(200, body, { 'Content-Type': 'application/vnd.api+json' })
+    .post(/.*/)
+    .reply(200, body, { 'Content-Type': 'application/vnd.api+json' })
+    .patch(/.*/)
+    .reply(200, body, { 'Content-Type': 'application/vnd.api+json' })
+    .delete(/.*/)
+    .reply(204);
+  return createTestClient();
 }
 
 /**

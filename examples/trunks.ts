@@ -1,45 +1,138 @@
-import { DidwwClient, Environment, sipConfiguration, pstnConfiguration } from '../src/index.js';
+/**
+ * Voice IN trunks: lists trunks with their trunk group, creates a SIP trunk and
+ * a PSTN trunk, finds the SIP trunk, updates both trunks and deletes both, also
+ * when a step fails.
+ *
+ * Usage: DIDWW_API_KEY=xxx npx tsx examples/trunks.ts
+ */
+import crypto from 'node:crypto';
+import {
+  CliFormat,
+  Codec,
+  DidwwClient,
+  Environment,
+  IceMode,
+  Pop,
+  ReroutingDisconnectCode,
+  TransportProtocol,
+  isIncluded,
+  pstnConfiguration,
+  sipConfiguration,
+} from '../src/index.js';
+import type { VoiceInTrunk, VoiceInTrunkGroup } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
   environment: Environment.SANDBOX,
 });
 
-async function main() {
-  // Get a valid POP
-  const pops = await client.pops().list();
-  if (pops.data.length === 0) {
-    console.log('No POPs available');
-    return;
-  }
-  const pop = pops.data[0];
-  console.log(`Using POP: ${pop.name} (${pop.id})`);
-
-  // Create a PSTN trunk (simplest config, no POP required)
-  const trunk = await client.voiceInTrunks().create({
-    name: 'Example PSTN Trunk',
-    configuration: pstnConfiguration({ dst: '15551234567' }),
-  });
-  console.log(`Created trunk: ${trunk.data.id} - ${trunk.data.name}`);
-  console.log(`  Config type: ${trunk.data.configuration.type}`);
-
-  // List all trunks
-  const trunks = await client.voiceInTrunks().list();
-  console.log(`\nFound ${trunks.data.length} trunks`);
-  for (const t of trunks.data) {
-    console.log(`  ${t.name} (${t.configuration.type})`);
-  }
-
-  // Update the trunk
-  const updated = await client.voiceInTrunks().update({
-    id: trunk.data.id,
-    name: 'Updated PSTN Trunk',
-  });
-  console.log(`\nUpdated trunk name: ${updated.data.name}`);
-
-  // Delete the trunk
-  await client.voiceInTrunks().remove(trunk.data.id);
-  console.log('Trunk deleted');
+function describe(trunk: VoiceInTrunk): string {
+  const config = trunk.configuration;
+  const target = config.type === 'pstn_configurations' ? `dst ${config.dst}` : `host ${config.host ?? 'none'}`;
+  return `${trunk.name} (${config.type}, ${target}, POP ${trunk.pop ?? 'auto'})`;
 }
 
-main().catch(console.error);
+/** Runs every deletion, also after one of them fails, then reports the failures. */
+async function removeEach(removals: Promise<void>[]) {
+  const failures = (await Promise.allSettled(removals)).flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+  if (failures.length > 0) throw new AggregateError(failures, 'Cleanup failed');
+}
+
+async function main() {
+  // List trunks with their trunk group
+  console.log('=== Voice IN Trunks ===');
+  const trunks = await client.voiceInTrunks().list({
+    include: 'voice_in_trunk_group',
+    page: { number: 1, size: 10 },
+  });
+  console.log(`Showing ${trunks.data.length} trunks`);
+  for (const t of trunks.data) {
+    const group = isIncluded<VoiceInTrunkGroup>(t.voiceInTrunkGroup) ? t.voiceInTrunkGroup.name : 'none';
+    console.log(`  ${describe(t)}, trunk group: ${group}`);
+  }
+
+  const suffix = crypto.randomBytes(4).toString('hex');
+  const createdIds: string[] = [];
+  try {
+    // Create a SIP trunk
+    console.log('\n=== Creating SIP trunk ===');
+    const sip = await client.voiceInTrunks().create({
+      name: `Example SIP Trunk ${suffix}`,
+      priority: 1,
+      weight: 100,
+      cliFormat: CliFormat.E164,
+      ringingTimeout: 30,
+      capacityLimit: 10,
+      configuration: sipConfiguration({
+        host: 'sip.example.com',
+        port: 5060,
+        // Codecs in priority order; left out, DIDWW applies its default list
+        codecs: [Codec.PCMU, Codec.PCMA, Codec.TELEPHONE_EVENT],
+        iceMode: IceMode.ACCEPT,
+        transportProtocolId: TransportProtocol.UDP,
+        reroutingDisconnectCodeIds: [
+          ReroutingDisconnectCode.SIP_480_TEMPORARILY_UNAVAILABLE,
+          ReroutingDisconnectCode.SIP_503_SERVICE_UNAVAILABLE,
+        ],
+      }),
+      // Point of presence: a Pop value, or leave it out to let DIDWW choose
+      pop: Pop.FRA,
+    });
+    createdIds.push(sip.data.id);
+    console.log(`Created SIP trunk: ${sip.data.id} - ${describe(sip.data)}`);
+
+    // Create a PSTN trunk
+    console.log('\n=== Creating PSTN trunk ===');
+    const pstn = await client.voiceInTrunks().create({
+      name: `Example PSTN Trunk ${suffix}`,
+      ringingTimeout: 30,
+      configuration: pstnConfiguration({ dst: '12125551234' }),
+    });
+    createdIds.push(pstn.data.id);
+    console.log(`Created PSTN trunk: ${pstn.data.id} - ${describe(pstn.data)}`);
+
+    // Find the SIP trunk by id
+    console.log('\n=== Finding SIP trunk ===');
+    const found = await client.voiceInTrunks().find(sip.data.id, { include: 'voice_in_trunk_group' });
+    const config = found.data.configuration;
+    console.log(`Found: ${describe(found.data)}`);
+    if (config.type === 'sip_configurations') {
+      console.log(`  codecs: ${config.codecs?.join(', ')}`);
+      console.log(`  ICE mode: ${config.iceMode}, transport: ${config.transportProtocolId}`);
+      console.log(`  rerouting disconnect codes: ${config.reroutingDisconnectCodeIds?.join(', ')}`);
+    }
+
+    // Update the SIP trunk: description, point of presence and capacity limit
+    console.log('\n=== Updating trunks ===');
+    const updatedSip = await client.voiceInTrunks().update({
+      id: sip.data.id,
+      description: 'Updated SIP trunk',
+      pop: Pop.AMS,
+      capacityLimit: 20,
+    });
+    console.log(
+      `Updated SIP trunk: description "${updatedSip.data.description}", POP ${updatedSip.data.pop}, ` +
+        `capacity limit ${updatedSip.data.capacityLimit}`,
+    );
+
+    // Update the PSTN trunk: name and destination number
+    const updatedPstn = await client.voiceInTrunks().update({
+      id: pstn.data.id,
+      name: `Updated PSTN Trunk ${suffix}`,
+      configuration: pstnConfiguration({ dst: '12125559876' }),
+    });
+    console.log(`Updated PSTN trunk: ${describe(updatedPstn.data)}`);
+  } finally {
+    // Delete both trunks, also when one deletion fails
+    await removeEach(
+      createdIds.map((id) =>
+        client
+          .voiceInTrunks()
+          .remove(id)
+          .then(() => console.log(`Deleted trunk ${id}`)),
+      ),
+    );
+  }
+}
+
+await main();

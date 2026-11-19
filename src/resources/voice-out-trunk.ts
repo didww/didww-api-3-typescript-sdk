@@ -1,5 +1,14 @@
 import { defineResource, type ResourceRef } from './base.js';
-import type { OnCliMismatchAction, VoiceOutTrunkStatus, MediaEncryptionMode, DefaultDstAction } from '../enums.js';
+import type {
+  OnCliMismatchAction,
+  VoiceOutTrunkStatus,
+  MediaEncryptionMode,
+  DefaultDstAction,
+  VoiceOutCodec,
+  IceMode,
+  RtcpMuxMode,
+  RtcpFeedbackMode,
+} from '../enums.js';
 import type { Did } from './did.js';
 import type { AuthenticationMethod } from '../nested/authentication-method.js';
 import { serializeAuthenticationMethod, deserializeAuthenticationMethod } from '../nested/authentication-method.js';
@@ -26,6 +35,11 @@ export interface VoiceOutTrunk {
   externalReferenceId: string | null;
   emergencyEnableAll: boolean;
   rtpTimeout: number | null;
+  /** Codecs offered on calls from the trunk, in priority order: the first has the highest priority. */
+  codecs: VoiceOutCodec[];
+  iceMode: IceMode;
+  rtcpMuxMode: RtcpMuxMode;
+  rtcpFeedbackMode: RtcpFeedbackMode;
   authenticationMethod: AuthenticationMethod;
   defaultDid?: Did | ResourceRef;
   dids?: (Did | ResourceRef)[];
@@ -49,6 +63,17 @@ export interface VoiceOutTrunkWrite {
   externalReferenceId?: string | null;
   emergencyEnableAll?: boolean;
   rtpTimeout?: number | null;
+  /**
+   * Codecs offered on calls from the trunk, in priority order: the first has the
+   * highest priority. Defaults to `pcma`, `pcmu`, `telephone_event`.
+   */
+  codecs?: VoiceOutCodec[];
+  /** ICE on calls from the trunk; defaults to `accept`. */
+  iceMode?: IceMode;
+  /** RTP and RTCP multiplexed on one port; defaults to `accept`. */
+  rtcpMuxMode?: RtcpMuxMode;
+  /** RTCP feedback (AVPF); defaults to `accept`. */
+  rtcpFeedbackMode?: RtcpFeedbackMode;
   authenticationMethod?: AuthenticationMethod;
   defaultDid?: ResourceRef | null;
   dids?: ResourceRef[];
@@ -72,6 +97,10 @@ const WRITABLE_KEYS = [
   'externalReferenceId',
   'emergencyEnableAll',
   'rtpTimeout',
+  'codecs',
+  'iceMode',
+  'rtcpMuxMode',
+  'rtcpFeedbackMode',
   'authenticationMethod',
   'defaultDid',
   'dids',

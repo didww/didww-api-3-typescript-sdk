@@ -9,10 +9,8 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/address-verifications.ts
  */
-import { DidwwClient, Environment } from '../src/index.js';
-import type { AddressVerification } from '../src/resources/address-verification.js';
-import type { Did } from '../src/resources/did.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { AddressVerification, Did } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,

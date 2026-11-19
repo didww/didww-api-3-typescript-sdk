@@ -1,7 +1,6 @@
 import { createReadOnlyResource, type ResourceRef } from './base.js';
-import type { IdentityType, AreaLevel } from '../enums.js';
+import type { IdentityType, AreaLevel, NumberType } from '../enums.js';
 import type { Country } from './country.js';
-import type { DidGroupType } from './did-group-type.js';
 import type { SupportingDocumentTemplate } from './supporting-document-template.js';
 import type { ProofType } from './proof-type.js';
 
@@ -17,14 +16,22 @@ export interface AddressRequirement {
   personalProofQty: number;
   businessProofQty: number;
   addressProofQty: number;
-  /** Null when no field is mandatory for a personal identity. */
-  personalMandatoryFields: string[] | null;
-  /** Null when no field is mandatory for a business identity. */
-  businessMandatoryFields: string[] | null;
+  /**
+   * The fields that must be filled in for a personal identity, as the API spells
+   * them, among `birth_date`, `country`, `birth_country`, `id_number`,
+   * `personal_tax_id` and `contact_email`; empty when none are.
+   */
+  personalMandatoryFields: string[];
+  /**
+   * The fields that must be filled in for a business identity, as the API spells
+   * them, among `id_number`, `tax_id` (`Identity.vatId`), `country`,
+   * `company_reg_number`, `personal_tax_id` and `contact_email`; empty when none are.
+   */
+  businessMandatoryFields: string[];
   serviceDescriptionRequired: boolean;
   restrictionMessage: string | null;
+  numberType: NumberType | (string & {});
   country?: Country | ResourceRef;
-  didGroupType?: DidGroupType | ResourceRef;
   personalPermanentDocument?: SupportingDocumentTemplate | ResourceRef;
   businessPermanentDocument?: SupportingDocumentTemplate | ResourceRef;
   personalOnetimeDocument?: SupportingDocumentTemplate | ResourceRef;

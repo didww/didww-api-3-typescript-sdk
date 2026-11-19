@@ -9,6 +9,11 @@ import type { Order } from '../../src/resources/order.js';
 import type { AddressVerification } from '../../src/resources/address-verification.js';
 import type { DidGroup } from '../../src/resources/did-group.js';
 import type { VoiceInTrunk } from '../../src/resources/voice-in-trunk.js';
+import type { SmsTrunk } from '../../src/resources/sms-trunk.js';
+import type { SmsTrunkGroup } from '../../src/resources/sms-trunk-group.js';
+import type { SmsHttpInConfiguration } from '../../src/nested/sms-trunk-configuration.js';
+import { ref } from '../../src/resources/base.js';
+import { DidwwClientError } from '../../src/errors.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('Dids', () => {
@@ -19,7 +24,7 @@ describe('Dids', () => {
   });
   it('lists DIDs', async () => {
     const client = setupClient('dids/list.yaml');
-    const result = await client.dids().list();
+    const result = await client.dids().list({ include: 'order' });
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('dids');
     expect(result.data[0].number).toBeDefined();
@@ -166,6 +171,89 @@ describe('Dids', () => {
       const serialized = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
       expect(serialized.data.attributes).toBeUndefined();
       expect(serialized.data.relationships).toBeUndefined();
+    });
+  });
+
+  describe('SMS routing', () => {
+    const SMS_DID_ID = '9df99644-f1a5-4a3c-99a4-559d758eb96b';
+    const SMS_TRUNK = ref('sms_trunks', '1a2b3c4d-0002-4a5b-8c6d-7e8f9a0b1c02');
+    const SMS_TRUNK_GROUP = ref('sms_trunk_groups', '2b3c4d5e-0001-4b6c-9d7e-8f9a0b1c2d01');
+
+    it('assigns an SMS trunk and clears the SMS trunk group', async () => {
+      const client = setupClient('dids/update_assign_sms_trunk.yaml');
+      const result = await client.dids().update({ id: SMS_DID_ID, smsTrunk: SMS_TRUNK });
+      expect(result.data.id).toBe(SMS_DID_ID);
+    });
+
+    it('assigns an SMS trunk group and clears the SMS trunk', async () => {
+      const client = setupClient('dids/update_assign_sms_trunk_group.yaml');
+      const result = await client.dids().update({ id: SMS_DID_ID, smsTrunkGroup: SMS_TRUNK_GROUP });
+      expect(result.data.id).toBe(SMS_DID_ID);
+    });
+
+    it('unassigns only the SMS trunk', async () => {
+      const client = setupClient('dids/update_unassign_sms_trunk.yaml');
+      const result = await client.dids().update({ id: SMS_DID_ID, smsTrunk: null });
+      expect(result.data.id).toBe(SMS_DID_ID);
+    });
+
+    it('unassigns only the SMS trunk group', async () => {
+      const client = setupClient('dids/update_unassign_sms_trunk_group.yaml');
+      const result = await client.dids().update({ id: SMS_DID_ID, smsTrunkGroup: null });
+      expect(result.data.id).toBe(SMS_DID_ID);
+    });
+
+    it('unassigns both', async () => {
+      const client = setupClient('dids/update_unassign_sms.yaml');
+      const result = await client.dids().update({ id: SMS_DID_ID, smsTrunk: null, smsTrunkGroup: null });
+      expect(result.data.id).toBe(SMS_DID_ID);
+    });
+
+    it('rejects an SMS trunk and an SMS trunk group together before sending', async () => {
+      const client = createTestClient();
+      const error = await client
+        .dids()
+        .update({ id: SMS_DID_ID, smsTrunk: SMS_TRUNK, smsTrunkGroup: SMS_TRUNK_GROUP })
+        .catch((e: unknown) => e);
+      expect(error).toBeInstanceOf(DidwwClientError);
+      expect((error as Error).message).toContain('smsTrunk and smsTrunkGroup are mutually exclusive');
+    });
+
+    it('finds a DID with an included SMS trunk and a clean dirty state', async () => {
+      const client = setupClient('dids/show_with_sms_trunk.yaml');
+      const { data: did } = await client.dids().find(SMS_DID_ID, { include: 'sms_trunk' });
+      expect(isIncluded(did.smsTrunk!)).toBe(true);
+      const trunk = did.smsTrunk as SmsTrunk;
+      expect((trunk.configuration as SmsHttpInConfiguration).headers).toEqual({ 'X-Source': 'didww' });
+      expect(did.smsTrunkGroup).toBeUndefined();
+      const serialized = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
+      expect(serialized.data.relationships).toBeUndefined();
+    });
+
+    it('finds a DID with an included SMS trunk group and its meta', async () => {
+      const client = setupClient('dids/show_with_sms_trunk_group.yaml');
+      const { data: did } = await client.dids().find(SMS_DID_ID, { include: 'sms_trunk_group' });
+      expect(isIncluded(did.smsTrunkGroup!)).toBe(true);
+      expect((did.smsTrunkGroup as SmsTrunkGroup).meta?.smsTrunksCount).toBe(2);
+      expect(did.smsTrunk).toBeUndefined();
+    });
+
+    it('sends a new SMS trunk group of a loaded DID with the SMS trunk cleared', async () => {
+      const client = setupClient('dids/show_with_sms_trunk.yaml');
+      const { data: did } = await client.dids().find(SMS_DID_ID, { include: 'sms_trunk' });
+      did.smsTrunkGroup = SMS_TRUNK_GROUP;
+      const serialized = serializeForUpdate(DID_RESOURCE, did as unknown as DidWrite & { id: string });
+      expect(serialized.data.relationships).toEqual({
+        sms_trunk_group: { data: SMS_TRUNK_GROUP },
+        sms_trunk: { data: null },
+      });
+    });
+
+    it('rejects a spread copy of a loaded DID with an SMS trunk and a new SMS trunk group', async () => {
+      const client = setupClient('dids/show_with_sms_trunk.yaml');
+      const { data: did } = await client.dids().find(SMS_DID_ID, { include: 'sms_trunk' });
+      const copy = { ...did, smsTrunkGroup: SMS_TRUNK_GROUP } as unknown as DidWrite & { id: string };
+      expect(() => serializeForUpdate(DID_RESOURCE, copy)).toThrow(DidwwClientError);
     });
   });
 });

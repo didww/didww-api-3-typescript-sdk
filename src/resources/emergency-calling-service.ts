@@ -1,7 +1,6 @@
 import { defineResource, type ResourceRef } from './base.js';
-import type { EmergencyCallingServiceStatus } from '../enums.js';
+import type { EmergencyCallingServiceStatus, NumberType } from '../enums.js';
 import type { Country } from './country.js';
-import type { DidGroupType } from './did-group-type.js';
 import type { Order } from './order.js';
 import type { Address } from './address.js';
 import type { EmergencyRequirement } from './emergency-requirement.js';
@@ -24,8 +23,8 @@ export interface EmergencyCallingService {
   createdAt: string;
   /** Next renewal date; null if not yet activated or already canceled. */
   renewDate: string | null;
+  numberType: NumberType | (string & {});
   country?: Country | ResourceRef;
-  didGroupType?: DidGroupType | ResourceRef;
   order?: Order | ResourceRef;
   address?: Address | ResourceRef;
   emergencyRequirement?: EmergencyRequirement | ResourceRef;

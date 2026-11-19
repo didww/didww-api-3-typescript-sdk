@@ -1,5 +1,8 @@
 import type {
   Codec,
+  IceMode,
+  RtcpMuxMode,
+  RtcpFeedbackMode,
   DiversionRelayPolicy,
   DiversionInjectMode,
   NetworkProtocolPriority,
@@ -37,7 +40,17 @@ export interface SipConfiguration {
   // builder usage `sipConfiguration({ enabledSipRegistration: true, ... })`.
   host?: string;
   port?: number;
-  codecIds: Codec[];
+  /**
+   * Codecs offered on calls to the trunk, in priority order: the first has the
+   * highest priority. Defaults to `pcmu`, `pcma`, `g729`, `g723`, `telephone_event`.
+   */
+  codecs?: Codec[];
+  /** ICE on calls to the trunk; defaults to `disabled`. */
+  iceMode?: IceMode;
+  /** RTP and RTCP multiplexed on one port; defaults to `disabled`. */
+  rtcpMuxMode?: RtcpMuxMode;
+  /** RTCP feedback (AVPF); defaults to `disabled`. */
+  rtcpFeedbackMode?: RtcpFeedbackMode;
   transportProtocolId?: TransportProtocol;
   authEnabled?: boolean;
   authUser?: string;

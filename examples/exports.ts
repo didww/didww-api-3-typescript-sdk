@@ -1,18 +1,20 @@
 /**
  * Exports: create and list CDR exports (cdr_in / cdr_out).
  *
- * 2026-04-16 additions:
- *   - external_reference_id: customer-supplied reference (max 100 chars)
+ * external_reference_id is a customer-supplied reference (max 100 chars).
  *
- * Filter semantics on CDR exports:
+ * Filter semantics on CDR exports ("YYYY-MM-DD HH:MM:SS" in UTC; "to" must not be in the future):
  *   - filters.from: lower bound, INCLUSIVE (server: time_start >= from)
  *   - filters.to:   upper bound, EXCLUSIVE (server: time_start <  to)
  * To cover a whole day, pass from: "2026-04-15 00:00:00", to: "2026-04-16 00:00:00".
  *
+ * The file URL is set once the export is completed: find the export again
+ * later and download it (see exports-sms.ts).
+ *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/exports.ts
  */
 import { DidwwClient, Environment, ExportType } from '../src/index.js';
-import type { Export } from '../src/resources/export.js';
+import type { Export } from '../src/index.js';
 import crypto from 'node:crypto';
 
 const client = new DidwwClient({
@@ -57,8 +59,10 @@ async function main() {
   }
 
   // Create a CDR-In export for yesterday (from is inclusive, to is exclusive)
-  console.log('\n=== Creating CDR-In Export (yesterday, 2026-04-16 external_reference_id) ===');
+  console.log('\n=== Creating CDR-In Export (yesterday) ===');
+  // Both bounds come from one UTC midnight, so "to" is never in the future
   const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
   const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
   const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
   const suffix = crypto.randomBytes(4).toString('hex');

@@ -6,7 +6,7 @@ import type {
   CredentialsAndIpAuthenticationMethod,
   AuthenticationMethod,
 } from '../../src/nested/authentication-method.js';
-import type { OnCliMismatchAction } from '../../src/enums.js';
+import { IceMode, RtcpFeedbackMode, RtcpMuxMode, VoiceOutCodec, type OnCliMismatchAction } from '../../src/enums.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
 
 describe('VoiceOutTrunks', () => {
@@ -39,6 +39,10 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.callbackUrl).toBeNull();
     expect(result.data.emergencyEnableAll).toBe(false);
     expect(result.data.rtpTimeout).toBe(30);
+    expect(result.data.codecs).toEqual(['opus', 'pcma', 'telephone_event']);
+    expect(result.data.iceMode).toBe('initiate');
+    expect(result.data.rtcpMuxMode).toBe('disabled');
+    expect(result.data.rtcpFeedbackMode).toBe('accept');
     // Polymorphic authentication_method
     const authMethod = result.data.authenticationMethod;
     expect(authMethod).toBeDefined();
@@ -104,11 +108,16 @@ describe('VoiceOutTrunks', () => {
     expect((authMethod as any).twilioAccountSid).toBe('AC33333333333333333333333333333333');
   });
 
-  it('creates a voice out trunk with ip_only authentication_method', async () => {
+  // The cassette matches the exact request body: codecs in the order given and the three modes.
+  it('creates a voice out trunk with ip_only authentication_method, codecs and modes', async () => {
     const client = setupClient('voice_out_trunks/create.yaml');
     const result = await client.voiceOutTrunks().create({
       name: 'ts-test',
       onCliMismatchAction: 1 as unknown as OnCliMismatchAction,
+      codecs: [VoiceOutCodec.G722, VoiceOutCodec.PCMU],
+      iceMode: IceMode.INITIATE,
+      rtcpMuxMode: RtcpMuxMode.ACCEPT,
+      rtcpFeedbackMode: RtcpFeedbackMode.DISABLED,
       authenticationMethod: {
         type: 'ip_only',
         allowedSipIps: ['203.0.113.0/24'],
@@ -123,14 +132,16 @@ describe('VoiceOutTrunks', () => {
     expect(result.data.authenticationMethod).toBeDefined();
   });
 
-  it('updates a voice out trunk', async () => {
+  // The cassette matches the exact request body: codecs in the order given and the three modes.
+  it('updates a voice out trunk with codecs and modes', async () => {
     const client = setupClient('voice_out_trunks/update.yaml');
     const result = await client.voiceOutTrunks().update({
       id: '425ce763-a3a9-49b4-af5b-ada1a65c8864',
       name: 'test',
-      capacityLimit: 123,
-      forceSymmetricRtp: true,
-      rtpPing: true,
+      codecs: [VoiceOutCodec.OPUS, VoiceOutCodec.G722, VoiceOutCodec.PCMA],
+      iceMode: IceMode.DISABLED,
+      rtcpMuxMode: RtcpMuxMode.INITIATE,
+      rtcpFeedbackMode: RtcpFeedbackMode.ACCEPT,
     });
     expect(result.data.id).toBe('425ce763-a3a9-49b4-af5b-ada1a65c8864');
     expect(result.data.name).toBe('test');

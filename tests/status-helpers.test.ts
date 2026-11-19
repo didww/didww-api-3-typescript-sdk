@@ -6,6 +6,7 @@ import {
   AddressVerificationStatus,
   EmergencyVerificationStatus,
   OrderStatus,
+  SenderIdVerificationStatus,
 } from '../src/enums.js';
 import {
   isActive,
@@ -28,6 +29,12 @@ import {
   isOrderPending,
   isOrderCompleted,
   isOrderCanceled,
+  isSenderIdVerificationActive,
+  isSenderIdVerificationChangesRequired,
+  isSenderIdVerificationClosed,
+  isSenderIdVerificationClosingInProcess,
+  isSenderIdVerificationInProcess,
+  isSenderIdVerificationNew,
 } from '../src/status-helpers.js';
 import type { VoiceOutTrunk } from '../src/resources/voice-out-trunk.js';
 import type { Export } from '../src/resources/export.js';
@@ -35,6 +42,7 @@ import type { EmergencyCallingService } from '../src/resources/emergency-calling
 import type { AddressVerification } from '../src/resources/address-verification.js';
 import type { EmergencyVerification } from '../src/resources/emergency-verification.js';
 import type { Order } from '../src/resources/order.js';
+import type { SenderIdVerification } from '../src/resources/sender-id-verification.js';
 
 describe('status helpers', () => {
   describe('VoiceOutTrunk', () => {
@@ -173,5 +181,25 @@ describe('status helpers', () => {
       expect(isOrderCanceled(cancelled)).toBe(true);
       expect(isOrderCanceled(pending)).toBe(false);
     });
+  });
+
+  describe('SenderIdVerification', () => {
+    const predicates: ReadonlyArray<[SenderIdVerificationStatus, (s: SenderIdVerification) => boolean]> = [
+      [SenderIdVerificationStatus.ACTIVE, isSenderIdVerificationActive],
+      [SenderIdVerificationStatus.CHANGES_REQUIRED, isSenderIdVerificationChangesRequired],
+      [SenderIdVerificationStatus.CLOSED, isSenderIdVerificationClosed],
+      [SenderIdVerificationStatus.CLOSING_IN_PROCESS, isSenderIdVerificationClosingInProcess],
+      [SenderIdVerificationStatus.IN_PROCESS, isSenderIdVerificationInProcess],
+      [SenderIdVerificationStatus.NEW, isSenderIdVerificationNew],
+    ];
+
+    for (const [status, predicate] of predicates) {
+      it(`${predicate.name} is true only for ${status}`, () => {
+        for (const [other] of predicates) {
+          expect(predicate({ status: other } as SenderIdVerification)).toBe(other === status);
+        }
+        expect(predicate({ status: 'future' } as SenderIdVerification)).toBe(false);
+      });
+    }
   });
 });

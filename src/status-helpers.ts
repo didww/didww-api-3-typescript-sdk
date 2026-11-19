@@ -5,6 +5,7 @@ import {
   AddressVerificationStatus,
   EmergencyVerificationStatus,
   OrderStatus,
+  SenderIdVerificationStatus,
 } from './enums.js';
 
 interface HasStatus<S> {
@@ -81,4 +82,24 @@ export function isOrderCompleted(order: HasStatus<OrderStatus>): boolean {
 }
 export function isOrderCanceled(order: HasStatus<OrderStatus>): boolean {
   return order.status === OrderStatus.CANCELED;
+}
+
+// SenderIdVerification status predicates
+export function isSenderIdVerificationActive(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.ACTIVE;
+}
+export function isSenderIdVerificationChangesRequired(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.CHANGES_REQUIRED;
+}
+export function isSenderIdVerificationClosed(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.CLOSED;
+}
+export function isSenderIdVerificationClosingInProcess(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.CLOSING_IN_PROCESS;
+}
+export function isSenderIdVerificationInProcess(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.IN_PROCESS;
+}
+export function isSenderIdVerificationNew(siv: HasStatus<SenderIdVerificationStatus>): boolean {
+  return siv.status === SenderIdVerificationStatus.NEW;
 }

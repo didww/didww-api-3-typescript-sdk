@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { setupClient } from '../helpers/client.js';
 import { ref, isIncluded } from '../../src/resources/base.js';
+import { serializeForCreate, serializeForUpdate } from '../../src/serializer.js';
+import { IDENTITY_RESOURCE } from '../../src/resources/identity.js';
+import { IdentityType } from '../../src/enums.js';
 import type { Country } from '../../src/resources/country.js';
 import type { Address } from '../../src/resources/address.js';
 import { describeOperationEnforcement } from '../helpers/operation-enforcement.js';
@@ -97,6 +100,32 @@ describe('Identities', () => {
     expect(isIncluded(country!)).toBe(true);
     expect((country as Country).name).toBe('United States');
     expect((country as Country).iso).toBe('US');
+  });
+
+  it('updates the company website', async () => {
+    const client = setupClient('identities/update_company_website.yaml');
+    const result = await client.identities().update({
+      id: 'e96ae7d1-11d5-42bc-a5c5-211f3c3788ae',
+      companyWebsite: 'https://www.example.org',
+    });
+    expect(result.data.companyWebsite).toBe('https://www.example.org');
+  });
+
+  it('does not send a null company website on create', () => {
+    const attrs = serializeForCreate(IDENTITY_RESOURCE, {
+      identityType: IdentityType.PERSONAL,
+      firstName: 'John',
+      companyWebsite: null,
+    }).data.attributes;
+    expect(attrs).toEqual({ identity_type: 'personal', first_name: 'John' });
+    expect(
+      serializeForCreate(IDENTITY_RESOURCE, { companyWebsite: 'https://www.example.org' }).data.attributes,
+    ).toEqual({ company_website: 'https://www.example.org' });
+  });
+
+  it('sends a null company website on update to clear it', () => {
+    const attrs = serializeForUpdate(IDENTITY_RESOURCE, { id: 'i1', companyWebsite: null }).data.attributes;
+    expect(attrs).toEqual({ company_website: null });
   });
 
   it('deletes an identity', async () => {

@@ -1,4 +1,5 @@
-import { DidwwClient, Environment, didOrderItem } from '../src/index.js';
+import { DidwwClient, Environment, didOrderItem, isIncluded } from '../src/index.js';
+import type { StockKeepingUnit } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -33,8 +34,8 @@ async function main() {
   }
 
   const group = didGroups.data[0];
-  const skus = group.stockKeepingUnits;
-  if (!Array.isArray(skus) || skus.length === 0) {
+  const skus = (group.stockKeepingUnits || []).filter((s): s is StockKeepingUnit => isIncluded(s));
+  if (skus.length === 0) {
     console.log('No SKUs found for this DID group');
     return;
   }

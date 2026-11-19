@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+    method: DELETE
+    uri: https://sandbox-api.didww.com/v3/sms_trunk_groups/2b3c4d5e-0001-4b6c-9d7e-8f9a0b1c2d01
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Type:
+      - application/vnd.api+json
+    status:
+      code: 204
+      message: No Content
+version: 1

@@ -1,4 +1,4 @@
-import { DidwwClient, Environment, ref, reservationDidOrderItem } from '../src/index.js';
+import { DidwwClient, Environment, isIncluded, ref, reservationDidOrderItem } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -19,7 +19,7 @@ async function main() {
   console.log(`Available DID: ${ad.number}`);
 
   // Resolve SKU from included DID group
-  const didGroup = ad.didGroup;
+  const didGroup = ad.didGroup && isIncluded(ad.didGroup) ? ad.didGroup : undefined;
   const skus = didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
     console.log('No stockKeepingUnits found in included didGroup');
@@ -32,7 +32,7 @@ async function main() {
     description: 'Reserved via SDK',
     availableDid: ref('available_dids', ad.id),
   });
-  console.log(`Reserved: ${reservation.data.id} expires=${reservation.data.expireAt}`);
+  console.log(`Reserved: ${reservation.data.id} expires=${reservation.data.expiresAt}`);
 
   // Order the reserved DID
   const order = await client.orders().create({

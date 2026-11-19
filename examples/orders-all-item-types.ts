@@ -1,3 +1,12 @@
+/**
+ * Orders with all DID item types: one order with the three DID item variants,
+ * by SKU and quantity, a specific available DID and a reserved DID. All three
+ * are did_order_items on the wire, so they fit one order. Capacity items
+ * cannot share an order with DID items (the API answers "items - should have
+ * same type"); orders-capacity.ts orders capacity on its own.
+ *
+ * Usage: DIDWW_API_KEY=xxx npx tsx examples/orders-all-item-types.ts
+ */
 import {
   DidwwClient,
   Environment,
@@ -5,7 +14,9 @@ import {
   didOrderItem,
   availableDidOrderItem,
   reservationDidOrderItem,
+  isIncluded,
 } from '../src/index.js';
+import type { AvailableDid } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -85,8 +96,9 @@ async function main() {
   }
 }
 
-function getSku(ad: Record<string, unknown>): string {
-  const skus = ad.didGroup?.stockKeepingUnits || [];
+function getSku(ad: AvailableDid): string {
+  const didGroup = ad.didGroup && isIncluded(ad.didGroup) ? ad.didGroup : undefined;
+  const skus = didGroup?.stockKeepingUnits || [];
   if (!Array.isArray(skus) || skus.length === 0) {
     throw new Error(`No stockKeepingUnits for available DID ${ad.id}`);
   }

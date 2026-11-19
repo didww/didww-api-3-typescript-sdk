@@ -11,8 +11,7 @@
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/orders-emergency.ts
  */
-import { DidwwClient, Environment, OrderItemType } from '../src/index.js';
-import { isIncluded } from '../src/resources/base.js';
+import { DidwwClient, Environment, OrderItemType, isIncluded } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -20,8 +19,8 @@ const client = new DidwwClient({
 });
 
 async function main() {
-  console.log('=== All Orders (filtering for Emergency) ===');
-  const orders = await client.orders().list();
+  console.log('=== Recent Orders (filtering for Emergency) ===');
+  const orders = await client.orders().list({ sort: '-created_at', page: { number: 1, size: 50 } });
   const emergencyOrders = orders.data.filter((o) => o.description === 'Emergency');
   console.log(`Found ${emergencyOrders.length} emergency orders out of ${orders.data.length} total`);
 

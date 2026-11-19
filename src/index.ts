@@ -1,8 +1,50 @@
 // Client
-export { DidwwClient, type DidwwClientOptions, type FetchFunction } from './client.js';
-export { Environment } from './configuration.js';
-export { DidwwApiError, DidwwClientError, type JsonApiError } from './errors.js';
+export { DidwwClient, type DidwwClientOptions } from './client.js';
+export {
+  Environment,
+  DEFAULT_API_VERSION,
+  Scope,
+  ENVIRONMENT_ENDPOINTS,
+  type EnvironmentEndpoints,
+} from './configuration.js';
+export {
+  DidwwError,
+  DidwwApiError,
+  DidwwClientError,
+  DidwwAuthError,
+  AuthErrorKind,
+  DidwwPricesError,
+  PricesErrorKind,
+  type DidwwAuthErrorInit,
+  type DidwwPricesErrorInit,
+  type JsonApiError,
+} from './errors.js';
 export { type QueryParams } from './query-params.js';
+export { JsonNumber } from './json.js';
+export { type DidwwLogger } from './logger.js';
+
+// Access tokens
+export { AccessToken, type AccessTokenData, type AccessTokenInit } from './auth/access-token.js';
+export { MemoryTokenStore, type TokenStore, type MemoryTokenStoreOptions } from './auth/token-store.js';
+
+// Prices services
+export {
+  PricesService,
+  type PriceFile,
+  type PricesRequestOptions,
+  type VoiceInPriceFilters,
+  type VoiceOutPriceFilters,
+  type SmsPriceFilters,
+} from './prices/service.js';
+export {
+  VoiceOutPriceCategory,
+  type PriceLookup,
+  type VoiceInPrice,
+  type VoiceOutPrice,
+  type SmsOutPrice,
+  type SmsInPrice,
+} from './prices/rows.js';
+export { PriceFileReader, readPriceFile, type PriceFileRow, type PriceFileSource } from './prices/price-file-reader.js';
 
 // Base
 export { ref, isIncluded, type ResourceRef, type ResourceConfig, type Operation } from './resources/base.js';
@@ -15,9 +57,7 @@ export type { Country } from './resources/country.js';
 export type { Region } from './resources/region.js';
 export type { City } from './resources/city.js';
 export type { Area } from './resources/area.js';
-export type { Pop } from './resources/pop.js';
 export type { Balance } from './resources/balance.js';
-export type { DidGroupType } from './resources/did-group-type.js';
 export type { DidGroup } from './resources/did-group.js';
 export type { AvailableDid } from './resources/available-did.js';
 export type { NanpaPrefix } from './resources/nanpa-prefix.js';
@@ -61,6 +101,13 @@ export type {
   VoiceOutTrunkRegenerateCredential,
   VoiceOutTrunkRegenerateCredentialWrite,
 } from './resources/voice-out-trunk-regenerate-credential.js';
+export type { SmsTrunk, SmsTrunkWrite } from './resources/sms-trunk.js';
+export type { SmsTrunkGroup, SmsTrunkGroupWrite } from './resources/sms-trunk-group.js';
+export type {
+  SmsTrunkRegenerateCredential,
+  SmsTrunkRegenerateCredentialWrite,
+} from './resources/sms-trunk-regenerate-credential.js';
+export type { SenderIdVerification, SenderIdVerificationWrite } from './resources/sender-id-verification.js';
 
 // Nested types
 export type { TrunkConfiguration, SipConfiguration, PstnConfiguration } from './nested/trunk-configuration.js';
@@ -70,6 +117,40 @@ export {
   redactSipConfiguration,
   SIP_CONFIGURATION_SENSITIVE_KEYS,
 } from './nested/trunk-configuration.js';
+
+export type {
+  SmsTrunkConfiguration,
+  SmsToEmailConfiguration,
+  SmsHttpInConfiguration,
+  SmsHttpOutConfiguration,
+  SmsSmppEsmeConfiguration,
+  SmsSmppSmscConfiguration,
+  GenericSmsTrunkConfiguration,
+  SmsToEmailConfigurationInput,
+  SmsHttpInConfigurationInput,
+  SmsHttpOutConfigurationInput,
+  SmsSmppEsmeConfigurationInput,
+  SmsSmppSmscConfigurationInput,
+} from './nested/sms-trunk-configuration.js';
+export {
+  smsToEmailConfiguration,
+  smsHttpInConfiguration,
+  smsHttpOutConfiguration,
+  smsSmppEsmeConfiguration,
+  smsSmppSmscConfiguration,
+  genericSmsTrunkConfiguration,
+  isSmsToEmail,
+  isSmsHttpIn,
+  isSmsHttpOut,
+  isSmsSmppEsme,
+  isSmsSmppSmsc,
+  isGenericSmsTrunkConfiguration,
+  redactSmsTrunkConfiguration,
+  SMS_HTTP_IN_SENSITIVE_KEYS,
+  SMS_HTTP_OUT_SENSITIVE_KEYS,
+  SMS_SMPP_ESME_SENSITIVE_KEYS,
+  SMS_SMPP_SMSC_SENSITIVE_KEYS,
+} from './nested/sms-trunk-configuration.js';
 
 export type {
   OrderItem,
@@ -144,6 +225,12 @@ export {
   isOrderPending,
   isOrderCompleted,
   isOrderCanceled,
+  isSenderIdVerificationActive,
+  isSenderIdVerificationChangesRequired,
+  isSenderIdVerificationClosed,
+  isSenderIdVerificationClosingInProcess,
+  isSenderIdVerificationInProcess,
+  isSenderIdVerificationNew,
 } from './status-helpers.js';
 
 // Callback

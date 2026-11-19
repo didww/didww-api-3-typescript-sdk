@@ -14,5 +14,12 @@ describe('ProofTypes', () => {
     expect(result.data.length).toBeGreaterThan(0);
     expect(result.data[0].type).toBe('proof_types');
     expect(result.data[0].name).toBeDefined();
+    expect(result.data.map((proofType) => proofType.entityType)).toEqual([
+      'address',
+      'address',
+      'address',
+      'personal',
+      'address',
+    ]);
   });
 });
