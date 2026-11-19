@@ -80,7 +80,7 @@ function provider(url: string, options: { store?: TokenStore; scope?: string | n
 }
 
 describe('token request', () => {
-  it('sends the API key, the audience and the API version, and no expires_in', async () => {
+  it('sends the API key, the audience, the API version and a one-hour lifetime', async () => {
     const s = (await startStub()).on('POST /token', tokenReply());
     await stubClient(s).balance().find();
     const [mint] = s.hits('POST /token');
