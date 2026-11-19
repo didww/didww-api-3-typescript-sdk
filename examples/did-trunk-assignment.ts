@@ -87,6 +87,7 @@ async function main() {
   } finally {
     // Restore the DID first, so the created trunk and group are no longer in use.
     // null clears only that relationship, so both are set to unroute the DID.
+    let restored = false;
     if (didChanged) {
       let restore: DidWrite & { id: string };
       if (originalTrunkId) {
@@ -97,8 +98,7 @@ async function main() {
         restore = { id: did.id, voiceInTrunk: null, voiceInTrunkGroup: null };
       }
       await client.dids().update(restore);
-      console.log("\nRestored the DID's original routing:");
-      await printDidState(did.id);
+      restored = true;
     }
     // No longer in use: the trunk and the group are deleted independently
     const removals: Promise<void>[] = [];
@@ -118,6 +118,11 @@ async function main() {
       );
     }
     await removeEach(removals);
+    // Read last, so that a failed read cannot keep the trunk and the group from being deleted
+    if (restored) {
+      console.log("\nRestored the DID's original routing:");
+      await printDidState(did.id);
+    }
   }
 }
 
