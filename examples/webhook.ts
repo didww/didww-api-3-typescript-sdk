@@ -17,12 +17,13 @@ const CALLBACK_SECRET = 'your-callback-secret';
 
 // HMAC-SHA1 with the callback secret, hex-encoded, over the callback URL with
 // its port written out (443 for https, 80 for http) followed by every payload
-// key and value, keys in alphabetical order.
+// key and value, keys in UTF-16 code unit order as RequestValidator sorts them
+// (localeCompare would order mixed-case keys differently).
 function signLikeDidww(secret: string, url: string, payload: Record<string, string>): string {
   const parsed = new URL(url);
   const port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
   let data = `${parsed.protocol}//${parsed.hostname}:${port}${parsed.pathname}${parsed.search}`;
-  for (const key of Object.keys(payload).sort()) {
+  for (const key of Object.keys(payload).sort((a, b) => Number(a > b) - Number(a < b))) {
     data += key + payload[key];
   }
   return createHmac('sha1', secret).update(data).digest('hex');
