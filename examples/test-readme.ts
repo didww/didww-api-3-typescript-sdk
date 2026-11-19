@@ -384,10 +384,24 @@ async function withPricePlan<T>(fn: () => Promise<T>): Promise<T> {
 
 // HMAC-SHA1 over the URL with its port written out, then every payload key and
 // value in key order: how DIDWW signs a callback (see examples/webhook.ts)
-function signLikeDidww(secret: string, url: string, payload: Record<string, string>): string {
+// The callback URL as RequestValidator normalizes it: the port written out (443 for https,
+// 80 for http), credentials, path, query and fragment kept, an IPv6 host in brackets
+function normalizedUrl(url: string): string {
   const parsed = new URL(url);
-  const port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
-  let data = `${parsed.protocol}//${parsed.hostname}:${port}${parsed.pathname}${parsed.search}`;
+  let port = '';
+  if (parsed.port) port = `:${parsed.port}`;
+  else if (parsed.protocol === 'https:') port = ':443';
+  else if (parsed.protocol === 'http:') port = ':80';
+  let auth = '';
+  if (parsed.username && parsed.password) auth = `${parsed.username}:${parsed.password}@`;
+  else if (parsed.username) auth = `${parsed.username}@`;
+  const host =
+    parsed.hostname.startsWith('[') || !parsed.hostname.includes(':') ? parsed.hostname : `[${parsed.hostname}]`;
+  return `${parsed.protocol}//${auth}${host}${port}${parsed.pathname}${parsed.search}${parsed.hash}`;
+}
+
+function signLikeDidww(secret: string, url: string, payload: Record<string, string>): string {
+  let data = normalizedUrl(url);
   // UTF-16 code unit order, as RequestValidator sorts the keys; localeCompare would order mixed case differently
   const keys = Object.keys(payload).sort((a, b) => Number(a > b) - Number(a < b));
   for (const key of keys) data += key + payload[key];
@@ -436,11 +450,21 @@ await check('Configuration: production client (read-only)', async () => {
     messages.some((m) => m.startsWith('DIDWW token minted:') && m.includes('scope read')),
     'a read-only token should be minted',
   );
-  assert(!messages.some((m) => m.includes('scope mismatch')), 'the token service should grant the read scope');
+  const readOnly = () => {
+    assert(!messages.some((m) => m.includes('scope mismatch')), 'the token service should grant the read scope');
+    const mints = messages.filter((m) => m.startsWith('DIDWW token minted:'));
+    assert(
+      mints.every((m) => m.includes('scope read')),
+      'every token should be read-only',
+    );
+  };
+  readOnly();
   const countries = await production.countries().list();
   assert(countries.data.length > 0, 'countries should be read');
+  // The prices service has a token of its own (another audience): checked again after the lookup
   const prices = await production.voiceInPrices().lookup({ number: '12125551234' });
   assert(Array.isArray(prices.rows), 'the price lookup should answer');
+  readOnly();
   // Facts only: never the key, the token, the balance or the account
   console.log(`    production: token minted (scope read), balance read, ${countries.data.length} countries,`);
   console.log(`    price lookup ok (${prices.rows.length} rows)`);
@@ -589,8 +613,11 @@ await check('Token cache: Redis token store', async () => {
     assert(secondStore.hits > 0, 'the second client should read the token from Redis');
     assert(secondStore.sets === 0, 'the second client should reuse the token, not mint one');
   } finally {
-    if (firstStore.keys.length > 0) await first.del(...firstStore.keys);
-    await Promise.allSettled([first.quit(), second.quit()]);
+    try {
+      if (firstStore.keys.length > 0) await first.del(...firstStore.keys);
+    } finally {
+      await Promise.allSettled([first.quit(), second.quit()]);
+    }
   }
 });
 

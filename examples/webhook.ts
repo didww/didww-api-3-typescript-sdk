@@ -15,14 +15,27 @@ import { RequestValidator } from '../src/index.js';
 
 const CALLBACK_SECRET = 'your-callback-secret';
 
-// HMAC-SHA1 with the callback secret, hex-encoded, over the callback URL with
-// its port written out (443 for https, 80 for http) followed by every payload
-// key and value, keys in UTF-16 code unit order as RequestValidator sorts them
-// (localeCompare would order mixed-case keys differently).
-function signLikeDidww(secret: string, url: string, payload: Record<string, string>): string {
+// The callback URL as RequestValidator normalizes it: the port written out (443 for https,
+// 80 for http), credentials, path, query and fragment kept, an IPv6 host in brackets
+function normalizedUrl(url: string): string {
   const parsed = new URL(url);
-  const port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
-  let data = `${parsed.protocol}//${parsed.hostname}:${port}${parsed.pathname}${parsed.search}`;
+  let port = '';
+  if (parsed.port) port = `:${parsed.port}`;
+  else if (parsed.protocol === 'https:') port = ':443';
+  else if (parsed.protocol === 'http:') port = ':80';
+  let auth = '';
+  if (parsed.username && parsed.password) auth = `${parsed.username}:${parsed.password}@`;
+  else if (parsed.username) auth = `${parsed.username}@`;
+  const host =
+    parsed.hostname.startsWith('[') || !parsed.hostname.includes(':') ? parsed.hostname : `[${parsed.hostname}]`;
+  return `${parsed.protocol}//${auth}${host}${port}${parsed.pathname}${parsed.search}${parsed.hash}`;
+}
+
+// HMAC-SHA1 with the callback secret, hex-encoded, over the normalized callback
+// URL followed by every payload key and value, keys in UTF-16 code unit order as
+// RequestValidator sorts them (localeCompare would order mixed-case keys differently).
+function signLikeDidww(secret: string, url: string, payload: Record<string, string>): string {
+  let data = normalizedUrl(url);
   for (const key of Object.keys(payload).sort((a, b) => Number(a > b) - Number(a < b))) {
     data += key + payload[key];
   }
