@@ -1123,20 +1123,34 @@ async function didNeedingAddress(countryId: string): Promise<Did> {
       Boolean(d.didGroup.addressRequirement),
   );
   if (reusable) return reusable;
-  const available = await client.availableDids().list({
-    filter: { 'country.id': countryId, 'did_group.number_type': NumberType.LOCAL },
-    include: 'did_group.stock_keeping_units,did_group.address_requirement',
-    page: { size: 50 },
+
+  // Only some Ukrainian Local groups need an address (Kiev does, Odessa does not); the
+  // relationship is filled in only when address_requirement is included
+  const local = { 'country.id': countryId, number_type: NumberType.LOCAL };
+  const kiev = await client.didGroups().list({
+    filter: { ...local, area_name: 'Kiev' },
+    include: 'address_requirement',
   });
-  const ad = needs(
-    available.data.find((a) => isIncluded<DidGroup>(a.didGroup) && a.didGroup.addressRequirement),
-    'an available DID whose DID group needs an address',
-  );
-  return orderAvailableDid(ad);
+  let group = kiev.data.find((g) => g.addressRequirement);
+  if (!group) {
+    const groups = await client
+      .didGroups()
+      .list({ filter: local, include: 'address_requirement', page: { size: 100 } });
+    group = needs(
+      groups.data.find((g) => g.addressRequirement),
+      'a Local DID group that needs an address',
+    );
+  }
+  const available = await client.availableDids().list({
+    filter: { 'did_group.id': group.id },
+    include: 'did_group.stock_keeping_units',
+    page: { size: 1 },
+  });
+  return orderAvailableDid(needs(available.data[0], `an available DID in ${group.areaName}`));
 }
 
 await check('Address Verifications: create', async () => {
-  // Ukrainian Local DID groups need an address
+  // Some Ukrainian Local DID groups, such as Kiev, need an address
   const ukraine = await uaCountry();
   const chosen = await didNeedingAddress(ukraine.id);
   usedDidIds.add(chosen.id);
