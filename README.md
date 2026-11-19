@@ -1179,7 +1179,8 @@ For the SMS trunk configuration types, see [SMS Trunks](#sms-trunks).
 | Available DID   | `availableDidOrderItem({ skuId, availableDidId })`     |
 | Reservation DID | `reservationDidOrderItem({ skuId, didReservationId })` |
 | Capacity        | `capacityOrderItem({ capacityPoolId, qty })`           |
-| Emergency       | `emergencyOrderItem({ emergencyCallingServiceId, qty })` |
+
+Emergency orders are created by the API when an emergency calling service is activated or renewed. Their `emergency_order_items` come back in `order.items`; `POST /orders` does not accept them.
 
 ## Date and Datetime Fields
 
