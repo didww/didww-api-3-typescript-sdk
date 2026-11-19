@@ -36,6 +36,12 @@ async function attachProof(proofType: ProofType | undefined, entity: ResourceRef
   console.log(`Created proof for ${entity.type}: ${proof.data.id} (type: ${typeName})`);
 }
 
+/** Runs every deletion, also after one of them fails, then reports the failures. */
+async function removeEach(removals: Promise<void>[]) {
+  const failures = (await Promise.allSettled(removals)).flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+  if (failures.length > 0) throw new AggregateError(failures, 'Cleanup failed');
+}
+
 async function main() {
   // A country for the identity and the address
   const countries = await client.countries().list({ filter: { iso: 'US' } });
@@ -122,10 +128,14 @@ async function main() {
       await client.identities().remove(identityId);
       console.log(`  Deleted identity: ${identityId}`);
     }
-    for (const id of fileIds) {
-      await client.encryptedFiles().remove(id);
-      console.log(`  Deleted encrypted file: ${id}`);
-    }
+    await removeEach(
+      fileIds.map((id) =>
+        client
+          .encryptedFiles()
+          .remove(id)
+          .then(() => console.log(`  Deleted encrypted file: ${id}`)),
+      ),
+    );
   }
 }
 

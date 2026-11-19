@@ -32,6 +32,12 @@ function describe(trunk: VoiceInTrunk): string {
   return `${trunk.name} (${config.type}, ${target}, POP ${trunk.pop ?? 'auto'})`;
 }
 
+/** Runs every deletion, also after one of them fails, then reports the failures. */
+async function removeEach(removals: Promise<void>[]) {
+  const failures = (await Promise.allSettled(removals)).flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+  if (failures.length > 0) throw new AggregateError(failures, 'Cleanup failed');
+}
+
 async function main() {
   // List trunks with their trunk group
   console.log('=== Voice IN Trunks ===');
@@ -117,11 +123,15 @@ async function main() {
     });
     console.log(`Updated PSTN trunk: ${describe(updatedPstn.data)}`);
   } finally {
-    // Delete both trunks
-    for (const id of createdIds) {
-      await client.voiceInTrunks().remove(id);
-      console.log(`Deleted trunk ${id}`);
-    }
+    // Delete both trunks, also when one deletion fails
+    await removeEach(
+      createdIds.map((id) =>
+        client
+          .voiceInTrunks()
+          .remove(id)
+          .then(() => console.log(`Deleted trunk ${id}`)),
+      ),
+    );
   }
 }
 

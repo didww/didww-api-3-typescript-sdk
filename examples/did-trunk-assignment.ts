@@ -30,6 +30,12 @@ async function printDidState(didId: string) {
   console.log(`   group = ${group}`);
 }
 
+/** Runs every deletion, also after one of them fails, then reports the failures. */
+async function removeEach(removals: Promise<void>[]) {
+  const failures = (await Promise.allSettled(removals)).flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+  if (failures.length > 0) throw new AggregateError(failures, 'Cleanup failed');
+}
+
 async function main() {
   const dids = await client.dids().list({ include: VOICE_INCLUDE, page: { number: 1, size: 1 } });
   const did = dids.data[0];
@@ -94,14 +100,24 @@ async function main() {
       console.log("\nRestored the DID's original routing:");
       await printDidState(did.id);
     }
-    if (trunkId) {
-      await client.voiceInTrunks().remove(trunkId);
-      console.log('Deleted trunk');
-    }
+    // No longer in use: the trunk and the group are deleted independently
+    const removals: Promise<void>[] = [];
+    if (trunkId)
+      removals.push(
+        client
+          .voiceInTrunks()
+          .remove(trunkId)
+          .then(() => console.log('Deleted trunk')),
+      );
     if (groupId) {
-      await client.voiceInTrunkGroups().remove(groupId);
-      console.log('Deleted trunk group');
+      removals.push(
+        client
+          .voiceInTrunkGroups()
+          .remove(groupId)
+          .then(() => console.log('Deleted trunk group')),
+      );
     }
+    await removeEach(removals);
   }
 }
 

@@ -14,6 +14,12 @@ const client = new DidwwClient({
   environment: Environment.SANDBOX,
 });
 
+/** Runs every deletion, also after one of them fails, then reports the failures. */
+async function removeEach(removals: Promise<void>[]) {
+  const failures = (await Promise.allSettled(removals)).flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+  if (failures.length > 0) throw new AggregateError(failures, 'Cleanup failed');
+}
+
 async function main() {
   const suffix = crypto.randomBytes(4).toString('hex');
   const trunkIds: string[] = [];
@@ -69,11 +75,15 @@ async function main() {
       await client.voiceInTrunkGroups().remove(groupId);
       console.log('\nDeleted trunk group (with its trunks)');
     } else {
-      // Without a group the trunks are deleted one by one
-      for (const id of trunkIds) {
-        await client.voiceInTrunks().remove(id);
-        console.log(`Deleted trunk ${id}`);
-      }
+      // Without a group each trunk is deleted, also when another deletion fails
+      await removeEach(
+        trunkIds.map((id) =>
+          client
+            .voiceInTrunks()
+            .remove(id)
+            .then(() => console.log(`Deleted trunk ${id}`)),
+        ),
+      );
     }
   }
 }
