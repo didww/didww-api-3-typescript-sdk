@@ -11,6 +11,7 @@ All examples except `webhook.ts`, which sends no API request, read the API key f
 
 - `DIDWW_API_KEY` (required): your DIDWW API key
 - `XDG_CACHE_HOME` (optional for `prices-download.ts`, Linux and other Unix systems): user cache directory, `~/.cache` if not set
+- `DIDWW_README_PROXY_URL`, `DIDWW_README_CA_BUNDLE`, `DIDWW_README_REDIS_URL` (optional for `test-readme.ts`): an HTTP proxy that allows CONNECT, a CA bundle file that trusts the sandbox hosts, and a Redis server, for the README's proxy, CA bundle and Redis token store snippets. The proxy snippet also needs the `https-proxy-agent` package and the Redis snippet the `ioredis` package (`npm install --no-save https-proxy-agent@7.0.6 ioredis@5.11.1`). Without them those checks are skipped.
 
 ## Install
 
@@ -76,7 +77,7 @@ DIDWW_API_KEY=your_api_key npx tsx examples/prices-lookup.ts 18005550123
 | [`prices-download.ts`](prices-download.ts) | Downloads the Voice IN price file, fetches it again with If-Modified-Since (304), reads the first rows. Directory: `didww-prices` in the user cache directory, created for the current user only. |
 | [`includes.ts`](includes.ts) | Reads regions, DID groups, available DIDs, DIDs and cities with included relationships and shows the `isIncluded` type guard. |
 | [`webhook.ts`](webhook.ts) | Validates callback signatures with `RequestValidator`: a signed sample callback is valid, a tampered one is not. Sends no API request. |
-| [`test-readme.ts`](test-readme.ts) | Runs every code snippet of the README against the sandbox API, one check per snippet, and cleans up what it creates. |
+| [`test-readme.ts`](test-readme.ts) | Runs every code snippet of the README against the sandbox API, one check per snippet, and cleans up what it creates. The address and emergency verifications it creates are printed on `REVIEW` lines. |
 
 `did-trunk-assignment.ts`, `did-sms-routing.ts` and `sender-id-verifications.ts` change existing account state and restore it at the end; `trunks.ts`, `voice-in-trunk-groups.ts`, `shared-capacity-groups.ts`, `identity-address-proofs.ts`, `sms-trunks.ts` and `sms-trunk-groups.ts` delete what they create. Both happen also when a step fails.
 

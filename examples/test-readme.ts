@@ -4,10 +4,17 @@
  *
  * What the checks create is deleted at the end, and what they change on
  * existing resources (the first DID of the account, a Sender ID verification)
- * is restored, also when a check fails. Orders and exports cannot be deleted.
- * A snippet that cannot run against the sandbox is reported as skipped with the
- * reason. Prints "Results: N passed, M failed, K skipped" and exits with 1 when
- * a check fails.
+ * is restored, also when a check fails. Orders, exports and the address and
+ * emergency verifications cannot be deleted: each verification is printed on a
+ * line starting with "REVIEW", for DIDWW to approve or reject it. Only the
+ * production client snippets send nothing. Prints "Results: N passed, M failed,
+ * K skipped" and exits with 1 when a check fails.
+ *
+ * Some snippets need more than the SDK; their checks are skipped without it:
+ *   - DIDWW_README_PROXY_URL: an HTTP proxy that allows CONNECT, and the
+ *     https-proxy-agent package
+ *   - DIDWW_README_CA_BUNDLE: a CA bundle file (PEM) that trusts the sandbox hosts
+ *   - DIDWW_README_REDIS_URL: a Redis server, and the ioredis package
  *
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/test-readme.ts
  */
@@ -18,6 +25,7 @@ import https from 'node:https';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { finished } from 'node:stream/promises';
+import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import {
   AccessToken,
@@ -90,6 +98,7 @@ import {
   smsHttpOutConfiguration,
 } from '../src/index.js';
 import type {
+  AvailableDid,
   CapacityPool,
   Country,
   CredentialsAndIpAuthenticationMethod,
@@ -97,7 +106,10 @@ import type {
   DidGroup,
   DidWrite,
   DidwwLogger,
+  IdentityWrite,
+  ProofType,
   QtyBasedPricing,
+  ResourceRef,
   SipConfiguration,
   SmsTrunk,
   StockKeepingUnit,
@@ -144,11 +156,6 @@ async function check(name: string, fn: () => Promise<void>) {
   }
 }
 
-function reportSkipped(name: string, reason: string) {
-  skipped++;
-  console.log(`  - ${name}: skipped, ${reason}`);
-}
-
 function section(title: string) {
   console.log(`\n== ${title} ==`);
 }
@@ -167,17 +174,44 @@ const restores: Cleanup[] = [];
 const deletions: Cleanup[] = [];
 const fileDeletions: Cleanup[] = [];
 
-function deleteLater(name: string, run: () => Promise<void>, list: Cleanup[] = deletions) {
+/**
+ * A resource that a verification may still use (mayBeInUse) is kept when the API
+ * refuses to delete it, and the output says so.
+ */
+function deleteLater(name: string, run: () => Promise<void>, list: Cleanup[] = deletions, mayBeInUse = false) {
   list.push({
     name,
     run: async () => {
       try {
         await run();
       } catch (err) {
-        if (!(err instanceof DidwwApiError && err.status === 404)) throw err;
+        if (err instanceof DidwwApiError && err.status === 404) return;
+        if (mayBeInUse && err instanceof DidwwApiError && err.status >= 400 && err.status < 500) {
+          const reason = err.errors.map((e) => e.detail ?? e.title).join('; ') || err.message;
+          console.log(`  kept ${name}: the API refuses to delete it (${reason})`);
+          return;
+        }
+        throw err;
       }
     },
   });
+}
+
+/** Imports a package that only a README snippet needs; undefined when it is not installed. */
+async function importOptional(name: string): Promise<Record<string, unknown> | undefined> {
+  try {
+    return (await import(name)) as Record<string, unknown>;
+  } catch (err) {
+    const code = (err as NodeJS.ErrnoException).code;
+    if (code === 'ERR_MODULE_NOT_FOUND' || code === 'MODULE_NOT_FOUND') return undefined;
+    throw err;
+  }
+}
+
+/** The message of an API error with the detail of each error, for a failed check. */
+function apiErrorDetails(error: unknown): unknown {
+  if (!(error instanceof DidwwApiError)) return error;
+  return new Error(`${error.message}: ${error.errors.map((e) => e.detail ?? e.title).join('; ')}`);
 }
 
 /** Runs fn once; later calls get the same promise. */
@@ -192,6 +226,47 @@ const usCountry = once(async () => {
   const countries = await client.countries().list({ filter: { iso: 'US' } });
   return needs(countries.data[0], 'country US');
 });
+
+const uaCountry = once(async () => {
+  const countries = await client.countries().list({ filter: { iso: 'UA' } });
+  return needs(countries.data[0], 'country UA');
+});
+
+/** DIDs and addresses the verification checks use, so that one check does not take those of the other. */
+const usedDidIds = new Set<string>();
+const createdAddressIds = new Set<string>();
+
+/** Orders an available DID (included with did_group.stock_keeping_units) and waits for the order to complete. */
+async function orderAvailableDid(ad: AvailableDid): Promise<Did> {
+  const skuId = needs(
+    isIncluded<DidGroup>(ad.didGroup) ? ad.didGroup.stockKeepingUnits?.[0]?.id : undefined,
+    `a SKU of available DID ${ad.number}`,
+  );
+  let { data: order } = await client.orders().create({
+    items: [availableDidOrderItem({ skuId, availableDidId: ad.id })],
+  });
+  for (let attempt = 0; attempt < 12 && order.status === OrderStatus.PENDING; attempt++) {
+    await sleep(5_000);
+    order = (await client.orders().find(order.id)).data;
+  }
+  assert(order.status === OrderStatus.COMPLETED, `order ${order.id} of ${ad.number} is ${order.status}`);
+  const dids = await client.dids().list({ filter: { 'order.id': order.id } });
+  const did = needs(dids.data[0], `the DID of order ${order.id}`);
+  console.log(`    ordered DID ${did.number} (order ${order.reference})`);
+  return did;
+}
+
+/** Uploads examples/sample.pdf encrypted and returns the encrypted file id; it is deleted at the end when unused. */
+async function uploadSamplePdf(description: string): Promise<string> {
+  const enc = new Encrypt(client);
+  const id = await client.uploadEncryptedFile(await enc.getFingerprint(), {
+    data: await enc.encrypt(readFileSync(resolve(here, 'sample.pdf'))),
+    description,
+    filename: `${description}.pdf.enc`,
+  });
+  deleteLater(`encrypted file ${id}`, () => client.encryptedFiles().remove(id), fileDeletions, true);
+  return id;
+}
 
 const firstSkuId = once(async () => {
   const groups = await client.didGroups().list({ include: 'stock_keeping_units', page: { size: 10 } });
@@ -351,8 +426,44 @@ await check('Configuration: production and sandbox clients', async () => {
   assert(!JSON.stringify(sandbox).includes(API_KEY), 'the API key should not be serialized');
 });
 
-await check('Proxy, TLS and connections: keep-alive agent', async () => {
-  const agent = new https.Agent({ keepAlive: true });
+/** The part of https-proxy-agent the proxy check uses. */
+type ProxyAgent = https.Agent & { connect(req: unknown, opts: unknown): Promise<unknown> };
+
+await check('Proxy, TLS and connections: through an HTTP proxy', async () => {
+  const proxyUrl = process.env.DIDWW_README_PROXY_URL || skip('set DIDWW_README_PROXY_URL to an HTTP proxy');
+  const proxyAgentModule = (await importOptional('https-proxy-agent')) ?? skip('install https-proxy-agent');
+  const HttpsProxyAgent = (proxyAgentModule.HttpsProxyAgent ??
+    (proxyAgentModule.default as Record<string, unknown> | undefined)?.HttpsProxyAgent) as new (
+    proxy: string,
+  ) => ProxyAgent;
+  // The README's proxy.example.com is the proxy of the environment; the client talks to the sandbox
+  const agent = new HttpsProxyAgent(proxyUrl);
+  let tunnels = 0;
+  const connect = agent.connect.bind(agent);
+  agent.connect = (req, opts) => {
+    tunnels++;
+    return connect(req, opts);
+  };
+  try {
+    // A token store of its own, so that the token request goes through the proxy too
+    const proxied = new DidwwClient({
+      apiKey: API_KEY,
+      environment: Environment.SANDBOX,
+      agent,
+      tokenStore: new MemoryTokenStore(),
+    });
+    const balance = await proxied.balance().find();
+    assert(typeof balance.data.totalBalance === 'string', 'totalBalance should be a string');
+    assert(tunnels > 0, 'the requests should go through the proxy');
+    console.log(`    ${tunnels} connections through the proxy`);
+  } finally {
+    agent.destroy();
+  }
+});
+
+await check('Proxy, TLS and connections: own CA bundle and keep-alive', async () => {
+  const caBundle = process.env.DIDWW_README_CA_BUNDLE || skip('set DIDWW_README_CA_BUNDLE to a CA bundle file');
+  const agent = new https.Agent({ keepAlive: true, ca: readFileSync(caBundle) });
   try {
     const keepAlive = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, agent });
     await keepAlive.balance().find();
@@ -361,10 +472,6 @@ await check('Proxy, TLS and connections: keep-alive agent', async () => {
     agent.destroy();
   }
 });
-reportSkipped(
-  'Proxy, TLS and connections: HTTP proxy and CA bundle',
-  'needs an HTTP proxy, the https-proxy-agent package and a CA bundle file',
-);
 
 await check('Scope: read-only client', async () => {
   const readOnly = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, scope: Scope.READ });
@@ -391,27 +498,66 @@ await check('Token cache: TokenStore interface', async () => {
   assert(sets === 1, `one token should be minted and then reused, got ${sets} sets`);
 });
 
-await check('Token cache: store that persists tokens (Redis snippet, a Map instead of Redis)', async () => {
-  // The snippet's toData/fromData round trip, with a Map in place of the Redis client
-  const redis = new Map<string, string>();
-  class SerializingTokenStore implements TokenStore {
-    get(key: string): AccessToken | null {
-      const raw = redis.get(key);
-      return raw === undefined ? null : AccessToken.fromData(JSON.parse(raw));
+/** The part of an ioredis client the Redis snippet uses. */
+interface Redis {
+  get(key: string): Promise<string | null>;
+  set(key: string, value: string, ...expiry: (string | number)[]): Promise<unknown>;
+  del(...keys: string[]): Promise<number>;
+  quit(): Promise<unknown>;
+}
+
+await check('Token cache: Redis token store', async () => {
+  const redisUrl = process.env.DIDWW_README_REDIS_URL || skip('set DIDWW_README_REDIS_URL to a Redis server');
+  const ioredis = (await importOptional('ioredis')) ?? skip('install ioredis');
+  const RedisClient = (ioredis.Redis ?? ioredis.default) as new (url: string, options: object) => Redis;
+
+  // The README's store, counting what it stores and what it reads back
+  class RedisTokenStore implements TokenStore {
+    readonly keys: string[] = [];
+    sets = 0;
+    hits = 0;
+    constructor(private readonly redis: Redis) {}
+
+    async get(key: string): Promise<AccessToken | null> {
+      const raw = await this.redis.get(key);
+      if (raw !== null) this.hits++;
+      return raw === null ? null : AccessToken.fromData(JSON.parse(raw));
     }
-    set(key: string, token: AccessToken): void {
-      redis.set(key, JSON.stringify(token.toData()));
+
+    async set(key: string, token: AccessToken, ttlSeconds: number): Promise<void> {
+      this.sets++;
+      this.keys.push(key);
+      const value = JSON.stringify(token.toData());
+      if (ttlSeconds > 0) await this.redis.set(key, value, 'EX', Math.ceil(ttlSeconds));
+      else await this.redis.set(key, value);
     }
-    delete(key: string): void {
-      redis.delete(key);
+
+    async delete(key: string): Promise<void> {
+      await this.redis.del(key);
     }
   }
-  const store = new SerializingTokenStore();
-  await new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, tokenStore: store }).balance().find();
-  assert(redis.size === 1, 'the token should be stored');
-  const stored = redis.get([...redis.keys()][0])!;
-  await new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, tokenStore: store }).balance().find();
-  assert(redis.get([...redis.keys()][0]) === stored, 'the stored token should be reused');
+
+  // Two connections, as two processes would have; the key prefix keeps this run's token apart
+  const options = { connectTimeout: 5_000, commandTimeout: 5_000, keyPrefix: `didww-readme-${suffix}:` };
+  const first = new RedisClient(redisUrl, options);
+  const second = new RedisClient(redisUrl, options);
+  const firstStore = new RedisTokenStore(first);
+  try {
+    await new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, tokenStore: firstStore })
+      .balance()
+      .find();
+    assert(firstStore.sets === 1, `the first client should mint and store one token, stored ${firstStore.sets}`);
+
+    const secondStore = new RedisTokenStore(second);
+    await new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, tokenStore: secondStore })
+      .balance()
+      .find();
+    assert(secondStore.hits > 0, 'the second client should read the token from Redis');
+    assert(secondStore.sets === 0, 'the second client should reuse the token, not mint one');
+  } finally {
+    if (firstStore.keys.length > 0) await first.del(...firstStore.keys);
+    await Promise.allSettled([first.quit(), second.quit()]);
+  }
 });
 
 await check('Logging: console and a (details, message) logger adapter', async () => {
@@ -877,6 +1023,7 @@ await check('Addresses: create', async () => {
     identity: ref('identities', id),
     country: ref('countries', country.id),
   });
+  createdAddressIds.add(address.data.id);
   deleteLater(`address ${address.data.id}`, () => client.addresses().remove(address.data.id));
 });
 
@@ -933,10 +1080,146 @@ await check('Address Verifications: list', async () => {
   const verifications = await client.addressVerifications().list();
   console.log(`    ${verifications.data.length} address verifications`);
 });
-reportSkipped(
-  'Address Verifications: create',
-  'needs a DID that requires an address and an address with its proofs; DIDWW reviews the request',
-);
+/** The description of the address this check creates; the emergency check leaves such addresses alone. */
+const README_ADDRESS = 'README address verification check';
+
+/** The identity fields an address requirement can make mandatory, as the API spells them. */
+const MANDATORY_IDENTITY_FIELDS: Record<string, (countryId: string) => IdentityWrite> = {
+  birth_date: () => ({ birthDate: '1980-01-01' }),
+  country: (countryId) => ({ country: ref('countries', countryId) }),
+  birth_country: (countryId) => ({ birthCountry: ref('countries', countryId) }),
+  id_number: () => ({ idNumber: 'AB123456' }),
+  personal_tax_id: () => ({ personalTaxId: '1234567890' }),
+  contact_email: () => ({ contactEmail: 'john.doe@example.com' }),
+  tax_id: () => ({ vatId: 'UA12345678' }),
+  company_reg_number: () => ({ companyRegNumber: '12345678' }),
+};
+
+/** Creates `qty` proofs for the entity, each with its own upload of sample.pdf. */
+async function createProofs(entity: ResourceRef, qty: number, proofTypes: (ProofType | ResourceRef)[] | undefined) {
+  for (let i = 0; i < qty; i++) {
+    const proofType = needs(proofTypes?.[i % proofTypes.length], `a proof type for ${entity.type}`);
+    const fileId = await uploadSamplePdf(`${entity.type}-proof-${i + 1}`);
+    await client.proofs().create({
+      proofType: ref('proof_types', proofType.id),
+      entity,
+      files: [ref('encrypted_files', fileId)],
+    });
+  }
+}
+
+/** A DID of the account whose DID group needs an address and that has no address verification; ordered when none. */
+async function didNeedingAddress(countryId: string): Promise<Did> {
+  const owned = await client.dids().list({
+    filter: { 'country.id': countryId, terminated: 'false' },
+    include: 'did_group.address_requirement,address_verification',
+    page: { size: 50 },
+  });
+  const reusable = owned.data.find(
+    (d) =>
+      !d.addressVerification &&
+      !usedDidIds.has(d.id) &&
+      isIncluded<DidGroup>(d.didGroup) &&
+      Boolean(d.didGroup.addressRequirement),
+  );
+  if (reusable) return reusable;
+  const available = await client.availableDids().list({
+    filter: { 'country.id': countryId, 'did_group.number_type': NumberType.LOCAL },
+    include: 'did_group.stock_keeping_units,did_group.address_requirement',
+    page: { size: 50 },
+  });
+  const ad = needs(
+    available.data.find((a) => isIncluded<DidGroup>(a.didGroup) && a.didGroup.addressRequirement),
+    'an available DID whose DID group needs an address',
+  );
+  return orderAvailableDid(ad);
+}
+
+await check('Address Verifications: create', async () => {
+  // Ukrainian Local DID groups need an address
+  const ukraine = await uaCountry();
+  const chosen = await didNeedingAddress(ukraine.id);
+  usedDidIds.add(chosen.id);
+  const { data: did } = await client.dids().find(chosen.id, { include: 'did_group' });
+  const group = did.didGroup;
+  assert(isIncluded<DidGroup>(group), 'the DID group should be included');
+  const groupWithRequirement = await client.didGroups().find(group.id, { include: 'address_requirement' });
+  const requirementId = needs(groupWithRequirement.data.addressRequirement?.id, 'the address requirement');
+  const { data: requirement } = await client.addressRequirements().find(requirementId, {
+    include:
+      'personal_proof_types,business_proof_types,address_proof_types,personal_permanent_document,business_permanent_document',
+  });
+  const business = requirement.identityType === IdentityType.BUSINESS || requirement.personalAreaLevel === null;
+  console.log(`    DID ${did.number} (${group.areaName}), requirement ${requirement.id}, ${requirement.identityType}`);
+
+  // An identity and an address that meet the requirement
+  const mandatory = business ? requirement.businessMandatoryFields : requirement.personalMandatoryFields;
+  const identityAttributes: IdentityWrite = {
+    identityType: business ? IdentityType.BUSINESS : IdentityType.PERSONAL,
+    firstName: 'John',
+    lastName: 'Doe',
+    phoneNumber: '380487000000',
+    country: ref('countries', ukraine.id),
+    ...(business ? { companyName: 'Example LLC' } : {}),
+  };
+  for (const field of mandatory) Object.assign(identityAttributes, MANDATORY_IDENTITY_FIELDS[field]?.(ukraine.id));
+  const identity = await client.identities().create(identityAttributes);
+  deleteLater(`identity ${identity.data.id}`, () => client.identities().remove(identity.data.id), deletions, true);
+
+  const city = group.city ? (await client.cities().find(group.city.id, { include: 'area' })).data : undefined;
+  const address = await client.addresses().create({
+    cityName: city?.name ?? 'Odesa',
+    postalCode: '65000',
+    address: '1 Derybasivska St',
+    description: README_ADDRESS,
+    identity: ref('identities', identity.data.id),
+    country: ref('countries', ukraine.id),
+    ...(city ? { city: ref('cities', city.id) } : {}),
+    ...(city?.area ? { area: ref('areas', city.area.id) } : {}),
+  });
+  createdAddressIds.add(address.data.id);
+  deleteLater(`address ${address.data.id}`, () => client.addresses().remove(address.data.id), deletions, true);
+
+  // The proofs and the permanent document the requirement lists
+  const identityRef = ref('identities', identity.data.id);
+  await createProofs(
+    identityRef,
+    business ? requirement.businessProofQty : requirement.personalProofQty,
+    business ? requirement.businessProofTypes : requirement.personalProofTypes,
+  );
+  await createProofs(ref('addresses', address.data.id), requirement.addressProofQty, requirement.addressProofTypes);
+  const template = business ? requirement.businessPermanentDocument : requirement.personalPermanentDocument;
+  if (template) {
+    const fileId = await uploadSamplePdf('permanent-document');
+    await client.permanentSupportingDocuments().create({
+      identity: identityRef,
+      template: ref('supporting_document_templates', template.id),
+      files: [ref('encrypted_files', fileId)],
+    });
+  }
+  const onetime = business ? requirement.businessOnetimeDocument : requirement.personalOnetimeDocument;
+  if (onetime) console.log(`    the requirement also lists one-time document ${onetime.id}, not sent with the request`);
+
+  try {
+    await client.addressRequirementValidations().create({
+      addressRequirement: ref('address_requirements', requirement.id),
+      identity: identityRef,
+      address: ref('addresses', address.data.id),
+    });
+  } catch (error) {
+    throw apiErrorDetails(error);
+  }
+
+  // The README snippet
+  const verification = await client.addressVerifications().create({
+    callbackUrl: 'https://example.com/callback',
+    callbackMethod: CallbackMethod.POST,
+    address: ref('addresses', address.data.id),
+    dids: [ref('dids', did.id)],
+    ...(requirement.serviceDescriptionRequired ? { serviceDescription: 'Inbound calls of a small office' } : {}),
+  });
+  console.log(`REVIEW address_verification ${verification.data.id} ${verification.data.reference}`);
+});
 
 section('Emergency Services');
 
@@ -945,10 +1228,70 @@ await check('Emergency Services: list requirements and calling services', async 
   const emergServices = await client.emergencyCallingServices().list({ page: { size: 3 } });
   console.log(`    ${emergReqs.data.length} requirements, ${emergServices.data.length} calling services`);
 });
-reportSkipped(
-  'Emergency Services: create an emergency verification',
-  'needs a DID with emergency calling and an address that meets its requirement; DIDWW reviews the request',
-);
+await check('Emergency Services: create an emergency verification', async () => {
+  // An address of the account with its identity, as examples/emergency-scenario.ts uses it, preferably
+  // in Ukraine; not one that this script created, now or in an earlier run
+  const ukraine = await uaCountry();
+  const addresses = await client.addresses().list({ include: 'country,identity' });
+  const candidates = addresses.data.filter(
+    (a) => a.country && a.identity && !createdAddressIds.has(a.id) && a.description !== README_ADDRESS,
+  );
+  const address = needs(
+    candidates.find((a) => a.country?.id === ukraine.id) ?? candidates[0],
+    'an address with a country and an identity on the account',
+  );
+  const countryId = address.country!.id;
+  const identityId = address.identity!.id;
+
+  // A DID with emergency calling in the country of the address, without an emergency calling service
+  const owned = await client.dids().list({
+    filter: {
+      'country.id': countryId,
+      'did_group.features': 'emergency',
+      emergency_enabled: 'false',
+      terminated: 'false',
+    },
+    include: 'emergency_calling_service',
+    page: { size: 50 },
+  });
+  let did = owned.data.find((d) => !d.emergencyCallingService && !usedDidIds.has(d.id));
+  if (!did) {
+    const available = await client.availableDids().list({
+      filter: { 'country.id': countryId, 'did_group.features': 'emergency' },
+      include: 'did_group.stock_keeping_units',
+      page: { size: 1 },
+    });
+    did = await orderAvailableDid(needs(available.data[0], 'an available DID with emergency calling'));
+  }
+  usedDidIds.add(did.id);
+  const { data: withGroup } = await client.dids().find(did.id, { include: 'did_group' });
+  const group = withGroup.didGroup;
+  assert(isIncluded<DidGroup>(group), 'the DID group should be included');
+
+  const requirements = await client.emergencyRequirements().list({
+    filter: { 'country.id': countryId, number_type: group.numberType },
+  });
+  const requirement = needs(requirements.data[0], `an emergency requirement for ${group.numberType} numbers`);
+  try {
+    await client.emergencyRequirementValidations().create({
+      emergencyRequirement: ref('emergency_requirements', requirement.id),
+      address: ref('addresses', address.id),
+      identity: ref('identities', identityId),
+    });
+  } catch (error) {
+    throw apiErrorDetails(error);
+  }
+  console.log(`    DID ${withGroup.number}, address ${address.id}, requirement ${requirement.id}`);
+
+  // The README snippet
+  const emergVerification = await client.emergencyVerifications().create({
+    callbackUrl: 'https://example.com/callback',
+    callbackMethod: CallbackMethod.POST,
+    address: ref('addresses', address.id),
+    dids: [ref('dids', did.id)],
+  });
+  console.log(`REVIEW emergency_verification ${emergVerification.data.id} ${emergVerification.data.reference}`);
+});
 
 section('DID History');
 
