@@ -12,6 +12,7 @@ All examples except `webhook.ts`, which sends no API request, read the API key f
 - `DIDWW_API_KEY` (required): your DIDWW API key
 - `XDG_CACHE_HOME` (optional for `prices-download.ts`, Linux and other Unix systems): user cache directory, `~/.cache` if not set
 - `DIDWW_README_PROXY_URL`, `DIDWW_README_CA_BUNDLE`, `DIDWW_README_REDIS_URL` (optional for `test-readme.ts`): an HTTP proxy that allows CONNECT, a CA bundle file that trusts the sandbox hosts, and a Redis server, for the README's proxy, CA bundle and Redis token store snippets. The proxy snippet also needs the `https-proxy-agent` package and the Redis snippet the `ioredis` package (`npm install --no-save https-proxy-agent@7.0.6 ioredis@5.11.1`). Without them those checks are skipped.
+- `DIDWW_README_PRODUCTION_API_KEY` (optional for `test-readme.ts`): a production API key for its one production check, which only reads the balance, the countries and a Voice IN price with a read-scoped token. Without it the check is skipped.
 
 ## Install
 

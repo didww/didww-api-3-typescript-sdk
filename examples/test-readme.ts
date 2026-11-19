@@ -6,11 +6,14 @@
  * existing resources (the first DID of the account, a Sender ID verification)
  * is restored, also when a check fails. Orders, exports and the address and
  * emergency verifications cannot be deleted: each verification is printed on a
- * line starting with "REVIEW", for DIDWW to approve or reject it. Only the
- * production client snippets send nothing. Prints "Results: N passed, M failed,
- * K skipped" and exits with 1 when a check fails.
+ * line starting with "REVIEW", for DIDWW to approve or reject it. The other
+ * production client snippets are run against the sandbox. Prints "Results: N
+ * passed, M failed, K skipped" and exits with 1 when a check fails.
  *
  * Some snippets need more than the SDK; their checks are skipped without it:
+ *   - DIDWW_README_PRODUCTION_API_KEY: a production API key, for the one
+ *     production check, which only reads (balance, countries, a price lookup)
+ *     with a read-scoped token
  *   - DIDWW_README_PROXY_URL: an HTTP proxy that allows CONNECT, and the
  *     https-proxy-agent package
  *   - DIDWW_README_CA_BUNDLE: a CA bundle file (PEM) that trusts the sandbox hosts
@@ -410,10 +413,40 @@ await check('Quick Start: balance and countries', async () => {
 
 section('Configuration');
 
-await check('Configuration: production and sandbox clients', async () => {
-  // Built only: no request is sent to production
-  const production = new DidwwClient({ apiKey: 'your-api-key', environment: Environment.PRODUCTION });
-  assert(production.scope === null, 'the production client should request no scope');
+await check('Configuration: production client (read-only)', async () => {
+  // Only with a production key of its own, and only reads: the read scope makes the token
+  // service issue a read-only token, so production refuses a write even by mistake
+  const productionKey = process.env.DIDWW_README_PRODUCTION_API_KEY || skip('set DIDWW_README_PRODUCTION_API_KEY');
+  const messages: string[] = [];
+  const record = (message: string) => {
+    messages.push(message);
+  };
+  const production = new DidwwClient({
+    apiKey: productionKey,
+    environment: Environment.PRODUCTION,
+    scope: Scope.READ,
+    tokenStore: new MemoryTokenStore(),
+    logger: { debug: record, warn: record },
+  });
+  assert(production.scope === Scope.READ, 'the production client should request the read scope');
+
+  const balance = await production.balance().find();
+  assert(typeof balance.data.totalBalance === 'string', 'the balance should be read');
+  assert(
+    messages.some((m) => m.startsWith('DIDWW token minted:') && m.includes('scope read')),
+    'a read-only token should be minted',
+  );
+  assert(!messages.some((m) => m.includes('scope mismatch')), 'the token service should grant the read scope');
+  const countries = await production.countries().list();
+  assert(countries.data.length > 0, 'countries should be read');
+  const prices = await production.voiceInPrices().lookup({ number: '12125551234' });
+  assert(Array.isArray(prices.rows), 'the price lookup should answer');
+  // Facts only: never the key, the token, the balance or the account
+  console.log(`    production: token minted (scope read), balance read, ${countries.data.length} countries,`);
+  console.log(`    price lookup ok (${prices.rows.length} rows)`);
+});
+
+await check('Configuration: sandbox client', async () => {
   const sandbox = new DidwwClient({
     apiKey: API_KEY,
     environment: Environment.SANDBOX,
