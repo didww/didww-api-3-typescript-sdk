@@ -338,8 +338,9 @@ await check('Configuration: production and sandbox clients', async () => {
     logger: console,
     connectTimeout: 5_000,
   });
-  const countries = await sandbox.countries().list({ page: { size: 1 } });
-  assert(countries.data.length === 1, 'the sandbox client should read countries');
+  // countries are not paginated: the API returns all of them
+  const countries = await sandbox.countries().list();
+  assert(countries.data.length > 0, 'the sandbox client should read countries');
   assert(!JSON.stringify(sandbox).includes(API_KEY), 'the API key should not be serialized');
 });
 
@@ -361,8 +362,8 @@ reportSkipped(
 await check('Scope: read-only client', async () => {
   const readOnly = new DidwwClient({ apiKey: API_KEY, environment: Environment.SANDBOX, scope: Scope.READ });
   assert(readOnly.scope === Scope.READ, 'scope should be read');
-  const countries = await readOnly.countries().list({ page: { size: 1 } });
-  assert(countries.data.length === 1, 'should read countries');
+  const countries = await readOnly.countries().list();
+  assert(countries.data.length > 0, 'should read countries');
 });
 
 await check('Token cache: TokenStore interface', async () => {
@@ -669,7 +670,13 @@ await check('SMS Trunks: generic configuration', async () => {
   const { id } = await httpInSmsTrunk();
   const updated = await client.smsTrunks().update({
     id,
-    configuration: genericSmsTrunkConfiguration('http_in', { url: 'https://example.com/sms', http_method: 'get' }),
+    // The trunk of the previous checks sends a JSON body; a GET trunk must have none
+    configuration: genericSmsTrunkConfiguration('http_in', {
+      url: 'https://example.com/sms',
+      http_method: 'get',
+      body_type: null,
+      body: null,
+    }),
   });
   const config = updated.data.configuration;
   assert(isSmsHttpIn(config) && config.httpMethod === SmsHttpMethod.GET, 'method should be GET');
@@ -822,7 +829,20 @@ await check('Identities: create', async () => {
 });
 
 await check('Identities: update the company website', async () => {
-  const id = needs(identityId, 'the identity of the previous check');
+  // companyWebsite belongs to business identities; a personal identity refuses it
+  const country = await usCountry();
+  const business = await client.identities().create({
+    identityType: IdentityType.BUSINESS,
+    firstName: 'John',
+    lastName: 'Doe',
+    phoneNumber: '12125551234',
+    companyName: 'Example Inc',
+    companyRegNumber: '12345678',
+    vatId: 'US123456789',
+    country: ref('countries', country.id),
+  });
+  const id = business.data.id;
+  deleteLater(`identity ${id}`, () => client.identities().remove(id));
   const updated = await client.identities().update({ id, companyWebsite: 'https://www.example.com' });
   assert(updated.data.companyWebsite === 'https://www.example.com', 'website should be set');
 });
