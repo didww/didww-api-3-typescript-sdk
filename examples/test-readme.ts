@@ -25,7 +25,7 @@ import {
   calculateFingerprint,
   encryptWithKeys,
   RequestValidator,
-  ipOnlyAuthenticationMethod,
+  credentialsAndIpAuthenticationMethod,
   NumberType,
   Pop,
   Scope,
@@ -38,7 +38,7 @@ import {
   isSmsHttpIn,
   SenderIdVerificationStatus,
 } from '../src/index.js';
-import type { QtyBasedPricing } from '../src/index.js';
+import type { CredentialsAndIpAuthenticationMethod, QtyBasedPricing } from '../src/index.js';
 import crypto from 'node:crypto';
 import assert from 'node:assert';
 
@@ -334,10 +334,11 @@ console.log('\n== Voice Out Trunks ==');
 await test('Create voice out trunk', async () => {
   const voTrunk = await client.voiceOutTrunks().create({
     name: `Test Outbound Trunk ${crypto.randomBytes(4).toString('hex')}`,
-    authenticationMethod: ipOnlyAuthenticationMethod({
+    // username and password are server-generated, so they are left out
+    authenticationMethod: credentialsAndIpAuthenticationMethod({
       allowedSipIps: ['203.0.113.0/24'],
       techPrefix: '',
-    }),
+    } as Omit<CredentialsAndIpAuthenticationMethod, 'type'>),
     defaultDstAction: DefaultDstAction.ALLOW_ALL,
     onCliMismatchAction: OnCliMismatchAction.REJECT_CALL,
     codecs: [VoiceOutCodec.OPUS, VoiceOutCodec.PCMA, VoiceOutCodec.TELEPHONE_EVENT],
