@@ -1,8 +1,10 @@
 /**
- * Capacity Pools: list and update.
+ * Capacity Pools: lists pools with their shared capacity groups and qty-based
+ * pricings, and finds one.
  * Usage: DIDWW_API_KEY=xxx npx tsx examples/capacity-pools.ts
  */
 import { DidwwClient, Environment, isIncluded } from '../src/index.js';
+import type { QtyBasedPricing, SharedCapacityGroup } from '../src/index.js';
 
 const client = new DidwwClient({
   apiKey: process.env.DIDWW_API_KEY!,
@@ -10,19 +12,31 @@ const client = new DidwwClient({
 });
 
 async function main() {
-  // List capacity pools with included shared capacity groups
+  // List capacity pools with included shared capacity groups and qty-based pricings
   const pools = await client.capacityPools().list({
-    include: 'shared_capacity_groups',
+    include: 'shared_capacity_groups,qty_based_pricings',
   });
   console.log(`Capacity pools (${pools.data.length}):`);
   for (const pool of pools.data) {
-    console.log(`  ${pool.name} (${pool.id})`);
+    console.log(`\n  ${pool.name} (${pool.id})`);
     console.log(`    totalChannelsCount: ${pool.totalChannelsCount}`);
     console.log(`    assignedChannelsCount: ${pool.assignedChannelsCount}`);
-    const scgs = pool.sharedCapacityGroups || [];
-    const scgNames = scgs.filter((g) => isIncluded(g)).map((g) => (g as { name: string }).name);
-    if (scgNames.length > 0) {
-      console.log(`    sharedCapacityGroups: [${scgNames.join(', ')}]`);
+    console.log(`    renewDate: ${pool.renewDate}`);
+
+    const groups = (pool.sharedCapacityGroups ?? []).filter((g): g is SharedCapacityGroup => isIncluded(g));
+    if (groups.length > 0) {
+      console.log(`    sharedCapacityGroups (${groups.length}):`);
+      for (const g of groups) {
+        console.log(`      ${g.name} shared=${g.sharedChannelsCount} metered=${g.meteredChannelsCount}`);
+      }
+    }
+
+    const pricings = (pool.qtyBasedPricings ?? []).filter((p): p is QtyBasedPricing => isIncluded(p));
+    if (pricings.length > 0) {
+      console.log(`    qtyBasedPricings (${pricings.length}):`);
+      for (const p of pricings) {
+        console.log(`      qty=${p.qty} setup=${p.setupPrice} monthly=${p.monthlyPrice}`);
+      }
     }
   }
 
@@ -33,4 +47,4 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();
